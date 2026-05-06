@@ -93,7 +93,6 @@
 .qz-type-mcq        { background: var(--accent2-soft); color: var(--accent2); }
 .qz-type-tf         { background: var(--accent3-soft); color: var(--accent3); }
 .qz-type-fill       { background: var(--accent5-soft); color: var(--accent5); }
-.qz-type-conceptual { background: var(--accent4-soft); color: var(--accent4); }
 .qz-type-numeric    { background: var(--accent-soft);  color: var(--accent); }
 
 /* ─── Hint button & content ──────────────────────────────── */

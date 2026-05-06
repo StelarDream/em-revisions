@@ -16,7 +16,7 @@ export function _showFeedback(q, given, correct, points = null) {
   fb.className = `qz-feedback ${correct ? 'correct' : 'incorrect'}`;
 
   const container = _el('#qz-input-area');
-  if (q.type === 'mcq' || q.type === 'conceptual' || q.type === 'tf') {
+  if (q.type === 'mcq' || q.type === 'tf') {
     const correctValues = new Set(_resolveAnswers(q));
     container.querySelectorAll('.qz-option').forEach(lbl => {
       lbl.style.pointerEvents = 'none';

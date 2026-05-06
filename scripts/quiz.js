@@ -1,12 +1,12 @@
 /**
  * QuizEngine — EM Revision quiz library
- * Supports: MCQ (single/multi-answer), true/false, fill-in-blank, conceptual, numeric
+ * Supports: MCQ (single/multi-answer), true/false, fill-in-blank, numeric
  * Persistent scoring via localStorage
  */
 
 import { Storage }                                         from './quiz/storage.js';
 import { _el, _renderMath, _renderField }                  from './quiz/markdown.js';
-import { _renderMCQ, _renderConceptual, _checkMCQ,
+import { _renderMCQ, _checkMCQ,
          _resolveAnswers }                                 from './quiz/mcq.js';
 import { _renderTF, _checkTF }                             from './quiz/tf.js';
 import { _renderFillBlank, _checkFill }                    from './quiz/fill.js';
@@ -65,7 +65,7 @@ function _renderQuestion() {
   _el('#qz-question-area').style.display = 'block';
   _el('#qz-results').style.display = 'none';
 
-  const typeLabel = { mcq: 'QCM', tf: 'Vrai / Faux', fill: 'Compléter', conceptual: 'Réflexion', numeric: 'Numérique' };
+  const typeLabel = { mcq: 'QCM', tf: 'Vrai / Faux', fill: 'Compléter', numeric: 'Numérique' };
   _el('#qz-qnum').textContent  = `Question ${state.current + 1} / ${state.questions.length}`;
   _el('#qz-qtype').textContent = typeLabel[q.type] || q.type;
   _el('#qz-qtype').className   = `qz-type-badge qz-type-${q.type}`;
@@ -85,7 +85,6 @@ function _renderQuestion() {
   if      (q.type === 'mcq')        _renderMCQ(q, inp);
   else if (q.type === 'tf')         _renderTF(q, inp);
   else if (q.type === 'fill')       _renderFillBlank(q, inp);
-  else if (q.type === 'conceptual') _renderConceptual(q, inp);
   else if (q.type === 'numeric')    _renderNumeric(q, inp);
   _renderMath(inp);
 
@@ -171,7 +170,7 @@ function submit() {
   // ── MCQ / Conceptual ──────────────────────────────────────────────────────
   // Retry by elimination; correct picks locked green (no cost), wrong picks locked red (penalise).
   // Points = (N_wrong - wrongFlags) / N_wrong.
-  if (q.type === 'mcq' || q.type === 'conceptual') {
+  if (q.type === 'mcq') {
     const selected = _checkMCQ(q, _el('#qz-input-area'));
     if (selected === null) return;
 
@@ -299,7 +298,7 @@ function retry() {
       _el('#qz-submit').disabled = true;
       inp.focus();
     }
-  } else if (q.type === 'mcq' || q.type === 'conceptual') {
+  } else if (q.type === 'mcq') {
     const available = [..._el('#qz-input-area').querySelectorAll('.qz-option:not(.answer-wrong):not(.answer-correct)')];
     available.forEach(lbl => { lbl.style.pointerEvents = ''; lbl.classList.remove('selected'); });
     _el('#qz-submit').disabled = true;
