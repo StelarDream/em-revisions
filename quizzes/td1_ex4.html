@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,175 +10,180 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD1 · Exercice 4 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent3)">Opérateurs en coordonnées cylindriques</h1>
-    <p class="ch-subtitle">Divergence et rotationnel — retrouver les expressions analytiques</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD1 · Exercice 4 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent3)">Opérateurs en coordonnées cylindriques</h1>
+      <p class="ch-subtitle">Divergence et rotationnel — retrouver les expressions analytiques</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD1 — Exercice 4 : Opérateurs en coordonnées cylindriques
-//  Retrouver div et rot en cylindriques par le calcul
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD1 — Exercice 4 : Opérateurs en coordonnées cylindriques
+    //  Retrouver div et rot en cylindriques par le calcul
+    // ═══════════════════════════════════════════════════════════
 
-const CTX_CYL = `
+    const CTX_CYL = `
   En coordonnées cylindriques $(r,\\varphi,z)$, la base locale est $(\\hat{u}_r, \\hat{u}_\\varphi, \\hat{u}_z)$.
   Un champ vectoriel s'écrit $\\vec{A} = A_r\\hat{u}_r + A_\\varphi\\hat{u}_\\varphi + A_z\\hat{u}_z$
   avec $A_r, A_\\varphi, A_z$ fonctions de $(r,\\varphi,z)$.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "Quelle est l'expression de l'élément de volume $d\\tau$ en coordonnées cylindriques ?",
-    options: [
-      "$d\\tau = r\\,dr\\,d\\varphi\\,dz$",
-      "$d\\tau = dr\\,d\\varphi\\,dz$",
-      "$d\\tau = r^2\\,dr\\,d\\varphi\\,dz$",
-      "$d\\tau = r\\,dr\\,d\\varphi^2\\,dz$"
-    ],
-    answer: "$d\\tau = r\\,dr\\,d\\varphi\\,dz$",
-    explanation: "Le jacobien de la transformation cartésienne → cylindrique est $r$. L'élément de volume est donc $d\\tau = r\\,dr\\,d\\varphi\\,dz$. Ce facteur $r$ est crucial : il apparaît aussi dans la divergence et dans les expressions des opérateurs."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "Quelle est l'expression de l'élément de volume $d\\tau$ en coordonnées cylindriques ?",
+        options: [
+          "$d\\tau = r\\,dr\\,d\\varphi\\,dz$",
+          "$d\\tau = dr\\,d\\varphi\\,dz$",
+          "$d\\tau = r^2\\,dr\\,d\\varphi\\,dz$",
+          "$d\\tau = r\\,dr\\,d\\varphi^2\\,dz$"
+        ],
+        answer: "$d\\tau = r\\,dr\\,d\\varphi\\,dz$",
+        explanation: "Le jacobien de la transformation cartésienne → cylindrique est $r$. L'élément de volume est donc $d\\tau = r\\,dr\\,d\\varphi\\,dz$. Ce facteur $r$ est crucial : il apparaît aussi dans la divergence et dans les expressions des opérateurs."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "Quelle est la bonne expression de la divergence $\\vec{\\nabla}\\cdot\\vec{A}$ en coordonnées cylindriques ?",
-    options: [
-      "$\\dfrac{1}{r}\\dfrac{\\partial(rA_r)}{\\partial r} + \\dfrac{1}{r}\\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
-      "$\\dfrac{\\partial A_r}{\\partial r} + \\dfrac{1}{r}\\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
-      "$\\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial r} + \\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
-      "$\\dfrac{\\partial(rA_r)}{\\partial r} + \\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$"
-    ],
-    answer: "$\\dfrac{1}{r}\\dfrac{\\partial(rA_r)}{\\partial r} + \\dfrac{1}{r}\\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
-    explanation: "La divergence en cylindriques s'obtient en développant le théorème de Gauss sur un volume élémentaire. Le terme en $r$ donne $\\frac{1}{r}\\frac{\\partial(rA_r)}{\\partial r}$ — le facteur $r$ vient du jacobien. En développant : $\\frac{1}{r}\\frac{\\partial(rA_r)}{\\partial r} = \\frac{\\partial A_r}{\\partial r} + \\frac{A_r}{r}$, ce qui est différent de simplement $\\frac{\\partial A_r}{\\partial r}$."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "Quelle est la bonne expression de la divergence $\\vec{\\nabla}\\cdot\\vec{A}$ en coordonnées cylindriques ?",
+        options: [
+          "$\\dfrac{1}{r}\\dfrac{\\partial(rA_r)}{\\partial r} + \\dfrac{1}{r}\\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
+          "$\\dfrac{\\partial A_r}{\\partial r} + \\dfrac{1}{r}\\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
+          "$\\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial r} + \\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
+          "$\\dfrac{\\partial(rA_r)}{\\partial r} + \\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$"
+        ],
+        answer: "$\\dfrac{1}{r}\\dfrac{\\partial(rA_r)}{\\partial r} + \\dfrac{1}{r}\\dfrac{\\partial A_\\varphi}{\\partial\\varphi} + \\dfrac{\\partial A_z}{\\partial z}$",
+        explanation: "La divergence en cylindriques s'obtient en développant le théorème de Gauss sur un volume élémentaire. Le terme en $r$ donne $\\frac{1}{r}\\frac{\\partial(rA_r)}{\\partial r}$ — le facteur $r$ vient du jacobien. En développant : $\\frac{1}{r}\\frac{\\partial(rA_r)}{\\partial r} = \\frac{\\partial A_r}{\\partial r} + \\frac{A_r}{r}$, ce qui est différent de simplement $\\frac{\\partial A_r}{\\partial r}$."
+      },
 
-  // ── Q3 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX_CYL,
-    question: "Pour un champ $\\vec{A} = A_r(r)\\hat{u}_r$ (radial, ne dépendant que de $r$), la divergence est $\\frac{dA_r}{dr}$.",
-    answer: "false",
-    explanation: "$\\vec{\\nabla}\\cdot\\vec{A} = \\frac{1}{r}\\frac{d(rA_r)}{dr} = \\frac{A_r}{r} + \\frac{dA_r}{dr}$. Le terme supplémentaire $A_r/r$ vient du fait que les vecteurs $\\hat{u}_r$ « s'écartent » avec $r$. Pour $\\vec{A} = \\frac{C}{r}\\hat{u}_r$ par exemple, $\\frac{dA_r}{dr} = -C/r^2$ mais $\\frac{1}{r}\\frac{d(r\\cdot C/r)}{dr} = 0$ — c'est solénoïdal !"
-  },
+      // ── Q3 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX_CYL,
+        question: "Pour un champ $\\vec{A} = A_r(r)\\hat{u}_r$ (radial, ne dépendant que de $r$), la divergence est $\\frac{dA_r}{dr}$.",
+        answer: "false",
+        explanation: "$\\vec{\\nabla}\\cdot\\vec{A} = \\frac{1}{r}\\frac{d(rA_r)}{dr} = \\frac{A_r}{r} + \\frac{dA_r}{dr}$. Le terme supplémentaire $A_r/r$ vient du fait que les vecteurs $\\hat{u}_r$ « s'écartent » avec $r$. Pour $\\vec{A} = \\frac{C}{r}\\hat{u}_r$ par exemple, $\\frac{dA_r}{dr} = -C/r^2$ mais $\\frac{1}{r}\\frac{d(r\\cdot C/r)}{dr} = 0$ — c'est solénoïdal !"
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "Quelle est la composante selon $\\hat{u}_z$ du rotationnel $(\\vec{\\nabla}\\times\\vec{A})_z$ en cylindriques ?",
-    options: [
-      "$\\dfrac{1}{r}\\dfrac{\\partial(rA_\\varphi)}{\\partial r} - \\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial\\varphi}$",
-      "$\\dfrac{\\partial A_\\varphi}{\\partial r} - \\dfrac{\\partial A_r}{\\partial\\varphi}$",
-      "$\\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial\\varphi} - \\dfrac{\\partial A_\\varphi}{\\partial r}$",
-      "$\\dfrac{\\partial A_r}{\\partial\\varphi} - \\dfrac{\\partial A_\\varphi}{\\partial r}$"
-    ],
-    answer: "$\\dfrac{1}{r}\\dfrac{\\partial(rA_\\varphi)}{\\partial r} - \\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial\\varphi}$",
-    explanation: "$(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi}$. Le facteur $1/r$ devant $\\frac{\\partial(rA_\\varphi)}{\\partial r}$ provient du jacobien. En développant : $\\frac{\\partial A_\\varphi}{\\partial r} + \\frac{A_\\varphi}{r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi}$."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "Quelle est la composante selon $\\hat{u}_z$ du rotationnel $(\\vec{\\nabla}\\times\\vec{A})_z$ en cylindriques ?",
+        options: [
+          "$\\dfrac{1}{r}\\dfrac{\\partial(rA_\\varphi)}{\\partial r} - \\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial\\varphi}$",
+          "$\\dfrac{\\partial A_\\varphi}{\\partial r} - \\dfrac{\\partial A_r}{\\partial\\varphi}$",
+          "$\\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial\\varphi} - \\dfrac{\\partial A_\\varphi}{\\partial r}$",
+          "$\\dfrac{\\partial A_r}{\\partial\\varphi} - \\dfrac{\\partial A_\\varphi}{\\partial r}$"
+        ],
+        answer: "$\\dfrac{1}{r}\\dfrac{\\partial(rA_\\varphi)}{\\partial r} - \\dfrac{1}{r}\\dfrac{\\partial A_r}{\\partial\\varphi}$",
+        explanation: "$(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi}$. Le facteur $1/r$ devant $\\frac{\\partial(rA_\\varphi)}{\\partial r}$ provient du jacobien. En développant : $\\frac{\\partial A_\\varphi}{\\partial r} + \\frac{A_\\varphi}{r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi}$."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "Quelles sont les composantes $r$ et $\\varphi$ du rotationnel en cylindriques ?",
-    options: [
-      "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$",
-      "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{\\partial A_\\varphi}{\\partial z} - \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_z}{\\partial r} - \\frac{\\partial A_r}{\\partial z}$",
-      "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_z}{\\partial r} - \\frac{\\partial A_r}{\\partial z}$",
-      "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$"
-    ],
-    answer: "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$",
-    explanation: "Le rotationnel complet en cylindriques : $(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$, $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$, $(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi}$."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "Quelles sont les composantes $r$ et $\\varphi$ du rotationnel en cylindriques ?",
+        options: [
+          "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$",
+          "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{\\partial A_\\varphi}{\\partial z} - \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_z}{\\partial r} - \\frac{\\partial A_r}{\\partial z}$",
+          "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_z}{\\partial r} - \\frac{\\partial A_r}{\\partial z}$",
+          "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$"
+        ],
+        answer: "$(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$ et $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$",
+        explanation: "Le rotationnel complet en cylindriques : $(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z}$, $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}$, $(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi}$."
+      },
 
-  // ── Q6 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Le Laplacien scalaire en cylindriques s'écrit $\\Delta f = \\dfrac{1}{r}\\dfrac{\\partial}{\\partial r}\\!\\left(r\\dfrac{\\partial f}{\\partial r}\\right) + \\dfrac{1}{r^2}\\dfrac{\\partial^2 f}{\\partial\\varphi^2} + \\dfrac{\\partial^2 f}{\\partial z^2}$.",
-    answer: "true",
-    explanation: "$\\Delta f = \\vec{\\nabla}\\cdot(\\vec{\\nabla}f)$. En cylindriques, $\\vec{\\nabla}f = \\frac{\\partial f}{\\partial r}\\hat{u}_r + \\frac{1}{r}\\frac{\\partial f}{\\partial\\varphi}\\hat{u}_\\varphi + \\frac{\\partial f}{\\partial z}\\hat{u}_z$. En appliquant la divergence cylindrique : $\\Delta f = \\frac{1}{r}\\frac{\\partial}{\\partial r}\\!(r\\frac{\\partial f}{\\partial r}) + \\frac{1}{r^2}\\frac{\\partial^2 f}{\\partial\\varphi^2} + \\frac{\\partial^2 f}{\\partial z^2}$."
-  },
+      // ── Q6 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Le Laplacien scalaire en cylindriques s'écrit $\\Delta f = \\dfrac{1}{r}\\dfrac{\\partial}{\\partial r}\\!\\left(r\\dfrac{\\partial f}{\\partial r}\\right) + \\dfrac{1}{r^2}\\dfrac{\\partial^2 f}{\\partial\\varphi^2} + \\dfrac{\\partial^2 f}{\\partial z^2}$.",
+        answer: "true",
+        explanation: "$\\Delta f = \\vec{\\nabla}\\cdot(\\vec{\\nabla}f)$. En cylindriques, $\\vec{\\nabla}f = \\frac{\\partial f}{\\partial r}\\hat{u}_r + \\frac{1}{r}\\frac{\\partial f}{\\partial\\varphi}\\hat{u}_\\varphi + \\frac{\\partial f}{\\partial z}\\hat{u}_z$. En appliquant la divergence cylindrique : $\\Delta f = \\frac{1}{r}\\frac{\\partial}{\\partial r}\\!(r\\frac{\\partial f}{\\partial r}) + \\frac{1}{r^2}\\frac{\\partial^2 f}{\\partial\\varphi^2} + \\frac{\\partial^2 f}{\\partial z^2}$."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Un champ $\\vec{A} = \\frac{C}{r}\\hat{u}_r$ (en cylindriques, $C$ constante). Quelle est sa divergence ?",
-    options: [
-      "$0$",
-      "$-C/r^2$",
-      "$C/r^2$",
-      "$2C/r$"
-    ],
-    answer: "$0$",
-    explanation: "$\\vec{\\nabla}\\cdot\\vec{A} = \\frac{1}{r}\\frac{\\partial}{\\partial r}(r \\cdot \\frac{C}{r}) = \\frac{1}{r}\\frac{\\partial C}{\\partial r} = 0$. Le champ $C/r\\,\\hat{u}_r$ est solénoïdal en cylindriques, même s'il diverge en $r=0$. Physiquement, c'est le champ créé par un fil infini chargé."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Un champ $\\vec{A} = \\frac{C}{r}\\hat{u}_r$ (en cylindriques, $C$ constante). Quelle est sa divergence ?",
+        options: [
+          "$0$",
+          "$-C/r^2$",
+          "$C/r^2$",
+          "$2C/r$"
+        ],
+        answer: "$0$",
+        explanation: "$\\vec{\\nabla}\\cdot\\vec{A} = \\frac{1}{r}\\frac{\\partial}{\\partial r}(r \\cdot \\frac{C}{r}) = \\frac{1}{r}\\frac{\\partial C}{\\partial r} = 0$. Le champ $C/r\\,\\hat{u}_r$ est solénoïdal en cylindriques, même s'il diverge en $r=0$. Physiquement, c'est le champ créé par un fil infini chargé."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Les expressions de div et rot en coordonnées cylindriques se déduisent de celles en cartésiennes par simple substitution de $x,y$ par $r,\\varphi$.",
-    answer: "false",
-    explanation: "Faux. Les coordonnées cylindriques sont **curvilignes** : les vecteurs de base $\\hat{u}_r$ et $\\hat{u}_\\varphi$ dépendent de la position (ils tournent avec $\\varphi$). Il faut tenir compte des dérivées des vecteurs de base lors du calcul des opérateurs différentiels — c'est ce qui introduit les facteurs $1/r$ et les termes supplémentaires absents en cartésien."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Les expressions de div et rot en coordonnées cylindriques se déduisent de celles en cartésiennes par simple substitution de $x,y$ par $r,\\varphi$.",
+        answer: "false",
+        explanation: "Faux. Les coordonnées cylindriques sont **curvilignes** : les vecteurs de base $\\hat{u}_r$ et $\\hat{u}_\\varphi$ dépendent de la position (ils tournent avec $\\varphi$). Il faut tenir compte des dérivées des vecteurs de base lors du calcul des opérateurs différentiels — c'est ce qui introduit les facteurs $1/r$ et les termes supplémentaires absents en cartésien."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td1_ex4", questions, `md:
+    QuizEngine.loadQuiz("td1_ex4", questions, `md:
 ## Exercice 4 — Opérateurs en coordonnées cylindriques
 
 **1.** Retrouver l'expression analytique de la divergence en coordonnées cylindriques.
 
 **2.** Retrouver l'expression analytique du rotationnel en coordonnées cylindriques.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

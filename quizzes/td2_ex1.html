@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,176 +10,181 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD2 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Demi-cercle chargé</h1>
-    <p class="ch-subtitle">Potentiel et champ électrostatique — intégration sur une distribution filiforme</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD2 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Demi-cercle chargé</h1>
+      <p class="ch-subtitle">Potentiel et champ électrostatique — intégration sur une distribution filiforme</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD2 — Exercice 1 : Demi-cercle chargé
-//  Un demi-cercle de rayon R portant une charge Q uniforme.
-//  Calcul de V et E en O.
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD2 — Exercice 1 : Demi-cercle chargé
+    //  Un demi-cercle de rayon R portant une charge Q uniforme.
+    //  Calcul de V et E en O.
+    // ═══════════════════════════════════════════════════════════
 
-const CTX = `
+    const CTX = `
   Un demi-cercle de rayon $R$, de centre $O$, porte une charge $Q$ uniformément répartie.
   On note $\\lambda = Q/(\\pi R)$ la densité linéique de charge.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quelle est l'expression de la densité linéique de charge $\\lambda$ du demi-cercle ?",
-    options: [
-      "$\\lambda = Q/(\\pi R)$",
-      "$\\lambda = Q/(2\\pi R)$",
-      "$\\lambda = Q/R$",
-      "$\\lambda = Q/(2R)$"
-    ],
-    answer: "$\\lambda = Q/(\\pi R)$",
-    explanation: "La longueur d'un demi-cercle de rayon $R$ est $\\pi R$. La charge est uniformément répartie, donc $\\lambda = Q / (\\pi R)$. (Pour un cercle complet on aurait $\\lambda = Q/(2\\pi R)$.)"
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quelle est l'expression de la densité linéique de charge $\\lambda$ du demi-cercle ?",
+        options: [
+          "$\\lambda = Q/(\\pi R)$",
+          "$\\lambda = Q/(2\\pi R)$",
+          "$\\lambda = Q/R$",
+          "$\\lambda = Q/(2R)$"
+        ],
+        answer: "$\\lambda = Q/(\\pi R)$",
+        explanation: "La longueur d'un demi-cercle de rayon $R$ est $\\pi R$. La charge est uniformément répartie, donc $\\lambda = Q / (\\pi R)$. (Pour un cercle complet on aurait $\\lambda = Q/(2\\pi R)$.)"
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Comment s'exprime l'élément de charge $dq$ sur un arc élémentaire $d\\ell = R\\,d\\varphi$ du demi-cercle ?",
-    options: [
-      "$dq = \\lambda R\\,d\\varphi$",
-      "$dq = \\lambda R^2\\,d\\varphi$",
-      "$dq = \\lambda\\,d\\varphi$",
-      "$dq = Q\\,d\\varphi / \\pi$"
-    ],
-    answer: "$dq = \\lambda R\\,d\\varphi$",
-    explanation: "L'arc élémentaire est $d\\ell = R\\,d\\varphi$, donc $dq = \\lambda\\,d\\ell = \\lambda R\\,d\\varphi$. Les deux dernières options omettent $R$ ou confondent les unités."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Comment s'exprime l'élément de charge $dq$ sur un arc élémentaire $d\\ell = R\\,d\\varphi$ du demi-cercle ?",
+        options: [
+          "$dq = \\lambda R\\,d\\varphi$",
+          "$dq = \\lambda R^2\\,d\\varphi$",
+          "$dq = \\lambda\\,d\\varphi$",
+          "$dq = Q\\,d\\varphi / \\pi$"
+        ],
+        answer: "$dq = \\lambda R\\,d\\varphi$",
+        explanation: "L'arc élémentaire est $d\\ell = R\\,d\\varphi$, donc $dq = \\lambda\\,d\\ell = \\lambda R\\,d\\varphi$. Les deux dernières options omettent $R$ ou confondent les unités."
+      },
 
-  // ── Q3 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX,
-    question: "La distance entre un point quelconque du demi-cercle et le centre $O$ est constante et égale à $R$.",
-    answer: "true",
-    explanation: "C'est la définition d'un cercle : tous les points sont à distance $R$ de $O$. Cela simplifie considérablement le calcul du potentiel en $O$ car $r = R$ est constant sur tout le demi-cercle."
-  },
+      // ── Q3 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX,
+        question: "La distance entre un point quelconque du demi-cercle et le centre $O$ est constante et égale à $R$.",
+        answer: "true",
+        explanation: "C'est la définition d'un cercle : tous les points sont à distance $R$ de $O$. Cela simplifie considérablement le calcul du potentiel en $O$ car $r = R$ est constant sur tout le demi-cercle."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quel est le potentiel électrostatique $V(O)$ créé en $O$ par le demi-cercle ?",
-    options: [
-      "$V(O) = \\dfrac{Q}{4\\pi\\varepsilon_0 R}$",
-      "$V(O) = \\dfrac{Q}{2\\pi\\varepsilon_0 R}$",
-      "$V(O) = \\dfrac{Q}{8\\pi\\varepsilon_0 R}$",
-      "$V(O) = 0$"
-    ],
-    answer: "$V(O) = \\dfrac{Q}{4\\pi\\varepsilon_0 R}$",
-    explanation: "$V(O) = \\dfrac{1}{4\\pi\\varepsilon_0}\\int \\dfrac{dq}{r} = \\dfrac{1}{4\\pi\\varepsilon_0 R}\\int_0^{\\pi}\\lambda R\\,d\\varphi = \\dfrac{\\lambda}{4\\pi\\varepsilon_0}\\pi = \\dfrac{\\lambda}{4\\varepsilon_0} = \\dfrac{Q}{4\\pi\\varepsilon_0 R}$. La distance $r = R$ est constante, ce qui sort $1/R$ de l'intégrale."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quel est le potentiel électrostatique $V(O)$ créé en $O$ par le demi-cercle ?",
+        options: [
+          "$V(O) = \\dfrac{Q}{4\\pi\\varepsilon_0 R}$",
+          "$V(O) = \\dfrac{Q}{2\\pi\\varepsilon_0 R}$",
+          "$V(O) = \\dfrac{Q}{8\\pi\\varepsilon_0 R}$",
+          "$V(O) = 0$"
+        ],
+        answer: "$V(O) = \\dfrac{Q}{4\\pi\\varepsilon_0 R}$",
+        explanation: "$V(O) = \\dfrac{1}{4\\pi\\varepsilon_0}\\int \\dfrac{dq}{r} = \\dfrac{1}{4\\pi\\varepsilon_0 R}\\int_0^{\\pi}\\lambda R\\,d\\varphi = \\dfrac{\\lambda}{4\\pi\\varepsilon_0}\\pi = \\dfrac{\\lambda}{4\\varepsilon_0} = \\dfrac{Q}{4\\pi\\varepsilon_0 R}$. La distance $r = R$ est constante, ce qui sort $1/R$ de l'intégrale."
+      },
 
-  // ── Q5 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "On ne peut pas déduire le champ $\\vec{E}(O)$ à partir de la seule valeur du potentiel $V(O)$ en un point.",
-    answer: "true",
-    explanation: "Le champ $\\vec{E} = -\\vec{\\nabla}V$ nécessite les dérivées spatiales de $V$, pas juste sa valeur en un point. Connaître $V(O)$ seul ne suffit pas — il faut $V$ dans tout un voisinage de $O$ pour calculer son gradient."
-  },
+      // ── Q5 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "On ne peut pas déduire le champ $\\vec{E}(O)$ à partir de la seule valeur du potentiel $V(O)$ en un point.",
+        answer: "true",
+        explanation: "Le champ $\\vec{E} = -\\vec{\\nabla}V$ nécessite les dérivées spatiales de $V$, pas juste sa valeur en un point. Connaître $V(O)$ seul ne suffit pas — il faut $V$ dans tout un voisinage de $O$ pour calculer son gradient."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Par symétrie, quelle composante du champ $\\vec{E}(O)$ est nulle si le demi-cercle est placé dans le demi-plan $y > 0$ (avec $\\varphi \\in [0,\\pi]$) ?",
-    options: [
-      "La composante $E_x$ (car la distribution est symétrique par rapport à l'axe $Oy$)",
-      "La composante $E_y$",
-      "Les deux composantes $E_x$ et $E_y$",
-      "Aucune composante n'est nulle par symétrie"
-    ],
-    answer: "La composante $E_x$ (car la distribution est symétrique par rapport à l'axe $Oy$)",
-    explanation: "Le demi-cercle ($\\varphi \\in [0,\\pi]$) est symétrique par rapport au plan $xOz$ (i.e. $Oy$). Pour tout élément $dq$ en $(R\\cos\\varphi, R\\sin\\varphi)$, il y a un élément symétrique en $(-R\\cos\\varphi, R\\sin\\varphi)$. Leurs contributions à $E_x$ se compensent, donc $E_x = 0$. Seule $E_y \\neq 0$."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Par symétrie, quelle composante du champ $\\vec{E}(O)$ est nulle si le demi-cercle est placé dans le demi-plan $y > 0$ (avec $\\varphi \\in [0,\\pi]$) ?",
+        options: [
+          "La composante $E_x$ (car la distribution est symétrique par rapport à l'axe $Oy$)",
+          "La composante $E_y$",
+          "Les deux composantes $E_x$ et $E_y$",
+          "Aucune composante n'est nulle par symétrie"
+        ],
+        answer: "La composante $E_x$ (car la distribution est symétrique par rapport à l'axe $Oy$)",
+        explanation: "Le demi-cercle ($\\varphi \\in [0,\\pi]$) est symétrique par rapport au plan $xOz$ (i.e. $Oy$). Pour tout élément $dq$ en $(R\\cos\\varphi, R\\sin\\varphi)$, il y a un élément symétrique en $(-R\\cos\\varphi, R\\sin\\varphi)$. Leurs contributions à $E_x$ se compensent, donc $E_x = 0$. Seule $E_y \\neq 0$."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quelle est la valeur de $\\vec{E}(O)$ pour le demi-cercle placé dans le demi-plan $y > 0$ ?",
-    options: [
-      "$\\vec{E}(O) = -\\dfrac{Q}{2\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$",
-      "$\\vec{E}(O) = \\dfrac{Q}{2\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$",
-      "$\\vec{E}(O) = -\\dfrac{Q}{4\\pi \\varepsilon_0 R^2}\\,\\hat{u}_y$",
-      "$\\vec{E}(O) = \\dfrac{2Q}{\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$"
-    ],
-    answer: "$\\vec{E}(O) = -\\dfrac{Q}{2\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$",
-    explanation: "Le champ élémentaire pointe de $dq$ vers $O$, soit $d\\vec{E} = \\frac{dq}{4\\pi\\varepsilon_0 R^2}(-\\cos\\varphi\\,\\hat{u}_x - \\sin\\varphi\\,\\hat{u}_y)$. Par symétrie $E_x = 0$. On intègre $E_y = -\\frac{\\lambda}{4\\pi\\varepsilon_0 R}\\int_0^\\pi \\sin\\varphi\\,d\\varphi = -\\frac{\\lambda}{4\\pi\\varepsilon_0 R}\\cdot 2 = -\\frac{Q}{2\\pi^2\\varepsilon_0 R^2}$."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quelle est la valeur de $\\vec{E}(O)$ pour le demi-cercle placé dans le demi-plan $y > 0$ ?",
+        options: [
+          "$\\vec{E}(O) = -\\dfrac{Q}{2\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$",
+          "$\\vec{E}(O) = \\dfrac{Q}{2\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$",
+          "$\\vec{E}(O) = -\\dfrac{Q}{4\\pi \\varepsilon_0 R^2}\\,\\hat{u}_y$",
+          "$\\vec{E}(O) = \\dfrac{2Q}{\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$"
+        ],
+        answer: "$\\vec{E}(O) = -\\dfrac{Q}{2\\pi^2 \\varepsilon_0 R^2}\\,\\hat{u}_y$",
+        explanation: "Le champ élémentaire pointe de $dq$ vers $O$, soit $d\\vec{E} = \\frac{dq}{4\\pi\\varepsilon_0 R^2}(-\\cos\\varphi\\,\\hat{u}_x - \\sin\\varphi\\,\\hat{u}_y)$. Par symétrie $E_x = 0$. On intègre $E_y = -\\frac{\\lambda}{4\\pi\\varepsilon_0 R}\\int_0^\\pi \\sin\\varphi\\,d\\varphi = -\\frac{\\lambda}{4\\pi\\varepsilon_0 R}\\cdot 2 = -\\frac{Q}{2\\pi^2\\varepsilon_0 R^2}$."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Pour une distribution de charges à symétrie sphérique, le potentiel $V(r)$ dépend uniquement de $r$, et on peut en déduire $E = -dV/dr$.",
-    answer: "true",
-    explanation: "Si $V = V(r)$ seulement (symétrie sphérique), alors $\\vec{E} = -\\vec{\\nabla}V = -\\frac{dV}{dr}\\hat{u}_r$. C'est applicable par exemple au champ créé à l'extérieur d'une sphère chargée uniformément, où $V(r) = Q/(4\\pi\\varepsilon_0 r)$ et $E = Q/(4\\pi\\varepsilon_0 r^2)$."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Pour une distribution de charges à symétrie sphérique, le potentiel $V(r)$ dépend uniquement de $r$, et on peut en déduire $E = -dV/dr$.",
+        answer: "true",
+        explanation: "Si $V = V(r)$ seulement (symétrie sphérique), alors $\\vec{E} = -\\vec{\\nabla}V = -\\frac{dV}{dr}\\hat{u}_r$. C'est applicable par exemple au champ créé à l'extérieur d'une sphère chargée uniformément, où $V(r) = Q/(4\\pi\\varepsilon_0 r)$ et $E = Q/(4\\pi\\varepsilon_0 r^2)$."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td2_ex1", questions, `md:
+    QuizEngine.loadQuiz("td2_ex1", questions, `md:
 ## Exercice 1 — Demi-cercle chargé
 
 On considère un demi-cercle de rayon $R$, de centre $O$ portant une charge $Q$ uniformément répartie.
 
 Calculer le potentiel et le champ en $O$.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,175 +10,180 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD1 · Exercice 7 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Théorème de Stokes-Ampère</h1>
-    <p class="ch-subtitle">Circulation, flux de $\vec{\nabla}\times\vec{A}$ — disque et demi-sphère, indépendance de la surface</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD1 · Exercice 7 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Théorème de Stokes-Ampère</h1>
+      <p class="ch-subtitle">Circulation, flux de $\vec{\nabla}\times\vec{A}$ — disque et demi-sphère, indépendance de
+        la surface</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD1 — Exercice 7 : Théorème de Stokes-Ampère
-//  Champ A(M) = k ∧ OM, cercle de rayon R, disque, ½ sphère
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD1 — Exercice 7 : Théorème de Stokes-Ampère
+    //  Champ A(M) = k ∧ OM, cercle de rayon R, disque, ½ sphère
+    // ═══════════════════════════════════════════════════════════
 
-const CTX = `
+    const CTX = `
   On considère $\\vec{k}$ un vecteur unitaire ($\\vec{k} = \\hat{u}_z$) et le champ vectoriel
   $$\\vec{A}(M) = \\vec{k}\\wedge\\overrightarrow{OM} = \\hat{u}_z\\wedge\\vec{r}$$
   Le cercle $\\mathcal{C}$ est de centre $O$, rayon $R$, dans le plan perpendiculaire à $\\hat{u}_z$.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "En coordonnées cylindriques, que vaut $\\vec{A}(M) = \\hat{u}_z\\wedge\\vec{r}$ sur le cercle $\\mathcal{C}$ de rayon $R$ dans le plan $z=0$ ?",
-    options: [
-      "$\\vec{A} = R\\hat{u}_\\varphi$",
-      "$\\vec{A} = R\\hat{u}_r$",
-      "$\\vec{A} = -R\\hat{u}_\\varphi$",
-      "$\\vec{A} = R\\hat{u}_z$"
-    ],
-    answer: "$\\vec{A} = R\\hat{u}_\\varphi$",
-    explanation: "En cylindriques, $\\vec{r} = r\\hat{u}_r$ (dans le plan $z=0$). Or $\\hat{u}_z\\wedge\\hat{u}_r = \\hat{u}_\\varphi$ (règle du produit vectoriel en cylindriques). Donc $\\vec{A} = r\\hat{u}_z\\wedge\\hat{u}_r = r\\hat{u}_\\varphi$. Sur $\\mathcal{C}$, $r = R$, donc $\\vec{A} = R\\hat{u}_\\varphi$."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "En coordonnées cylindriques, que vaut $\\vec{A}(M) = \\hat{u}_z\\wedge\\vec{r}$ sur le cercle $\\mathcal{C}$ de rayon $R$ dans le plan $z=0$ ?",
+        options: [
+          "$\\vec{A} = R\\hat{u}_\\varphi$",
+          "$\\vec{A} = R\\hat{u}_r$",
+          "$\\vec{A} = -R\\hat{u}_\\varphi$",
+          "$\\vec{A} = R\\hat{u}_z$"
+        ],
+        answer: "$\\vec{A} = R\\hat{u}_\\varphi$",
+        explanation: "En cylindriques, $\\vec{r} = r\\hat{u}_r$ (dans le plan $z=0$). Or $\\hat{u}_z\\wedge\\hat{u}_r = \\hat{u}_\\varphi$ (règle du produit vectoriel en cylindriques). Donc $\\vec{A} = r\\hat{u}_z\\wedge\\hat{u}_r = r\\hat{u}_\\varphi$. Sur $\\mathcal{C}$, $r = R$, donc $\\vec{A} = R\\hat{u}_\\varphi$."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quelle est la circulation $\\oint_\\mathcal{C} \\vec{A}\\cdot d\\vec{\\ell}$ le long du cercle orienté positivement ?",
-    options: [
-      "$2\\pi R^2$",
-      "$\\pi R^2$",
-      "$4\\pi R^2$",
-      "$0$"
-    ],
-    answer: "$2\\pi R^2$",
-    explanation: "Sur $\\mathcal{C}$ : $\\vec{A} = R\\hat{u}_\\varphi$ et $d\\vec{\\ell} = R\\,d\\varphi\\,\\hat{u}_\\varphi$. Donc $\\vec{A}\\cdot d\\vec{\\ell} = R^2\\,d\\varphi$. La circulation est $\\oint = \\int_0^{2\\pi} R^2\\,d\\varphi = 2\\pi R^2$."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quelle est la circulation $\\oint_\\mathcal{C} \\vec{A}\\cdot d\\vec{\\ell}$ le long du cercle orienté positivement ?",
+        options: [
+          "$2\\pi R^2$",
+          "$\\pi R^2$",
+          "$4\\pi R^2$",
+          "$0$"
+        ],
+        answer: "$2\\pi R^2$",
+        explanation: "Sur $\\mathcal{C}$ : $\\vec{A} = R\\hat{u}_\\varphi$ et $d\\vec{\\ell} = R\\,d\\varphi\\,\\hat{u}_\\varphi$. Donc $\\vec{A}\\cdot d\\vec{\\ell} = R^2\\,d\\varphi$. La circulation est $\\oint = \\int_0^{2\\pi} R^2\\,d\\varphi = 2\\pi R^2$."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quel est le rotationnel $\\vec{\\nabla}\\times\\vec{A}$ pour $\\vec{A} = \\hat{u}_z\\wedge\\vec{r} = r\\hat{u}_\\varphi$ (en cylindriques) ?",
-    options: [
-      "$2\\hat{u}_z$",
-      "$\\hat{u}_z$",
-      "$\\dfrac{2}{r}\\hat{u}_z$",
-      "$\\vec{0}$"
-    ],
-    answer: "$2\\hat{u}_z$",
-    explanation: "$(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} = \\frac{1}{r}\\frac{\\partial(r\\cdot r)}{\\partial r} = \\frac{1}{r}\\cdot 2r = 2$. Les composantes $r$ et $\\varphi$ sont nulles ($A_r = A_z = 0$, $\\partial/\\partial z = 0$). Donc $\\vec{\\nabla}\\times\\vec{A} = 2\\hat{u}_z$ — rotationnel uniforme."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quel est le rotationnel $\\vec{\\nabla}\\times\\vec{A}$ pour $\\vec{A} = \\hat{u}_z\\wedge\\vec{r} = r\\hat{u}_\\varphi$ (en cylindriques) ?",
+        options: [
+          "$2\\hat{u}_z$",
+          "$\\hat{u}_z$",
+          "$\\dfrac{2}{r}\\hat{u}_z$",
+          "$\\vec{0}$"
+        ],
+        answer: "$2\\hat{u}_z$",
+        explanation: "$(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} = \\frac{1}{r}\\frac{\\partial(r\\cdot r)}{\\partial r} = \\frac{1}{r}\\cdot 2r = 2$. Les composantes $r$ et $\\varphi$ sont nulles ($A_r = A_z = 0$, $\\partial/\\partial z = 0$). Donc $\\vec{\\nabla}\\times\\vec{A} = 2\\hat{u}_z$ — rotationnel uniforme."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quel est le flux de $\\vec{\\nabla}\\times\\vec{A}$ à travers le disque $\\mathcal{D}$ de rayon $R$ délimité par $\\mathcal{C}$ ?",
-    options: [
-      "$2\\pi R^2$",
-      "$\\pi R^2$",
-      "$4\\pi R^2$",
-      "$2R^2$"
-    ],
-    answer: "$2\\pi R^2$",
-    explanation: "$\\iint_\\mathcal{D} (\\vec{\\nabla}\\times\\vec{A})\\cdot d\\vec{S} = \\iint_\\mathcal{D} 2\\hat{u}_z\\cdot dS\\,\\hat{u}_z = 2\\times\\text{Aire}(\\mathcal{D}) = 2\\pi R^2$. Ce résultat doit être égal à la circulation calculée en Q2 — c'est précisément le théorème de Stokes !"
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quel est le flux de $\\vec{\\nabla}\\times\\vec{A}$ à travers le disque $\\mathcal{D}$ de rayon $R$ délimité par $\\mathcal{C}$ ?",
+        options: [
+          "$2\\pi R^2$",
+          "$\\pi R^2$",
+          "$4\\pi R^2$",
+          "$2R^2$"
+        ],
+        answer: "$2\\pi R^2$",
+        explanation: "$\\iint_\\mathcal{D} (\\vec{\\nabla}\\times\\vec{A})\\cdot d\\vec{S} = \\iint_\\mathcal{D} 2\\hat{u}_z\\cdot dS\\,\\hat{u}_z = 2\\times\\text{Aire}(\\mathcal{D}) = 2\\pi R^2$. Ce résultat doit être égal à la circulation calculée en Q2 — c'est précisément le théorème de Stokes !"
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quel est le flux de $\\vec{\\nabla}\\times\\vec{A}$ à travers la demi-sphère $\\mathcal{H}$ de rayon $R$ s'appuyant sur $\\mathcal{C}$ (même bord, orientée vers le haut) ?",
-    options: [
-      "$2\\pi R^2$ — même résultat que le disque",
-      "$4\\pi R^2$",
-      "$0$",
-      "Dépend de la forme de la surface"
-    ],
-    answer: "$2\\pi R^2$ — même résultat que le disque",
-    explanation: "Par le théorème de Stokes, le flux de $\\vec{\\nabla}\\times\\vec{A}$ à travers **toute** surface $\\mathcal{S}$ s'appuyant sur $\\mathcal{C}$ avec la même orientation vaut $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = 2\\pi R^2$. Le flux est indépendant du choix de la surface — disque, demi-sphère, ou n'importe quelle surface de même bord $\\mathcal{C}$."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quel est le flux de $\\vec{\\nabla}\\times\\vec{A}$ à travers la demi-sphère $\\mathcal{H}$ de rayon $R$ s'appuyant sur $\\mathcal{C}$ (même bord, orientée vers le haut) ?",
+        options: [
+          "$2\\pi R^2$ — même résultat que le disque",
+          "$4\\pi R^2$",
+          "$0$",
+          "Dépend de la forme de la surface"
+        ],
+        answer: "$2\\pi R^2$ — même résultat que le disque",
+        explanation: "Par le théorème de Stokes, le flux de $\\vec{\\nabla}\\times\\vec{A}$ à travers **toute** surface $\\mathcal{S}$ s'appuyant sur $\\mathcal{C}$ avec la même orientation vaut $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = 2\\pi R^2$. Le flux est indépendant du choix de la surface — disque, demi-sphère, ou n'importe quelle surface de même bord $\\mathcal{C}$."
+      },
 
-  // ── Q6 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Le théorème de Stokes $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = \\iint_\\mathcal{S}(\\vec{\\nabla}\\times\\vec{A})\\cdot d\\vec{S}$ est l'analogue vectoriel du théorème fondamental du calcul intégral.",
-    answer: "true",
-    explanation: "En 1D : $\\int_a^b f'(x)\\,dx = f(b)-f(a)$. En 2D (Stokes) : l'intégrale du rotationnel sur une surface = circulation sur le bord. En 3D (Gauss) : l'intégrale de la divergence sur un volume = flux sur la surface. Tous ces théorèmes relient une intégrale sur un domaine à une intégrale sur son bord — c'est le théorème de Stokes généralisé."
-  },
+      // ── Q6 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Le théorème de Stokes $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = \\iint_\\mathcal{S}(\\vec{\\nabla}\\times\\vec{A})\\cdot d\\vec{S}$ est l'analogue vectoriel du théorème fondamental du calcul intégral.",
+        answer: "true",
+        explanation: "En 1D : $\\int_a^b f'(x)\\,dx = f(b)-f(a)$. En 2D (Stokes) : l'intégrale du rotationnel sur une surface = circulation sur le bord. En 3D (Gauss) : l'intégrale de la divergence sur un volume = flux sur la surface. Tous ces théorèmes relient une intégrale sur un domaine à une intégrale sur son bord — c'est le théorème de Stokes généralisé."
+      },
 
-  // ── Q7 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Si $\\vec{\\nabla}\\times\\vec{A} = \\vec{0}$ partout dans un domaine simplement connexe, alors $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = 0$ pour tout contour $\\mathcal{C}$ de ce domaine.",
-    answer: "true",
-    explanation: "Par Stokes : $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = \\iint_\\mathcal{S}(\\vec{\\nabla}\\times\\vec{A})\\cdot d\\vec{S} = 0$ si $\\vec{\\nabla}\\times\\vec{A} = \\vec{0}$. En électrostatique : $\\vec{\\nabla}\\times\\vec{E} = 0 \\Rightarrow$ la circulation de $\\vec{E}$ est nulle sur tout contour fermé — conservation de l'énergie."
-  },
+      // ── Q7 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Si $\\vec{\\nabla}\\times\\vec{A} = \\vec{0}$ partout dans un domaine simplement connexe, alors $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = 0$ pour tout contour $\\mathcal{C}$ de ce domaine.",
+        answer: "true",
+        explanation: "Par Stokes : $\\oint_\\mathcal{C}\\vec{A}\\cdot d\\vec{\\ell} = \\iint_\\mathcal{S}(\\vec{\\nabla}\\times\\vec{A})\\cdot d\\vec{S} = 0$ si $\\vec{\\nabla}\\times\\vec{A} = \\vec{0}$. En électrostatique : $\\vec{\\nabla}\\times\\vec{E} = 0 \\Rightarrow$ la circulation de $\\vec{E}$ est nulle sur tout contour fermé — conservation de l'énergie."
+      },
 
-  // ── Q8 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "En magnétostatique, le théorème d'Ampère $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{\\text{enlacé}}$ est la version intégrale de quelle équation locale ?",
-    options: [
-      "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
-      "$\\vec{\\nabla}\\cdot\\vec{B} = 0$",
-      "$\\vec{\\nabla}\\times\\vec{E} = 0$",
-      "$\\vec{\\nabla}\\cdot\\vec{E} = \\rho/\\varepsilon_0$"
-    ],
-    answer: "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
-    explanation: "Par Stokes : $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\iint_\\mathcal{S}(\\vec{\\nabla}\\times\\vec{B})\\cdot d\\vec{S} = \\iint_\\mathcal{S}\\mu_0\\vec{j}\\cdot d\\vec{S} = \\mu_0 I_{\\text{enlacé}}$. La forme locale de l'équation d'Ampère est $\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$. C'est l'une des quatre équations de Maxwell en statique."
-  },
+      // ── Q8 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "En magnétostatique, le théorème d'Ampère $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{\\text{enlacé}}$ est la version intégrale de quelle équation locale ?",
+        options: [
+          "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
+          "$\\vec{\\nabla}\\cdot\\vec{B} = 0$",
+          "$\\vec{\\nabla}\\times\\vec{E} = 0$",
+          "$\\vec{\\nabla}\\cdot\\vec{E} = \\rho/\\varepsilon_0$"
+        ],
+        answer: "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
+        explanation: "Par Stokes : $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\iint_\\mathcal{S}(\\vec{\\nabla}\\times\\vec{B})\\cdot d\\vec{S} = \\iint_\\mathcal{S}\\mu_0\\vec{j}\\cdot d\\vec{S} = \\mu_0 I_{\\text{enlacé}}$. La forme locale de l'équation d'Ampère est $\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$. C'est l'une des quatre équations de Maxwell en statique."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td1_ex7", questions, `md:
+    QuizEngine.loadQuiz("td1_ex7", questions, `md:
 ## Exercice 7 — Théorème de Stokes-Ampère
 
 Avec $\\vec{k} = \\hat{u}_z$ et le champ $\\vec{A}(M) = \\vec{k}\\wedge\\overrightarrow{OM}$ :
@@ -190,6 +196,7 @@ Avec $\\vec{k} = \\hat{u}_z$ et le champ $\\vec{A}(M) = \\vec{k}\\wedge\\overrig
 
 **d)** Comparer et conclure.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

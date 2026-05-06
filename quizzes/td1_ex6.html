@@ -126,9 +126,8 @@ const questions = [
       "$\\vec{B} = \\vec{0}$",
       "$\\vec{B} = \\dfrac{A_0}{r}\\hat{u}_r$"
     ],
-    answer: "$\\vec{B} = -\\dfrac{A_0}{r^2}\\hat{u}_\\varphi$",
-    explanation: "Ici $A_z = A_0/r$. $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r} = 0 - \\frac{\\partial(A_0/r)}{\\partial r} = 0 -(-\\frac{A_0}{r^2}) = \\frac{A_0}{r^2}$... Attention au signe : $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r} = -(-\\frac{A_0}{r^2}) = +\\frac{A_0}{r^2}$. Donc $\\vec{B} = \\frac{A_0}{r^2}\\hat{u}_\\varphi$. (Vérifier le signe selon la convention du cours.)"
-  },
+    answer: "$\\vec{B} = \\dfrac{A_0}{r^2}\\hat{u}_\\varphi$",
+    explanation: "Ici $A_z = A_0/r$, $A_r = A_\\varphi = 0$. Seule la composante $\\varphi$ du rotationnel est non nulle : $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r} = 0 - \\frac{\\partial}{\\partial r}\\!\\left(\\frac{A_0}{r}\\right) = 0 - \\left(-\\frac{A_0}{r^2}\\right) = +\\frac{A_0}{r^2}$. Donc $\\vec{B} = \\frac{A_0}{r^2}\\hat{u}_\\varphi$. Ce champ décroît en $1/r^2$ — à comparer avec le cas 2 ($\\vec{A} = A_0\\hat{u}_\\varphi$) qui donnait $1/r$."  },
 
   // ── Q5 · TF ──────────────────────────────────────────────
   {

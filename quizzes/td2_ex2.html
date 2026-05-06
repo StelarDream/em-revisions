@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,172 +10,177 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD2 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent3)">Sphère chargée non uniformément</h1>
-    <p class="ch-subtitle">Distribution surfacique $\sigma(\theta) = \sigma_0 \cos\theta$ — potentiel et champ au centre</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD2 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent3)">Sphère chargée non uniformément</h1>
+      <p class="ch-subtitle">Distribution surfacique $\sigma(\theta) = \sigma_0 \cos\theta$ — potentiel et champ au
+        centre</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD2 — Exercice 2 : Sphère chargée non uniformément en surface
-//  σ(θ) = σ₀ cosθ
-//  Q1–Q4 : potentiel au centre
-//  Q5–Q8 : champ au centre (calcul direct)
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD2 — Exercice 2 : Sphère chargée non uniformément en surface
+    //  σ(θ) = σ₀ cosθ
+    //  Q1–Q4 : potentiel au centre
+    //  Q5–Q8 : champ au centre (calcul direct)
+    // ═══════════════════════════════════════════════════════════
 
-const CTX = `
+    const CTX = `
   Une sphère de rayon $R$ porte une densité surfacique de charge
   $$\\sigma(\\theta) = \\sigma_0 \\cos\\theta$$
   où $\\sigma_0$ est une constante et $\\theta$ l'angle polaire (colatitude).
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Quel est l'élément de surface $dS$ sur la sphère en coordonnées sphériques ?",
-    options: [
-      "$dS = R^2 \\sin\\theta\\,d\\theta\\,d\\varphi$",
-      "$dS = R^2\\,d\\theta\\,d\\varphi$",
-      "$dS = R \\sin\\theta\\,d\\theta\\,d\\varphi$",
-      "$dS = R^2 \\cos\\theta\\,d\\theta\\,d\\varphi$"
-    ],
-    answer: "$dS = R^2 \\sin\\theta\\,d\\theta\\,d\\varphi$",
-    explanation: "En coordonnées sphériques, l'élément de surface sur une sphère de rayon $R$ est $dS = R^2 \\sin\\theta\\,d\\theta\\,d\\varphi$. Le facteur $\\sin\\theta$ est le jacobien de la transformation — il s'annule aux pôles ($\\theta = 0, \\pi$) et est maximal à l'équateur ($\\theta = \\pi/2$)."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Quel est l'élément de surface $dS$ sur la sphère en coordonnées sphériques ?",
+        options: [
+          "$dS = R^2 \\sin\\theta\\,d\\theta\\,d\\varphi$",
+          "$dS = R^2\\,d\\theta\\,d\\varphi$",
+          "$dS = R \\sin\\theta\\,d\\theta\\,d\\varphi$",
+          "$dS = R^2 \\cos\\theta\\,d\\theta\\,d\\varphi$"
+        ],
+        answer: "$dS = R^2 \\sin\\theta\\,d\\theta\\,d\\varphi$",
+        explanation: "En coordonnées sphériques, l'élément de surface sur une sphère de rayon $R$ est $dS = R^2 \\sin\\theta\\,d\\theta\\,d\\varphi$. Le facteur $\\sin\\theta$ est le jacobien de la transformation — il s'annule aux pôles ($\\theta = 0, \\pi$) et est maximal à l'équateur ($\\theta = \\pi/2$)."
+      },
 
-  // ── Q2 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX,
-    question: "La charge totale portée par la sphère est nulle : $Q_{\\text{tot}} = 0$.",
-    answer: "true",
-    explanation: "$Q_{\\text{tot}} = \\int \\sigma(\\theta) dS = \\sigma_0 R^2 \\int_0^{2\\pi}d\\varphi\\int_0^\\pi \\cos\\theta \\sin\\theta\\,d\\theta = 2\\pi\\sigma_0 R^2 \\int_0^\\pi \\sin\\theta\\cos\\theta\\,d\\theta$. Or $\\int_0^\\pi \\sin\\theta\\cos\\theta\\,d\\theta = \\frac{1}{2}[\\sin^2\\theta]_0^\\pi = 0$. La sphère est globalement neutre — c'est une distribution dipolaire."
-  },
+      // ── Q2 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX,
+        question: "La charge totale portée par la sphère est nulle : $Q_{\\text{tot}} = 0$.",
+        answer: "true",
+        explanation: "$Q_{\\text{tot}} = \\int \\sigma(\\theta) dS = \\sigma_0 R^2 \\int_0^{2\\pi}d\\varphi\\int_0^\\pi \\cos\\theta \\sin\\theta\\,d\\theta = 2\\pi\\sigma_0 R^2 \\int_0^\\pi \\sin\\theta\\cos\\theta\\,d\\theta$. Or $\\int_0^\\pi \\sin\\theta\\cos\\theta\\,d\\theta = \\frac{1}{2}[\\sin^2\\theta]_0^\\pi = 0$. La sphère est globalement neutre — c'est une distribution dipolaire."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Pour calculer $V(O)$ au centre, tous les points de la sphère sont à la même distance de $O$. Que vaut $V(O)$ ?",
-    options: [
-      "$V(O) = 0$",
-      "$V(O) = \\dfrac{\\sigma_0 R}{\\varepsilon_0}$",
-      "$V(O) = \\dfrac{\\sigma_0}{4\\varepsilon_0}$",
-      "$V(O) = \\dfrac{\\sigma_0 R}{2\\varepsilon_0}$"
-    ],
-    answer: "$V(O) = 0$",
-    explanation: "$V(O) = \\frac{1}{4\\pi\\varepsilon_0 R}\\int \\sigma\\,dS = \\frac{1}{4\\pi\\varepsilon_0 R} Q_{\\text{tot}} = 0$. Puisque la charge totale est nulle, le potentiel au centre est nul. Le facteur $1/R$ sort de l'intégrale car $R$ est constant (tous les points de la surface sont équidistants de $O$)."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Pour calculer $V(O)$ au centre, tous les points de la sphère sont à la même distance de $O$. Que vaut $V(O)$ ?",
+        options: [
+          "$V(O) = 0$",
+          "$V(O) = \\dfrac{\\sigma_0 R}{\\varepsilon_0}$",
+          "$V(O) = \\dfrac{\\sigma_0}{4\\varepsilon_0}$",
+          "$V(O) = \\dfrac{\\sigma_0 R}{2\\varepsilon_0}$"
+        ],
+        answer: "$V(O) = 0$",
+        explanation: "$V(O) = \\frac{1}{4\\pi\\varepsilon_0 R}\\int \\sigma\\,dS = \\frac{1}{4\\pi\\varepsilon_0 R} Q_{\\text{tot}} = 0$. Puisque la charge totale est nulle, le potentiel au centre est nul. Le facteur $1/R$ sort de l'intégrale car $R$ est constant (tous les points de la surface sont équidistants de $O$)."
+      },
 
-  // ── Q4 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Si $V(O) = 0$, on peut en conclure que $\\vec{E}(O) = \\vec{0}$.",
-    answer: "false",
-    explanation: "Faux. $\\vec{E} = -\\vec{\\nabla}V$ : nul en un point n'implique pas que le gradient y est nul. Ici $V(O) = 0$ mais $\\vec{E}(O) \\neq \\vec{0}$ — la distribution $\\sigma \\propto \\cos\\theta$ crée un champ non nul au centre. Il faut calculer $\\vec{E}$ directement."
-  },
+      // ── Q4 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Si $V(O) = 0$, on peut en conclure que $\\vec{E}(O) = \\vec{0}$.",
+        answer: "false",
+        explanation: "Faux. $\\vec{E} = -\\vec{\\nabla}V$ : nul en un point n'implique pas que le gradient y est nul. Ici $V(O) = 0$ mais $\\vec{E}(O) \\neq \\vec{0}$ — la distribution $\\sigma \\propto \\cos\\theta$ crée un champ non nul au centre. Il faut calculer $\\vec{E}$ directement."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Par symétrie, quelle est la direction du champ $\\vec{E}(O)$ ?",
-    options: [
-      "Selon $\\hat{u}_z$ (axe polaire), car la distribution a une symétrie de révolution autour de $Oz$",
-      "Radiale, selon $\\hat{u}_r$",
-      "Nulle par symétrie",
-      "Selon $\\hat{u}_\\theta$"
-    ],
-    answer: "Selon $\\hat{u}_z$ (axe polaire), car la distribution a une symétrie de révolution autour de $Oz$",
-    explanation: "$\\sigma(\\theta) = \\sigma_0\\cos\\theta$ ne dépend pas de $\\varphi$ : la distribution est invariante par rotation autour de $Oz$. Le champ en $O$ doit donc être colinéaire à $Oz$. De plus, le plan $z=0$ est plan d'antisymétrie de $\\sigma$ (car $\\cos(\\pi-\\theta) = -\\cos\\theta$), donc $\\vec{E}(O)$ est bien selon $\\pm\\hat{u}_z$."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Par symétrie, quelle est la direction du champ $\\vec{E}(O)$ ?",
+        options: [
+          "Selon $\\hat{u}_z$ (axe polaire), car la distribution a une symétrie de révolution autour de $Oz$",
+          "Radiale, selon $\\hat{u}_r$",
+          "Nulle par symétrie",
+          "Selon $\\hat{u}_\\theta$"
+        ],
+        answer: "Selon $\\hat{u}_z$ (axe polaire), car la distribution a une symétrie de révolution autour de $Oz$",
+        explanation: "$\\sigma(\\theta) = \\sigma_0\\cos\\theta$ ne dépend pas de $\\varphi$ : la distribution est invariante par rotation autour de $Oz$. Le champ en $O$ doit donc être colinéaire à $Oz$. De plus, le plan $z=0$ est plan d'antisymétrie de $\\sigma$ (car $\\cos(\\pi-\\theta) = -\\cos\\theta$), donc $\\vec{E}(O)$ est bien selon $\\pm\\hat{u}_z$."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "L'élément de champ $d\\vec{E}(O)$ créé par l'élément de charge $dq = \\sigma(\\theta)\\,dS$ pointe de $dq$ vers $O$. Quelle est sa composante selon $\\hat{u}_z$ ?",
-    options: [
-      "$dE_z = -\\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\cos\\theta\\,dS$",
-      "$dE_z = \\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\cos\\theta\\,dS$",
-      "$dE_z = -\\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\sin\\theta\\,dS$",
-      "$dE_z = \\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\,dS$"
-    ],
-    answer: "$dE_z = -\\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\cos\\theta\\,dS$",
-    explanation: "Le vecteur de $dq$ vers $O$ est $-\\hat{u}_r$. Sa projection sur $\\hat{u}_z$ est $-\\cos\\theta$ (car $\\hat{u}_r \\cdot \\hat{u}_z = \\cos\\theta$). Donc $dE_z = \\frac{dq}{4\\pi\\varepsilon_0 R^2}\\times(-\\cos\\theta) = -\\frac{\\sigma(\\theta)\\cos\\theta}{4\\pi\\varepsilon_0 R^2}dS$."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "L'élément de champ $d\\vec{E}(O)$ créé par l'élément de charge $dq = \\sigma(\\theta)\\,dS$ pointe de $dq$ vers $O$. Quelle est sa composante selon $\\hat{u}_z$ ?",
+        options: [
+          "$dE_z = -\\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\cos\\theta\\,dS$",
+          "$dE_z = \\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\cos\\theta\\,dS$",
+          "$dE_z = -\\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\sin\\theta\\,dS$",
+          "$dE_z = \\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\,dS$"
+        ],
+        answer: "$dE_z = -\\dfrac{\\sigma(\\theta)}{4\\pi\\varepsilon_0 R^2}\\cos\\theta\\,dS$",
+        explanation: "Le vecteur de $dq$ vers $O$ est $-\\hat{u}_r$. Sa projection sur $\\hat{u}_z$ est $-\\cos\\theta$ (car $\\hat{u}_r \\cdot \\hat{u}_z = \\cos\\theta$). Donc $dE_z = \\frac{dq}{4\\pi\\varepsilon_0 R^2}\\times(-\\cos\\theta) = -\\frac{\\sigma(\\theta)\\cos\\theta}{4\\pi\\varepsilon_0 R^2}dS$."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "En intégrant sur toute la sphère, que vaut $\\vec{E}(O)$ ?",
-    options: [
-      "$\\vec{E}(O) = -\\dfrac{\\sigma_0}{3\\varepsilon_0}\\hat{u}_z$",
-      "$\\vec{E}(O) = -\\dfrac{\\sigma_0}{2\\varepsilon_0}\\hat{u}_z$",
-      "$\\vec{E}(O) = \\dfrac{\\sigma_0}{3\\varepsilon_0}\\hat{u}_z$",
-      "$\\vec{E}(O) = \\vec{0}$"
-    ],
-    answer: "$\\vec{E}(O) = -\\dfrac{\\sigma_0}{3\\varepsilon_0}\\hat{u}_z$",
-    explanation: "$E_z = -\\frac{\\sigma_0}{4\\pi\\varepsilon_0 R^2}\\int_0^{2\\pi}d\\varphi\\int_0^\\pi \\cos^2\\theta \\cdot R^2\\sin\\theta\\,d\\theta = -\\frac{\\sigma_0}{2\\varepsilon_0}\\int_0^\\pi \\cos^2\\theta\\sin\\theta\\,d\\theta$. Or $\\int_0^\\pi \\cos^2\\theta\\sin\\theta\\,d\\theta = \\left[-\\frac{\\cos^3\\theta}{3}\\right]_0^\\pi = \\frac{2}{3}$. D'où $E_z = -\\frac{\\sigma_0}{3\\varepsilon_0}$."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "En intégrant sur toute la sphère, que vaut $\\vec{E}(O)$ ?",
+        options: [
+          "$\\vec{E}(O) = -\\dfrac{\\sigma_0}{3\\varepsilon_0}\\hat{u}_z$",
+          "$\\vec{E}(O) = -\\dfrac{\\sigma_0}{2\\varepsilon_0}\\hat{u}_z$",
+          "$\\vec{E}(O) = \\dfrac{\\sigma_0}{3\\varepsilon_0}\\hat{u}_z$",
+          "$\\vec{E}(O) = \\vec{0}$"
+        ],
+        answer: "$\\vec{E}(O) = -\\dfrac{\\sigma_0}{3\\varepsilon_0}\\hat{u}_z$",
+        explanation: "$E_z = -\\frac{\\sigma_0}{4\\pi\\varepsilon_0 R^2}\\int_0^{2\\pi}d\\varphi\\int_0^\\pi \\cos^2\\theta \\cdot R^2\\sin\\theta\\,d\\theta = -\\frac{\\sigma_0}{2\\varepsilon_0}\\int_0^\\pi \\cos^2\\theta\\sin\\theta\\,d\\theta$. Or $\\int_0^\\pi \\cos^2\\theta\\sin\\theta\\,d\\theta = \\left[-\\frac{\\cos^3\\theta}{3}\\right]_0^\\pi = \\frac{2}{3}$. D'où $E_z = -\\frac{\\sigma_0}{3\\varepsilon_0}$."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Une distribution $\\sigma(\\theta) = \\sigma_0\\cos\\theta$ sur une sphère est équivalente, pour ses effets extérieurs, à un dipôle électrique.",
-    answer: "true",
-    explanation: "Oui. Ce type de distribution (harmonique sphérique $Y_1^0$) est exactement la distribution dipolaire. On peut montrer que le potentiel créé à l'extérieur est identique à celui d'un dipôle $\\vec{p} = \\frac{4\\pi R^3 \\sigma_0}{3}\\hat{u}_z$. La sphère uniformément polarisée d'un diélectrique présente cette distribution surfacique."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Une distribution $\\sigma(\\theta) = \\sigma_0\\cos\\theta$ sur une sphère est équivalente, pour ses effets extérieurs, à un dipôle électrique.",
+        answer: "true",
+        explanation: "Oui. Ce type de distribution (harmonique sphérique $Y_1^0$) est exactement la distribution dipolaire. On peut montrer que le potentiel créé à l'extérieur est identique à celui d'un dipôle $\\vec{p} = \\frac{4\\pi R^3 \\sigma_0}{3}\\hat{u}_z$. La sphère uniformément polarisée d'un diélectrique présente cette distribution surfacique."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td2_ex2", questions, `md:
+    QuizEngine.loadQuiz("td2_ex2", questions, `md:
 ## Exercice 2 — Sphère chargée non uniformément en surface
 
 On considère une sphère portant une charge répartie en surface selon une dépendance angulaire $\\sigma(\\theta) = \\sigma_0 \\cos\\theta$, avec $\\sigma_0$ une constante.
@@ -183,6 +189,7 @@ On considère une sphère portant une charge répartie en surface selon une dép
 
 **2.** Déterminer de manière directe la valeur du champ électrique au centre de la sphère.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

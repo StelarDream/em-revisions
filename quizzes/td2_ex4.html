@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,183 +10,187 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD2 · Exercice 4 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent)">Sphères creuses &amp; inhomogènes</h1>
-    <p class="ch-subtitle">Théorème de Gauss — symétries, surface de Gauss, $\vec{E}$ et $V$ en tout point</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD2 · Exercice 4 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent)">Sphères creuses &amp; inhomogènes</h1>
+      <p class="ch-subtitle">Théorème de Gauss — symétries, surface de Gauss, $\vec{E}$ et $V$ en tout point</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD2 — Exercice 4 : Sphères creuses et inhomogènes
-//  Partie 1 : sphère creuse ρ uniforme (R₁ < r < R₂)
-//  Partie 2 : sphère pleine ρ(r) = ρ₀ r²/R²
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD2 — Exercice 4 : Sphères creuses et inhomogènes
+    //  Partie 1 : sphère creuse ρ uniforme (R₁ < r < R₂)
+    //  Partie 2 : sphère pleine ρ(r) = ρ₀ r²/R²
+    // ═══════════════════════════════════════════════════════════
 
-const CTX1 = `
+    const CTX1 = `
   Sphère creuse de centre $O$, rayon extérieur $R_2$, rayon intérieur $R_1$,
   portant une densité volumique de charge $\\rho$ uniforme dans la couronne $R_1 < r < R_2$.
   La cavité ($r < R_1$) est vide.
 `;
 
-const CTX2 = `
+    const CTX2 = `
   Sphère pleine de centre $O$, rayon $R$, portant une densité volumique
   non uniforme $\\rho(r) = \\rho_0\\dfrac{r^2}{R^2}$.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Quelle surface de Gauss choisir pour calculer $\\vec{E}$ en un point $M$ à distance $r$ du centre ?",
-    options: [
-      "Une sphère de rayon $r$ centrée en $O$ (exploite la symétrie sphérique)",
-      "Un plan infini passant par $M$",
-      "Un cube de côté $2r$",
-      "Un cylindre d'axe $OM$"
-    ],
-    answer: "Une sphère de rayon $r$ centrée en $O$ (exploite la symétrie sphérique)",
-    explanation: "La distribution a une symétrie sphérique ($\\rho$ ne dépend que de $r$) : $\\vec{E}$ est radial et $E$ ne dépend que de $r$. La surface de Gauss optimale est donc une sphère de rayon $r$ concentrique, sur laquelle $\\vec{E} \\cdot d\\vec{S} = E(r)\\,dS$, ce qui permet de sortir $E$ de l'intégrale de flux."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Quelle surface de Gauss choisir pour calculer $\\vec{E}$ en un point $M$ à distance $r$ du centre ?",
+        options: [
+          "Une sphère de rayon $r$ centrée en $O$ (exploite la symétrie sphérique)",
+          "Un plan infini passant par $M$",
+          "Un cube de côté $2r$",
+          "Un cylindre d'axe $OM$"
+        ],
+        answer: "Une sphère de rayon $r$ centrée en $O$ (exploite la symétrie sphérique)",
+        explanation: "La distribution a une symétrie sphérique ($\\rho$ ne dépend que de $r$) : $\\vec{E}$ est radial et $E$ ne dépend que de $r$. La surface de Gauss optimale est donc une sphère de rayon $r$ concentrique, sur laquelle $\\vec{E} \\cdot d\\vec{S} = E(r)\\,dS$, ce qui permet de sortir $E$ de l'intégrale de flux."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Dans la cavité ($r < R_1$), quel est le champ $\\vec{E}$ ?",
-    options: [
-      "$\\vec{E} = \\vec{0}$",
-      "$\\vec{E} = \\dfrac{\\rho R_1^3}{3\\varepsilon_0 r^2}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho r}{3\\varepsilon_0}\\hat{u}_r$",
-      "$\\vec{E}$ est non nul mais indéterminable"
-    ],
-    answer: "$\\vec{E} = \\vec{0}$",
-    explanation: "Pour $r < R_1$ : la surface de Gauss sphérique de rayon $r$ n'englobe aucune charge ($Q_{int} = 0$). Par Gauss : $\\oint \\vec{E}\\cdot d\\vec{S} = Q_{int}/\\varepsilon_0 = 0$. Par symétrie, $E(r)\\times 4\\pi r^2 = 0 \\Rightarrow E = 0$. Le champ est nul à l'intérieur d'une cavité entourée d'une distribution sphérique — résultat général."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Dans la cavité ($r < R_1$), quel est le champ $\\vec{E}$ ?",
+        options: [
+          "$\\vec{E} = \\vec{0}$",
+          "$\\vec{E} = \\dfrac{\\rho R_1^3}{3\\varepsilon_0 r^2}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho r}{3\\varepsilon_0}\\hat{u}_r$",
+          "$\\vec{E}$ est non nul mais indéterminable"
+        ],
+        answer: "$\\vec{E} = \\vec{0}$",
+        explanation: "Pour $r < R_1$ : la surface de Gauss sphérique de rayon $r$ n'englobe aucune charge ($Q_{int} = 0$). Par Gauss : $\\oint \\vec{E}\\cdot d\\vec{S} = Q_{int}/\\varepsilon_0 = 0$. Par symétrie, $E(r)\\times 4\\pi r^2 = 0 \\Rightarrow E = 0$. Le champ est nul à l'intérieur d'une cavité entourée d'une distribution sphérique — résultat général."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Dans la couronne chargée ($R_1 < r < R_2$), quelle est la charge $Q_{int}$ englobée par une sphère de Gauss de rayon $r$ ?",
-    options: [
-      "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}(r^3 - R_1^3)$",
-      "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}r^3$",
-      "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}(R_2^3 - R_1^3)$",
-      "$Q_{int} = \\rho\\,4\\pi r^2$"
-    ],
-    answer: "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}(r^3 - R_1^3)$",
-    explanation: "Pour $R_1 < r < R_2$, seule la couronne de $R_1$ à $r$ contribue : $Q_{int} = \\int_{R_1}^r \\rho \\cdot 4\\pi r'^2\\,dr' = \\rho\\,\\frac{4\\pi}{3}(r^3 - R_1^3)$. Le volume de la cavité ($r < R_1$) ne contient pas de charge."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Dans la couronne chargée ($R_1 < r < R_2$), quelle est la charge $Q_{int}$ englobée par une sphère de Gauss de rayon $r$ ?",
+        options: [
+          "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}(r^3 - R_1^3)$",
+          "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}r^3$",
+          "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}(R_2^3 - R_1^3)$",
+          "$Q_{int} = \\rho\\,4\\pi r^2$"
+        ],
+        answer: "$Q_{int} = \\rho\\,\\dfrac{4\\pi}{3}(r^3 - R_1^3)$",
+        explanation: "Pour $R_1 < r < R_2$, seule la couronne de $R_1$ à $r$ contribue : $Q_{int} = \\int_{R_1}^r \\rho \\cdot 4\\pi r'^2\\,dr' = \\rho\\,\\frac{4\\pi}{3}(r^3 - R_1^3)$. Le volume de la cavité ($r < R_1$) ne contient pas de charge."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "En dehors de la sphère ($r > R_2$), le champ $\\vec{E}$ est équivalent à celui d'une charge ponctuelle $Q_{tot}$ en $O$. Quelle est l'expression de $Q_{tot}$ ?",
-    options: [
-      "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}(R_2^3 - R_1^3)$",
-      "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}R_2^3$",
-      "$Q_{tot} = \\rho\\,4\\pi(R_2^2 - R_1^2)$",
-      "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}R_1^3$"
-    ],
-    answer: "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}(R_2^3 - R_1^3)$",
-    explanation: "La charge totale est la charge de la couronne sphérique de rayons $R_1$ et $R_2$ : $Q_{tot} = \\rho \\times V_{couronne} = \\rho \\times \\frac{4\\pi}{3}(R_2^3 - R_1^3)$. Pour $r > R_2$, le théorème de Gauss donne $E = Q_{tot}/(4\\pi\\varepsilon_0 r^2)$, identique à une charge ponctuelle — c'est le théorème de Gauss-Newton."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "En dehors de la sphère ($r > R_2$), le champ $\\vec{E}$ est équivalent à celui d'une charge ponctuelle $Q_{tot}$ en $O$. Quelle est l'expression de $Q_{tot}$ ?",
+        options: [
+          "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}(R_2^3 - R_1^3)$",
+          "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}R_2^3$",
+          "$Q_{tot} = \\rho\\,4\\pi(R_2^2 - R_1^2)$",
+          "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}R_1^3$"
+        ],
+        answer: "$Q_{tot} = \\rho\\,\\dfrac{4\\pi}{3}(R_2^3 - R_1^3)$",
+        explanation: "La charge totale est la charge de la couronne sphérique de rayons $R_1$ et $R_2$ : $Q_{tot} = \\rho \\times V_{couronne} = \\rho \\times \\frac{4\\pi}{3}(R_2^3 - R_1^3)$. Pour $r > R_2$, le théorème de Gauss donne $E = Q_{tot}/(4\\pi\\varepsilon_0 r^2)$, identique à une charge ponctuelle — c'est le théorème de Gauss-Newton."
+      },
 
-  // ── Q5 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX1,
-    question: "Le potentiel $V$ est continu à travers la surface $r = R_1$ (interface cavité/matériau).",
-    answer: "true",
-    explanation: "Le potentiel est toujours continu (pas de discontinuité de $V$). Ce qui peut être discontinu, c'est la dérivée du potentiel — et donc le champ électrique $E = -dV/dr$ — aux interfaces où $\\rho$ est discontinue. Ici : $V$ continu en $R_1$ et $R_2$, mais $E$ présente des sauts (ou dérivées discontinues) à ces interfaces."
-  },
+      // ── Q5 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX1,
+        question: "Le potentiel $V$ est continu à travers la surface $r = R_1$ (interface cavité/matériau).",
+        answer: "true",
+        explanation: "Le potentiel est toujours continu (pas de discontinuité de $V$). Ce qui peut être discontinu, c'est la dérivée du potentiel — et donc le champ électrique $E = -dV/dr$ — aux interfaces où $\\rho$ est discontinue. Ici : $V$ continu en $R_1$ et $R_2$, mais $E$ présente des sauts (ou dérivées discontinues) à ces interfaces."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "Quelle est la charge totale $Q$ contenue dans la sphère inhomogène $\\rho(r) = \\rho_0 r^2/R^2$ ?",
-    options: [
-      "$Q = \\dfrac{4\\pi\\rho_0 R^3}{5}$",
-      "$Q = \\dfrac{4\\pi\\rho_0 R^3}{3}$",
-      "$Q = \\pi\\rho_0 R^3$",
-      "$Q = \\dfrac{\\rho_0 R^3}{5}$"
-    ],
-    answer: "$Q = \\dfrac{4\\pi\\rho_0 R^3}{5}$",
-    explanation: "$Q = \\int_0^R \\rho(r)\\cdot 4\\pi r^2\\,dr = \\frac{4\\pi\\rho_0}{R^2}\\int_0^R r^4\\,dr = \\frac{4\\pi\\rho_0}{R^2}\\cdot\\frac{R^5}{5} = \\frac{4\\pi\\rho_0 R^3}{5}$."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Quelle est la charge totale $Q$ contenue dans la sphère inhomogène $\\rho(r) = \\rho_0 r^2/R^2$ ?",
+        options: [
+          "$Q = \\dfrac{4\\pi\\rho_0 R^3}{5}$",
+          "$Q = \\dfrac{4\\pi\\rho_0 R^3}{3}$",
+          "$Q = \\pi\\rho_0 R^3$",
+          "$Q = \\dfrac{\\rho_0 R^3}{5}$"
+        ],
+        answer: "$Q = \\dfrac{4\\pi\\rho_0 R^3}{5}$",
+        explanation: "$Q = \\int_0^R \\rho(r)\\cdot 4\\pi r^2\\,dr = \\frac{4\\pi\\rho_0}{R^2}\\int_0^R r^4\\,dr = \\frac{4\\pi\\rho_0}{R^2}\\cdot\\frac{R^5}{5} = \\frac{4\\pi\\rho_0 R^3}{5}$."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "À l'intérieur de la sphère ($r < R$), quel est le champ $\\vec{E}(r)$ ?",
-    options: [
-      "$\\vec{E} = \\dfrac{\\rho_0 r^3}{5\\varepsilon_0 R^2}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho_0 r}{3\\varepsilon_0}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R^2}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho_0}{5\\varepsilon_0}\\hat{u}_r$"
-    ],
-    answer: "$\\vec{E} = \\dfrac{\\rho_0 r^3}{5\\varepsilon_0 R^2}\\hat{u}_r$",
-    explanation: "$Q_{int}(r) = \\frac{4\\pi\\rho_0}{R^2}\\int_0^r r'^4\\,dr' = \\frac{4\\pi\\rho_0 r^5}{5R^2}$. Par Gauss : $E(r)\\cdot 4\\pi r^2 = Q_{int}/\\varepsilon_0$, donc $E = \\frac{\\rho_0 r^3}{5\\varepsilon_0 R^2}$."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "À l'intérieur de la sphère ($r < R$), quel est le champ $\\vec{E}(r)$ ?",
+        options: [
+          "$\\vec{E} = \\dfrac{\\rho_0 r^3}{5\\varepsilon_0 R^2}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho_0 r}{3\\varepsilon_0}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R^2}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho_0}{5\\varepsilon_0}\\hat{u}_r$"
+        ],
+        answer: "$\\vec{E} = \\dfrac{\\rho_0 r^3}{5\\varepsilon_0 R^2}\\hat{u}_r$",
+        explanation: "$Q_{int}(r) = \\frac{4\\pi\\rho_0}{R^2}\\int_0^r r'^4\\,dr' = \\frac{4\\pi\\rho_0 r^5}{5R^2}$. Par Gauss : $E(r)\\cdot 4\\pi r^2 = Q_{int}/\\varepsilon_0$, donc $E = \\frac{\\rho_0 r^3}{5\\varepsilon_0 R^2}$."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "On peut utiliser le théorème de Gauss pour calculer $\\vec{E}$ uniquement si la distribution de charges présente une symétrie sphérique, cylindrique ou plane.",
-    answer: "true",
-    explanation: "Le théorème de Gauss $\\oint \\vec{E}\\cdot d\\vec{S} = Q_{int}/\\varepsilon_0$ est toujours vrai, mais ne permet de calculer facilement $\\vec{E}$ que si on peut trouver une surface de Gauss sur laquelle $\\vec{E}$ est constant et normal. Ceci n'est possible que pour les trois symétries citées (sphérique, cylindrique, planaire). Pour d'autres géométries, on doit intégrer directement."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "On peut utiliser le théorème de Gauss pour calculer $\\vec{E}$ uniquement si la distribution de charges présente une symétrie sphérique, cylindrique ou plane.",
+        answer: "true",
+        explanation: "Le théorème de Gauss $\\oint \\vec{E}\\cdot d\\vec{S} = Q_{int}/\\varepsilon_0$ est toujours vrai, mais ne permet de calculer facilement $\\vec{E}$ que si on peut trouver une surface de Gauss sur laquelle $\\vec{E}$ est constant et normal. Ceci n'est possible que pour les trois symétries citées (sphérique, cylindrique, planaire). Pour d'autres géométries, on doit intégrer directement."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td2_ex4", questions, `md:
+    QuizEngine.loadQuiz("td2_ex4", questions, `md:
 ## Exercice 4 — Sphères creuses et inhomogènes
 
 **Partie 1 :** Sphère creuse ($R_1 < r < R_2$), densité volumique $\\rho$ uniforme.
@@ -194,6 +199,7 @@ Déterminer $\\vec{E}$ et $V$ en tout point par le théorème de Gauss.
 **Partie 2 :** Sphère pleine ($r < R$) avec $\\rho(r) = \\rho_0 r^2/R^2$.
 Calculer la charge totale, puis reprendre l'analyse complète.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

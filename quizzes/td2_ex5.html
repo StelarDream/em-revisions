@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,183 +10,187 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD2 · Exercice 5 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Cylindres creux &amp; inhomogènes</h1>
-    <p class="ch-subtitle">Gauss en symétrie cylindrique — $\rho$ uniforme et $\rho \propto r^3$</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD2 · Exercice 5 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Cylindres creux &amp; inhomogènes</h1>
+      <p class="ch-subtitle">Gauss en symétrie cylindrique — $\rho$ uniforme et $\rho \propto r^3$</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD2 — Exercice 5 : Cylindres creux et inhomogènes
-//  Partie 1 : cylindre creux ρ uniforme (R₁ < r < R₂), infini
-//  Partie 2 : cylindre plein ρ(r) = ρ₀ r³/R³
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD2 — Exercice 5 : Cylindres creux et inhomogènes
+    //  Partie 1 : cylindre creux ρ uniforme (R₁ < r < R₂), infini
+    //  Partie 2 : cylindre plein ρ(r) = ρ₀ r³/R³
+    // ═══════════════════════════════════════════════════════════
 
-const CTX1 = `
+    const CTX1 = `
   Cylindre infini d'axe $Oz$, de rayons intérieur $R_1$ et extérieur $R_2$,
   portant une densité volumique de charge $\\rho$ uniforme dans la couronne $R_1 < r < R_2$.
   La cavité ($r < R_1$) est vide.
 `;
 
-const CTX2 = `
+    const CTX2 = `
   Cylindre infini d'axe $Oz$, de rayon $R$, portant une densité volumique non uniforme
   $\\rho(r,\\theta,z) = \\rho_0\\dfrac{r^3}{R^3}$ en coordonnées cylindriques.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Quelle surface de Gauss est adaptée pour un cylindre infini d'axe $Oz$ ?",
-    options: [
-      "Un cylindre coaxial de rayon $r$, hauteur $h$, fermé par deux disques",
-      "Une sphère de rayon $r$ centrée sur l'axe",
-      "Un plan perpendiculaire à $Oz$",
-      "Un cube de côté $2r$"
-    ],
-    answer: "Un cylindre coaxial de rayon $r$, hauteur $h$, fermé par deux disques",
-    explanation: "La symétrie cylindrique implique $\\vec{E} = E(r)\\hat{u}_r$. Sur le cylindre de Gauss : le flux latéral est $E(r)\\times 2\\pi r h$ (car $\\vec{E}\\perp d\\vec{S}_{lat}$). Les flux sur les disques du haut et du bas sont nuls (car $\\vec{E}\\perp\\hat{u}_z$). La hauteur $h$ s'annulera dans le calcul."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Quelle surface de Gauss est adaptée pour un cylindre infini d'axe $Oz$ ?",
+        options: [
+          "Un cylindre coaxial de rayon $r$, hauteur $h$, fermé par deux disques",
+          "Une sphère de rayon $r$ centrée sur l'axe",
+          "Un plan perpendiculaire à $Oz$",
+          "Un cube de côté $2r$"
+        ],
+        answer: "Un cylindre coaxial de rayon $r$, hauteur $h$, fermé par deux disques",
+        explanation: "La symétrie cylindrique implique $\\vec{E} = E(r)\\hat{u}_r$. Sur le cylindre de Gauss : le flux latéral est $E(r)\\times 2\\pi r h$ (car $\\vec{E}\\perp d\\vec{S}_{lat}$). Les flux sur les disques du haut et du bas sont nuls (car $\\vec{E}\\perp\\hat{u}_z$). La hauteur $h$ s'annulera dans le calcul."
+      },
 
-  // ── Q2 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX1,
-    question: "Par invariance par translation selon $z$ et par rotation autour de $Oz$, le champ $\\vec{E}$ ne dépend que de $r$ et est dirigé selon $\\hat{u}_r$.",
-    answer: "true",
-    explanation: "Invariance par translation $\\Rightarrow$ pas de dépendance en $z$. Invariance par rotation $\\Rightarrow$ pas de dépendance en $\\varphi$. Symétrie plane (tout plan contenant $Oz$ est plan de symétrie) $\\Rightarrow \\vec{E} \\parallel \\hat{u}_r$. Donc $\\vec{E} = E(r)\\hat{u}_r$ avec $E$ fonction de $r$ uniquement."
-  },
+      // ── Q2 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX1,
+        question: "Par invariance par translation selon $z$ et par rotation autour de $Oz$, le champ $\\vec{E}$ ne dépend que de $r$ et est dirigé selon $\\hat{u}_r$.",
+        answer: "true",
+        explanation: "Invariance par translation $\\Rightarrow$ pas de dépendance en $z$. Invariance par rotation $\\Rightarrow$ pas de dépendance en $\\varphi$. Symétrie plane (tout plan contenant $Oz$ est plan de symétrie) $\\Rightarrow \\vec{E} \\parallel \\hat{u}_r$. Donc $\\vec{E} = E(r)\\hat{u}_r$ avec $E$ fonction de $r$ uniquement."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Pour un point dans la cavité ($r < R_1$), que vaut $\\vec{E}$ ?",
-    options: [
-      "$\\vec{E} = \\vec{0}$",
-      "$\\vec{E} = \\dfrac{\\rho R_1^2}{2\\varepsilon_0 r}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho r}{2\\varepsilon_0}\\hat{u}_r$",
-      "Non déterminable"
-    ],
-    answer: "$\\vec{E} = \\vec{0}$",
-    explanation: "Gauss sur le cylindre de rayon $r < R_1$ : $Q_{int}/h = 0$ (cavité vide). Donc $E(r)\\times 2\\pi r = 0 \\Rightarrow E = 0$. Identique au cas sphérique : l'intérieur d'une cavité entourée d'une distribution cylindrique infinie est sans champ."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Pour un point dans la cavité ($r < R_1$), que vaut $\\vec{E}$ ?",
+        options: [
+          "$\\vec{E} = \\vec{0}$",
+          "$\\vec{E} = \\dfrac{\\rho R_1^2}{2\\varepsilon_0 r}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho r}{2\\varepsilon_0}\\hat{u}_r$",
+          "Non déterminable"
+        ],
+        answer: "$\\vec{E} = \\vec{0}$",
+        explanation: "Gauss sur le cylindre de rayon $r < R_1$ : $Q_{int}/h = 0$ (cavité vide). Donc $E(r)\\times 2\\pi r = 0 \\Rightarrow E = 0$. Identique au cas sphérique : l'intérieur d'une cavité entourée d'une distribution cylindrique infinie est sans champ."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Dans la couronne chargée ($R_1 < r < R_2$), quelle est la charge linéique englobée $Q_{int}/h$ pour un cylindre de Gauss de rayon $r$ et hauteur $h$ ?",
-    options: [
-      "$Q_{int}/h = \\rho\\pi(r^2 - R_1^2)$",
-      "$Q_{int}/h = \\rho\\pi r^2$",
-      "$Q_{int}/h = \\rho\\pi(R_2^2 - R_1^2)$",
-      "$Q_{int}/h = \\rho 2\\pi r h$"
-    ],
-    answer: "$Q_{int}/h = \\rho\\pi(r^2 - R_1^2)$",
-    explanation: "Pour $R_1 < r < R_2$, la charge englobée est celle de la couronne de $R_1$ à $r$, sur une hauteur $h$ : $Q_{int} = \\rho\\int_{R_1}^r 2\\pi r'h\\,dr' = \\rho\\pi(r^2-R_1^2)h$. D'où la densité linéique $Q_{int}/h = \\rho\\pi(r^2-R_1^2)$."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Dans la couronne chargée ($R_1 < r < R_2$), quelle est la charge linéique englobée $Q_{int}/h$ pour un cylindre de Gauss de rayon $r$ et hauteur $h$ ?",
+        options: [
+          "$Q_{int}/h = \\rho\\pi(r^2 - R_1^2)$",
+          "$Q_{int}/h = \\rho\\pi r^2$",
+          "$Q_{int}/h = \\rho\\pi(R_2^2 - R_1^2)$",
+          "$Q_{int}/h = \\rho 2\\pi r h$"
+        ],
+        answer: "$Q_{int}/h = \\rho\\pi(r^2 - R_1^2)$",
+        explanation: "Pour $R_1 < r < R_2$, la charge englobée est celle de la couronne de $R_1$ à $r$, sur une hauteur $h$ : $Q_{int} = \\rho\\int_{R_1}^r 2\\pi r'h\\,dr' = \\rho\\pi(r^2-R_1^2)h$. D'où la densité linéique $Q_{int}/h = \\rho\\pi(r^2-R_1^2)$."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Toujours dans la couronne ($R_1 < r < R_2$), quel est le champ $\\vec{E}$ ?",
-    options: [
-      "$\\vec{E} = \\dfrac{\\rho(r^2 - R_1^2)}{2\\varepsilon_0 r}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho r}{2\\varepsilon_0}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho(R_2^2 - R_1^2)}{2\\varepsilon_0 r}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho r^2}{2\\varepsilon_0 R_1}\\hat{u}_r$"
-    ],
-    answer: "$\\vec{E} = \\dfrac{\\rho(r^2 - R_1^2)}{2\\varepsilon_0 r}\\hat{u}_r$",
-    explanation: "Gauss : $E(r)\\times 2\\pi r h = Q_{int}/\\varepsilon_0 = \\rho\\pi(r^2-R_1^2)h/\\varepsilon_0$. Donc $E(r) = \\frac{\\rho(r^2-R_1^2)}{2\\varepsilon_0 r}$. Vérification aux limites : en $r=R_1$, $E=0$ (continuité avec la cavité) ✓."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Toujours dans la couronne ($R_1 < r < R_2$), quel est le champ $\\vec{E}$ ?",
+        options: [
+          "$\\vec{E} = \\dfrac{\\rho(r^2 - R_1^2)}{2\\varepsilon_0 r}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho r}{2\\varepsilon_0}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho(R_2^2 - R_1^2)}{2\\varepsilon_0 r}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho r^2}{2\\varepsilon_0 R_1}\\hat{u}_r$"
+        ],
+        answer: "$\\vec{E} = \\dfrac{\\rho(r^2 - R_1^2)}{2\\varepsilon_0 r}\\hat{u}_r$",
+        explanation: "Gauss : $E(r)\\times 2\\pi r h = Q_{int}/\\varepsilon_0 = \\rho\\pi(r^2-R_1^2)h/\\varepsilon_0$. Donc $E(r) = \\frac{\\rho(r^2-R_1^2)}{2\\varepsilon_0 r}$. Vérification aux limites : en $r=R_1$, $E=0$ (continuité avec la cavité) ✓."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "Quelle est la charge totale $Q$ portée par le cylindre inhomogène sur une hauteur $h$ ?",
-    options: [
-      "$Q = \\dfrac{\\pi\\rho_0 R^2 h}{2}$",
-      "$Q = \\dfrac{2\\pi\\rho_0 R^2 h}{5}$",
-      "$Q = \\dfrac{\\pi\\rho_0 R^2 h}{3}$",
-      "$Q = \\pi\\rho_0 R^2 h$"
-    ],
-    answer: "$Q = \\dfrac{\\pi\\rho_0 R^2 h}{2}$",
-    explanation: "$Q = \\int_0^R \\rho_0\\frac{r^3}{R^3}\\cdot 2\\pi r h\\,dr = \\frac{2\\pi\\rho_0 h}{R^3}\\int_0^R r^4\\,dr = \\frac{2\\pi\\rho_0 h}{R^3}\\cdot\\frac{R^5}{5} = \\frac{2\\pi\\rho_0 R^2 h}{5}$. Attenttion : le résultat correct est $\\frac{2\\pi\\rho_0 R^2 h}{5}$, pas $\\frac{1}{2}$."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Quelle est la charge totale $Q$ portée par le cylindre inhomogène sur une hauteur $h$ ?",
+        options: [
+          "$Q = \\dfrac{\\pi\\rho_0 R^2 h}{2}$",
+          "$Q = \\dfrac{2\\pi\\rho_0 R^2 h}{5}$",
+          "$Q = \\dfrac{\\pi\\rho_0 R^2 h}{3}$",
+          "$Q = \\pi\\rho_0 R^2 h$"
+        ],
+        answer: "$Q = \\dfrac{\\pi\\rho_0 R^2 h}{2}$",
+        explanation: "$Q = \\int_0^R \\rho_0\\frac{r^3}{R^3}\\cdot 2\\pi r h\\,dr = \\frac{2\\pi\\rho_0 h}{R^3}\\int_0^R r^4\\,dr = \\frac{2\\pi\\rho_0 h}{R^3}\\cdot\\frac{R^5}{5} = \\frac{2\\pi\\rho_0 R^2 h}{5}$."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "À l'intérieur du cylindre ($r < R$), quel est le champ $\\vec{E}$ ?",
-    options: [
-      "$\\vec{E} = \\dfrac{\\rho_0 r^3}{5\\varepsilon_0 R^3}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho_0 r}{3\\varepsilon_0}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho_0 r^4}{5\\varepsilon_0 R^3}\\hat{u}_r$",
-      "$\\vec{E} = \\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R^3}\\hat{u}_r$"
-    ],
-    answer: "$\\vec{E} = \\dfrac{\\rho_0 r^3}{5\\varepsilon_0 R^3}\\hat{u}_r$",
-    explanation: "$Q_{int}/h = \\frac{2\\pi\\rho_0}{R^3}\\int_0^r r'^4\\,dr' = \\frac{2\\pi\\rho_0 r^5}{5R^3}$. Gauss : $E\\cdot 2\\pi r = Q_{int}/(h\\varepsilon_0) = \\frac{2\\pi\\rho_0 r^5}{5R^3\\varepsilon_0}$. D'où $E = \\frac{\\rho_0 r^4}{5\\varepsilon_0 R^3}$... Correction : $E(r)\\times 2\\pi r h = \\frac{2\\pi\\rho_0 r^5 h}{5R^3\\varepsilon_0}$, donc $E = \\frac{\\rho_0 r^4}{5\\varepsilon_0 R^3}$. Vérifier dans l'énoncé — la bonne réponse dépend de l'exposant dans $\\rho$."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "À l'intérieur du cylindre ($r < R$), quel est le champ $\\vec{E}$ ?",
+        options: [
+          "$\\vec{E} = \\dfrac{\\rho_0 r^4}{5\\varepsilon_0 R^3}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho_0 r}{3\\varepsilon_0}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho_0 r^4}{5\\varepsilon_0 R^3}\\hat{u}_r$",
+          "$\\vec{E} = \\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R^3}\\hat{u}_r$"
+        ],
+        answer: "$\\vec{E} = \\dfrac{\\rho_0 r^4}{5\\varepsilon_0 R^3}\\hat{u}_r$",
+        explanation: "$Q_{int}/h = \\frac{2\\pi\\rho_0}{R^3}\\int_0^r r'^4\\,dr' = \\frac{2\\pi\\rho_0 r^5}{5R^3}$. Gauss : $E(r)\\cdot 2\\pi r h = Q_{int}/\\varepsilon_0$, donc $E(r)\\cdot 2\\pi r = \\frac{2\\pi\\rho_0 r^5}{5R^3\\varepsilon_0}$, d'où $E = \\frac{\\rho_0 r^4}{5\\varepsilon_0 R^3}$. Vérification : en $r = R$, $E = \\frac{\\rho_0 R}{5\\varepsilon_0}$, ce qui correspond bien à $Q_{tot}/(2\\pi R h\\varepsilon_0)$ avec $Q_{tot}/h = \\frac{2\\pi\\rho_0 R^2}{5}$."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "En symétrie cylindrique, le potentiel $V(r)$ est obtenu en intégrant $E(r)$ : $V(r) = -\\int E(r)\\,dr + C$. La constante d'intégration est fixée par la condition $V \\to 0$ quand $r \\to \\infty$.",
-    answer: "false",
-    explanation: "Pour un cylindre **infini**, le potentiel $V(r) = -\\int E(r)\\,dr$ diverge logarithmiquement en $r \\to \\infty$ (car $E \\sim 1/r$ pour $r > R_2$, et $\\int dr/r = \\ln r$). On ne peut pas fixer $V(\\infty) = 0$. La condition de référence se prend à un rayon fini $r_0$ : $V(r_0) = 0$. C'est une différence fondamentale avec le cas sphérique."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "En symétrie cylindrique, le potentiel $V(r)$ est obtenu en intégrant $E(r)$ : $V(r) = -\\int E(r)\\,dr + C$. La constante d'intégration est fixée par la condition $V \\to 0$ quand $r \\to \\infty$.",
+        answer: "false",
+        explanation: "Pour un cylindre **infini**, le potentiel $V(r) = -\\int E(r)\\,dr$ diverge logarithmiquement en $r \\to \\infty$ (car $E \\sim 1/r$ pour $r > R_2$, et $\\int dr/r = \\ln r$). On ne peut pas fixer $V(\\infty) = 0$. La condition de référence se prend à un rayon fini $r_0$ : $V(r_0) = 0$. C'est une différence fondamentale avec le cas sphérique."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td2_ex5", questions, `md:
+    QuizEngine.loadQuiz("td2_ex5", questions, `md:
 ## Exercice 5 — Cylindres creux et inhomogènes
 
 **Partie 1 :** Cylindre creux infini ($R_1 < r < R_2$), densité $\\rho$ uniforme.
@@ -194,6 +199,7 @@ Symétries, surface de Gauss, $\\vec{E}$ en tout point, potentiel $V(r)$.
 **Partie 2 :** Cylindre plein infini ($r < R$) avec $\\rho(r) = \\rho_0 r^3/R^3$.
 Charge totale sur une hauteur $h$, puis reprendre l'analyse complète.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>
