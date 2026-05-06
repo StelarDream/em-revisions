@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,184 +10,189 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD4 · Exercice 4 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent3)">Boucle circulaire chargée</h1>
-    <p class="ch-subtitle">Champ $\vec{E}$ sur l'axe (charge $\lambda$) puis $\vec{B}$ sur l'axe (boucle en rotation)</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD4 · Exercice 4 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent3)">Boucle circulaire chargée</h1>
+      <p class="ch-subtitle">Champ $\vec{E}$ sur l'axe (charge $\lambda$) puis $\vec{B}$ sur l'axe (boucle en rotation)
+      </p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD4 — Exercice 4 : Boucle circulaire chargée
-//  Partie 1 : boucle de rayon R, charge Q (densité λ)
-//             → champ E sur l'axe Oz
-//  Partie 2 : même boucle en rotation → courant I = Q/T
-//             → champ B sur l'axe (= résultat Ex3)
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD4 — Exercice 4 : Boucle circulaire chargée
+    //  Partie 1 : boucle de rayon R, charge Q (densité λ)
+    //             → champ E sur l'axe Oz
+    //  Partie 2 : même boucle en rotation → courant I = Q/T
+    //             → champ B sur l'axe (= résultat Ex3)
+    // ═══════════════════════════════════════════════════════════
 
-const CTX_E = `
+    const CTX_E = `
   Boucle circulaire de rayon $R$, centre $O$, dans le plan $Oxy$,
   portant une densité linéique de charge uniforme $\\lambda$ (charge totale $Q = 2\\pi R\\lambda$).
   Point $M$ sur l'axe $Oz$ en $(0, 0, z)$.
 `;
 
-const CTX_B = `
+    const CTX_B = `
   La même boucle de charge $Q$ tourne autour de $Oz$ avec période $T$.
   Elle est équivalente à un courant $I = Q/T$.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_E,
-    question: "Par symétrie, dans quelle direction est $\\vec{E}(M)$ pour $M$ sur l'axe $Oz$ ?",
-    options: [
-      "Selon $\\hat{u}_z$ uniquement",
-      "Selon $\\hat{u}_r$ uniquement",
-      "Selon $\\hat{u}_\\varphi$",
-      "Quelconque"
-    ],
-    answer: "Selon $\\hat{u}_z$ uniquement",
-    explanation: "L'axe $Oz$ est axe de révolution — pour tout élément $dq$ en $(R,\\theta,0)$, il existe un élément symétrique en $(R,\\theta+\\pi,0)$ dont la contribution radiale à $\\vec{E}$ est opposée. Les composantes radiales se compensent, ne laissant que $E_z$. De plus, tout plan méridien est plan de symétrie de $\\lambda$ ⟹ $\\vec{E}$ dans le plan méridien ⟹ $\\vec{E}\\parallel\\hat{u}_z$."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_E,
+        question: "Par symétrie, dans quelle direction est $\\vec{E}(M)$ pour $M$ sur l'axe $Oz$ ?",
+        options: [
+          "Selon $\\hat{u}_z$ uniquement",
+          "Selon $\\hat{u}_r$ uniquement",
+          "Selon $\\hat{u}_\\varphi$",
+          "Quelconque"
+        ],
+        answer: "Selon $\\hat{u}_z$ uniquement",
+        explanation: "L'axe $Oz$ est axe de révolution — pour tout élément $dq$ en $(R,\\theta,0)$, il existe un élément symétrique en $(R,\\theta+\\pi,0)$ dont la contribution radiale à $\\vec{E}$ est opposée. Les composantes radiales se compensent, ne laissant que $E_z$. De plus, tout plan méridien est plan de symétrie de $\\lambda$ ⟹ $\\vec{E}$ dans le plan méridien ⟹ $\\vec{E}\\parallel\\hat{u}_z$."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_E,
-    question: "L'élément de longueur $d\\ell = R\\,d\\theta$ en $N(R,\\theta,0)$ porte la charge $dq = \\lambda R\\,d\\theta$. Le vecteur $\\overrightarrow{NM}$ pour $M(0,0,z)$ vaut :",
-    options: [
-      "$\\overrightarrow{NM} = -R\\hat{u}_r + z\\hat{u}_z$",
-      "$\\overrightarrow{NM} = R\\hat{u}_r + z\\hat{u}_z$",
-      "$\\overrightarrow{NM} = -R\\hat{u}_r - z\\hat{u}_z$",
-      "$\\overrightarrow{NM} = z\\hat{u}_z$"
-    ],
-    answer: "$\\overrightarrow{NM} = -R\\hat{u}_r + z\\hat{u}_z$",
-    explanation: "$N$ est en $(R,\\theta,0)$ et $M$ en $(0,0,z)$. Dans la base locale en $N$ : $\\overrightarrow{NM} = -R\\hat{u}_r + z\\hat{u}_z$ (il faut aller vers l'axe, i.e. $-\\hat{u}_r$, puis monter de $z$). Distance : $NM = \\sqrt{R^2+z^2}$."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_E,
+        question: "L'élément de longueur $d\\ell = R\\,d\\theta$ en $N(R,\\theta,0)$ porte la charge $dq = \\lambda R\\,d\\theta$. Le vecteur $\\overrightarrow{NM}$ pour $M(0,0,z)$ vaut :",
+        options: [
+          "$\\overrightarrow{NM} = -R\\hat{u}_r + z\\hat{u}_z$",
+          "$\\overrightarrow{NM} = R\\hat{u}_r + z\\hat{u}_z$",
+          "$\\overrightarrow{NM} = -R\\hat{u}_r - z\\hat{u}_z$",
+          "$\\overrightarrow{NM} = z\\hat{u}_z$"
+        ],
+        answer: "$\\overrightarrow{NM} = -R\\hat{u}_r + z\\hat{u}_z$",
+        explanation: "$N$ est en $(R,\\theta,0)$ et $M$ en $(0,0,z)$. Dans la base locale en $N$ : $\\overrightarrow{NM} = -R\\hat{u}_r + z\\hat{u}_z$ (il faut aller vers l'axe, i.e. $-\\hat{u}_r$, puis monter de $z$). Distance : $NM = \\sqrt{R^2+z^2}$."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_E,
-    question: "Quel est le champ électrique total $E_z(M)$ sur l'axe ?",
-    options: [
-      "$E_z = \\dfrac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)^{3/2}}$",
-      "$E_z = \\dfrac{Q}{4\\pi\\varepsilon_0(R^2+z^2)}$",
-      "$E_z = \\dfrac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)}$",
-      "$E_z = \\dfrac{Q}{4\\pi\\varepsilon_0 z^2}$"
-    ],
-    answer: "$E_z = \\dfrac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)^{3/2}}$",
-    explanation: "$dE_z = \\frac{dq}{4\\pi\\varepsilon_0 NM^2}\\cdot\\frac{z}{NM} = \\frac{\\lambda R\\,d\\theta}{4\\pi\\varepsilon_0}\\cdot\\frac{z}{(R^2+z^2)^{3/2}}$. En intégrant sur $[0,2\\pi]$ : $E_z = \\frac{\\lambda R \\cdot 2\\pi}{4\\pi\\varepsilon_0}\\cdot\\frac{z}{(R^2+z^2)^{3/2}} = \\frac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)^{3/2}}$. Même forme que l'expression de Biot-Savart pour $B$ avec $Q/(\\varepsilon_0)$ à la place de $\\mu_0 I R^2/2$."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_E,
+        question: "Quel est le champ électrique total $E_z(M)$ sur l'axe ?",
+        options: [
+          "$E_z = \\dfrac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)^{3/2}}$",
+          "$E_z = \\dfrac{Q}{4\\pi\\varepsilon_0(R^2+z^2)}$",
+          "$E_z = \\dfrac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)}$",
+          "$E_z = \\dfrac{Q}{4\\pi\\varepsilon_0 z^2}$"
+        ],
+        answer: "$E_z = \\dfrac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)^{3/2}}$",
+        explanation: "$dE_z = \\frac{dq}{4\\pi\\varepsilon_0 NM^2}\\cdot\\frac{z}{NM} = \\frac{\\lambda R\\,d\\theta}{4\\pi\\varepsilon_0}\\cdot\\frac{z}{(R^2+z^2)^{3/2}}$. En intégrant sur $[0,2\\pi]$ : $E_z = \\frac{\\lambda R \\cdot 2\\pi}{4\\pi\\varepsilon_0}\\cdot\\frac{z}{(R^2+z^2)^{3/2}} = \\frac{Qz}{4\\pi\\varepsilon_0(R^2+z^2)^{3/2}}$. Même forme que l'expression de Biot-Savart pour $B$ avec $Q/(\\varepsilon_0)$ à la place de $\\mu_0 I R^2/2$."
+      },
 
-  // ── Q4 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX_E,
-    question: "Pour $z \\to \\infty$, le champ $E_z \\to Q/(4\\pi\\varepsilon_0 z^2)$ — la boucle se comporte comme une charge ponctuelle.",
-    answer: "true",
-    explanation: "Pour $z \\gg R$ : $(R^2+z^2)^{3/2} \\approx z^3$, donc $E_z \\approx \\frac{Qz}{4\\pi\\varepsilon_0 z^3} = \\frac{Q}{4\\pi\\varepsilon_0 z^2}$. À grande distance, toute distribution de charge finie tend vers un monopole si $Q \\neq 0$, vers un dipôle si $Q = 0$, etc. C'est le principe du développement multipolaire."
-  },
+      // ── Q4 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX_E,
+        question: "Pour $z \\to \\infty$, le champ $E_z \\to Q/(4\\pi\\varepsilon_0 z^2)$ — la boucle se comporte comme une charge ponctuelle.",
+        answer: "true",
+        explanation: "Pour $z \\gg R$ : $(R^2+z^2)^{3/2} \\approx z^3$, donc $E_z \\approx \\frac{Qz}{4\\pi\\varepsilon_0 z^3} = \\frac{Q}{4\\pi\\varepsilon_0 z^2}$. À grande distance, toute distribution de charge finie tend vers un monopole si $Q \\neq 0$, vers un dipôle si $Q = 0$, etc. C'est le principe du développement multipolaire."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_B,
-    question: "La boucle de charge $Q$ tourne à la pulsation $\\omega = 2\\pi/T$. L'intensité du courant équivalent est :",
-    options: [
-      "$I = Q\\omega/(2\\pi) = Q/(T)$",
-      "$I = Q\\omega$",
-      "$I = Q/(2\\pi)$",
-      "$I = Q\\omega R$"
-    ],
-    answer: "$I = Q\\omega/(2\\pi) = Q/(T)$",
-    explanation: "En une période $T$, la charge totale $Q$ passe une fois en chaque point du circuit. L'intensité est $I = Q/T = Q\\omega/(2\\pi)$. C'est le raisonnement général : $I = dq/dt = Q/T$ pour une charge $Q$ en rotation périodique. Unités : $[Q/T] = \\text{C/s} = \\text{A}$ ✓."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_B,
+        question: "La boucle de charge $Q$ tourne à la pulsation $\\omega = 2\\pi/T$. L'intensité du courant équivalent est :",
+        options: [
+          "$I = Q\\omega/(2\\pi) = Q/(T)$",
+          "$I = Q\\omega$",
+          "$I = Q/(2\\pi)$",
+          "$I = Q\\omega R$"
+        ],
+        answer: "$I = Q\\omega/(2\\pi) = Q/(T)$",
+        explanation: "En une période $T$, la charge totale $Q$ passe une fois en chaque point du circuit. L'intensité est $I = Q/T = Q\\omega/(2\\pi)$. C'est le raisonnement général : $I = dq/dt = Q/T$ pour une charge $Q$ en rotation périodique. Unités : $[Q/T] = \\text{C/s} = \\text{A}$ ✓."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_B,
-    question: "Le champ $B_z$ sur l'axe de la boucle en rotation s'obtient directement depuis le résultat de l'exercice 3. Il vaut :",
-    options: [
-      "$B_z = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}} = \\dfrac{\\mu_0 Q\\omega R^2}{4\\pi(R^2+z^2)^{3/2}}$",
-      "$B_z = \\dfrac{\\mu_0 Q}{2R}$",
-      "$B_z = \\dfrac{\\mu_0 Q\\omega}{4\\pi R}$",
-      "$B_z = \\dfrac{\\mu_0 Q\\omega z}{4\\pi(R^2+z^2)^{3/2}}$"
-    ],
-    answer: "$B_z = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}} = \\dfrac{\\mu_0 Q\\omega R^2}{4\\pi(R^2+z^2)^{3/2}}$",
-    explanation: "On substitue simplement $I = Q\\omega/(2\\pi)$ dans la formule de la spire circulaire : $B_z = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}} = \\frac{\\mu_0 Q\\omega R^2}{4\\pi(R^2+z^2)^{3/2}}$. C'est l'analogie électrostatique/magnétostatique : le calcul de $\\vec{E}$ et de $\\vec{B}$ suivent la même structure mathématique."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_B,
+        question: "Le champ $B_z$ sur l'axe de la boucle en rotation s'obtient directement depuis le résultat de l'exercice 3. Il vaut :",
+        options: [
+          "$B_z = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}} = \\dfrac{\\mu_0 Q\\omega R^2}{4\\pi(R^2+z^2)^{3/2}}$",
+          "$B_z = \\dfrac{\\mu_0 Q}{2R}$",
+          "$B_z = \\dfrac{\\mu_0 Q\\omega}{4\\pi R}$",
+          "$B_z = \\dfrac{\\mu_0 Q\\omega z}{4\\pi(R^2+z^2)^{3/2}}$"
+        ],
+        answer: "$B_z = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}} = \\dfrac{\\mu_0 Q\\omega R^2}{4\\pi(R^2+z^2)^{3/2}}$",
+        explanation: "On substitue simplement $I = Q\\omega/(2\\pi)$ dans la formule de la spire circulaire : $B_z = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}} = \\frac{\\mu_0 Q\\omega R^2}{4\\pi(R^2+z^2)^{3/2}}$. C'est l'analogie électrostatique/magnétostatique : le calcul de $\\vec{E}$ et de $\\vec{B}$ suivent la même structure mathématique."
+      },
 
-  // ── Q7 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Le calcul du champ $\\vec{E}$ d'une boucle chargée et le calcul du champ $\\vec{B}$ d'une spire de courant ont la même structure mathématique, avec la substitution $Q/(4\\pi\\varepsilon_0) \\leftrightarrow \\mu_0 I/4\\pi$.",
-    answer: "true",
-    explanation: "En effet, les deux intégrales de Biot-Savart et de Coulomb ont la même forme : $dB$ et $dE$ varient tous deux en $1/r^2$ et font intervenir un produit avec la direction $\\hat{u}_{PM}$. La seule différence est la nature du terme source ($I\\,d\\vec{\\ell}$ vs $dq$) et les constantes. C'est le fondement de l'analogie électrostatique/magnétostatique du formulaire."
-  },
+      // ── Q7 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Le calcul du champ $\\vec{E}$ d'une boucle chargée et le calcul du champ $\\vec{B}$ d'une spire de courant ont la même structure mathématique, avec la substitution $Q/(4\\pi\\varepsilon_0) \\leftrightarrow \\mu_0 I/4\\pi$.",
+        answer: "true",
+        explanation: "En effet, les deux intégrales de Biot-Savart et de Coulomb ont la même forme : $dB$ et $dE$ varient tous deux en $1/r^2$ et font intervenir un produit avec la direction $\\hat{u}_{PM}$. La seule différence est la nature du terme source ($I\\,d\\vec{\\ell}$ vs $dq$) et les constantes. C'est le fondement de l'analogie électrostatique/magnétostatique du formulaire."
+      },
 
-  // ── Q8 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Si la boucle portait une densité linéique non uniforme $\\lambda(\\theta) = \\lambda_0\\cos\\theta$, le comportement de $\\vec{E}$ à grande distance ($z \\gg R$) serait :",
-    options: [
-      "Dipolaire — $E_z \\sim 1/z^3$ car la charge totale est nulle",
-      "Monopolaire — $E_z \\sim 1/z^2$",
-      "Quadripolaire — $E_z \\sim 1/z^4$",
-      "Nul"
-    ],
-    answer: "Dipolaire — $E_z \\sim 1/z^3$ car la charge totale est nulle",
-    explanation: "$Q_{tot} = \\int_0^{2\\pi}\\lambda_0\\cos\\theta\\,R\\,d\\theta = 0$ : la charge totale est nulle, le terme monopolaire disparaît. Le terme dipolaire domine : $E \\sim p/(4\\pi\\varepsilon_0 z^3)$ avec $p = \\int dq\\cdot r_{source}$. C'est l'analogie directe avec l'exercice 3 de TD2 sur le développement multipolaire."
-  },
+      // ── Q8 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Si la boucle portait une densité linéique non uniforme $\\lambda(\\theta) = \\lambda_0\\cos\\theta$, le comportement de $\\vec{E}$ à grande distance ($z \\gg R$) serait :",
+        options: [
+          "Dipolaire — $E_z \\sim 1/z^3$ car la charge totale est nulle",
+          "Monopolaire — $E_z \\sim 1/z^2$",
+          "Quadripolaire — $E_z \\sim 1/z^4$",
+          "Nul"
+        ],
+        answer: "Dipolaire — $E_z \\sim 1/z^3$ car la charge totale est nulle",
+        explanation: "$Q_{tot} = \\int_0^{2\\pi}\\lambda_0\\cos\\theta\\,R\\,d\\theta = 0$ : la charge totale est nulle, le terme monopolaire disparaît. Le terme dipolaire domine : $E \\sim p/(4\\pi\\varepsilon_0 z^3)$ avec $p = \\int dq\\cdot r_{source}$. C'est l'analogie directe avec l'exercice 3 de TD2 sur le développement multipolaire."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td4_ex4", questions, `md:
+    QuizEngine.loadQuiz("td4_ex4", questions, `md:
 ## Exercice 4 — Boucle circulaire chargée et tournante
 
 **Partie 1 :** Boucle de rayon $R$, densité $\\lambda$ uniforme, charge $Q = 2\\pi R\\lambda$.
@@ -195,6 +201,7 @@ Calculer $\\vec{E}$ sur l'axe $Oz$. Comportement asymptotique.
 **Partie 2 :** Même boucle tournant à pulsation $\\omega$ (période $T$).
 Courant équivalent $I = Q/T$, champ $\\vec{B}$ sur l'axe — analogie avec Ex3.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

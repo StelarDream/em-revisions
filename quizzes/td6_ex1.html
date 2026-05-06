@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD6 Ex1 — Spire oscillante dans B terrestre</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+
+<body>
+  <div id="topbar" class="topbar"></div>
+  <main class="quiz-page">
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD6 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent)">Spire oscillante dans $\vec{B}$ terrestre</h1>
+      <p class="ch-subtitle">Moment magnétique, couple $\vec{\Gamma} = \vec{\mathcal{M}}\wedge\vec{B}$, oscillations,
+        mesure de $B_0$</p>
+    </div>
+    <div id="qz-past-attempts"></div>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
+      </div>
+      <span id="qz-progress-label"></span>
+    </div>
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
+      </div>
+    </div>
+    <div id="qz-results"></div>
+  </main>
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+
+    const CTX = `
+  Spire circulaire de rayon $R$, masse $m$, moment d'inertie $J$, courant $I$,
+  suspendue à un fil sans torsion. Champ magnétique terrestre horizontal $\\vec{B}_0$.
+  $\\theta$ : angle entre le plan de la spire et le plan perpendiculaire à $\\vec{B}_0$.
+`;
+
+    const questions = [
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Le moment magnétique de la spire circulaire de rayon $R$ parcourue par $I$ est :",
+        options: [
+          "$\\vec{\\mathcal{M}} = I\\pi R^2\\hat{n}$",
+          "$\\vec{\\mathcal{M}} = I\\cdot 2\\pi R\\hat{n}$",
+          "$\\vec{\\mathcal{M}} = I R^2\\hat{n}$",
+          "$\\vec{\\mathcal{M}} = \\pi R^2\\hat{n}$"
+        ],
+        answer: "$\\vec{\\mathcal{M}} = I\\pi R^2\\hat{n}$",
+        explanation: "Le moment magnétique d'une spire est $\\vec{\\mathcal{M}} = IS\\hat{n}$ où $S = \\pi R^2$ est l'aire et $\\hat{n}$ le vecteur normal orienté par la règle de la main droite. Il s'exprime en A·m². C'est la grandeur qui caractérise complètement la source de champ à grande distance — analogue au moment dipolaire électrique $\\vec{p} = qd\\hat{n}$."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "À l'équilibre stable, comment s'orientent $\\vec{\\mathcal{M}}$ et $\\vec{B}_0$ ?",
+        options: [
+          "$\\vec{\\mathcal{M}}$ est parallèle à $\\vec{B}_0$ — l'énergie $U = -\\vec{\\mathcal{M}}\\cdot\\vec{B}_0$ est minimale",
+          "$\\vec{\\mathcal{M}}$ est antiparallèle à $\\vec{B}_0$",
+          "$\\vec{\\mathcal{M}}$ est perpendiculaire à $\\vec{B}_0$",
+          "L'équilibre est indifférent"
+        ],
+        answer: "$\\vec{\\mathcal{M}}$ est parallèle à $\\vec{B}_0$ — l'énergie $U = -\\vec{\\mathcal{M}}\\cdot\\vec{B}_0$ est minimale",
+        explanation: "L'énergie d'interaction est $U = -\\vec{\\mathcal{M}}\\cdot\\vec{B}_0 = -\\mathcal{M}B_0\\cos\\theta$. Minimum pour $\\theta = 0$ ($\\vec{\\mathcal{M}}\\parallel\\vec{B}_0$) : équilibre stable. Maximum pour $\\theta = \\pi$ ($\\vec{\\mathcal{M}}$ antiparallèle) : équilibre instable. C'est exactement comme l'aiguille d'une boussole qui s'aligne avec le champ terrestre."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Le couple exercé par $\\vec{B}_0$ sur la spire est $\\vec{\\Gamma} = \\vec{\\mathcal{M}}\\wedge\\vec{B}_0$. Pour un petit écart $\\theta$ de l'équilibre, l'équation du mouvement donne :",
+        options: [
+          "$J\\ddot{\\theta} = -\\mathcal{M}B_0\\theta$ — oscillateur harmonique de pulsation $\\omega_0 = \\sqrt{\\mathcal{M}B_0/J}$",
+          "$J\\ddot{\\theta} = \\mathcal{M}B_0\\theta$ — instabilité",
+          "$J\\ddot{\\theta} = -\\mathcal{M}B_0$ — accélération constante",
+          "$J\\ddot{\\theta} = 0$ — mouvement uniforme"
+        ],
+        answer: "$J\\ddot{\\theta} = -\\mathcal{M}B_0\\theta$ — oscillateur harmonique de pulsation $\\omega_0 = \\sqrt{\\mathcal{M}B_0/J}$",
+        explanation: "Le couple de rappel est $\\Gamma = -\\mathcal{M}B_0\\sin\\theta \\approx -\\mathcal{M}B_0\\theta$ pour $\\theta \\ll 1$. L'équation du mouvement : $J\\ddot{\\theta} = -\\mathcal{M}B_0\\theta$, soit $\\ddot{\\theta} + \\omega_0^2\\theta = 0$ avec $\\omega_0 = \\sqrt{\\mathcal{M}B_0/J} = \\sqrt{I\\pi R^2 B_0/J}$. La solution est $\\theta(t) = \\theta_0\\cos(\\omega_0 t)$."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "En mesurant la période $T = 2\\pi/\\omega_0$ des oscillations, on peut déduire $B_0$. L'expression est :",
+        options: [
+          "$B_0 = \\dfrac{4\\pi^2 J}{\\mathcal{M}T^2} = \\dfrac{4\\pi^2 J}{I\\pi R^2 T^2} = \\dfrac{4\\pi J}{I R^2 T^2}$",
+          "$B_0 = \\dfrac{2\\pi J}{\\mathcal{M}T}$",
+          "$B_0 = \\dfrac{J}{\\mathcal{M}T^2}$",
+          "$B_0 = \\dfrac{\\mathcal{M}T^2}{4\\pi^2 J}$"
+        ],
+        answer: "$B_0 = \\dfrac{4\\pi^2 J}{\\mathcal{M}T^2} = \\dfrac{4\\pi^2 J}{I\\pi R^2 T^2} = \\dfrac{4\\pi J}{I R^2 T^2}$",
+        explanation: "$\\omega_0 = 2\\pi/T$ et $\\omega_0^2 = \\mathcal{M}B_0/J$, donc $B_0 = \\omega_0^2 J/\\mathcal{M} = 4\\pi^2 J/(\\mathcal{M}T^2)$. Cette méthode permet de mesurer $B_0$ avec une très bonne précision en mesurant $T$, $J$, $I$ et $R$ — c'est le principe du magnétomètre à oscillations."
+      },
+      {
+        type: "tf",
+        question: "L'énergie potentielle d'un dipôle magnétique $\\vec{\\mathcal{M}}$ dans un champ $\\vec{B}$ est $U = -\\vec{\\mathcal{M}}\\cdot\\vec{B}$, analogue à l'énergie d'un dipôle électrique $U = -\\vec{p}\\cdot\\vec{E}$.",
+        answer: "true",
+        explanation: "L'analogie électrostatique/magnétostatique est complète : $\\vec{p} = q\\vec{d} \\leftrightarrow \\vec{\\mathcal{M}} = IS\\hat{n}$, $U_{élec} = -\\vec{p}\\cdot\\vec{E} \\leftrightarrow U_{mag} = -\\vec{\\mathcal{M}}\\cdot\\vec{B}$, couple $\\vec{\\Gamma} = \\vec{p}\\wedge\\vec{E} \\leftrightarrow \\vec{\\Gamma} = \\vec{\\mathcal{M}}\\wedge\\vec{B}$. Cette analogie est résumée dans le formulaire électromagnétique."
+      },
+      {
+        type: "mcq",
+        question: "Le champ magnétique créé par une spire de moment $\\vec{\\mathcal{M}}$ à grande distance ($r \\gg R$) vaut :",
+        options: [
+          "$B_r = \\dfrac{\\mu_0}{2\\pi}\\dfrac{\\mathcal{M}\\cos\\theta}{r^3}$, $\\quad B_\\theta = \\dfrac{\\mu_0}{4\\pi}\\dfrac{\\mathcal{M}\\sin\\theta}{r^3}$",
+          "$B_r = \\dfrac{\\mu_0\\mathcal{M}}{4\\pi r^2}$",
+          "$B_r = \\dfrac{\\mu_0\\mathcal{M}}{2\\pi r^2}$, $\\quad B_\\theta = 0$",
+          "$\\vec{B} = \\dfrac{\\mu_0\\mathcal{M}}{4\\pi r^3}\\hat{u}_z$"
+        ],
+        answer: "$B_r = \\dfrac{\\mu_0}{2\\pi}\\dfrac{\\mathcal{M}\\cos\\theta}{r^3}$, $\\quad B_\\theta = \\dfrac{\\mu_0}{4\\pi}\\dfrac{\\mathcal{M}\\sin\\theta}{r^3}$",
+        explanation: "C'est le champ dipolaire magnétique — exactement analogue au champ dipolaire électrique avec $\\mathcal{M}\\mu_0/(4\\pi) \\leftrightarrow p/(4\\pi\\varepsilon_0)$. Il décroît en $1/r^3$, caractéristique d'un dipôle. Le champ terrestre est approximativement dipolaire à grande échelle — le moment magnétique de la Terre est $\\mathcal{M}_T \\approx 8\\times10^{22}\\,\\text{A·m}^2$."
+      },
+      {
+        type: "tf",
+        question: "La force exercée sur un dipôle $\\vec{\\mathcal{M}}$ dans un champ $\\vec{B}$ non uniforme est $\\vec{F} = \\vec{\\nabla}(\\vec{\\mathcal{M}}\\cdot\\vec{B})$.",
+        answer: "true",
+        explanation: "$\\vec{F} = -\\vec{\\nabla}U = \\vec{\\nabla}(\\vec{\\mathcal{M}}\\cdot\\vec{B})$ (pour $\\vec{\\mathcal{M}}$ constant). Dans un champ uniforme, $\\vec{\\nabla}\\vec{B} = 0$ ⟹ $\\vec{F} = \\vec{0}$ : un dipôle dans un champ uniforme n'est soumis qu'à un couple, pas à une force de translation. C'est pourquoi les aimants sont attirés vers les régions de champ plus intense (gradient non nul)."
+      },
+      {
+        type: "mcq",
+        question: "Une aiguille de boussole (moment $\\vec{\\mathcal{M}}$) s'aligne avec le champ terrestre $\\vec{B}_0$. La pulsation de petites oscillations est $\\omega_0 = \\sqrt{\\mathcal{M}B_0/J}$. Si on double $I$ (donc double $\\mathcal{M}$), la période est multipliée par :",
+        options: [
+          "$1/\\sqrt{2} \\approx 0{,}71$ — la période diminue",
+          "$\\sqrt{2} \\approx 1{,}41$ — la période augmente",
+          "$2$ — la période double",
+          "$1$ — la période ne change pas"
+        ],
+        answer: "$1/\\sqrt{2} \\approx 0{,}71$ — la période diminue",
+        explanation: "$T = 2\\pi/\\omega_0 = 2\\pi\\sqrt{J/(\\mathcal{M}B_0)}$. Si $\\mathcal{M} \\to 2\\mathcal{M}$ : $T \\to T/\\sqrt{2}$. Un courant plus fort → moment plus grand → couple de rappel plus fort → oscillations plus rapides → période plus courte. C'est cohérent avec l'analogie du pendule : augmenter la « raideur » diminue la période."
+      },
+    ];
+
+    QuizEngine.loadQuiz("td6_ex1", questions, `md:
+## Exercice 1 — Spire oscillante dans $\\vec{B}$ terrestre
+
+Spire circulaire ($R$, $I$, $J$) suspendue dans le champ terrestre horizontal $B_0$.
+
+**1.** Moment magnétique $\\vec{\\mathcal{M}} = I\\pi R^2\\hat{n}$, équilibre stable ($\\vec{\\mathcal{M}}\\parallel\\vec{B}_0$).
+
+**2.** Petites oscillations : $\\omega_0 = \\sqrt{\\mathcal{M}B_0/J}$, $\\theta(t) = \\theta_0\\cos(\\omega_0 t)$.
+
+**3.** Déduire $B_0 = 4\\pi^2 J/(\\mathcal{M}T^2)$ par mesure de la période.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+  </script>
+</body>
+
+</html>

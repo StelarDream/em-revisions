@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,181 +10,185 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD4 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent4)">Symétries et invariances</h1>
-    <p class="ch-subtitle">Plans de symétrie/antisymétrie des courants — direction et dépendance de $\vec{B}$</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD4 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent4)">Symétries et invariances</h1>
+      <p class="ch-subtitle">Plans de symétrie/antisymétrie des courants — direction et dépendance de $\vec{B}$</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD4 — Exercice 1 : Symétries et invariances
-//  Cylindre creux infini :
-//    Cas 1 : courant parallèle à Oz (j_surf selon +z)
-//    Cas 2 : courant azimutal (solénoïde)
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD4 — Exercice 1 : Symétries et invariances
+    //  Cylindre creux infini :
+    //    Cas 1 : courant parallèle à Oz (j_surf selon +z)
+    //    Cas 2 : courant azimutal (solénoïde)
+    // ═══════════════════════════════════════════════════════════
 
-const CTX1 = `
+    const CTX1 = `
   Cylindre creux infini d'axe $Oz$, parcouru par un courant de surface $j_{surf}$ uniforme
   dirigé selon $+\\hat{u}_z$ (parallèle à l'axe).
 `;
 
-const CTX2 = `
+    const CTX2 = `
   Même cylindre, mais le courant s'écoule maintenant de façon azimutale (selon $\\hat{u}_\\varphi$,
   sens trigonométrique) — équivalent à un solénoïde infini.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Pour une distribution de courants, un plan $\\Pi$ est plan d'antisymétrie si :",
-    options: [
-      "Le courant en $P'$ (symétrique de $P$) est opposé à celui en $P$ après réflexion par $\\Pi$",
-      "Le courant est identique de chaque côté de $\\Pi$",
-      "Le courant est nul sur $\\Pi$",
-      "Le courant est parallèle à $\\Pi$"
-    ],
-    answer: "Le courant en $P'$ (symétrique de $P$) est opposé à celui en $P$ après réflexion par $\\Pi$",
-    explanation: "Un plan d'antisymétrie renverse le courant par réflexion : $\\vec{j}(P') = -\\text{sym}_\\Pi(\\vec{j}(P))$. Le champ magnétique $\\vec{B}$ est un vecteur axial (pseudovecteur) — en un point $M$ appartenant à un plan d'antisymétrie de $\\vec{j}$, $\\vec{B}$ est perpendiculaire à ce plan."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Pour une distribution de courants, un plan $\\Pi$ est plan d'antisymétrie si :",
+        options: [
+          "Le courant en $P'$ (symétrique de $P$) est opposé à celui en $P$ après réflexion par $\\Pi$",
+          "Le courant est identique de chaque côté de $\\Pi$",
+          "Le courant est nul sur $\\Pi$",
+          "Le courant est parallèle à $\\Pi$"
+        ],
+        answer: "Le courant en $P'$ (symétrique de $P$) est opposé à celui en $P$ après réflexion par $\\Pi$",
+        explanation: "Un plan d'antisymétrie renverse le courant par réflexion : $\\vec{j}(P') = -\\text{sym}_\\Pi(\\vec{j}(P))$. Le champ magnétique $\\vec{B}$ est un vecteur axial (pseudovecteur) — en un point $M$ appartenant à un plan d'antisymétrie de $\\vec{j}$, $\\vec{B}$ est perpendiculaire à ce plan."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Pour le cylindre avec courant selon $+\\hat{u}_z$ : tout plan contenant $Oz$ est-il plan de symétrie ou d'antisymétrie de la distribution de courant ?",
-    options: [
-      "Plan d'antisymétrie — le courant est un vecteur axial renversé par la réflexion",
-      "Plan de symétrie — le courant reste selon $+\\hat{u}_z$ après réflexion",
-      "Ni l'un ni l'autre",
-      "Plan de symétrie pour certains, d'antisymétrie pour d'autres"
-    ],
-    answer: "Plan de symétrie — le courant reste selon $+\\hat{u}_z$ après réflexion",
-    explanation: "Le courant $\\vec{j} = j_{surf}\\hat{u}_z$ est un vecteur polaire. Sous réflexion par un plan contenant $Oz$ (plan méridien), la composante $z$ est conservée : $\\hat{u}_z \\to \\hat{u}_z$. C'est donc un plan de symétrie de $\\vec{j}$. Mais $\\vec{B}$ étant un pseudovecteur, sa composante dans le plan s'inverse : $\\vec{B}(M)$ doit être perpendiculaire au plan méridien, c'est-à-dire selon $\\hat{u}_\\varphi$."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Pour le cylindre avec courant selon $+\\hat{u}_z$ : tout plan contenant $Oz$ est-il plan de symétrie ou d'antisymétrie de la distribution de courant ?",
+        options: [
+          "Plan d'antisymétrie — le courant est un vecteur axial renversé par la réflexion",
+          "Plan de symétrie — le courant reste selon $+\\hat{u}_z$ après réflexion",
+          "Ni l'un ni l'autre",
+          "Plan de symétrie pour certains, d'antisymétrie pour d'autres"
+        ],
+        answer: "Plan de symétrie — le courant reste selon $+\\hat{u}_z$ après réflexion",
+        explanation: "Le courant $\\vec{j} = j_{surf}\\hat{u}_z$ est un vecteur polaire. Sous réflexion par un plan contenant $Oz$ (plan méridien), la composante $z$ est conservée : $\\hat{u}_z \\to \\hat{u}_z$. C'est donc un plan de symétrie de $\\vec{j}$. Mais $\\vec{B}$ étant un pseudovecteur, sa composante dans le plan s'inverse : $\\vec{B}(M)$ doit être perpendiculaire au plan méridien, c'est-à-dire selon $\\hat{u}_\\varphi$."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX1,
-    question: "Par les invariances (translation selon $z$, rotation autour de $Oz$), de quoi dépend $\\vec{B}(M)$ en coordonnées cylindriques $(r,\\varphi,z)$ ?",
-    options: [
-      "$\\vec{B}$ ne dépend que de $r$, et est dirigé selon $\\hat{u}_\\varphi$",
-      "$\\vec{B}$ dépend de $r$ et $z$, dirigé selon $\\hat{u}_z$",
-      "$\\vec{B}$ ne dépend que de $r$, dirigé selon $\\hat{u}_r$",
-      "$\\vec{B}$ est uniforme"
-    ],
-    answer: "$\\vec{B}$ ne dépend que de $r$, et est dirigé selon $\\hat{u}_\\varphi$",
-    explanation: "Invariance par translation selon $z$ ⟹ $\\vec{B}$ indépendant de $z$. Invariance par rotation autour de $Oz$ ⟹ $\\vec{B}$ indépendant de $\\varphi$. Tout plan méridien est plan de symétrie du courant ⟹ $\\vec{B}(M)\\perp$ à ce plan ⟹ $\\vec{B}$ selon $\\hat{u}_\\varphi$. Conclusion : $\\vec{B} = B(r)\\hat{u}_\\varphi$."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX1,
+        question: "Par les invariances (translation selon $z$, rotation autour de $Oz$), de quoi dépend $\\vec{B}(M)$ en coordonnées cylindriques $(r,\\varphi,z)$ ?",
+        options: [
+          "$\\vec{B}$ ne dépend que de $r$, et est dirigé selon $\\hat{u}_\\varphi$",
+          "$\\vec{B}$ dépend de $r$ et $z$, dirigé selon $\\hat{u}_z$",
+          "$\\vec{B}$ ne dépend que de $r$, dirigé selon $\\hat{u}_r$",
+          "$\\vec{B}$ est uniforme"
+        ],
+        answer: "$\\vec{B}$ ne dépend que de $r$, et est dirigé selon $\\hat{u}_\\varphi$",
+        explanation: "Invariance par translation selon $z$ ⟹ $\\vec{B}$ indépendant de $z$. Invariance par rotation autour de $Oz$ ⟹ $\\vec{B}$ indépendant de $\\varphi$. Tout plan méridien est plan de symétrie du courant ⟹ $\\vec{B}(M)\\perp$ à ce plan ⟹ $\\vec{B}$ selon $\\hat{u}_\\varphi$. Conclusion : $\\vec{B} = B(r)\\hat{u}_\\varphi$."
+      },
 
-  // ── Q4 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX1,
-    question: "Le plan $z = 0$ est un plan de symétrie de la distribution de courant (courant selon $+\\hat{u}_z$), ce qui implique que $\\vec{B}$ est dans ce plan en tout point de ce plan.",
-    answer: "false",
-    explanation: "Le plan $z = 0$ est effectivement plan de symétrie du courant $\\vec{j} = j_{surf}\\hat{u}_z$ (invariance par $z \\to -z$). Mais $\\vec{B}$ est un pseudovecteur : en un point $M$ appartenant à un plan de symétrie, $\\vec{B}$ est perpendiculaire à ce plan. Donc $\\vec{B}$ est selon $\\hat{u}_z$... mais l'analyse complète (plan méridien = antisymétrie pour $\\vec{B}$) impose $\\vec{B}\\parallel\\hat{u}_\\varphi$."
-  },
+      // ── Q4 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX1,
+        question: "Le plan $z = 0$ est un plan de symétrie de la distribution de courant (courant selon $+\\hat{u}_z$), ce qui implique que $\\vec{B}$ est dans ce plan en tout point de ce plan.",
+        answer: "false",
+        explanation: "Le plan $z = 0$ est effectivement plan de symétrie du courant $\\vec{j} = j_{surf}\\hat{u}_z$ (invariance par $z \\to -z$). Mais $\\vec{B}$ est un pseudovecteur : en un point $M$ appartenant à un plan de symétrie, $\\vec{B}$ est perpendiculaire à ce plan. Donc $\\vec{B}$ est selon $\\hat{u}_z$... mais l'analyse complète (plan méridien = antisymétrie pour $\\vec{B}$) impose $\\vec{B}\\parallel\\hat{u}_\\varphi$."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "Pour le solénoïde (courant selon $\\hat{u}_\\varphi$) : le plan $z = z_0$ (perpendiculaire à $Oz$) est-il plan de symétrie ou d'antisymétrie du courant ?",
-    options: [
-      "Plan d'antisymétrie — la réflexion par $z = z_0$ inverse la composante $\\varphi$ du courant",
-      "Plan de symétrie — le courant azimutal est conservé par cette réflexion",
-      "Ni l'un ni l'autre",
-      "Plan de symétrie pour $z_0 = 0$ uniquement"
-    ],
-    answer: "Plan d'antisymétrie — la réflexion par $z = z_0$ inverse la composante $\\varphi$ du courant",
-    explanation: "Sous réflexion par le plan $z = z_0$, le courant $\\vec{j} = j\\hat{u}_\\varphi$ (vecteur polaire) voit sa composante $\\varphi$ conservée en module mais le sens de parcours du circuit s'inverse (le courant qui tournait dans le sens trigo vue du haut tourne maintenant dans l'autre sens). Donc c'est un plan d'antisymétrie : $\\vec{B}$ en un point du plan est perpendiculaire à ce plan, soit selon $\\hat{u}_z$."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Pour le solénoïde (courant selon $\\hat{u}_\\varphi$) : le plan $z = z_0$ (perpendiculaire à $Oz$) est-il plan de symétrie ou d'antisymétrie du courant ?",
+        options: [
+          "Plan d'antisymétrie — la réflexion par $z = z_0$ inverse la composante $\\varphi$ du courant",
+          "Plan de symétrie — le courant azimutal est conservé par cette réflexion",
+          "Ni l'un ni l'autre",
+          "Plan de symétrie pour $z_0 = 0$ uniquement"
+        ],
+        answer: "Plan d'antisymétrie — la réflexion par $z = z_0$ inverse la composante $\\varphi$ du courant",
+        explanation: "Sous réflexion par le plan $z = z_0$, le courant $\\vec{j} = j\\hat{u}_\\varphi$ (vecteur polaire) voit sa composante $\\varphi$ conservée en module mais le sens de parcours du circuit s'inverse (le courant qui tournait dans le sens trigo vue du haut tourne maintenant dans l'autre sens). Donc c'est un plan d'antisymétrie : $\\vec{B}$ en un point du plan est perpendiculaire à ce plan, soit selon $\\hat{u}_z$."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "Par les invariances du solénoïde (translation selon $z$, rotation autour de $Oz$), et l'analyse des symétries, quelle est la forme de $\\vec{B}(M)$ ?",
-    options: [
-      "$\\vec{B} = B(r)\\hat{u}_z$ — dépend uniquement de $r$, dirigé selon $\\hat{u}_z$",
-      "$\\vec{B} = B(r)\\hat{u}_\\varphi$ — azimutal",
-      "$\\vec{B} = B(r,z)\\hat{u}_z$",
-      "$\\vec{B} = B(r)\\hat{u}_r$"
-    ],
-    answer: "$\\vec{B} = B(r)\\hat{u}_z$ — dépend uniquement de $r$, dirigé selon $\\hat{u}_z$",
-    explanation: "Invariances ⟹ $B$ dépend uniquement de $r$. Tout plan $z = z_0$ est plan d'antisymétrie ⟹ $\\vec{B}\\perp$ au plan ⟹ $\\vec{B}\\parallel\\hat{u}_z$. Tout plan méridien est plan de symétrie (le courant $\\hat{u}_\\varphi$ s'inverse par réflexion méridienne, donc c'est plan d'antisymétrie pour $\\vec{j}$, mais de symétrie pour $\\vec{B}$) ⟹ $\\vec{B}$ doit être dans le plan méridien. Combiné : $\\vec{B} = B(r)\\hat{u}_z$."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Par les invariances du solénoïde (translation selon $z$, rotation autour de $Oz$), et l'analyse des symétries, quelle est la forme de $\\vec{B}(M)$ ?",
+        options: [
+          "$\\vec{B} = B(r)\\hat{u}_z$ — dépend uniquement de $r$, dirigé selon $\\hat{u}_z$",
+          "$\\vec{B} = B(r)\\hat{u}_\\varphi$ — azimutal",
+          "$\\vec{B} = B(r,z)\\hat{u}_z$",
+          "$\\vec{B} = B(r)\\hat{u}_r$"
+        ],
+        answer: "$\\vec{B} = B(r)\\hat{u}_z$ — dépend uniquement de $r$, dirigé selon $\\hat{u}_z$",
+        explanation: "Invariances ⟹ $B$ dépend uniquement de $r$. Tout plan $z = z_0$ est plan d'antisymétrie ⟹ $\\vec{B}\\perp$ au plan ⟹ $\\vec{B}\\parallel\\hat{u}_z$. Tout plan méridien est plan de symétrie (le courant $\\hat{u}_\\varphi$ s'inverse par réflexion méridienne, donc c'est plan d'antisymétrie pour $\\vec{j}$, mais de symétrie pour $\\vec{B}$) ⟹ $\\vec{B}$ doit être dans le plan méridien. Combiné : $\\vec{B} = B(r)\\hat{u}_z$."
+      },
 
-  // ── Q7 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Le champ magnétique $\\vec{B}$ est un pseudovecteur (vecteur axial) : sous réflexion par un plan, il se transforme comme le produit vectoriel de deux vecteurs polaires.",
-    answer: "true",
-    explanation: "Oui. $\\vec{B}$ naît de $d\\vec{\\ell}\\wedge\\hat{u}_{PM}$ dans la loi de Biot-Savart : produit vectoriel de deux vecteurs polaires = pseudovecteur. Conséquence : en un point $M$ appartenant à un plan de symétrie de $\\vec{j}$, la composante de $\\vec{B}$ dans le plan s'annule (elle est perpendiculaire au plan). C'est l'inverse de $\\vec{E}$, qui est polaire."
-  },
+      // ── Q7 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Le champ magnétique $\\vec{B}$ est un pseudovecteur (vecteur axial) : sous réflexion par un plan, il se transforme comme le produit vectoriel de deux vecteurs polaires.",
+        answer: "true",
+        explanation: "Oui. $\\vec{B}$ naît de $d\\vec{\\ell}\\wedge\\hat{u}_{PM}$ dans la loi de Biot-Savart : produit vectoriel de deux vecteurs polaires = pseudovecteur. Conséquence : en un point $M$ appartenant à un plan de symétrie de $\\vec{j}$, la composante de $\\vec{B}$ dans le plan s'annule (elle est perpendiculaire au plan). C'est l'inverse de $\\vec{E}$, qui est polaire."
+      },
 
-  // ── Q8 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Une distribution de courant est invariante par rotation d'angle $\\varphi_0$ quelconque autour de $Oz$. Cela implique que $\\vec{B}$ :",
-    options: [
-      "Ne dépend pas de $\\varphi$ et n'a pas de composante selon $\\hat{u}_\\varphi$ si de plus les plans méridiens sont plans de symétrie",
-      "Est nul",
-      "Est uniforme",
-      "Ne dépend que de $z$"
-    ],
-    answer: "Ne dépend pas de $\\varphi$ et n'a pas de composante selon $\\hat{u}_\\varphi$ si de plus les plans méridiens sont plans de symétrie",
-    explanation: "L'invariance par rotation impose $\\vec{B}(r,\\varphi,z) = \\vec{B}(r,z)$ : pas de dépendance en $\\varphi$. Si de plus tout plan méridien est plan de symétrie/antisymétrie, alors la composante $B_\\varphi = 0$. Si tout plan $z = cte$ est plan d'antisymétrie, alors $B_r = 0$ également, ne laissant que $B_z(r)$. C'est le cas du solénoïde."
-  },
+      // ── Q8 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Une distribution de courant est invariante par rotation d'angle $\\varphi_0$ quelconque autour de $Oz$. Cela implique que $\\vec{B}$ :",
+        options: [
+          "Ne dépend pas de $\\varphi$ et n'a pas de composante selon $\\hat{u}_\\varphi$ si de plus les plans méridiens sont plans de symétrie",
+          "Est nul",
+          "Est uniforme",
+          "Ne dépend que de $z$"
+        ],
+        answer: "Ne dépend pas de $\\varphi$ et n'a pas de composante selon $\\hat{u}_\\varphi$ si de plus les plans méridiens sont plans de symétrie",
+        explanation: "L'invariance par rotation impose $\\vec{B}(r,\\varphi,z) = \\vec{B}(r,z)$ : pas de dépendance en $\\varphi$. Si de plus tout plan méridien est plan de symétrie/antisymétrie, alors la composante $B_\\varphi = 0$. Si tout plan $z = cte$ est plan d'antisymétrie, alors $B_r = 0$ également, ne laissant que $B_z(r)$. C'est le cas du solénoïde."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td4_ex1", questions, `md:
+    QuizEngine.loadQuiz("td4_ex1", questions, `md:
 ## Exercice 1 — Symétries et invariances
 
 **Distribution 1 :** Cylindre creux infini d'axe $Oz$, courant $j_{surf}$ uniforme selon $+\\hat{u}_z$.
@@ -192,6 +197,7 @@ Déterminer plans de symétrie/antisymétrie, invariances, direction et dépenda
 **Distribution 2 :** Même cylindre, courant azimutal selon $\\hat{u}_\\varphi$ (solénoïde).
 Même analyse.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

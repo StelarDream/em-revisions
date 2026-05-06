@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,156 +10,162 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
-<div id="topbar" class="topbar"></div>
-<main class="quiz-page">
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD7 · Exercices 2 &amp; 3 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Cadre tombant &amp; champ tournant</h1>
-    <p class="ch-subtitle">Induction — entrée dans $\vec{B}$, traversée, sortie ; flux d'un champ $\vec{B}(t)$ tournant</p>
-  </div>
-  <div id="qz-past-attempts"></div>
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+  <div id="topbar" class="topbar"></div>
+  <main class="quiz-page">
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD7 · Exercices 2 &amp; 3 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Cadre tombant &amp; champ tournant</h1>
+      <p class="ch-subtitle">Induction — entrée dans $\vec{B}$, traversée, sortie ; flux d'un champ $\vec{B}(t)$
+        tournant</p>
+    </div>
+    <div id="qz-past-attempts"></div>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="qz-results"></div>
-</main>
-<button id="btt" title="Haut de page">↑</button>
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    <div id="qz-results"></div>
+  </main>
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
 
-const CTX2 = `
+    const CTX2 = `
   Cadre rectangulaire (largeur $a$, hauteur $b$, résistance $R$) tombe verticalement dans des rails.
   Un champ $\\vec{B}$ uniforme et constant occupe une région de hauteur $H > b$.
 `;
 
-const CTX3 = `
+    const CTX3 = `
   Champ magnétique tournant : $\\vec{B}(t) = B_0(\\sin\\omega t\\,\\hat{u}_x + \\cos\\omega t\\,\\hat{u}_z)$.
   Circuit carré de côté $a$, résistance $R$, dans le plan $Oxy$.
 `;
 
-const questions = [
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "Avant que le cadre n'entre dans la zone de champ, que vaut la fem induite ?",
-    options: [
-      "$e = 0$ — aucun flux ne traverse le cadre",
-      "$e = Bav$ — la vitesse crée une fem",
-      "$e = Bab$ — le champ crée une fem",
-      "$e$ dépend de la hauteur du cadre"
-    ],
-    answer: "$e = 0$ — aucun flux ne traverse le cadre",
-    explanation: "Avant d'entrer dans le champ, $\\Phi = 0$ et $d\\Phi/dt = 0$. Il n'y a pas de fem. Le cadre est en chute libre : $v(t) = gt$. L'induction n'existe que lorsque le flux varie — condition nécessaire."
-  },
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "Pendant l'entrée dans le champ (seul le côté inférieur est dans $\\vec{B}$), la fem vaut :",
-    options: [
-      "$e = -Bav$ (induction de Lorentz sur le côté inférieur uniquement)",
-      "$e = -Babv$",
-      "$e = -Ba^2v$",
-      "$e = 0$"
-    ],
-    answer: "$e = -Bav$ (induction de Lorentz sur le côté inférieur uniquement)",
-    explanation: "Seul le côté inférieur (longueur $a$) se déplace dans $\\vec{B}$ et contribue à la fem. $e = -Bav$ (avec $v = \\dot{y}$ la vitesse de descente). Un courant $i = Bav/R$ circule, créant une force de Laplace sur le côté inférieur qui s'oppose à la chute — freinage magnétique à l'entrée."
-  },
-  {
-    type: "mcq",
-    context: CTX2,
-    question: "Une fois le cadre entièrement dans le champ (les deux côtés horizontaux sont dans $\\vec{B}$), que se passe-t-il ?",
-    options: [
-      "$e = 0$ — le flux est constant, les deux côtés induisent des fem opposées",
-      "$e = -2Bav$ — les deux côtés s'additionnent",
-      "$e = -Bav$ — seul un côté contribue",
-      "$e$ dépend de $b$"
-    ],
-    answer: "$e = 0$ — le flux est constant, les deux côtés induisent des fem opposées",
-    explanation: "Quand le cadre est entièrement dans $\\vec{B}$ uniforme, $\\Phi = Bab$ = constante ⟹ $e = 0$. Les deux côtés horizontaux créent des fem égales et opposées qui s'annulent. Le cadre est en chute libre à nouveau — aucun freinage. C'est pourquoi dans Ex2, il y a trois phases : chute libre / freinage à l'entrée / freinage à la sortie."
-  },
-  {
-    type: "tf",
-    context: CTX2,
-    question: "Le champ $\\vec{B}_2$ créé par le courant induit dans le cadre peut être négligé si $L/R \\ll$ temps caractéristique du mouvement (hypothèse ARQS).",
-    answer: "true",
-    explanation: "Le courant induit crée un champ $\\vec{B}_2$ qui modifie lui-même le flux — c'est l'auto-induction. On peut le négliger si $\\tau_{RL} = L/R \\ll \\tau_{mec}$ (temps caractéristique du mouvement mécanique). Dans l'hypothèse des régimes quasi-stationnaires (ARQS), cette condition est vérifiée et on traite le système comme purement résistif."
-  },
-  {
-    type: "mcq",
-    context: CTX3,
-    question: "Le circuit carré est dans le plan $Oxy$, son vecteur normal est $\\hat{u}_z$. Quel est le flux $\\Phi(t)$ ?",
-    options: [
-      "$\\Phi = B_0 a^2\\cos\\omega t$",
-      "$\\Phi = B_0 a^2\\sin\\omega t$",
-      "$\\Phi = B_0 a^2$",
-      "$\\Phi = 0$"
-    ],
-    answer: "$\\Phi = B_0 a^2\\cos\\omega t$",
-    explanation: "$\\Phi = \\vec{B}\\cdot\\vec{S} = (B_0\\sin\\omega t\\,\\hat{u}_x + B_0\\cos\\omega t\\,\\hat{u}_z)\\cdot a^2\\hat{u}_z = B_0 a^2\\cos\\omega t$. Seule la composante selon $\\hat{u}_z$ contribue au flux à travers le plan $Oxy$. La composante $\\hat{u}_x$ est parallèle au plan et ne contribue pas."
-  },
-  {
-    type: "mcq",
-    context: CTX3,
-    question: "La fem induite et le courant dans le circuit sont :",
-    options: [
-      "$e = B_0 a^2\\omega\\sin\\omega t$, $\\;i = \\frac{B_0 a^2\\omega}{R}\\sin\\omega t$",
-      "$e = -B_0 a^2\\omega\\sin\\omega t$, $\\;i = -\\frac{B_0 a^2\\omega}{R}\\sin\\omega t$",
-      "$e = B_0 a^2\\omega\\cos\\omega t$, $\\;i = \\frac{B_0 a^2\\omega}{R}\\cos\\omega t$",
-      "$e = 0$"
-    ],
-    answer: "$e = B_0 a^2\\omega\\sin\\omega t$, $\\;i = \\frac{B_0 a^2\\omega}{R}\\sin\\omega t$",
-    explanation: "$e = -\\frac{d\\Phi}{dt} = -(-B_0 a^2\\omega\\sin\\omega t) = B_0 a^2\\omega\\sin\\omega t$. Le courant $i = e/R = B_0 a^2\\omega\\sin\\omega t/R$. C'est le principe du générateur alternatif : un champ tournant (ou un circuit tournant dans un champ fixe) produit une fem sinusoïdale."
-  },
-  {
-    type: "tf",
-    context: CTX3,
-    question: "Le courant induit $i \\propto \\sin\\omega t$ est bien conforme à la loi de Lenz : quand $\\Phi = B_0a^2\\cos\\omega t$ décroît (de $t=0$ à $t=\\pi/\\omega$), le courant crée un champ dans le sens de $\\hat{u}_z$ pour s'y opposer.",
-    answer: "true",
-    explanation: "Pour $0 < t < \\pi/(2\\omega)$ : $\\cos\\omega t$ décroît de 1 à 0 ⟹ $\\Phi$ décroît ⟹ $e > 0$ ⟹ $i > 0$. Un courant positif dans le circuit (sens direct) crée un champ $\\vec{B}_{ind}$ selon $+\\hat{u}_z$ — il s'oppose à la diminution de $\\Phi$ ✓. C'est conforme à Lenz."
-  },
-  {
-    type: "mcq",
-    question: "La loi de Faraday $e = -d\\Phi/dt$ est la forme intégrale de quelle équation de Maxwell ?",
-    options: [
-      "$\\vec{\\nabla}\\times\\vec{E} = -\\dfrac{\\partial\\vec{B}}{\\partial t}$",
-      "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
-      "$\\vec{\\nabla}\\cdot\\vec{B} = 0$",
-      "$\\vec{\\nabla}\\cdot\\vec{E} = \\rho/\\varepsilon_0$"
-    ],
-    answer: "$\\vec{\\nabla}\\times\\vec{E} = -\\dfrac{\\partial\\vec{B}}{\\partial t}$",
-    explanation: "Par Stokes : $e = \\oint_\\mathcal{C}\\vec{E}\\cdot d\\vec{\\ell} = \\iint_S(\\vec{\\nabla}\\times\\vec{E})\\cdot d\\vec{S} = -\\iint_S\\frac{\\partial\\vec{B}}{\\partial t}\\cdot d\\vec{S} = -\\frac{d\\Phi}{dt}$. L'équation locale $\\vec{\\nabla}\\times\\vec{E} = -\\partial\\vec{B}/\\partial t$ est l'équation de Maxwell-Faraday — la quatrième équation de Maxwell (avec Maxwell-Gauss, Thomson, Ampère-Maxwell)."
-  },
-];
+    const questions = [
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Avant que le cadre n'entre dans la zone de champ, que vaut la fem induite ?",
+        options: [
+          "$e = 0$ — aucun flux ne traverse le cadre",
+          "$e = Bav$ — la vitesse crée une fem",
+          "$e = Bab$ — le champ crée une fem",
+          "$e$ dépend de la hauteur du cadre"
+        ],
+        answer: "$e = 0$ — aucun flux ne traverse le cadre",
+        explanation: "Avant d'entrer dans le champ, $\\Phi = 0$ et $d\\Phi/dt = 0$. Il n'y a pas de fem. Le cadre est en chute libre : $v(t) = gt$. L'induction n'existe que lorsque le flux varie — condition nécessaire."
+      },
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Pendant l'entrée dans le champ (seul le côté inférieur est dans $\\vec{B}$), la fem vaut :",
+        options: [
+          "$e = -Bav$ (induction de Lorentz sur le côté inférieur uniquement)",
+          "$e = -Babv$",
+          "$e = -Ba^2v$",
+          "$e = 0$"
+        ],
+        answer: "$e = -Bav$ (induction de Lorentz sur le côté inférieur uniquement)",
+        explanation: "Seul le côté inférieur (longueur $a$) se déplace dans $\\vec{B}$ et contribue à la fem. $e = -Bav$ (avec $v = \\dot{y}$ la vitesse de descente). Un courant $i = Bav/R$ circule, créant une force de Laplace sur le côté inférieur qui s'oppose à la chute — freinage magnétique à l'entrée."
+      },
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Une fois le cadre entièrement dans le champ (les deux côtés horizontaux sont dans $\\vec{B}$), que se passe-t-il ?",
+        options: [
+          "$e = 0$ — le flux est constant, les deux côtés induisent des fem opposées",
+          "$e = -2Bav$ — les deux côtés s'additionnent",
+          "$e = -Bav$ — seul un côté contribue",
+          "$e$ dépend de $b$"
+        ],
+        answer: "$e = 0$ — le flux est constant, les deux côtés induisent des fem opposées",
+        explanation: "Quand le cadre est entièrement dans $\\vec{B}$ uniforme, $\\Phi = Bab$ = constante ⟹ $e = 0$. Les deux côtés horizontaux créent des fem égales et opposées qui s'annulent. Le cadre est en chute libre à nouveau — aucun freinage. C'est pourquoi dans Ex2, il y a trois phases : chute libre / freinage à l'entrée / freinage à la sortie."
+      },
+      {
+        type: "tf",
+        context: CTX2,
+        question: "Le champ $\\vec{B}_2$ créé par le courant induit dans le cadre peut être négligé si $L/R \\ll$ temps caractéristique du mouvement (hypothèse ARQS).",
+        answer: "true",
+        explanation: "Le courant induit crée un champ $\\vec{B}_2$ qui modifie lui-même le flux — c'est l'auto-induction. On peut le négliger si $\\tau_{RL} = L/R \\ll \\tau_{mec}$ (temps caractéristique du mouvement mécanique). Dans l'hypothèse des régimes quasi-stationnaires (ARQS), cette condition est vérifiée et on traite le système comme purement résistif."
+      },
+      {
+        type: "mcq",
+        context: CTX3,
+        question: "Le circuit carré est dans le plan $Oxy$, son vecteur normal est $\\hat{u}_z$. Quel est le flux $\\Phi(t)$ ?",
+        options: [
+          "$\\Phi = B_0 a^2\\cos\\omega t$",
+          "$\\Phi = B_0 a^2\\sin\\omega t$",
+          "$\\Phi = B_0 a^2$",
+          "$\\Phi = 0$"
+        ],
+        answer: "$\\Phi = B_0 a^2\\cos\\omega t$",
+        explanation: "$\\Phi = \\vec{B}\\cdot\\vec{S} = (B_0\\sin\\omega t\\,\\hat{u}_x + B_0\\cos\\omega t\\,\\hat{u}_z)\\cdot a^2\\hat{u}_z = B_0 a^2\\cos\\omega t$. Seule la composante selon $\\hat{u}_z$ contribue au flux à travers le plan $Oxy$. La composante $\\hat{u}_x$ est parallèle au plan et ne contribue pas."
+      },
+      {
+        type: "mcq",
+        context: CTX3,
+        question: "La fem induite et le courant dans le circuit sont :",
+        options: [
+          "$e = B_0 a^2\\omega\\sin\\omega t$, $\\;i = \\frac{B_0 a^2\\omega}{R}\\sin\\omega t$",
+          "$e = -B_0 a^2\\omega\\sin\\omega t$, $\\;i = -\\frac{B_0 a^2\\omega}{R}\\sin\\omega t$",
+          "$e = B_0 a^2\\omega\\cos\\omega t$, $\\;i = \\frac{B_0 a^2\\omega}{R}\\cos\\omega t$",
+          "$e = 0$"
+        ],
+        answer: "$e = B_0 a^2\\omega\\sin\\omega t$, $\\;i = \\frac{B_0 a^2\\omega}{R}\\sin\\omega t$",
+        explanation: "$e = -\\frac{d\\Phi}{dt} = -(-B_0 a^2\\omega\\sin\\omega t) = B_0 a^2\\omega\\sin\\omega t$. Le courant $i = e/R = B_0 a^2\\omega\\sin\\omega t/R$. C'est le principe du générateur alternatif : un champ tournant (ou un circuit tournant dans un champ fixe) produit une fem sinusoïdale."
+      },
+      {
+        type: "tf",
+        context: CTX3,
+        question: "Le courant induit $i \\propto \\sin\\omega t$ est bien conforme à la loi de Lenz : quand $\\Phi = B_0a^2\\cos\\omega t$ décroît (de $t=0$ à $t=\\pi/\\omega$), le courant crée un champ dans le sens de $\\hat{u}_z$ pour s'y opposer.",
+        answer: "true",
+        explanation: "Pour $0 < t < \\pi/(2\\omega)$ : $\\cos\\omega t$ décroît de 1 à 0 ⟹ $\\Phi$ décroît ⟹ $e > 0$ ⟹ $i > 0$. Un courant positif dans le circuit (sens direct) crée un champ $\\vec{B}_{ind}$ selon $+\\hat{u}_z$ — il s'oppose à la diminution de $\\Phi$ ✓. C'est conforme à Lenz."
+      },
+      {
+        type: "mcq",
+        question: "La loi de Faraday $e = -d\\Phi/dt$ est la forme intégrale de quelle équation de Maxwell ?",
+        options: [
+          "$\\vec{\\nabla}\\times\\vec{E} = -\\dfrac{\\partial\\vec{B}}{\\partial t}$",
+          "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
+          "$\\vec{\\nabla}\\cdot\\vec{B} = 0$",
+          "$\\vec{\\nabla}\\cdot\\vec{E} = \\rho/\\varepsilon_0$"
+        ],
+        answer: "$\\vec{\\nabla}\\times\\vec{E} = -\\dfrac{\\partial\\vec{B}}{\\partial t}$",
+        explanation: "Par Stokes : $e = \\oint_\\mathcal{C}\\vec{E}\\cdot d\\vec{\\ell} = \\iint_S(\\vec{\\nabla}\\times\\vec{E})\\cdot d\\vec{S} = -\\iint_S\\frac{\\partial\\vec{B}}{\\partial t}\\cdot d\\vec{S} = -\\frac{d\\Phi}{dt}$. L'équation locale $\\vec{\\nabla}\\times\\vec{E} = -\\partial\\vec{B}/\\partial t$ est l'équation de Maxwell-Faraday — la quatrième équation de Maxwell (avec Maxwell-Gauss, Thomson, Ampère-Maxwell)."
+      },
+    ];
 
-QuizEngine.loadQuiz("td7_ex23", questions, `md:
+    QuizEngine.loadQuiz("td7_ex23", questions, `md:
 ## Exercices 2 & 3 — Cadre tombant & champ tournant
 
 **Ex2 :** Cadre rectangulaire tombant dans une zone de champ $\\vec{B}$ — trois phases : avant, pendant l'entrée (fem $= -Bav$), entièrement dans $\\vec{B}$ (fem $= 0$).
 
 **Ex3 :** $\\vec{B}(t) = B_0(\\sin\\omega t\\,\\hat{u}_x + \\cos\\omega t\\,\\hat{u}_z)$, circuit carré dans $Oxy$ — flux, fem $= B_0 a^2\\omega\\sin\\omega t$, vérification de Lenz.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

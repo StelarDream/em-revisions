@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,177 +10,181 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD3 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Densité de courant</h1>
-    <p class="ch-subtitle">Conducteurs en rotation — $\vec{j}_V$, $\vec{j}_S$, intensité, lien charge/courant</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD3 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Densité de courant</h1>
+      <p class="ch-subtitle">Conducteurs en rotation — $\vec{j}_V$, $\vec{j}_S$, intensité, lien charge/courant</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD3 — Exercice 2 : Densité de courant
-//  1. Cylindre plein, j uniforme
-//  2. Cylindre creux (surface), j_S
-//  3. Sphère tournante σ(θ) → j_S(θ) = σRω sinθ → I
-//  4-6. Cylindre tournant ρ → j_V(r) = ρrω → I
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD3 — Exercice 2 : Densité de courant
+    //  1. Cylindre plein, j uniforme
+    //  2. Cylindre creux (surface), j_S
+    //  3. Sphère tournante σ(θ) → j_S(θ) = σRω sinθ → I
+    //  4-6. Cylindre tournant ρ → j_V(r) = ρrω → I
+    // ═══════════════════════════════════════════════════════════
 
-const CTX_SPH = `
+    const CTX_SPH = `
   Une sphère de rayon $R$ porte une densité surfacique de charge $\\sigma$ et tourne autour de $Oz$
   avec une pulsation $\\omega$.
 `;
 
-const CTX_CYL = `
+    const CTX_CYL = `
   Un cylindre de hauteur $h$, de rayon $R$, porte une densité volumique de charge $\\rho$ et tourne
   autour de $Oz$ avec une pulsation $\\omega$.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Un conducteur plein cylindrique de rayon $R$ est parcouru par un courant $I$ uniforme. Quelle est la densité volumique de courant $\\vec{j}_V$ ?",
-    options: [
-      "$\\vec{j}_V = \\dfrac{I}{\\pi R^2}\\hat{u}_z$",
-      "$\\vec{j}_V = \\dfrac{I}{2\\pi R}\\hat{u}_z$",
-      "$\\vec{j}_V = \\dfrac{I}{\\pi R}\\hat{u}_z$",
-      "$\\vec{j}_V = \\dfrac{I}{2\\pi R^2}\\hat{u}_z$"
-    ],
-    answer: "$\\vec{j}_V = \\dfrac{I}{\\pi R^2}\\hat{u}_z$",
-    explanation: "$I = \\iint j_V\\,dS = j_V\\times\\pi R^2$ (section circulaire), donc $j_V = I/(\\pi R^2)$. Pour un conducteur creux (surface) de rayon $R$ : $I = j_S\\times 2\\pi R$, d'où $j_S = I/(2\\pi R)$. La densité surfacique $j_S$ a des unités de A/m (pas A/m²)."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Un conducteur plein cylindrique de rayon $R$ est parcouru par un courant $I$ uniforme. Quelle est la densité volumique de courant $\\vec{j}_V$ ?",
+        options: [
+          "$\\vec{j}_V = \\dfrac{I}{\\pi R^2}\\hat{u}_z$",
+          "$\\vec{j}_V = \\dfrac{I}{2\\pi R}\\hat{u}_z$",
+          "$\\vec{j}_V = \\dfrac{I}{\\pi R}\\hat{u}_z$",
+          "$\\vec{j}_V = \\dfrac{I}{2\\pi R^2}\\hat{u}_z$"
+        ],
+        answer: "$\\vec{j}_V = \\dfrac{I}{\\pi R^2}\\hat{u}_z$",
+        explanation: "$I = \\iint j_V\\,dS = j_V\\times\\pi R^2$ (section circulaire), donc $j_V = I/(\\pi R^2)$. Pour un conducteur creux (surface) de rayon $R$ : $I = j_S\\times 2\\pi R$, d'où $j_S = I/(2\\pi R)$. La densité surfacique $j_S$ a des unités de A/m (pas A/m²)."
+      },
 
-  // ── Q2 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "La densité surfacique de courant $\\vec{j}_S$ a des unités de A/m², comme la densité volumique.",
-    answer: "false",
-    explanation: "$\\vec{j}_V$ est en A/m² (courant par unité de surface). $\\vec{j}_S$ est en A/m (courant par unité de longueur) car elle s'intègre sur une longueur et non une surface : $I = \\int \\vec{j}_S\\cdot d\\vec{\\ell}$. Physiquement, $j_S$ représente un courant localisé sur une surface infiniment mince."
-  },
+      // ── Q2 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "La densité surfacique de courant $\\vec{j}_S$ a des unités de A/m², comme la densité volumique.",
+        answer: "false",
+        explanation: "$\\vec{j}_V$ est en A/m² (courant par unité de surface). $\\vec{j}_S$ est en A/m (courant par unité de longueur) car elle s'intègre sur une longueur et non une surface : $I = \\int \\vec{j}_S\\cdot d\\vec{\\ell}$. Physiquement, $j_S$ représente un courant localisé sur une surface infiniment mince."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_SPH,
-    question: "Un point de la sphère à colatitude $\\theta$ se déplace à la vitesse $v = R\\omega\\sin\\theta$ (composante azimutale). Quelle est la densité surfacique de courant $j_S(\\theta)$ ?",
-    options: [
-      "$j_S(\\theta) = \\sigma R\\omega\\sin\\theta$",
-      "$j_S(\\theta) = \\sigma R\\omega\\cos\\theta$",
-      "$j_S(\\theta) = \\sigma\\omega\\sin\\theta$",
-      "$j_S(\\theta) = \\sigma R^2\\omega\\sin\\theta$"
-    ],
-    answer: "$j_S(\\theta) = \\sigma R\\omega\\sin\\theta$",
-    explanation: "La densité de courant surfacique est $\\vec{j}_S = \\sigma\\vec{v}$. La vitesse azimutale d'un point à colatitude $\\theta$ est $v_\\varphi = R\\omega\\sin\\theta$ (rayon du cercle $= R\\sin\\theta$, fois $\\omega$). Donc $j_S(\\theta) = \\sigma\\,R\\omega\\sin\\theta$, dirigée selon $\\hat{u}_\\varphi$."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_SPH,
+        question: "Un point de la sphère à colatitude $\\theta$ se déplace à la vitesse $v = R\\omega\\sin\\theta$ (composante azimutale). Quelle est la densité surfacique de courant $j_S(\\theta)$ ?",
+        options: [
+          "$j_S(\\theta) = \\sigma R\\omega\\sin\\theta$",
+          "$j_S(\\theta) = \\sigma R\\omega\\cos\\theta$",
+          "$j_S(\\theta) = \\sigma\\omega\\sin\\theta$",
+          "$j_S(\\theta) = \\sigma R^2\\omega\\sin\\theta$"
+        ],
+        answer: "$j_S(\\theta) = \\sigma R\\omega\\sin\\theta$",
+        explanation: "La densité de courant surfacique est $\\vec{j}_S = \\sigma\\vec{v}$. La vitesse azimutale d'un point à colatitude $\\theta$ est $v_\\varphi = R\\omega\\sin\\theta$ (rayon du cercle $= R\\sin\\theta$, fois $\\omega$). Donc $j_S(\\theta) = \\sigma\\,R\\omega\\sin\\theta$, dirigée selon $\\hat{u}_\\varphi$."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_SPH,
-    question: "Pour calculer l'intensité $I$ traversant un demi-cercle joignant les deux pôles, on intègre $j_S$ sur ce demi-cercle. Quel est le résultat ?",
-    options: [
-      "$I = 2\\sigma R^2\\omega$",
-      "$I = \\sigma R^2\\omega$",
-      "$I = 4\\pi\\sigma R^2\\omega$",
-      "$I = \\pi\\sigma R^2\\omega$"
-    ],
-    answer: "$I = 2\\sigma R^2\\omega$",
-    explanation: "Le demi-cercle est paramétré par $\\theta \\in [0,\\pi]$, avec $d\\ell = R\\,d\\theta$. L'intensité est $I = \\int_0^\\pi j_S(\\theta)\\,R\\,d\\theta = \\sigma R^2\\omega\\int_0^\\pi\\sin\\theta\\,d\\theta = \\sigma R^2\\omega\\times[-\\cos\\theta]_0^\\pi = \\sigma R^2\\omega\\times 2 = 2\\sigma R^2\\omega$."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_SPH,
+        question: "Pour calculer l'intensité $I$ traversant un demi-cercle joignant les deux pôles, on intègre $j_S$ sur ce demi-cercle. Quel est le résultat ?",
+        options: [
+          "$I = 2\\sigma R^2\\omega$",
+          "$I = \\sigma R^2\\omega$",
+          "$I = 4\\pi\\sigma R^2\\omega$",
+          "$I = \\pi\\sigma R^2\\omega$"
+        ],
+        answer: "$I = 2\\sigma R^2\\omega$",
+        explanation: "Le demi-cercle est paramétré par $\\theta \\in [0,\\pi]$, avec $d\\ell = R\\,d\\theta$. L'intensité est $I = \\int_0^\\pi j_S(\\theta)\\,R\\,d\\theta = \\sigma R^2\\omega\\int_0^\\pi\\sin\\theta\\,d\\theta = \\sigma R^2\\omega\\times[-\\cos\\theta]_0^\\pi = \\sigma R^2\\omega\\times 2 = 2\\sigma R^2\\omega$."
+      },
 
-  // ── Q5 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX_SPH,
-    question: "On peut retrouver $I = 2\\sigma R^2\\omega$ en calculant la charge totale $Q = 4\\pi R^2\\sigma$ et en remarquant qu'elle traverse le demi-cercle en un tour complet $T = 2\\pi/\\omega$.",
-    answer: "true",
-    explanation: "En un tour, toute la charge $Q = 4\\pi R^2\\sigma$ traverse chaque demi-cercle méridien. Donc $I = Q/T = 4\\pi R^2\\sigma/(2\\pi/\\omega) = 2\\sigma R^2\\omega$. Ce raisonnement élégant (charge totale / période) est une alternative à l'intégration directe de $j_S$."
-  },
+      // ── Q5 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX_SPH,
+        question: "On peut retrouver $I = 2\\sigma R^2\\omega$ en calculant la charge totale $Q = 4\\pi R^2\\sigma$ et en remarquant qu'elle traverse le demi-cercle en un tour complet $T = 2\\pi/\\omega$.",
+        answer: "true",
+        explanation: "En un tour, toute la charge $Q = 4\\pi R^2\\sigma$ traverse chaque demi-cercle méridien. Donc $I = Q/T = 4\\pi R^2\\sigma/(2\\pi/\\omega) = 2\\sigma R^2\\omega$. Ce raisonnement élégant (charge totale / période) est une alternative à l'intégration directe de $j_S$."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "Un point du cylindre à distance $r$ de l'axe se déplace à $v = r\\omega$. Quelle est la densité volumique de courant $j_V(r)$ ?",
-    options: [
-      "$j_V(r) = \\rho\\,r\\omega$",
-      "$j_V(r) = \\rho\\,R\\omega$",
-      "$j_V(r) = \\rho\\,r^2\\omega$",
-      "$j_V(r) = \\rho\\omega/r$"
-    ],
-    answer: "$j_V(r) = \\rho\\,r\\omega$",
-    explanation: "La densité de courant volumique est $\\vec{j}_V = \\rho\\vec{v}$. La vitesse azimutale à distance $r$ de l'axe est $v_\\varphi = r\\omega$. Donc $j_V(r) = \\rho\\,r\\omega$, dirigée selon $\\hat{u}_\\varphi$. Non-uniforme : croît linéairement depuis l'axe jusqu'au bord."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "Un point du cylindre à distance $r$ de l'axe se déplace à $v = r\\omega$. Quelle est la densité volumique de courant $j_V(r)$ ?",
+        options: [
+          "$j_V(r) = \\rho\\,r\\omega$",
+          "$j_V(r) = \\rho\\,R\\omega$",
+          "$j_V(r) = \\rho\\,r^2\\omega$",
+          "$j_V(r) = \\rho\\omega/r$"
+        ],
+        answer: "$j_V(r) = \\rho\\,r\\omega$",
+        explanation: "La densité de courant volumique est $\\vec{j}_V = \\rho\\vec{v}$. La vitesse azimutale à distance $r$ de l'axe est $v_\\varphi = r\\omega$. Donc $j_V(r) = \\rho\\,r\\omega$, dirigée selon $\\hat{u}_\\varphi$. Non-uniforme : croît linéairement depuis l'axe jusqu'au bord."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "L'intensité $I$ traversant un demi-plan dont $Oz$ est le bord, sur une hauteur $h$, vaut :",
-    options: [
-      "$I = \\dfrac{1}{2}\\rho\\omega R^2 h$",
-      "$I = \\rho\\omega R^2 h$",
-      "$I = \\dfrac{1}{3}\\rho\\omega R^2 h$",
-      "$I = 2\\rho\\omega R^2 h$"
-    ],
-    answer: "$I = \\dfrac{1}{2}\\rho\\omega R^2 h$",
-    explanation: "On intègre $j_V(r)$ sur le demi-plan ($r$ de $0$ à $R$, $z$ de $0$ à $h$) : $I = \\int_0^h\\int_0^R j_V(r)\\,dr\\,dz = h\\int_0^R \\rho r\\omega\\,dr = h\\rho\\omega\\frac{R^2}{2} = \\frac{1}{2}\\rho\\omega R^2 h$."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "L'intensité $I$ traversant un demi-plan dont $Oz$ est le bord, sur une hauteur $h$, vaut :",
+        options: [
+          "$I = \\dfrac{1}{2}\\rho\\omega R^2 h$",
+          "$I = \\rho\\omega R^2 h$",
+          "$I = \\dfrac{1}{3}\\rho\\omega R^2 h$",
+          "$I = 2\\rho\\omega R^2 h$"
+        ],
+        answer: "$I = \\dfrac{1}{2}\\rho\\omega R^2 h$",
+        explanation: "On intègre $j_V(r)$ sur le demi-plan ($r$ de $0$ à $R$, $z$ de $0$ à $h$) : $I = \\int_0^h\\int_0^R j_V(r)\\,dr\\,dz = h\\int_0^R \\rho r\\omega\\,dr = h\\rho\\omega\\frac{R^2}{2} = \\frac{1}{2}\\rho\\omega R^2 h$."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX_CYL,
-    question: "On peut vérifier $I = \\frac{1}{2}\\rho\\omega R^2 h$ via $I = Q/T$ avec $Q = \\rho\\pi R^2 h$ et $T = 2\\pi/\\omega$.",
-    answer: "true",
-    explanation: "$Q/T = \\frac{\\rho\\pi R^2 h}{2\\pi/\\omega} = \\frac{\\rho\\pi R^2 h\\omega}{2\\pi} = \\frac{1}{2}\\rho\\omega R^2 h$ ✓. Les deux méthodes (intégration de $j_V$ et charge/période) donnent bien le même résultat — cohérence de la définition du courant."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX_CYL,
+        question: "On peut vérifier $I = \\frac{1}{2}\\rho\\omega R^2 h$ via $I = Q/T$ avec $Q = \\rho\\pi R^2 h$ et $T = 2\\pi/\\omega$.",
+        answer: "true",
+        explanation: "$Q/T = \\frac{\\rho\\pi R^2 h}{2\\pi/\\omega} = \\frac{\\rho\\pi R^2 h\\omega}{2\\pi} = \\frac{1}{2}\\rho\\omega R^2 h$ ✓. Les deux méthodes (intégration de $j_V$ et charge/période) donnent bien le même résultat — cohérence de la définition du courant."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td3_ex2", questions, `md:
+    QuizEngine.loadQuiz("td3_ex2", questions, `md:
 ## Exercice 2 — Densité de courant
 
 **1–2.** Conducteur cylindrique plein ($j_V$) et creux ($j_S$) parcourus par $I$.
@@ -188,6 +193,7 @@ QuizEngine.loadQuiz("td3_ex2", questions, `md:
 
 **6–8.** Cylindre ($R$, $h$, $\\rho$) en rotation $\\omega$ : montrer que $j_V(r) = \\rho r\\omega$ et $I = \\frac{1}{2}\\rho\\omega R^2 h$.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

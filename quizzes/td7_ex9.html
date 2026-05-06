@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,143 +10,147 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
-<div id="topbar" class="topbar"></div>
-<main class="quiz-page">
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD7 · Exercice 9 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Induction mutuelle</h1>
-    <p class="ch-subtitle">Deux solénoïdes coaxiaux — $M_{12}$, symétrie $M_{12}=M_{21}$, énergie, force</p>
-  </div>
-  <div id="qz-past-attempts"></div>
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+  <div id="topbar" class="topbar"></div>
+  <main class="quiz-page">
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD7 · Exercice 9 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Induction mutuelle</h1>
+      <p class="ch-subtitle">Deux solénoïdes coaxiaux — $M_{12}$, symétrie $M_{12}=M_{21}$, énergie, force</p>
+    </div>
+    <div id="qz-past-attempts"></div>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="qz-results"></div>
-</main>
-<button id="btt" title="Haut de page">↑</button>
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    <div id="qz-results"></div>
+  </main>
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
 
-const CTX = `
+    const CTX = `
   Deux solénoïdes coaxiaux : solénoïde 1 ($L_1$, $N_1$ spires, section $S_1$) et solénoïde 2
   ($L_2 < L_1$, $N_2$ spires, section $S_2 < S_1$). Le solénoïde 2 est à l'intérieur du 1.
   Longueur commune $l$ (partie de chevauchement).
 `;
 
-const questions = [
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Le coefficient de mutuelle induction $M_{12}$ est défini par $\\Phi_{12} = M_{12}I_1$ où $\\Phi_{12}$ est le flux du champ de 1 à travers 2. Avec $B_1 = \\mu_0 n_1 I_1$ (solénoïde 1) et $n_1 = N_1/L_1$, que vaut $M_{12}$ ?",
-    options: [
-      "$M_{12} = \\mu_0 n_1 N_2 S_2 l$",
-      "$M_{12} = \\mu_0 n_1 N_2 S_1 l$",
-      "$M_{12} = \\mu_0 N_1 N_2 S_2$",
-      "$M_{12} = \\mu_0 n_1 n_2 S_2 l$"
-    ],
-    answer: "$M_{12} = \\mu_0 n_1 n_2 S_2 l$",
-    explanation: "Le flux de $\\vec{B}_1 = \\mu_0 n_1 I_1\\hat{u}_z$ à travers une spire de 2 : $\\Phi_{1\\to spire} = B_1 S_2$ (car $S_2 < S_1$, tout le flux de 1 passe dans 2). Le nombre de spires de 2 dans la zone de chevauchement est $n_2 l$ (avec $n_2 = N_2/L_2$). Flux total : $\\Phi_{12} = n_2 l\\cdot B_1 S_2 = \\mu_0 n_1 n_2 S_2 l\\cdot I_1$. Donc $M_{12} = \\mu_0 n_1 n_2 S_2 l$."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "On calcule maintenant $M_{21}$ (flux de 2 à travers 1). Le champ de 2 ne remplit que $S_2$ à l'intérieur de 1. Que vaut $M_{21}$ ?",
-    options: [
-      "$M_{21} = \\mu_0 n_2 N_1' S_2$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
-      "$M_{21} = \\mu_0 n_2 N_1 S_1 L_1$",
-      "$M_{21} = \\mu_0 n_1 N_2 S_1 l$",
-      "$M_{21} = 0$"
-    ],
-    answer: "$M_{21} = \\mu_0 n_2 N_1' S_2$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
-    explanation: "Le champ $B_2 = \\mu_0 n_2 I_2$ n'existe qu'à l'intérieur du solénoïde 2 (section $S_2$). Le flux de 2 à travers chaque spire de 1 (section $S_1 > S_2$) : $\\Phi_{2\\to spire_1} = B_2 S_2$. Nombre de spires de 1 dans la zone commune : $N_1' = n_1 l$. Flux total : $\\Phi_{21} = N_1'\\cdot B_2 S_2 = \\mu_0 n_2 n_1 S_2 l\\cdot I_2$. Donc $M_{21} = \\mu_0 n_1 n_2 S_2 l = M_{12}$ ✓."
-  },
-  {
-    type: "tf",
-    question: "Le théorème de réciprocité de Neumann garantit $M_{12} = M_{21}$, quelle que soit la géométrie des deux circuits.",
-    answer: "true",
-    explanation: "C'est le théorème de Neumann : $M_{12} = M_{21} = M$. Démonstration : $M_{12} = \\frac{\\mu_0}{4\\pi}\\oint_{\\mathcal{C}_1}\\oint_{\\mathcal{C}_2}\\frac{d\\vec{\\ell}_1\\cdot d\\vec{\\ell}_2}{r_{12}}$ — la formule est symétrique en échangeant 1 et 2. Cette propriété est remarquable : le flux créé par 1 à travers 2 (pour le même courant unitaire) est toujours égal au flux créé par 2 à travers 1."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "L'énergie magnétique totale du système est $U_m = \\frac{1}{2}L_1 I_1^2 + \\frac{1}{2}L_2 I_2^2 + MI_1 I_2$. Le signe du terme mutuel dépend de :",
-    options: [
-      "Le sens relatif des courants et l'orientation des bobines (couplage additif ou soustractif)",
-      "Uniquement de $M$",
-      "De l'amplitude des courants seulement",
-      "De la fréquence des courants"
-    ],
-    answer: "Le sens relatif des courants et l'orientation des bobines (couplage additif ou soustractif)",
-    explanation: "Si les courants circulent dans le même sens (bobines en phase) : le terme mutuel est $+MI_1I_2 > 0$ (couplage additif, les champs s'additionnent). Si en sens opposés : $-MI_1I_2$ (couplage soustractif). En pratique, on utilise la convention des « points » pour indiquer le sens du couplage sur les schémas."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "La force exercée sur le solénoïde 2 est $F = -\\partial U_m/\\partial x$ (dérivée à courants constants). Si les courants sont dans le même sens, quelle est la position d'équilibre stable ?",
-    options: [
-      "Maximum de chevauchement ($l$ maximal) — les bobines se repoussent si on les sépare",
-      "Minimum de chevauchement ($l = 0$) — les bobines s'attirent",
-      "Position intermédiaire $l = L_2/2$",
-      "Pas d'équilibre — force toujours dans le même sens"
-    ],
-    answer: "Maximum de chevauchement ($l$ maximal) — les bobines se repoussent si on les sépare",
-    explanation: "$U_m = \\frac{1}{2}L_1I_1^2 + \\frac{1}{2}L_2I_2^2 + MI_1I_2$. $M = \\mu_0 n_1 N_2 S_2 l \\propto l$. Donc $\\partial U_m/\\partial x = -MI_1I_2/l \\cdot dl/dx$... La force tend à maximiser $M$ (minimiser $U_m$ négatif quand courants en même sens) ⟹ les bobines tendent à s'encastrer au maximum. L'équilibre stable est à $l = \\min(L_1, L_2) = L_2$."
-  },
-  {
-    type: "mcq",
-    question: "Le coefficient de couplage $k = M/\\sqrt{L_1 L_2}$ vérifie $0 \\leq k \\leq 1$. Pour les deux solénoïdes coaxiaux avec $S_2 < S_1$, que vaut $k$ ?",
-    options: [
-      "$k = \\sqrt{S_2/S_1} < 1$ — couplage imparfait car $\\vec{B}_2$ ne remplit pas entièrement 1",
-      "$k = 1$ — couplage parfait",
-      "$k = S_2/S_1$",
-      "$k = 0$"
-    ],
-    answer: "$k = \\sqrt{S_2/S_1} < 1$ — couplage imparfait car $\\vec{B}_2$ ne remplit pas entièrement 1",
-    explanation: "$M = \\mu_0 n_1 n_2 S_2 l$, $L_1 = \\mu_0 n_1^2 S_1 L_1$, $L_2 = \\mu_0 n_2^2 S_2 L_2$. $k = M/\\sqrt{L_1 L_2} = \\frac{\\mu_0 n_1 n_2 S_2 l}{\\sqrt{\\mu_0^2 n_1^2 n_2^2 S_1 S_2 L_1 L_2}}\\propto \\sqrt{S_2/S_1}$ (en supposant $l = L_2$). Le couplage parfait ($k=1$) nécessite $S_1 = S_2$ — les deux solénoïdes sont identiques. En pratique, les transformateurs utilisent des noyaux ferromagnétiques pour forcer $k \\approx 1$."
-  },
-  {
-    type: "tf",
-    question: "Dans un transformateur idéal ($k = 1$, pertes nulles), la fem secondaire est $e_2 = M\\dot{I}_1$ et le rapport de transformation est $e_2/e_1 = N_2/N_1$.",
-    answer: "true",
-    explanation: "Pour $k=1$ : $M = \\sqrt{L_1 L_2}$. La fem secondaire : $e_2 = M\\dot{I}_1 = \\sqrt{L_1 L_2}\\dot{I}_1$. La fem primaire : $e_1 = L_1\\dot{I}_1$. Rapport : $e_2/e_1 = \\sqrt{L_2/L_1} = \\sqrt{n_2^2 S_2 L_2/(n_1^2 S_1 L_1)}$. Pour deux solénoïdes identiques sauf le nombre de spires ($S_1 = S_2$, $L_1 = L_2$) : $e_2/e_1 = n_2/n_1 = N_2/N_1$. C'est le rapport de transformation d'un transformateur."
-  },
-  {
-    type: "mcq",
-    question: "La pince ampèremétrique (Ex8 du TD7) mesure un courant $I(t)$ dans un fil en mesurant la fem induite dans un tore entourant le fil. Elle exploite :",
-    options: [
-      "La mutuelle induction entre le fil (circuit 1) et le tore (circuit 2)",
-      "L'auto-induction du tore uniquement",
-      "L'effet Hall dans le tore",
-      "La force de Laplace sur le tore"
-    ],
-    answer: "La mutuelle induction entre le fil (circuit 1) et le tore (circuit 2)",
-    explanation: "Le fil parcouru par $I(t)$ crée un champ $B_1(t)$ qui génère un flux variable dans le tore. La fem induite $e_2 = -M_{12}\\dot{I}$ est mesurée (ou un courant $i_2 = e_2/R$ est détecté). La pince peut être ouverte pour entourer le fil sans couper le circuit — c'est une mesure non-intrusive. $M_{12}$ dépend du nombre de spires du tore et de sa géométrie."
-  },
-];
+    const questions = [
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Le coefficient de mutuelle induction $M_{12}$ est défini par $\\Phi_{12} = M_{12}I_1$ où $\\Phi_{12}$ est le flux du champ de 1 à travers 2. Avec $B_1 = \\mu_0 n_1 I_1$ (solénoïde 1) et $n_1 = N_1/L_1$, que vaut $M_{12}$ ?",
+        options: [
+          "$M_{12} = \\mu_0 n_1 N_2 S_2 l$",
+          "$M_{12} = \\mu_0 n_1 N_2 S_1 l$",
+          "$M_{12} = \\mu_0 N_1 N_2 S_2$",
+          "$M_{12} = \\mu_0 n_1 n_2 S_2 l$"
+        ],
+        answer: "$M_{12} = \\mu_0 n_1 n_2 S_2 l$",
+        explanation: "Le flux de $\\vec{B}_1 = \\mu_0 n_1 I_1\\hat{u}_z$ à travers une spire de 2 : $\\Phi_{1\\to spire} = B_1 S_2$ (car $S_2 < S_1$, tout le flux de 1 passe dans 2). Le nombre de spires de 2 dans la zone de chevauchement est $n_2 l$ (avec $n_2 = N_2/L_2$). Flux total : $\\Phi_{12} = n_2 l\\cdot B_1 S_2 = \\mu_0 n_1 n_2 S_2 l\\cdot I_1$. Donc $M_{12} = \\mu_0 n_1 n_2 S_2 l$."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "On calcule maintenant $M_{21}$ (flux de 2 à travers 1). Le champ de 2 ne remplit que $S_2$ à l'intérieur de 1. Que vaut $M_{21}$ ?",
+        options: [
+          "$M_{21} = \\mu_0 n_2 N_1' S_2$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
+          "$M_{21} = \\mu_0 n_2 N_1 S_1 L_1$",
+          "$M_{21} = \\mu_0 n_1 N_2 S_1 l$",
+          "$M_{21} = 0$"
+        ],
+        answer: "$M_{21} = \\mu_0 n_2 N_1' S_2$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
+        explanation: "Le champ $B_2 = \\mu_0 n_2 I_2$ n'existe qu'à l'intérieur du solénoïde 2 (section $S_2$). Le flux de 2 à travers chaque spire de 1 (section $S_1 > S_2$) : $\\Phi_{2\\to spire_1} = B_2 S_2$. Nombre de spires de 1 dans la zone commune : $N_1' = n_1 l$. Flux total : $\\Phi_{21} = N_1'\\cdot B_2 S_2 = \\mu_0 n_2 n_1 S_2 l\\cdot I_2$. Donc $M_{21} = \\mu_0 n_1 n_2 S_2 l = M_{12}$ ✓."
+      },
+      {
+        type: "tf",
+        question: "Le théorème de réciprocité de Neumann garantit $M_{12} = M_{21}$, quelle que soit la géométrie des deux circuits.",
+        answer: "true",
+        explanation: "C'est le théorème de Neumann : $M_{12} = M_{21} = M$. Démonstration : $M_{12} = \\frac{\\mu_0}{4\\pi}\\oint_{\\mathcal{C}_1}\\oint_{\\mathcal{C}_2}\\frac{d\\vec{\\ell}_1\\cdot d\\vec{\\ell}_2}{r_{12}}$ — la formule est symétrique en échangeant 1 et 2. Cette propriété est remarquable : le flux créé par 1 à travers 2 (pour le même courant unitaire) est toujours égal au flux créé par 2 à travers 1."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "L'énergie magnétique totale du système est $U_m = \\frac{1}{2}L_1 I_1^2 + \\frac{1}{2}L_2 I_2^2 + MI_1 I_2$. Le signe du terme mutuel dépend de :",
+        options: [
+          "Le sens relatif des courants et l'orientation des bobines (couplage additif ou soustractif)",
+          "Uniquement de $M$",
+          "De l'amplitude des courants seulement",
+          "De la fréquence des courants"
+        ],
+        answer: "Le sens relatif des courants et l'orientation des bobines (couplage additif ou soustractif)",
+        explanation: "Si les courants circulent dans le même sens (bobines en phase) : le terme mutuel est $+MI_1I_2 > 0$ (couplage additif, les champs s'additionnent). Si en sens opposés : $-MI_1I_2$ (couplage soustractif). En pratique, on utilise la convention des « points » pour indiquer le sens du couplage sur les schémas."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "La force exercée sur le solénoïde 2 est $F = -\\partial U_m/\\partial x$ (dérivée à courants constants). Si les courants sont dans le même sens, quelle est la position d'équilibre stable ?",
+        options: [
+          "Maximum de chevauchement ($l$ maximal) — les bobines se repoussent si on les sépare",
+          "Minimum de chevauchement ($l = 0$) — les bobines s'attirent",
+          "Position intermédiaire $l = L_2/2$",
+          "Pas d'équilibre — force toujours dans le même sens"
+        ],
+        answer: "Maximum de chevauchement ($l$ maximal) — les bobines se repoussent si on les sépare",
+        explanation: "$U_m = \\frac{1}{2}L_1I_1^2 + \\frac{1}{2}L_2I_2^2 + MI_1I_2$. $M = \\mu_0 n_1 N_2 S_2 l \\propto l$. Donc $\\partial U_m/\\partial x = -MI_1I_2/l \\cdot dl/dx$... La force tend à maximiser $M$ (minimiser $U_m$ négatif quand courants en même sens) ⟹ les bobines tendent à s'encastrer au maximum. L'équilibre stable est à $l = \\min(L_1, L_2) = L_2$."
+      },
+      {
+        type: "mcq",
+        question: "Le coefficient de couplage $k = M/\\sqrt{L_1 L_2}$ vérifie $0 \\leq k \\leq 1$. Pour les deux solénoïdes coaxiaux avec $S_2 < S_1$, que vaut $k$ ?",
+        options: [
+          "$k = \\sqrt{S_2/S_1} < 1$ — couplage imparfait car $\\vec{B}_2$ ne remplit pas entièrement 1",
+          "$k = 1$ — couplage parfait",
+          "$k = S_2/S_1$",
+          "$k = 0$"
+        ],
+        answer: "$k = \\sqrt{S_2/S_1} < 1$ — couplage imparfait car $\\vec{B}_2$ ne remplit pas entièrement 1",
+        explanation: "$M = \\mu_0 n_1 n_2 S_2 l$, $L_1 = \\mu_0 n_1^2 S_1 L_1$, $L_2 = \\mu_0 n_2^2 S_2 L_2$. $k = M/\\sqrt{L_1 L_2} = \\frac{\\mu_0 n_1 n_2 S_2 l}{\\sqrt{\\mu_0^2 n_1^2 n_2^2 S_1 S_2 L_1 L_2}}\\propto \\sqrt{S_2/S_1}$ (en supposant $l = L_2$). Le couplage parfait ($k=1$) nécessite $S_1 = S_2$ — les deux solénoïdes sont identiques. En pratique, les transformateurs utilisent des noyaux ferromagnétiques pour forcer $k \\approx 1$."
+      },
+      {
+        type: "tf",
+        question: "Dans un transformateur idéal ($k = 1$, pertes nulles), la fem secondaire est $e_2 = M\\dot{I}_1$ et le rapport de transformation est $e_2/e_1 = N_2/N_1$.",
+        answer: "true",
+        explanation: "Pour $k=1$ : $M = \\sqrt{L_1 L_2}$. La fem secondaire : $e_2 = M\\dot{I}_1 = \\sqrt{L_1 L_2}\\dot{I}_1$. La fem primaire : $e_1 = L_1\\dot{I}_1$. Rapport : $e_2/e_1 = \\sqrt{L_2/L_1} = \\sqrt{n_2^2 S_2 L_2/(n_1^2 S_1 L_1)}$. Pour deux solénoïdes identiques sauf le nombre de spires ($S_1 = S_2$, $L_1 = L_2$) : $e_2/e_1 = n_2/n_1 = N_2/N_1$. C'est le rapport de transformation d'un transformateur."
+      },
+      {
+        type: "mcq",
+        question: "La pince ampèremétrique (Ex8 du TD7) mesure un courant $I(t)$ dans un fil en mesurant la fem induite dans un tore entourant le fil. Elle exploite :",
+        options: [
+          "La mutuelle induction entre le fil (circuit 1) et le tore (circuit 2)",
+          "L'auto-induction du tore uniquement",
+          "L'effet Hall dans le tore",
+          "La force de Laplace sur le tore"
+        ],
+        answer: "La mutuelle induction entre le fil (circuit 1) et le tore (circuit 2)",
+        explanation: "Le fil parcouru par $I(t)$ crée un champ $B_1(t)$ qui génère un flux variable dans le tore. La fem induite $e_2 = -M_{12}\\dot{I}$ est mesurée (ou un courant $i_2 = e_2/R$ est détecté). La pince peut être ouverte pour entourer le fil sans couper le circuit — c'est une mesure non-intrusive. $M_{12}$ dépend du nombre de spires du tore et de sa géométrie."
+      },
+    ];
 
-QuizEngine.loadQuiz("td7_ex9", questions, `md:
+    QuizEngine.loadQuiz("td7_ex9", questions, `md:
 ## Exercice 9 — Coefficient d'induction mutuelle
 
 Deux solénoïdes coaxiaux ($S_2 < S_1$, longueur commune $l$).
@@ -154,6 +159,7 @@ Deux solénoïdes coaxiaux ($S_2 < S_1$, longueur commune $l$).
 
 **c–d)** Énergie $U_m = \\frac{1}{2}L_1I_1^2 + \\frac{1}{2}L_2I_2^2 + MI_1I_2$, force sur 2, positions d'équilibre stables.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

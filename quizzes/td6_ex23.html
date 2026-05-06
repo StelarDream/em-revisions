@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD6 Ex2&amp;3 — Balance de Cotton &amp; Cadre</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+
+<body>
+  <div id="topbar" class="topbar"></div>
+  <main class="quiz-page">
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD6 · Exercices 2 &amp; 3 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Balance de Cotton &amp; Cadre</h1>
+      <p class="ch-subtitle">Moment des forces de Laplace — mesure de $B$, équilibre, oscillations</p>
+    </div>
+    <div id="qz-past-attempts"></div>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
+      </div>
+      <span id="qz-progress-label"></span>
+    </div>
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
+      </div>
+    </div>
+    <div id="qz-results"></div>
+  </main>
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+
+    const CTX2 = `
+  Balance de Cotton : bras gauche porte un circuit de courant $i$, bras droit une masse $m$.
+  Dans la zone de champ $\\vec{B}$ horizontal, seule la portion horizontale de longueur $L$
+  crée un moment net (les arcs de cercle de centre $O$ ont un moment nul).
+  Distances : $a$ (bras gauche), $a'$ (bras droit).
+`;
+
+    const CTX3 = `
+  Cadre rectangulaire ($a\\times b$, courant $i$, masse $m$, moment d'inertie $J$),
+  tournant autour de $Ox$. Champ magnétique uniforme horizontal $\\vec{B}$.
+  Angle $\\theta$ entre le plan du cadre et la verticale.
+`;
+
+    const questions = [
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "Pourquoi les arcs de cercle du circuit ne contribuent-ils pas au moment en $O$ des forces de Laplace ?",
+        options: [
+          "Ils sont centrés en $O$, donc leur bras de levier est nul — la force de Laplace passe par $O$",
+          "Ils sont hors du champ $\\vec{B}$",
+          "Leur courant est nul",
+          "Leur longueur est négligeable"
+        ],
+        answer: "Ils sont centrés en $O$, donc leur bras de levier est nul — la force de Laplace passe par $O$",
+        explanation: "Pour un arc de cercle centré en $O$ : la force de Laplace $d\\vec{F} = i\\,d\\vec{\\ell}\\wedge\\vec{B}$ est radiale (perpendiculaire à $d\\vec{\\ell}$ qui est tangentiel et à $\\vec{B}$ qui est horizontal). Pour un arc centré en $O$, cette force radiale passe exactement par $O$ ⟹ moment nul. Seule la portion rectiligne horizontale de longueur $L$ contribue."
+      },
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "La force de Laplace sur la portion horizontale de longueur $L$ parcourue par $i$ dans $\\vec{B}$ horizontal est $F = BiL$. Son moment en $O$ (bras de levier $a$) est :",
+        options: [
+          "$\\Gamma_{mag} = BiLa$",
+          "$\\Gamma_{mag} = BiL/a$",
+          "$\\Gamma_{mag} = BiLa^2$",
+          "$\\Gamma_{mag} = BiL$"
+        ],
+        answer: "$\\Gamma_{mag} = BiLa$",
+        explanation: "Le moment d'une force $F$ par rapport à $O$ est $\\Gamma = F\\times d$ où $d$ est le bras de levier. La force $F = BiL$ s'applique sur la portion horizontale à distance $a$ de $O$, donc $\\Gamma_{mag} = BiLa$. Pour l'équilibre, ce moment est compensé par le moment de la pesanteur : $mga' = BiLa$."
+      },
+      {
+        type: "mcq",
+        context: CTX2,
+        question: "À l'équilibre ($\\Gamma_{mag} = \\Gamma_{pesanteur}$), la relation entre $B$ et $m$ est :",
+        options: [
+          "$B = \\dfrac{mga'}{iLa}$",
+          "$B = \\dfrac{mga}{iLa'}$",
+          "$B = \\dfrac{iLa}{mga'}$",
+          "$B = mga'\\cdot iLa$"
+        ],
+        answer: "$B = \\dfrac{mga'}{iLa}$",
+        explanation: "Équilibre en rotation autour de $O$ : $BiLa = mga'$, donc $B = mga'/(iLa)$. Application numérique : $a = a' = 0{,}25\\,\\text{m}$, $L = 0{,}02\\,\\text{m}$, $m = 0{,}01\\,\\text{kg}$, $i = 3\\,\\text{A}$, $g = 9{,}81\\,\\text{m/s}^2$ : $B = \\frac{0{,}01\\times9{,}81\\times0{,}25}{3\\times0{,}02\\times0{,}25} = \\frac{0{,}02453}{0{,}015} \\approx 1{,}64\\,\\text{T}$."
+      },
+      {
+        type: "tf",
+        context: CTX2,
+        question: "La balance de Cotton mesure $B$ en comparant une force magnétique à une force gravitationnelle — c'est une méthode absolue ne nécessitant pas d'étalonnage.",
+        answer: "true",
+        explanation: "Oui : $B = mga'/(iLa)$ ne fait intervenir que des grandeurs mécaniques ($m$, $g$, géométrie) et électriques ($i$) mesurables absolument. C'est une méthode primaire — comparable aux balances de Kibble (ou balances du watt) utilisées pour définir le kilogramme via la constante de Planck."
+      },
+      {
+        type: "mcq",
+        context: CTX3,
+        question: "Le moment du couple magnétique exercé sur le cadre ($\\vec{\\Gamma} = \\vec{\\mathcal{M}}\\wedge\\vec{B}$) autour de $Ox$, avec $\\mathcal{M} = iab$ et $\\theta$ l'angle entre le plan du cadre et la verticale, vaut :",
+        options: [
+          "$\\Gamma_{mag} = iab B\\cos\\theta$",
+          "$\\Gamma_{mag} = iab B\\sin\\theta$",
+          "$\\Gamma_{mag} = iab B$",
+          "$\\Gamma_{mag} = iab B\\tan\\theta$"
+        ],
+        answer: "$\\Gamma_{mag} = iab B\\cos\\theta$",
+        explanation: "Le moment magnétique est $\\vec{\\mathcal{M}} = iab\\hat{n}$ où $\\hat{n}$ est normal au plan du cadre. L'angle entre $\\vec{\\mathcal{M}}$ et $\\vec{B}$ (horizontal) est $\\pi/2 - \\theta$ (si $\\theta$ est l'angle entre le plan du cadre et la verticale). Donc $|\\vec{\\Gamma}| = \\mathcal{M}B\\sin(\\pi/2-\\theta) = iabB\\cos\\theta$."
+      },
+      {
+        type: "mcq",
+        context: CTX3,
+        question: "Le moment de la pesanteur autour de $Ox$ sur le cadre de masse $m$ et centre de masse à mi-hauteur est $\\Gamma_g = \\frac{mga}{2}\\sin\\theta$ (en supposant le cadre fin). Les positions d'équilibre sont :",
+        options: [
+          "$\\theta = 0$ (plan vertical, $\\vec{\\mathcal{M}}$ horizontal) et $\\theta = \\pi$ — plus d'autres si $iabB = mga/2$",
+          "$\\theta = \\pi/2$ uniquement",
+          "$\\theta = 0$ et $\\theta = \\pi/2$",
+          "Aucune position d'équilibre"
+        ],
+        answer: "$\\theta = 0$ (plan vertical, $\\vec{\\mathcal{M}}$ horizontal) et $\\theta = \\pi$ — plus d'autres si $iabB = mga/2$",
+        explanation: "Équilibre : $iabB\\cos\\theta = \\frac{mga}{2}\\sin\\theta$, soit $\\tan\\theta = 2iabB/(mga) = 2ibB/(mg)$. Si ce rapport est fini, il existe deux équilibres symétriques $\\pm\\theta_0$. Si $iabB \\gg mga/2$ : $\\theta_0 \\to \\pi/2$ (plan horizontal, $\\vec{\\mathcal{M}}$ vertical). Si $\\vec{B}$ est vertical (Q4), le couple magnétique est nul en $\\theta = \\pi/2$ et la pesanteur domine."
+      },
+      {
+        type: "mcq",
+        context: CTX3,
+        question: "Pour de petits écarts autour de l'équilibre $\\theta_0$, la pulsation des oscillations est (en supposant $\\theta_0$ connu) :",
+        options: [
+          "$\\omega = \\sqrt{\\dfrac{iabB\\sin\\theta_0 + \\frac{mga}{2}\\cos\\theta_0}{J}}$",
+          "$\\omega = \\sqrt{\\dfrac{iabB}{J}}$",
+          "$\\omega = \\sqrt{\\dfrac{mga}{2J}}$",
+          "$\\omega = \\sqrt{\\dfrac{iabB - mga/2}{J}}$"
+        ],
+        answer: "$\\omega = \\sqrt{\\dfrac{iabB\\sin\\theta_0 + \\frac{mga}{2}\\cos\\theta_0}{J}}$",
+        explanation: "En linéarisant l'équation du mouvement $J\\ddot{\\phi} = -\\kappa\\phi$ autour de $\\theta_0$ (avec $\\phi = \\theta - \\theta_0$) : $\\kappa = \\left.\\frac{d}{d\\theta}(\\Gamma_{mag} - \\Gamma_g)\\right|_{\\theta_0} = iabB\\sin\\theta_0 + \\frac{mga}{2}\\cos\\theta_0$. Donc $\\omega = \\sqrt{\\kappa/J}$."
+      },
+      {
+        type: "mcq",
+        context: CTX3,
+        question: "Si $\\vec{B}$ est maintenant vertical ascendant, les positions d'équilibre du cadre sont :",
+        options: [
+          "$\\theta = \\pm\\pi/2$ (plan horizontal) — stable si $\\vec{\\mathcal{M}}$ parallèle à $\\vec{B}$",
+          "$\\theta = 0$ uniquement",
+          "$\\theta = 0$ et $\\theta = \\pi$",
+          "Indifférent — tout angle est équilibre"
+        ],
+        answer: "$\\theta = \\pm\\pi/2$ (plan horizontal) — stable si $\\vec{\\mathcal{M}}$ parallèle à $\\vec{B}$",
+        explanation: "Avec $\\vec{B}$ vertical, le couple magnétique $\\Gamma_{mag} = iabB\\sin(\\pi/2 - \\theta) = iabB\\cos\\theta$ tend à mettre $\\vec{\\mathcal{M}}$ (normal au cadre) parallèle à $\\vec{B}$ (vertical) ⟹ $\\theta = \\pi/2$ (plan horizontal). La pesanteur tend à ramener $\\theta = 0$. L'équilibre est déterminé par la compétition des deux couples — l'analyse est identique au champ horizontal mais transposée de $\\pi/2$."
+      },
+    ];
+
+    QuizEngine.loadQuiz("td6_ex23", questions, `md:
+## Exercices 2 & 3 — Balance de Cotton & Équilibre d'un cadre
+
+**Ex2 :** Balance de Cotton — moment des forces de Laplace sur la portion $L$, $B = mga'/(iLa)$, application numérique.
+
+**Ex3 :** Cadre ($a\\times b$, $i$, $m$, $J$) dans $\\vec{B}$ horizontal : couple total, positions d'équilibre, pulsation des petites oscillations. Reprendre avec $\\vec{B}$ vertical.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+  </script>
+</body>
+
+</html>

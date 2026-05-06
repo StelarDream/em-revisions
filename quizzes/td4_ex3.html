@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,170 +10,174 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD4 · Exercice 3 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Spire circulaire &amp; bobines d'Helmholtz</h1>
-    <p class="ch-subtitle">$B = \frac{\mu_0 I}{2R}\sin^3\beta$ sur l'axe — bobine plate, condition Helmholtz</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD4 · Exercice 3 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Spire circulaire &amp; bobines d'Helmholtz</h1>
+      <p class="ch-subtitle">$B = \frac{\mu_0 I}{2R}\sin^3\beta$ sur l'axe — bobine plate, condition Helmholtz</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD4 — Exercice 3 : Spire circulaire, bobine plate, Helmholtz
-//  B sur axe = μ₀I/(2R) sin³β
-//  Bobine plate : N spires
-//  Helmholtz : condition d = R pour B uniforme
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD4 — Exercice 3 : Spire circulaire, bobine plate, Helmholtz
+    //  B sur axe = μ₀I/(2R) sin³β
+    //  Bobine plate : N spires
+    //  Helmholtz : condition d = R pour B uniforme
+    // ═══════════════════════════════════════════════════════════
 
-const CTX = `
+    const CTX = `
   Spire circulaire de rayon $R$, centre $O$, axe $Oz$, parcourue par $I$.
   Un point $M$ sur l'axe est vu depuis la spire sous un demi-angle $\\beta$
   (i.e. $\\sin\\beta = R/\\sqrt{R^2+z^2}$).
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    context: CTX,
-    question: "Par symétrie, le champ $\\vec{B}$ en un point $M$ de l'axe $Oz$ est nécessairement selon $\\hat{u}_z$.",
-    answer: "true",
-    explanation: "L'axe $Oz$ est axe de symétrie de révolution de la spire. Tout plan méridien (contenant $Oz$) est plan d'antisymétrie de la distribution de courant ⟹ $\\vec{B}$ est perpendiculaire à ces plans ⟹ $\\vec{B}\\parallel\\hat{u}_z$. De plus, les composantes radiales $dB_r$ des éléments opposés se compensent deux à deux."
-  },
+      // ── Q1 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        context: CTX,
+        question: "Par symétrie, le champ $\\vec{B}$ en un point $M$ de l'axe $Oz$ est nécessairement selon $\\hat{u}_z$.",
+        answer: "true",
+        explanation: "L'axe $Oz$ est axe de symétrie de révolution de la spire. Tout plan méridien (contenant $Oz$) est plan d'antisymétrie de la distribution de courant ⟹ $\\vec{B}$ est perpendiculaire à ces plans ⟹ $\\vec{B}\\parallel\\hat{u}_z$. De plus, les composantes radiales $dB_r$ des éléments opposés se compensent deux à deux."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Le champ magnétique en un point $M$ de l'axe, à distance $z$ du centre, vaut :",
-    options: [
-      "$B(z) = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$",
-      "$B(z) = \\dfrac{\\mu_0 I}{2\\sqrt{R^2+z^2}}$",
-      "$B(z) = \\dfrac{\\mu_0 I R}{2(R^2+z^2)}$",
-      "$B(z) = \\dfrac{\\mu_0 I}{2R}$"
-    ],
-    answer: "$B(z) = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$",
-    explanation: "Par Biot-Savart, chaque élément $Id\\ell$ à distance $\\sqrt{R^2+z^2}$ de $M$ contribue $dB = \\frac{\\mu_0 I d\\ell}{4\\pi(R^2+z^2)}$. Seule la composante $z$ survit : $dB_z = dB\\sin\\beta = dB\\frac{R}{\\sqrt{R^2+z^2}}$. En intégrant sur le périmètre $2\\pi R$ : $B = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$. En termes de $\\beta$ : $\\sin\\beta = R/\\sqrt{R^2+z^2}$, donc $B = \\frac{\\mu_0 I}{2R}\\sin^3\\beta$."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Le champ magnétique en un point $M$ de l'axe, à distance $z$ du centre, vaut :",
+        options: [
+          "$B(z) = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$",
+          "$B(z) = \\dfrac{\\mu_0 I}{2\\sqrt{R^2+z^2}}$",
+          "$B(z) = \\dfrac{\\mu_0 I R}{2(R^2+z^2)}$",
+          "$B(z) = \\dfrac{\\mu_0 I}{2R}$"
+        ],
+        answer: "$B(z) = \\dfrac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$",
+        explanation: "Par Biot-Savart, chaque élément $Id\\ell$ à distance $\\sqrt{R^2+z^2}$ de $M$ contribue $dB = \\frac{\\mu_0 I d\\ell}{4\\pi(R^2+z^2)}$. Seule la composante $z$ survit : $dB_z = dB\\sin\\beta = dB\\frac{R}{\\sqrt{R^2+z^2}}$. En intégrant sur le périmètre $2\\pi R$ : $B = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$. En termes de $\\beta$ : $\\sin\\beta = R/\\sqrt{R^2+z^2}$, donc $B = \\frac{\\mu_0 I}{2R}\\sin^3\\beta$."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Que vaut $B$ au centre de la spire ($z = 0$, $\\beta = \\pi/2$) ?",
-    options: [
-      "$B(0) = \\dfrac{\\mu_0 I}{2R}$",
-      "$B(0) = \\dfrac{\\mu_0 I}{4\\pi R}$",
-      "$B(0) = \\dfrac{\\mu_0 I}{R}$",
-      "$B(0) = 0$"
-    ],
-    answer: "$B(0) = \\dfrac{\\mu_0 I}{2R}$",
-    explanation: "En $z=0$ : $B = \\frac{\\mu_0 I R^2}{2R^3} = \\frac{\\mu_0 I}{2R}$. Avec la formule en $\\beta$ : $\\sin(\\pi/2) = 1$ donc $B = \\frac{\\mu_0 I}{2R}\\times 1^3 = \\frac{\\mu_0 I}{2R}$ ✓. C'est le résultat fondamental de la spire circulaire."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Que vaut $B$ au centre de la spire ($z = 0$, $\\beta = \\pi/2$) ?",
+        options: [
+          "$B(0) = \\dfrac{\\mu_0 I}{2R}$",
+          "$B(0) = \\dfrac{\\mu_0 I}{4\\pi R}$",
+          "$B(0) = \\dfrac{\\mu_0 I}{R}$",
+          "$B(0) = 0$"
+        ],
+        answer: "$B(0) = \\dfrac{\\mu_0 I}{2R}$",
+        explanation: "En $z=0$ : $B = \\frac{\\mu_0 I R^2}{2R^3} = \\frac{\\mu_0 I}{2R}$. Avec la formule en $\\beta$ : $\\sin(\\pi/2) = 1$ donc $B = \\frac{\\mu_0 I}{2R}\\times 1^3 = \\frac{\\mu_0 I}{2R}$ ✓. C'est le résultat fondamental de la spire circulaire."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Une bobine plate de $N$ spires identiques de rayon $R$. Le champ au centre vaut :",
-    options: [
-      "$B = \\dfrac{N\\mu_0 I}{2R}$",
-      "$B = \\dfrac{\\mu_0 I}{2NR}$",
-      "$B = \\dfrac{N^2\\mu_0 I}{2R}$",
-      "$B = \\dfrac{\\mu_0 I}{2R}$"
-    ],
-    answer: "$B = \\dfrac{N\\mu_0 I}{2R}$",
-    explanation: "Par superposition, $N$ spires identiques au même endroit contribuent chacune $\\mu_0 I/(2R)$ : $B_{total} = N\\mu_0 I/(2R)$. Pour la bobine de 130 spires, $R = 15\\,\\text{cm}$, $I = 170\\,\\text{A}$ : $B = \\frac{130\\times4\\pi\\times10^{-7}\\times170}{2\\times0{,}15} \\approx 9{,}3\\times10^{-2}\\,\\text{T} \\approx 93\\,\\text{mT}$, soit environ 4650 fois le champ terrestre ($2\\times10^{-5}\\,\\text{T}$)."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Une bobine plate de $N$ spires identiques de rayon $R$. Le champ au centre vaut :",
+        options: [
+          "$B = \\dfrac{N\\mu_0 I}{2R}$",
+          "$B = \\dfrac{\\mu_0 I}{2NR}$",
+          "$B = \\dfrac{N^2\\mu_0 I}{2R}$",
+          "$B = \\dfrac{\\mu_0 I}{2R}$"
+        ],
+        answer: "$B = \\dfrac{N\\mu_0 I}{2R}$",
+        explanation: "Par superposition, $N$ spires identiques au même endroit contribuent chacune $\\mu_0 I/(2R)$ : $B_{total} = N\\mu_0 I/(2R)$. Pour la bobine de 130 spires, $R = 15\\,\\text{cm}$, $I = 170\\,\\text{A}$ : $B = \\frac{130\\times4\\pi\\times10^{-7}\\times170}{2\\times0{,}15} \\approx 9{,}3\\times10^{-2}\\,\\text{T} \\approx 93\\,\\text{mT}$, soit environ 4650 fois le champ terrestre ($2\\times10^{-5}\\,\\text{T}$)."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Les bobines d'Helmholtz sont deux bobines de même rayon $R$ et même axe, séparées d'une distance $d$, parcourues par le même courant $I$ dans le même sens. La condition d'uniformité maximale du champ au centre est :",
-    options: [
-      "$d = R$",
-      "$d = 2R$",
-      "$d = R/2$",
-      "$d = R\\sqrt{2}$"
-    ],
-    answer: "$d = R$",
-    explanation: "On cherche $d$ tel que $\\frac{d^2B}{dz^2} = 0$ au centre (et par symétrie $\\frac{dB}{dz} = 0$ déjà). Le calcul montre que la dérivée seconde s'annule quand $d = R$. Avec $d = R$, les deux premières dérivées non nulles sont d'ordre 4, garantissant une excellente uniformité au voisinage du centre — d'où l'usage des bobines d'Helmholtz en métrologie."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Les bobines d'Helmholtz sont deux bobines de même rayon $R$ et même axe, séparées d'une distance $d$, parcourues par le même courant $I$ dans le même sens. La condition d'uniformité maximale du champ au centre est :",
+        options: [
+          "$d = R$",
+          "$d = 2R$",
+          "$d = R/2$",
+          "$d = R\\sqrt{2}$"
+        ],
+        answer: "$d = R$",
+        explanation: "On cherche $d$ tel que $\\frac{d^2B}{dz^2} = 0$ au centre (et par symétrie $\\frac{dB}{dz} = 0$ déjà). Le calcul montre que la dérivée seconde s'annule quand $d = R$. Avec $d = R$, les deux premières dérivées non nulles sont d'ordre 4, garantissant une excellente uniformité au voisinage du centre — d'où l'usage des bobines d'Helmholtz en métrologie."
+      },
 
-  // ── Q6 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Pour les bobines d'Helmholtz ($d = R$), le champ total au centre vaut $B_H = \\frac{8\\mu_0 N I}{5\\sqrt{5}\\,R}$.",
-    answer: "true",
-    explanation: "Avec $d = R$, chaque bobine est à $z = \\pm R/2$ du centre. $B$ par bobine : $\\frac{N\\mu_0 I R^2}{2(R^2+R^2/4)^{3/2}} = \\frac{N\\mu_0 I R^2}{2R^3(5/4)^{3/2}} = \\frac{N\\mu_0 I}{2R}\\cdot\\frac{1}{(5/4)^{3/2}} = \\frac{N\\mu_0 I}{2R}\\cdot\\frac{8}{5\\sqrt{5}}$. Deux bobines : $B_H = \\frac{8N\\mu_0 I}{5\\sqrt{5}\\,R}$ ✓."
-  },
+      // ── Q6 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Pour les bobines d'Helmholtz ($d = R$), le champ total au centre vaut $B_H = \\frac{8\\mu_0 N I}{5\\sqrt{5}\\,R}$.",
+        answer: "true",
+        explanation: "Avec $d = R$, chaque bobine est à $z = \\pm R/2$ du centre. $B$ par bobine : $\\frac{N\\mu_0 I R^2}{2(R^2+R^2/4)^{3/2}} = \\frac{N\\mu_0 I R^2}{2R^3(5/4)^{3/2}} = \\frac{N\\mu_0 I}{2R}\\cdot\\frac{1}{(5/4)^{3/2}} = \\frac{N\\mu_0 I}{2R}\\cdot\\frac{8}{5\\sqrt{5}}$. Deux bobines : $B_H = \\frac{8N\\mu_0 I}{5\\sqrt{5}\\,R}$ ✓."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Le champ $B(z)$ présente un point d'inflexion en $z = R/2$. Que vaut le rapport $B(R/2)/B(0)$ ?",
-    options: [
-      "$\\left(\\dfrac{4}{5}\\right)^{3/2} \\approx 0{,}715$",
-      "$\\dfrac{1}{2}$",
-      "$\\dfrac{1}{\\sqrt{2}}$",
-      "$\\dfrac{2}{3}$"
-    ],
-    answer: "$\\left(\\dfrac{4}{5}\\right)^{3/2} \\approx 0{,}715$",
-    explanation: "$B(z) = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$. En $z = R/2$ : $R^2+z^2 = R^2+R^2/4 = 5R^2/4$. Donc $B(R/2) = \\frac{\\mu_0 I R^2}{2(5R^2/4)^{3/2}} = \\frac{\\mu_0 I}{2R}\\cdot\\left(\\frac{4}{5}\\right)^{3/2}$. Ratio $= (4/5)^{3/2} \\approx 0{,}715$."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Le champ $B(z)$ présente un point d'inflexion en $z = R/2$. Que vaut le rapport $B(R/2)/B(0)$ ?",
+        options: [
+          "$\\left(\\dfrac{4}{5}\\right)^{3/2} \\approx 0{,}715$",
+          "$\\dfrac{1}{2}$",
+          "$\\dfrac{1}{\\sqrt{2}}$",
+          "$\\dfrac{2}{3}$"
+        ],
+        answer: "$\\left(\\dfrac{4}{5}\\right)^{3/2} \\approx 0{,}715$",
+        explanation: "$B(z) = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$. En $z = R/2$ : $R^2+z^2 = R^2+R^2/4 = 5R^2/4$. Donc $B(R/2) = \\frac{\\mu_0 I R^2}{2(5R^2/4)^{3/2}} = \\frac{\\mu_0 I}{2R}\\cdot\\left(\\frac{4}{5}\\right)^{3/2}$. Ratio $= (4/5)^{3/2} \\approx 0{,}715$."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Loin de la spire ($z \\gg R$), le champ sur l'axe décroît comme $1/z^3$, caractéristique d'un dipôle magnétique.",
-    answer: "true",
-    explanation: "Pour $z \\gg R$ : $B(z) \\approx \\frac{\\mu_0 I R^2}{2z^3} = \\frac{\\mu_0}{2\\pi}\\frac{\\mathcal{M}}{z^3}$ avec $\\mathcal{M} = I\\pi R^2$ le moment magnétique. La décroissance en $1/z^3$ est la signature du champ dipolaire, analogue au potentiel électrostatique $V \\sim 1/r^2$ et au champ $E \\sim 1/r^3$ d'un dipôle électrique."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Loin de la spire ($z \\gg R$), le champ sur l'axe décroît comme $1/z^3$, caractéristique d'un dipôle magnétique.",
+        answer: "true",
+        explanation: "Pour $z \\gg R$ : $B(z) \\approx \\frac{\\mu_0 I R^2}{2z^3} = \\frac{\\mu_0}{2\\pi}\\frac{\\mathcal{M}}{z^3}$ avec $\\mathcal{M} = I\\pi R^2$ le moment magnétique. La décroissance en $1/z^3$ est la signature du champ dipolaire, analogue au potentiel électrostatique $V \\sim 1/r^2$ et au champ $E \\sim 1/r^3$ d'un dipôle électrique."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td4_ex3", questions, `md:
+    QuizEngine.loadQuiz("td4_ex3", questions, `md:
 ## Exercice 3 — Spire circulaire, bobine plate, bobines d'Helmholtz
 
 **1.** Spire de rayon $R$, courant $I$ : montrer que $B(z) = \\frac{\\mu_0 I}{2R}\\sin^3\\beta$.
@@ -182,6 +187,7 @@ Tracer $B(z)$, vérifier le point d'inflexion en $z = R/2$.
 
 **3.** Bobines d'Helmholtz — condition $d = R$ pour uniformité, expression de $B_H$.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

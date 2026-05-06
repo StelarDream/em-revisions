@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,181 +10,185 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD5 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent)">Câble coaxial</h1>
-    <p class="ch-subtitle">Théorème d'Ampère — fil infini, cylindre creux, câble coaxial blindé</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD5 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent)">Câble coaxial</h1>
+      <p class="ch-subtitle">Théorème d'Ampère — fil infini, cylindre creux, câble coaxial blindé</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD5 — Exercice 1 : Câble coaxial
-//  1. Fil rectiligne infini → B = μ₀I/(2πr)
-//  2. Cylindre creux rayon R, j_S selon z → B intérieur/extérieur
-//  3. Câble coaxial : fil +I intérieur, surface -I extérieur → B=0 dehors
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD5 — Exercice 1 : Câble coaxial
+    //  1. Fil rectiligne infini → B = μ₀I/(2πr)
+    //  2. Cylindre creux rayon R, j_S selon z → B intérieur/extérieur
+    //  3. Câble coaxial : fil +I intérieur, surface -I extérieur → B=0 dehors
+    // ═══════════════════════════════════════════════════════════
 
-const CTX_FIL = `
+    const CTX_FIL = `
   Fil rectiligne infini parcouru par un courant $I$, d'axe $Oz$.
   Contour d'Ampère : cercle de rayon $r$ dans le plan $Oxy$.
 `;
 
-const CTX_CYL = `
+    const CTX_CYL = `
   Cylindre creux infini de rayon $R$, axe $Oz$, parcouru par une densité surfacique
   de courant uniforme $\\vec{j}_S = j_S\\hat{u}_z$.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_FIL,
-    question: "Par les symétries, $\\vec{B} = B(r)\\hat{u}_\\varphi$. La circulation sur le cercle d'Ampère de rayon $r$ vaut :",
-    options: [
-      "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = 2\\pi r\\,B(r)$",
-      "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = \\pi r^2\\,B(r)$",
-      "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = B(r)$",
-      "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = 2\\pi B(r)$"
-    ],
-    answer: "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = 2\\pi r\\,B(r)$",
-    explanation: "Sur le cercle de rayon $r$ : $\\vec{B}\\parallel d\\vec{\\ell}$ (les deux selon $\\hat{u}_\\varphi$) et $B = B(r)$ constant sur le contour. Donc $\\oint\\vec{B}\\cdot d\\vec{\\ell} = B(r)\\times 2\\pi r$ (périmètre du cercle). C'est la clé du théorème d'Ampère : le contour est choisi pour que ce calcul soit trivial."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_FIL,
+        question: "Par les symétries, $\\vec{B} = B(r)\\hat{u}_\\varphi$. La circulation sur le cercle d'Ampère de rayon $r$ vaut :",
+        options: [
+          "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = 2\\pi r\\,B(r)$",
+          "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = \\pi r^2\\,B(r)$",
+          "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = B(r)$",
+          "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = 2\\pi B(r)$"
+        ],
+        answer: "$\\oint\\vec{B}\\cdot d\\vec{\\ell} = 2\\pi r\\,B(r)$",
+        explanation: "Sur le cercle de rayon $r$ : $\\vec{B}\\parallel d\\vec{\\ell}$ (les deux selon $\\hat{u}_\\varphi$) et $B = B(r)$ constant sur le contour. Donc $\\oint\\vec{B}\\cdot d\\vec{\\ell} = B(r)\\times 2\\pi r$ (périmètre du cercle). C'est la clé du théorème d'Ampère : le contour est choisi pour que ce calcul soit trivial."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_FIL,
-    question: "En appliquant le théorème d'Ampère $\\oint\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{enlacé}$, quel est $\\vec{B}$ créé par le fil infini ?",
-    options: [
-      "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r}\\hat{u}_\\varphi$",
-      "$\\vec{B} = \\dfrac{\\mu_0 I}{4\\pi r}\\hat{u}_\\varphi$",
-      "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r^2}\\hat{u}_\\varphi$",
-      "$\\vec{B} = \\mu_0 I\\,r\\,\\hat{u}_\\varphi$"
-    ],
-    answer: "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r}\\hat{u}_\\varphi$",
-    explanation: "$2\\pi r\\,B = \\mu_0 I$ ⟹ $B = \\mu_0 I/(2\\pi r)$. Ce résultat fondamental — le champ décroît en $1/r$ — est bien plus simple à obtenir par Ampère que par Biot-Savart (où il faut intégrer sur un fil infini). C'est la raison d'être du théorème d'Ampère : exploiter les symétries pour éviter le calcul intégral."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_FIL,
+        question: "En appliquant le théorème d'Ampère $\\oint\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{enlacé}$, quel est $\\vec{B}$ créé par le fil infini ?",
+        options: [
+          "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r}\\hat{u}_\\varphi$",
+          "$\\vec{B} = \\dfrac{\\mu_0 I}{4\\pi r}\\hat{u}_\\varphi$",
+          "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r^2}\\hat{u}_\\varphi$",
+          "$\\vec{B} = \\mu_0 I\\,r\\,\\hat{u}_\\varphi$"
+        ],
+        answer: "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r}\\hat{u}_\\varphi$",
+        explanation: "$2\\pi r\\,B = \\mu_0 I$ ⟹ $B = \\mu_0 I/(2\\pi r)$. Ce résultat fondamental — le champ décroît en $1/r$ — est bien plus simple à obtenir par Ampère que par Biot-Savart (où il faut intégrer sur un fil infini). C'est la raison d'être du théorème d'Ampère : exploiter les symétries pour éviter le calcul intégral."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "La relation entre $j_S$ et l'intensité $I$ traversant une section circulaire du cylindre est :",
-    options: [
-      "$I = j_S\\times 2\\pi R$",
-      "$I = j_S\\times\\pi R^2$",
-      "$I = j_S\\times 2\\pi R^2$",
-      "$I = j_S / (2\\pi R)$"
-    ],
-    answer: "$I = j_S\\times 2\\pi R$",
-    explanation: "$I = \\oint j_S\\,d\\ell = j_S\\times 2\\pi R$ (intégrale de la densité surfacique sur le périmètre du cylindre). Rappel : $j_S$ est en A/m, pas A/m² — on l'intègre sur une longueur pour obtenir une intensité."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "La relation entre $j_S$ et l'intensité $I$ traversant une section circulaire du cylindre est :",
+        options: [
+          "$I = j_S\\times 2\\pi R$",
+          "$I = j_S\\times\\pi R^2$",
+          "$I = j_S\\times 2\\pi R^2$",
+          "$I = j_S / (2\\pi R)$"
+        ],
+        answer: "$I = j_S\\times 2\\pi R$",
+        explanation: "$I = \\oint j_S\\,d\\ell = j_S\\times 2\\pi R$ (intégrale de la densité surfacique sur le périmètre du cylindre). Rappel : $j_S$ est en A/m, pas A/m² — on l'intègre sur une longueur pour obtenir une intensité."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "Pour $r < R$ (intérieur du cylindre creux), le courant enlacé par un cercle d'Ampère de rayon $r$ est nul. Que vaut $\\vec{B}$ ?",
-    options: [
-      "$\\vec{B} = \\vec{0}$",
-      "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r}\\hat{u}_\\varphi$",
-      "$\\vec{B} = \\dfrac{\\mu_0 j_S r}{2}\\hat{u}_\\varphi$",
-      "$\\vec{B}$ indéterminé"
-    ],
-    answer: "$\\vec{B} = \\vec{0}$",
-    explanation: "Le cercle de rayon $r < R$ n'enlace aucun courant ($I_{enlacé} = 0$) : $2\\pi r B = 0 \\Rightarrow B = 0$. Le champ est nul à l'intérieur d'un cylindre creux — résultat analogue au champ électrique nul à l'intérieur d'une sphère chargée en surface (théorème de Gauss). L'écrantage magnétique fonctionne de la même façon."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "Pour $r < R$ (intérieur du cylindre creux), le courant enlacé par un cercle d'Ampère de rayon $r$ est nul. Que vaut $\\vec{B}$ ?",
+        options: [
+          "$\\vec{B} = \\vec{0}$",
+          "$\\vec{B} = \\dfrac{\\mu_0 I}{2\\pi r}\\hat{u}_\\varphi$",
+          "$\\vec{B} = \\dfrac{\\mu_0 j_S r}{2}\\hat{u}_\\varphi$",
+          "$\\vec{B}$ indéterminé"
+        ],
+        answer: "$\\vec{B} = \\vec{0}$",
+        explanation: "Le cercle de rayon $r < R$ n'enlace aucun courant ($I_{enlacé} = 0$) : $2\\pi r B = 0 \\Rightarrow B = 0$. Le champ est nul à l'intérieur d'un cylindre creux — résultat analogue au champ électrique nul à l'intérieur d'une sphère chargée en surface (théorème de Gauss). L'écrantage magnétique fonctionne de la même façon."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CYL,
-    question: "Pour $r > R$ (extérieur), le courant enlacé est $I = j_S\\times 2\\pi R$. Que vaut $\\vec{B}$ ?",
-    options: [
-      "$\\vec{B} = \\dfrac{\\mu_0 j_S R}{r}\\hat{u}_\\varphi$",
-      "$\\vec{B} = \\dfrac{\\mu_0 j_S R^2}{r}\\hat{u}_\\varphi$",
-      "$\\vec{B} = \\dfrac{\\mu_0 j_S}{r}\\hat{u}_\\varphi$",
-      "$\\vec{B} = \\mu_0 j_S R\\hat{u}_\\varphi$"
-    ],
-    answer: "$\\vec{B} = \\dfrac{\\mu_0 j_S R}{r}\\hat{u}_\\varphi$",
-    explanation: "$2\\pi r B = \\mu_0 I = \\mu_0 j_S 2\\pi R$, donc $B = \\mu_0 j_S R/r$. À l'extérieur, le cylindre se comporte comme un fil infini de même courant total — c'est le théorème d'Ampère-Gauss : seule la charge (ou le courant) totale compte pour le champ extérieur."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CYL,
+        question: "Pour $r > R$ (extérieur), le courant enlacé est $I = j_S\\times 2\\pi R$. Que vaut $\\vec{B}$ ?",
+        options: [
+          "$\\vec{B} = \\dfrac{\\mu_0 j_S R}{r}\\hat{u}_\\varphi$",
+          "$\\vec{B} = \\dfrac{\\mu_0 j_S R^2}{r}\\hat{u}_\\varphi$",
+          "$\\vec{B} = \\dfrac{\\mu_0 j_S}{r}\\hat{u}_\\varphi$",
+          "$\\vec{B} = \\mu_0 j_S R\\hat{u}_\\varphi$"
+        ],
+        answer: "$\\vec{B} = \\dfrac{\\mu_0 j_S R}{r}\\hat{u}_\\varphi$",
+        explanation: "$2\\pi r B = \\mu_0 I = \\mu_0 j_S 2\\pi R$, donc $B = \\mu_0 j_S R/r$. À l'extérieur, le cylindre se comporte comme un fil infini de même courant total — c'est le théorème d'Ampère-Gauss : seule la charge (ou le courant) totale compte pour le champ extérieur."
+      },
 
-  // ── Q6 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "Dans un câble coaxial (fil central $+I$, gaine cylindrique $-I$), le champ magnétique est nul à l'extérieur de la gaine.",
-    answer: "true",
-    explanation: "Pour $r > R$ : $I_{enlacé} = I_{fil} + I_{gaine} = I + (-I) = 0$. Donc $\\oint\\vec{B}\\cdot d\\vec{\\ell} = 0$, et par les symétries $B = 0$. C'est la propriété fondamentale du câble coaxial : il ne rayonne pas de champ magnétique extérieur, ce qui élimine les perturbations électromagnétiques. Les câbles d'antenne, BNC, etc. exploitent ce principe."
-  },
+      // ── Q6 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "Dans un câble coaxial (fil central $+I$, gaine cylindrique $-I$), le champ magnétique est nul à l'extérieur de la gaine.",
+        answer: "true",
+        explanation: "Pour $r > R$ : $I_{enlacé} = I_{fil} + I_{gaine} = I + (-I) = 0$. Donc $\\oint\\vec{B}\\cdot d\\vec{\\ell} = 0$, et par les symétries $B = 0$. C'est la propriété fondamentale du câble coaxial : il ne rayonne pas de champ magnétique extérieur, ce qui élimine les perturbations électromagnétiques. Les câbles d'antenne, BNC, etc. exploitent ce principe."
+      },
 
-  // ── Q7 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Le théorème d'Ampère $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{enlacé}$ est la forme intégrale de quelle équation locale ?",
-    options: [
-      "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
-      "$\\vec{\\nabla}\\cdot\\vec{B} = 0$",
-      "$\\vec{\\nabla}\\times\\vec{E} = 0$",
-      "$\\vec{\\nabla}\\cdot\\vec{E} = \\rho/\\varepsilon_0$"
-    ],
-    answer: "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
-    explanation: "Par le théorème de Stokes : $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\iint_S(\\vec{\\nabla}\\times\\vec{B})\\cdot d\\vec{S}$. Pour que cela égale $\\mu_0 I_{enlacé} = \\mu_0\\iint_S\\vec{j}\\cdot d\\vec{S}$, il faut $\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$. C'est l'équation de Maxwell-Ampère en magnétostatique."
-  },
+      // ── Q7 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Le théorème d'Ampère $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{enlacé}$ est la forme intégrale de quelle équation locale ?",
+        options: [
+          "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
+          "$\\vec{\\nabla}\\cdot\\vec{B} = 0$",
+          "$\\vec{\\nabla}\\times\\vec{E} = 0$",
+          "$\\vec{\\nabla}\\cdot\\vec{E} = \\rho/\\varepsilon_0$"
+        ],
+        answer: "$\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$",
+        explanation: "Par le théorème de Stokes : $\\oint_\\mathcal{C}\\vec{B}\\cdot d\\vec{\\ell} = \\iint_S(\\vec{\\nabla}\\times\\vec{B})\\cdot d\\vec{S}$. Pour que cela égale $\\mu_0 I_{enlacé} = \\mu_0\\iint_S\\vec{j}\\cdot d\\vec{S}$, il faut $\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$. C'est l'équation de Maxwell-Ampère en magnétostatique."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "On ne peut appliquer le théorème d'Ampère pour calculer $\\vec{B}$ que si la distribution de courant présente une symétrie permettant de simplifier la circulation.",
-    answer: "true",
-    explanation: "Ampère $\\oint\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{enlacé}$ est toujours vrai, mais ne permet de *calculer* $\\vec{B}$ que si on peut trouver un contour où $B$ est constant et $\\vec{B}\\parallel d\\vec{\\ell}$ (ou $\\perp$). Ceci n'est possible que pour les symétries cylindrique, planaire ou toroïdale. Pour d'autres géométries (spire carrée, etc.), on est forcé d'utiliser Biot-Savart."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "On ne peut appliquer le théorème d'Ampère pour calculer $\\vec{B}$ que si la distribution de courant présente une symétrie permettant de simplifier la circulation.",
+        answer: "true",
+        explanation: "Ampère $\\oint\\vec{B}\\cdot d\\vec{\\ell} = \\mu_0 I_{enlacé}$ est toujours vrai, mais ne permet de *calculer* $\\vec{B}$ que si on peut trouver un contour où $B$ est constant et $\\vec{B}\\parallel d\\vec{\\ell}$ (ou $\\perp$). Ceci n'est possible que pour les symétries cylindrique, planaire ou toroïdale. Pour d'autres géométries (spire carrée, etc.), on est forcé d'utiliser Biot-Savart."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td5_ex1", questions, `md:
+    QuizEngine.loadQuiz("td5_ex1", questions, `md:
 ## Exercice 1 — Câble coaxial
 
 **1.** Fil infini parcouru par $I$ : montrer la circulation $\\oint\\vec{B}\\cdot d\\vec{\\ell} = 2\\pi r B(r)$, en déduire $\\vec{B}$.
@@ -192,6 +197,7 @@ QuizEngine.loadQuiz("td5_ex1", questions, `md:
 
 **3.** Câble coaxial ($+I$ sur fil, $-I$ sur gaine) : montrer que $\\vec{B} = \\vec{0}$ à l'extérieur.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

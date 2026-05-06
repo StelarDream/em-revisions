@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD6 Ex4 — Sphère chargée en rotation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+
+<body>
+  <div id="topbar" class="topbar"></div>
+  <main class="quiz-page">
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD6 · Exercice 4 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent3)">Sphère chargée en rotation</h1>
+      <p class="ch-subtitle">Moment magnétique équivalent — modèle classique de l'électron et incompatibilité
+        relativiste</p>
+    </div>
+    <div id="qz-past-attempts"></div>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
+      </div>
+      <span id="qz-progress-label"></span>
+    </div>
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
+      </div>
+    </div>
+    <div id="qz-results"></div>
+  </main>
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+
+    const CTX = `
+  Sphère de rayon $R$, densité de charge uniforme $\\rho$, charge totale $Q = \\frac{4}{3}\\pi R^3\\rho$,
+  en rotation à vitesse angulaire $\\omega$ autour de $Oz$.
+`;
+
+    const questions = [
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Une couche sphérique mince à la colatitude $\\theta$, de rayon $r$, d'épaisseur $dr$ et de largeur $rd\\theta$ tourne comme une boucle de courant. Son courant élémentaire est $dI = \\sigma_{eff}\\cdot v_\\varphi$ où $\\sigma_{eff}$ est la densité surfacique effective. Quelle est l'expression du moment magnétique élémentaire $d\\mathcal{M}$ d'une couche de rayon $r$ et d'épaisseur $dr$ ?",
+        options: [
+          "$d\\mathcal{M} = \\dfrac{Q\\omega r^2}{5R^3}\\cdot 3r^2\\,dr$... résultat final : $\\mathcal{M} = \\dfrac{Q\\omega R^2}{5}$",
+          "$d\\mathcal{M} = Q\\omega r^2 dr$",
+          "$d\\mathcal{M} = \\dfrac{Q\\omega R^2}{3}$",
+          "$d\\mathcal{M} = \\dfrac{2Q\\omega R^2}{3}$"
+        ],
+        answer: "$d\\mathcal{M} = \\dfrac{Q\\omega r^2}{5R^3}\\cdot 3r^2\\,dr$... résultat final : $\\mathcal{M} = \\dfrac{Q\\omega R^2}{5}$",
+        explanation: "Chaque couche de rayon $r$ et d'épaisseur $dr$ a une charge $dQ = \\rho\\cdot 4\\pi r^2 dr = \\frac{3Q}{R^3}r^2 dr$. Son moment magnétique est $d\\mathcal{M} = \\frac{1}{3}dQ\\omega r^2$ (résultat pour une sphère creuse de charge $dQ$). En intégrant : $\\mathcal{M} = \\int_0^R \\frac{\\omega r^2}{3}\\cdot\\frac{3Q}{R^3}r^2 dr = \\frac{Q\\omega}{R^3}\\int_0^R r^4 dr = \\frac{Q\\omega R^2}{5}$."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Le champ magnétique créé à grande distance ($r \\gg R$) sur l'axe est celui d'un dipôle. Selon $\\hat{u}_z$ ($\\theta = 0$), il vaut :",
+        options: [
+          "$B = \\dfrac{\\mu_0}{2\\pi}\\dfrac{\\mathcal{M}}{r^3} = \\dfrac{\\mu_0 Q\\omega R^2}{10\\pi r^3}$",
+          "$B = \\dfrac{\\mu_0 Q\\omega}{4\\pi r^2}$",
+          "$B = \\dfrac{\\mu_0 Q\\omega R^2}{4\\pi r^3}$",
+          "$B = \\dfrac{\\mu_0 Q\\omega R^3}{5r^3}$"
+        ],
+        answer: "$B = \\dfrac{\\mu_0}{2\\pi}\\dfrac{\\mathcal{M}}{r^3} = \\dfrac{\\mu_0 Q\\omega R^2}{10\\pi r^3}$",
+        explanation: "Sur l'axe ($\\theta = 0$) : $B_r = \\frac{\\mu_0}{2\\pi}\\frac{\\mathcal{M}}{r^3}$ avec $\\mathcal{M} = Q\\omega R^2/5$. Donc $B = \\frac{\\mu_0 Q\\omega R^2}{10\\pi r^3}$. Ce champ est dipolaire (décroît en $1/r^3$) — à grande distance, la sphère chargée en rotation est indiscernable d'une spire de courant de même moment magnétique."
+      },
+      {
+        type: "tf",
+        context: CTX,
+        question: "Le moment magnétique de la sphère est proportionnel à son moment cinétique $L = \\frac{2}{5}MR^2\\omega$ : $\\mathcal{M}/L = Q/(2M)$.",
+        answer: "true",
+        explanation: "$\\mathcal{M} = Q\\omega R^2/5$ et $L = \\frac{2}{5}MR^2\\omega$ (moment cinétique d'une sphère solide). Donc $\\mathcal{M}/L = \\frac{Q\\omega R^2/5}{\\frac{2}{5}MR^2\\omega} = \\frac{Q}{2M}$. Ce rapport $\\mathcal{M}/L = Q/(2M)$ est le rapport gyromagnétique classique. Pour l'électron, la mécanique quantique donne un facteur $g \\approx 2$ de plus — c'est l'anomalie gyromagnétique."
+      },
+      {
+        type: "mcq",
+        question: "Le rayon classique de l'électron est $R_e \\approx 1{,}68\\times10^{-15}\\,\\text{m}$. Le moment magnétique expérimental de l'électron est $\\mathcal{M}_e \\approx 9{,}28\\times10^{-24}\\,\\text{A·m}^2$. La vitesse angulaire nécessaire pour reproduire $\\mathcal{M}_e$ avec $\\mathcal{M} = eR_e^2\\omega/5$ est de l'ordre de :",
+        options: [
+          "$\\omega \\sim 10^{31}\\,\\text{rad/s}$ — vitesse linéaire en surface $v = R_e\\omega \\gg c$",
+          "$\\omega \\sim 10^{20}\\,\\text{rad/s}$",
+          "$\\omega \\sim 10^{10}\\,\\text{rad/s}$",
+          "$\\omega \\sim 10^{15}\\,\\text{rad/s}$"
+        ],
+        answer: "$\\omega \\sim 10^{31}\\,\\text{rad/s}$ — vitesse linéaire en surface $v = R_e\\omega \\gg c$",
+        explanation: "$\\omega = 5\\mathcal{M}_e/(eR_e^2) = \\frac{5\\times9{,}28\\times10^{-24}}{1{,}6\\times10^{-19}\\times(1{,}68\\times10^{-15})^2} \\approx \\frac{4{,}64\\times10^{-23}}{4{,}5\\times10^{-49}} \\approx 10^{26}\\,\\text{rad/s}$... La vitesse en surface $v = R_e\\omega \\approx 10^{-15}\\times10^{26} = 10^{11}\\,\\text{m/s} \\gg c = 3\\times10^8\\,\\text{m/s}$. Incompatible avec la relativité restreinte !"
+      },
+      {
+        type: "tf",
+        question: "L'incompatibilité du modèle classique de l'électron avec la relativité restreinte montre que le spin de l'électron est un phénomène purement quantique, sans analogue classique.",
+        answer: "true",
+        explanation: "Le spin de l'électron ($s = 1/2$) est une propriété intrinsèquement quantique — il n'existe pas de modèle classique cohérent de l'électron comme boule en rotation. Dirac a montré en 1928 que le spin émerge naturellement de l'équation de Dirac, qui est l'équation de Schrödinger relativiste. Le magnéton de Bohr $\\mu_B = e\\hbar/(2m_e) = 9{,}27\\times10^{-24}\\,\\text{A·m}^2$ est l'unité naturelle du moment magnétique quantique."
+      },
+      {
+        type: "mcq",
+        question: "Le rapport gyromagnétique classique est $\\gamma_{cl} = Q/(2M)$. Pour l'électron, le rapport expérimental (facteur $g$) est $\\gamma_e = g_e e/(2m_e)$ avec $g_e \\approx 2{,}002$. Cela signifie que :",
+        options: [
+          "Le moment magnétique de l'électron est environ 2 fois plus grand que prédit classiquement",
+          "Le moment magnétique est la moitié de la valeur classique",
+          "Le rapport gyromagnétique est identique au cas classique",
+          "L'électron n'a pas de moment magnétique orbital"
+        ],
+        answer: "Le moment magnétique de l'électron est environ 2 fois plus grand que prédit classiquement",
+        explanation: "Le facteur $g_e \\approx 2$ (prédit par Dirac) signifie que le moment magnétique de spin est $\\mathcal{M}_s = g_e\\mu_B/2 \\approx \\mu_B$, soit deux fois plus grand que ce que donnerait un rapport gyromagnétique classique pour un moment cinétique $\\hbar/2$. La correction $g_e - 2 \\approx 0{,}002$ (anomalie magnétique) est calculable en QED avec une précision extraordinaire — c'est l'accord le plus précis entre théorie et expérience en physique."
+      },
+      {
+        type: "mcq",
+        question: "Le magnéton de Bohr $\\mu_B = e\\hbar/(2m_e) \\approx 9{,}27\\times10^{-24}\\,\\text{A·m}^2$ est l'unité du moment magnétique atomique. Il correspond au moment magnétique orbital d'un électron dans une orbite de Bohr. Sa valeur numérique est :",
+        options: [
+          "Proche du moment magnétique expérimental de l'électron $\\mathcal{M}_e \\approx 9{,}28\\times10^{-24}\\,\\text{A·m}^2$",
+          "Dix fois plus grand que $\\mathcal{M}_e$",
+          "Dix fois plus petit que $\\mathcal{M}_e$",
+          "Sans rapport avec $\\mathcal{M}_e$"
+        ],
+        answer: "Proche du moment magnétique expérimental de l'électron $\\mathcal{M}_e \\approx 9{,}28\\times10^{-24}\\,\\text{A·m}^2$",
+        explanation: "$\\mu_B \\approx 9{,}274\\times10^{-24}\\,\\text{A·m}^2$ et $|\\mathcal{M}_e| = g_e\\mu_B/2 \\approx \\mu_B$ (car $g_e \\approx 2$). La coïncidence n'est pas un hasard — c'est la prédiction de l'équation de Dirac : le moment magnétique de spin de l'électron est exactement $\\mu_B$ au premier ordre (avec corrections QED minimes)."
+      },
+      {
+        type: "tf",
+        question: "La Terre peut être modélisée comme un dipôle magnétique de moment $\\mathcal{M}_T \\approx 8\\times10^{22}\\,\\text{A·m}^2$, incliné d'environ 11° par rapport à l'axe de rotation.",
+        answer: "true",
+        explanation: "Le champ terrestre est bien approximé par un dipôle à grande échelle. Ce moment énorme est dû aux courants électriques dans le noyau liquide externe (fer fondu en rotation) — c'est la géodynamo. Il se renverse périodiquement (toutes les quelques centaines de milliers d'années) et est actuellement en décroissance lente. Le pôle Nord magnétique se déplace de plusieurs dizaines de km par an."
+      },
+    ];
+
+    QuizEngine.loadQuiz("td6_ex4", questions, `md:
+## Exercice 4 — Sphère chargée en rotation
+
+Sphère de rayon $R$, densité $\\rho$, charge totale $Q$, en rotation à $\\omega$.
+
+**1.** Montrer que $\\mathcal{M} = Q\\omega R^2/5$, champ dipolaire à grande distance.
+
+**2.** Modèle classique de l'électron ($R_e = 1{,}68\\times10^{-15}\\,\\text{m}$, $\\mathcal{M}_e = 9{,}28\\times10^{-24}\\,\\text{A·m}^2$) : calculer $\\omega$ et montrer que $v = R_e\\omega \\gg c$ — incompatibilité avec la relativité.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+  </script>
+</body>
+
+</html>

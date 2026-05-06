@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,182 +10,186 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD3 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent)">Conductivité électrique dans les métaux</h1>
-    <p class="ch-subtitle">Densité électronique, densité de courant, modèle de Drude — fil de cuivre</p>
-  </div>
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD3 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent)">Conductivité électrique dans les métaux</h1>
+      <p class="ch-subtitle">Densité électronique, densité de courant, modèle de Drude — fil de cuivre</p>
+    </div>
 
-  <div id="qz-past-attempts"></div>
+    <div id="qz-past-attempts"></div>
 
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="qz-results"></div>
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
-// ═══════════════════════════════════════════════════════════
-//  TD3 — Exercice 1 : Conductivité électrique dans les métaux
-//  Fil de cuivre : densité électronique, j, vitesse dérive
-//  Modèle de Drude : équation du mouvement, γ, résistance
-// ═══════════════════════════════════════════════════════════
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    // ═══════════════════════════════════════════════════════════
+    //  TD3 — Exercice 1 : Conductivité électrique dans les métaux
+    //  Fil de cuivre : densité électronique, j, vitesse dérive
+    //  Modèle de Drude : équation du mouvement, γ, résistance
+    // ═══════════════════════════════════════════════════════════
 
-const CTX_CU = `
+    const CTX_CU = `
   Fil de cuivre : section $S = 1\\,\\text{mm}^2$, masse volumique $\\rho_{Cu} = 8{,}9\\,\\text{g/cm}^3$,
   masse molaire $M_{Cu} = 63{,}6\\,\\text{g/mol}$, nombre d'Avogadro $\\mathcal{N} = 6{,}02\\times10^{23}\\,\\text{mol}^{-1}$.
   Un électron libre par atome.
 `;
 
-const CTX_DRUDE = `
+    const CTX_DRUDE = `
   Modèle de Drude : les électrons subissent le champ $E$ et une force de frottement $\\vec{F}_f = -\\dfrac{m_e}{\\tau}\\vec{v}$.
   Données : $\\tau = 4{,}22\\times10^{-15}\\,\\text{s}$, $m_e = 9{,}109\\times10^{-31}\\,\\text{kg}$.
 `;
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CU,
-    question: "Quelle est la formule donnant la densité volumique d'électrons libres $n$ dans le fil de cuivre ?",
-    options: [
-      "$n = \\dfrac{\\rho_{Cu}\\,\\mathcal{N}}{M_{Cu}}$",
-      "$n = \\dfrac{M_{Cu}}{\\rho_{Cu}\\,\\mathcal{N}}$",
-      "$n = \\rho_{Cu}\\,M_{Cu}\\,\\mathcal{N}$",
-      "$n = \\dfrac{\\mathcal{N}}{M_{Cu}}$"
-    ],
-    answer: "$n = \\dfrac{\\rho_{Cu}\\,\\mathcal{N}}{M_{Cu}}$",
-    explanation: "Le nombre d'atomes par unité de volume est $n_{at} = \\rho_{Cu}/M_{Cu}\\times\\mathcal{N}$ (densité / masse molaire × Avogadro). Comme chaque atome libère un électron, $n = n_{at} = \\rho_{Cu}\\mathcal{N}/M_{Cu}$. Application numérique (en unités SI) : $n = \\frac{8{,}9\\times10^{3} \\times 6{,}02\\times10^{23}}{63{,}6\\times10^{-3}} \\approx 8{,}4\\times10^{28}\\,\\text{m}^{-3}$."
-  },
+      // ── Q1 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CU,
+        question: "Quelle est la formule donnant la densité volumique d'électrons libres $n$ dans le fil de cuivre ?",
+        options: [
+          "$n = \\dfrac{\\rho_{Cu}\\,\\mathcal{N}}{M_{Cu}}$",
+          "$n = \\dfrac{M_{Cu}}{\\rho_{Cu}\\,\\mathcal{N}}$",
+          "$n = \\rho_{Cu}\\,M_{Cu}\\,\\mathcal{N}$",
+          "$n = \\dfrac{\\mathcal{N}}{M_{Cu}}$"
+        ],
+        answer: "$n = \\dfrac{\\rho_{Cu}\\,\\mathcal{N}}{M_{Cu}}$",
+        explanation: "Le nombre d'atomes par unité de volume est $n_{at} = \\rho_{Cu}/M_{Cu}\\times\\mathcal{N}$ (densité / masse molaire × Avogadro). Comme chaque atome libère un électron, $n = n_{at} = \\rho_{Cu}\\mathcal{N}/M_{Cu}$. Application numérique (en unités SI) : $n = \\frac{8{,}9\\times10^{3} \\times 6{,}02\\times10^{23}}{63{,}6\\times10^{-3}} \\approx 8{,}4\\times10^{28}\\,\\text{m}^{-3}$."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CU,
-    question: "La densité volumique de courant $\\vec{j}_V$ est reliée à l'intensité $I$ et à la section $S$ par :",
-    options: [
-      "$j_V = I/S$",
-      "$j_V = I\\cdot S$",
-      "$j_V = I/S^2$",
-      "$j_V = \\sqrt{I/S}$"
-    ],
-    answer: "$j_V = I/S$",
-    explanation: "Par définition, $I = \\iint_S \\vec{j}_V\\cdot d\\vec{S}$. Pour une densité uniforme perpendiculaire à la section : $I = j_V \\times S$, d'où $j_V = I/S$. Pour $I = 10\\,\\text{A}$ et $S = 1\\,\\text{mm}^2 = 10^{-6}\\,\\text{m}^2$ : $j_V = 10^7\\,\\text{A/m}^2$."
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CU,
+        question: "La densité volumique de courant $\\vec{j}_V$ est reliée à l'intensité $I$ et à la section $S$ par :",
+        options: [
+          "$j_V = I/S$",
+          "$j_V = I\\cdot S$",
+          "$j_V = I/S^2$",
+          "$j_V = \\sqrt{I/S}$"
+        ],
+        answer: "$j_V = I/S$",
+        explanation: "Par définition, $I = \\iint_S \\vec{j}_V\\cdot d\\vec{S}$. Pour une densité uniforme perpendiculaire à la section : $I = j_V \\times S$, d'où $j_V = I/S$. Pour $I = 10\\,\\text{A}$ et $S = 1\\,\\text{mm}^2 = 10^{-6}\\,\\text{m}^2$ : $j_V = 10^7\\,\\text{A/m}^2$."
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_CU,
-    question: "La densité de courant est reliée à la densité électronique $n$, la charge $e$ et la vitesse de dérive $v_d$ par :",
-    options: [
-      "$j_V = n\\,e\\,v_d$",
-      "$j_V = n\\,e\\,v_d^2$",
-      "$j_V = n\\,v_d / e$",
-      "$j_V = e\\,v_d / n$"
-    ],
-    answer: "$j_V = n\\,e\\,v_d$",
-    explanation: "En une seconde, les électrons de charge $e$ se déplacent de $v_d$ : le volume balayé par unité de surface est $v_d$, contenant $n\\,v_d$ électrons par m². Le courant surfacique est donc $j_V = n\\,e\\,v_d$. Avec $n \\approx 8{,}4\\times10^{28}\\,\\text{m}^{-3}$ et $j_V = 10^7\\,\\text{A/m}^2$ : $v_d \\approx 0{,}74\\,\\text{mm/s}$ — très lent !"
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_CU,
+        question: "La densité de courant est reliée à la densité électronique $n$, la charge $e$ et la vitesse de dérive $v_d$ par :",
+        options: [
+          "$j_V = n\\,e\\,v_d$",
+          "$j_V = n\\,e\\,v_d^2$",
+          "$j_V = n\\,v_d / e$",
+          "$j_V = e\\,v_d / n$"
+        ],
+        answer: "$j_V = n\\,e\\,v_d$",
+        explanation: "En une seconde, les électrons de charge $e$ se déplacent de $v_d$ : le volume balayé par unité de surface est $v_d$, contenant $n\\,v_d$ électrons par m². Le courant surfacique est donc $j_V = n\\,e\\,v_d$. Avec $n \\approx 8{,}4\\times10^{28}\\,\\text{m}^{-3}$ et $j_V = 10^7\\,\\text{A/m}^2$ : $v_d \\approx 0{,}74\\,\\text{mm/s}$ — très lent !"
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_DRUDE,
-    question: "L'équation du mouvement d'un électron dans le modèle de Drude s'écrit $m_e\\dot{v} = -eE - \\frac{m_e}{\\tau}v$. Quelle est la solution pour $v(t)$ avec $v(0) = 0$ ?",
-    options: [
-      "$v(t) = -\\dfrac{eE\\tau}{m_e}\\left(1 - e^{-t/\\tau}\\right)$",
-      "$v(t) = -\\dfrac{eE}{m_e}\\,t$",
-      "$v(t) = -\\dfrac{eE\\tau}{m_e}\\,e^{-t/\\tau}$",
-      "$v(t) = \\dfrac{eE\\tau}{m_e}\\left(1 - e^{-t/\\tau}\\right)$"
-    ],
-    answer: "$v(t) = -\\dfrac{eE\\tau}{m_e}\\left(1 - e^{-t/\\tau}\\right)$",
-    explanation: "C'est une EDO du premier ordre : $\\dot{v} + v/\\tau = -eE/m_e$. La solution générale est $v(t) = -\\frac{eE\\tau}{m_e} + C\\,e^{-t/\\tau}$. Avec $v(0) = 0$ : $C = \\frac{eE\\tau}{m_e}$, d'où $v(t) = -\\frac{eE\\tau}{m_e}(1-e^{-t/\\tau})$. Le signe $-$ reflète que les électrons (charge $-e$) vont à l'opposé de $E$."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_DRUDE,
+        question: "L'équation du mouvement d'un électron dans le modèle de Drude s'écrit $m_e\\dot{v} = -eE - \\frac{m_e}{\\tau}v$. Quelle est la solution pour $v(t)$ avec $v(0) = 0$ ?",
+        options: [
+          "$v(t) = -\\dfrac{eE\\tau}{m_e}\\left(1 - e^{-t/\\tau}\\right)$",
+          "$v(t) = -\\dfrac{eE}{m_e}\\,t$",
+          "$v(t) = -\\dfrac{eE\\tau}{m_e}\\,e^{-t/\\tau}$",
+          "$v(t) = \\dfrac{eE\\tau}{m_e}\\left(1 - e^{-t/\\tau}\\right)$"
+        ],
+        answer: "$v(t) = -\\dfrac{eE\\tau}{m_e}\\left(1 - e^{-t/\\tau}\\right)$",
+        explanation: "C'est une EDO du premier ordre : $\\dot{v} + v/\\tau = -eE/m_e$. La solution générale est $v(t) = -\\frac{eE\\tau}{m_e} + C\\,e^{-t/\\tau}$. Avec $v(0) = 0$ : $C = \\frac{eE\\tau}{m_e}$, d'où $v(t) = -\\frac{eE\\tau}{m_e}(1-e^{-t/\\tau})$. Le signe $-$ reflète que les électrons (charge $-e$) vont à l'opposé de $E$."
+      },
 
-  // ── Q5 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_DRUDE,
-    question: "Quelle est la vitesse de dérive à l'équilibre ($t \\to \\infty$) ?",
-    options: [
-      "$v_d = -\\dfrac{eE\\tau}{m_e}$",
-      "$v_d = -\\dfrac{eE}{m_e}$",
-      "$v_d = -\\dfrac{m_e}{eE\\tau}$",
-      "$v_d = 0$"
-    ],
-    answer: "$v_d = -\\dfrac{eE\\tau}{m_e}$",
-    explanation: "À l'équilibre, $\\dot{v} = 0$ : la force électrique compense le frottement, $-eE = \\frac{m_e}{\\tau}v_d$, d'où $v_d = -eE\\tau/m_e$. La vitesse de dérive est proportionnelle au champ $E$ — c'est la loi d'Ohm microscopique. Le temps $\\tau \\sim 4\\times10^{-15}\\,\\text{s}$ est atteint quasi-instantanément."
-  },
+      // ── Q5 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_DRUDE,
+        question: "Quelle est la vitesse de dérive à l'équilibre ($t \\to \\infty$) ?",
+        options: [
+          "$v_d = -\\dfrac{eE\\tau}{m_e}$",
+          "$v_d = -\\dfrac{eE}{m_e}$",
+          "$v_d = -\\dfrac{m_e}{eE\\tau}$",
+          "$v_d = 0$"
+        ],
+        answer: "$v_d = -\\dfrac{eE\\tau}{m_e}$",
+        explanation: "À l'équilibre, $\\dot{v} = 0$ : la force électrique compense le frottement, $-eE = \\frac{m_e}{\\tau}v_d$, d'où $v_d = -eE\\tau/m_e$. La vitesse de dérive est proportionnelle au champ $E$ — c'est la loi d'Ohm microscopique. Le temps $\\tau \\sim 4\\times10^{-15}\\,\\text{s}$ est atteint quasi-instantanément."
+      },
 
-  // ── Q6 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    context: CTX_DRUDE,
-    question: "En exprimant $j_V = n\\,e\\,|v_d|$, quelle est la conductivité électrique $\\gamma$ telle que $\\vec{j}_V = \\gamma\\vec{E}$ ?",
-    options: [
-      "$\\gamma = \\dfrac{ne^2\\tau}{m_e}$",
-      "$\\gamma = \\dfrac{m_e}{ne^2\\tau}$",
-      "$\\gamma = \\dfrac{ne\\tau}{m_e}$",
-      "$\\gamma = ne^2\\tau\\,m_e$"
-    ],
-    answer: "$\\gamma = \\dfrac{ne^2\\tau}{m_e}$",
-    explanation: "$j_V = n\\,e\\,|v_d| = n\\,e\\,\\frac{e\\tau}{m_e}E = \\frac{ne^2\\tau}{m_e}E$. Donc $\\gamma = ne^2\\tau/m_e$. Application numérique : $\\gamma = \\frac{8{,}4\\times10^{28}\\times(1{,}6\\times10^{-19})^2\\times4{,}22\\times10^{-15}}{9{,}109\\times10^{-31}} \\approx 10^7\\,\\text{S/m}$. La valeur tabulée du cuivre ($5{,}9\\times10^7\\,\\text{S/m}$) correspond à un $\\tau \\approx 2{,}5\\times10^{-14}\\,\\text{s}$ — le $\\tau$ du modèle de Drude classique sous-estime la conductivité réelle (qui requiert un traitement quantique)."
-  },
+      // ── Q6 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        context: CTX_DRUDE,
+        question: "En exprimant $j_V = n\\,e\\,|v_d|$, quelle est la conductivité électrique $\\gamma$ telle que $\\vec{j}_V = \\gamma\\vec{E}$ ?",
+        options: [
+          "$\\gamma = \\dfrac{ne^2\\tau}{m_e}$",
+          "$\\gamma = \\dfrac{m_e}{ne^2\\tau}$",
+          "$\\gamma = \\dfrac{ne\\tau}{m_e}$",
+          "$\\gamma = ne^2\\tau\\,m_e$"
+        ],
+        answer: "$\\gamma = \\dfrac{ne^2\\tau}{m_e}$",
+        explanation: "$j_V = n\\,e\\,|v_d| = n\\,e\\,\\frac{e\\tau}{m_e}E = \\frac{ne^2\\tau}{m_e}E$. Donc $\\gamma = ne^2\\tau/m_e$. Application numérique : $\\gamma = \\frac{8{,}4\\times10^{28}\\times(1{,}6\\times10^{-19})^2\\times4{,}22\\times10^{-15}}{9{,}109\\times10^{-31}} \\approx 10^7\\,\\text{S/m}$. La valeur tabulée du cuivre ($5{,}9\\times10^7\\,\\text{S/m}$) correspond à un $\\tau \\approx 2{,}5\\times10^{-14}\\,\\text{s}$ — le $\\tau$ du modèle de Drude classique sous-estime la conductivité réelle (qui requiert un traitement quantique)."
+      },
 
-  // ── Q7 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "La résistance d'un fil de longueur $L$, de section $S$ et de conductivité $\\gamma$ est $R = L/(\\gamma S)$.",
-    answer: "true",
-    explanation: "La loi d'Ohm locale $\\vec{j} = \\gamma\\vec{E}$ donne, en intégrant sur le fil : $U = EL$ et $I = j_V S = \\gamma E S$, donc $R = U/I = L/(\\gamma S)$. Pour 1 m de cuivre ($S = 1\\,\\text{mm}^2$, $\\gamma \\approx 6\\times10^7\\,\\text{S/m}$) : $R = 1/(6\\times10^7\\times10^{-6}) \\approx 17\\,\\text{m}\\Omega$ — très faible."
-  },
+      // ── Q7 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "La résistance d'un fil de longueur $L$, de section $S$ et de conductivité $\\gamma$ est $R = L/(\\gamma S)$.",
+        answer: "true",
+        explanation: "La loi d'Ohm locale $\\vec{j} = \\gamma\\vec{E}$ donne, en intégrant sur le fil : $U = EL$ et $I = j_V S = \\gamma E S$, donc $R = U/I = L/(\\gamma S)$. Pour 1 m de cuivre ($S = 1\\,\\text{mm}^2$, $\\gamma \\approx 6\\times10^7\\,\\text{S/m}$) : $R = 1/(6\\times10^7\\times10^{-6}) \\approx 17\\,\\text{m}\\Omega$ — très faible."
+      },
 
-  // ── Q8 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "La vitesse de dérive des électrons dans un fil parcouru par $I = 10\\,\\text{A}$ est de l'ordre du mm/s, bien inférieure à la vitesse agitation thermique ($\\sim 10^6\\,\\text{m/s}$).",
-    answer: "true",
-    explanation: "La vitesse de dérive $v_d = j_V/(ne) \\approx 10^7/(8{,}4\\times10^{28}\\times1{,}6\\times10^{-19}) \\approx 7\\times10^{-4}\\,\\text{m/s}$ est en effet de l'ordre du mm/s. Les électrons ont en réalité une agitation thermique de $\\sim 10^6\\,\\text{m/s}$ — le courant n'est qu'un léger biais directionnel sur ce mouvement chaotique."
-  },
+      // ── Q8 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "La vitesse de dérive des électrons dans un fil parcouru par $I = 10\\,\\text{A}$ est de l'ordre du mm/s, bien inférieure à la vitesse agitation thermique ($\\sim 10^6\\,\\text{m/s}$).",
+        answer: "true",
+        explanation: "La vitesse de dérive $v_d = j_V/(ne) \\approx 10^7/(8{,}4\\times10^{28}\\times1{,}6\\times10^{-19}) \\approx 7\\times10^{-4}\\,\\text{m/s}$ est en effet de l'ordre du mm/s. Les électrons ont en réalité une agitation thermique de $\\sim 10^6\\,\\text{m/s}$ — le courant n'est qu'un léger biais directionnel sur ce mouvement chaotique."
+      },
 
-];
+    ];
 
-QuizEngine.loadQuiz("td3_ex1", questions, `md:
+    QuizEngine.loadQuiz("td3_ex1", questions, `md:
 ## Exercice 1 — Conductivité électrique dans les métaux
 
 **Partie 1 :** Fil de cuivre ($S = 1\\,\\text{mm}^2$, $\\rho = 8{,}9\\,\\text{g/cm}^3$, $M = 63{,}6\\,\\text{g/mol}$).
@@ -193,6 +198,7 @@ Densité électronique $n$, densité de courant $j_V$ pour $I = 10\\,\\text{A}$,
 **Partie 2 :** Modèle de Drude — équation du mouvement, $v(t)$, vitesse d'équilibre,
 conductivité $\\gamma$, résistance d'un mètre de fil.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>
