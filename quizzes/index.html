@@ -2,12 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <base href="/em-revisions/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quizzes — EM L2</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/print_style.css">
-  <link rel="stylesheet" href="/styles/quiz.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/print_style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
 </head>
 <body>
 
@@ -53,17 +54,17 @@
 
 <button id="btt" title="Haut de page">↑</button>
 
-<script src="/scripts/nav.js"></script>
+<script src="scripts/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="/scripts/main.js"></script>
+<script src="scripts/main.js"></script>
 <script type="module">
-import { QuizEngine } from '/scripts/quiz.js';
+import { QuizEngine } from 'scripts/quiz.js';
 
 const catalogue = {
   "td1": [
     {
-      file:  "/quizzes/td1_ex1.html",
+      file:  "quizzes/td1_ex1.html",
       id:    "td1_ex1",
       label: "TD1 · Ex 1",
       title: "Champs de position",
@@ -71,7 +72,7 @@ const catalogue = {
       color: "ic-1"
     },
     {
-      file:  "/quizzes/td1_ex2.html",
+      file:  "quizzes/td1_ex2.html",
       id:    "td1_ex2",
       label: "TD1 · Ex 2",
       title: "Champs & lignes de champ",
@@ -79,7 +80,7 @@ const catalogue = {
       color: "ic-1"
     },
     {
-      file:  "/quizzes/td1_ex3.html",
+      file:  "quizzes/td1_ex3.html",
       id:    "td1_ex3",
       label: "TD1 · Ex 3",
       title: "Identités vectorielles",

@@ -3,11 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
+  <base href="/em-revisions/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz · TD1 Ex1 — Champs de position</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/quiz.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
 </head>
 
 <body>
@@ -59,12 +60,12 @@
 
   <button id="btt" title="Haut de page">↑</button>
 
-  <script src="/scripts/nav.js"></script>
+  <script src="scripts/nav.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-  <script src="/scripts/main.js"></script>
+  <script src="scripts/main.js"></script>
   <script type="module">
-  import { QuizEngine } from '/scripts/quiz.js';
+  import { QuizEngine } from 'scripts/quiz.js';
     // ═══════════════════════════════════════════════════════════
     //  TD1 — Exercice 1 : Champs de position
     //  Concepts : $\vec{R}$, $R$, divergence, gradient
@@ -185,7 +186,7 @@ On considère le champ vectoriel $\\vec{R}$ qui est en un point $M$ le vecteur $
 - $\\text{div}\\!\\left(\\dfrac{\\vec{R}}{R^2}\\right)$
 - $\\text{div}\\!\\left(\\dfrac{\\vec{R}}{R^3}\\right)$
 - $\\vec{\\nabla}\\!\\left(\\dfrac{1}{R^2}\\right)$
-`, { setsFile: '/config/token_sets.json', normFile: '/config/norm_rules.json' });
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
   </script>
 </body>
 

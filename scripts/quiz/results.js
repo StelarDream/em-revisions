@@ -98,7 +98,7 @@ export function _showResults(state) {
     ${exBlock}
     <div class="qz-result-actions">
       <button class="qz-btn qz-btn-secondary" onclick="QuizEngine.restart()">↺ Recommencer</button>
-      <a class="qz-btn qz-btn-primary" href="/quizzes/">← Quizzes</a>
+      <a class="qz-btn qz-btn-primary" href="quizzes/">← Quizzes</a>
     </div>
   `;
 

@@ -1,31 +1,30 @@
 /* Shared navigation HTML — injected by each page */
 (function () {
   const nav = [
-    { href: "/",                   label: "Accueil" },
-    { href: "/lessons/ch1.html",   label: "CM1 · Maths" },
-    { href: "/lessons/ch2.html",   label: "CM2 · Électrostatique" },
-    { href: "/lessons/ch3.html",   label: "CM3 · Charges en mouvement" },
-    { href: "/lessons/ch4.html",   label: "CM4 · Magnétostatique" },
-    { href: "/lessons/ch5.html",   label: "CM5 · Induction" },
-    { href: "/quizzes/",           label: "🎯 Quizzes" },
+    { href: "",                    label: "Accueil" },
+    { href: "lessons/ch1.html",   label: "CM1 · Maths" },
+    { href: "lessons/ch2.html",   label: "CM2 · Électrostatique" },
+    { href: "lessons/ch3.html",   label: "CM3 · Charges en mouvement" },
+    { href: "lessons/ch4.html",   label: "CM4 · Magnétostatique" },
+    { href: "lessons/ch5.html",   label: "CM5 · Induction" },
+    { href: "quizzes/",           label: "🎯 Quizzes" },
   ];
 
   const bar = document.getElementById("topbar");
   if (!bar) return;
 
-  const p = location.pathname;
-  // Normalise /index.html → / and match quiz sub-pages to /quizzes/
-  const current = p.endsWith("/index.html") ? p.slice(0, -"index.html".length) : p;
+  const norm = p => p.endsWith("/index.html") ? p.slice(0, -10) : p;
+  const resolved = href => new URL(href || ".", document.baseURI).pathname;
   const isActive = href =>
-    href === current ||
-    (href.endsWith("/") && href !== "/" && current.startsWith(href));
+    norm(location.pathname) === norm(resolved(href)) ||
+    (href.endsWith("/") && href !== "" && location.pathname.startsWith(resolved(href)));
 
   const linkHTML = nav
     .map(n => `<a href="${n.href}"${isActive(n.href) ? ' class="active"' : ""}>${n.label}</a>`)
     .join("");
 
   bar.innerHTML = `
-    <a class="topbar-brand" href="/">⚡ EM L2</a>
+    <a class="topbar-brand" href="">⚡ EM L2</a>
     <button class="nav-arrow nav-arrow-left" aria-label="Défiler à gauche">&#8249;</button>
     <nav class="topbar-nav">${linkHTML}</nav>
     <button class="nav-arrow nav-arrow-right" aria-label="Défiler à droite">&#8250;</button>

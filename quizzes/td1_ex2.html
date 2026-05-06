@@ -2,11 +2,12 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <base href="/em-revisions/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz · TD1 Ex2 — Champs & lignes de champ</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/quiz.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
 </head>
 <body>
 
@@ -50,12 +51,12 @@
 
 <button id="btt" title="Haut de page">↑</button>
 
-<script src="/scripts/nav.js"></script>
+<script src="scripts/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="/scripts/main.js"></script>
+<script src="scripts/main.js"></script>
 <script type="module">
-import { QuizEngine } from '/scripts/quiz.js';
+import { QuizEngine } from 'scripts/quiz.js';
 // ═══════════════════════════════════════════════════════════
 //  TD1 — Exercice 2 : Champs et lignes de champ
 //  Trois champs cartésiens :
@@ -186,7 +187,7 @@ $$\\vec{A}(\\vec{r}) = -y\\,\\hat{u}_x + x\\,\\hat{u}_y \\qquad \\vec{B}(\\vec{r
 **d)** En déduire et représenter les lignes de champ de chacun des trois vecteurs.
 
 **e)** Retrouver grâce aux théorèmes de Green-Ostrogradski et Stokes les résultats de la question **b)**.
-`, { setsFile: '/config/token_sets.json', normFile: '/config/norm_rules.json' });
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
 </script>
 </body>
 </html>
