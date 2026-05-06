@@ -101,7 +101,7 @@ const questions = [
       "Ni l'un ni l'autre",
       "Plan de symétrie pour certains, d'antisymétrie pour d'autres"
     ],
-    answer: "Plan d'antisymétrie — le courant est un vecteur axial renversé par la réflexion",
+    answer: "Plan de symétrie — le courant reste selon $+\\hat{u}_z$ après réflexion",
     explanation: "Le courant $\\vec{j} = j_{surf}\\hat{u}_z$ est un vecteur polaire. Sous réflexion par un plan contenant $Oz$ (plan méridien), la composante $z$ est conservée : $\\hat{u}_z \\to \\hat{u}_z$. C'est donc un plan de symétrie de $\\vec{j}$. Mais $\\vec{B}$ étant un pseudovecteur, sa composante dans le plan s'inverse : $\\vec{B}(M)$ doit être perpendiculaire au plan méridien, c'est-à-dire selon $\\hat{u}_\\varphi$."
   },
 
@@ -126,7 +126,7 @@ const questions = [
     context: CTX1,
     question: "Le plan $z = 0$ est un plan de symétrie de la distribution de courant (courant selon $+\\hat{u}_z$), ce qui implique que $\\vec{B}$ est dans ce plan en tout point de ce plan.",
     answer: "false",
-    explanation: "Le plan $z = 0$ est effectivement plan de symétrie du courant $\\vec{j} = j_{surf}\\hat{u}_z$ (invariance par $z \\to -z$). Mais $\\vec{B}$ est un pseudovecteur : en un point $M$ appartenant à un plan de symétrie, $\\vec{B}$ est perpendiculaire à ce plan. Donc $\\vec{B}$ est selon $\\hat{u}_z$... mais l'analyse complète (plan méridien = antisymétrie pour $\\vec{B}$) impose $\\vec{B}\\parallel\\hat{u}_\\varphi$. Les deux conditions ensemble donnent $\\vec{B} = \\vec{0}$ dans le plan $z=0$, cohérent avec $B = B(r)\\hat{u}_\\varphi$ uniforme."
+    explanation: "Le plan $z = 0$ est effectivement plan de symétrie du courant $\\vec{j} = j_{surf}\\hat{u}_z$ (invariance par $z \\to -z$). Mais $\\vec{B}$ est un pseudovecteur : en un point $M$ appartenant à un plan de symétrie, $\\vec{B}$ est perpendiculaire à ce plan. Donc $\\vec{B}$ est selon $\\hat{u}_z$... mais l'analyse complète (plan méridien = antisymétrie pour $\\vec{B}$) impose $\\vec{B}\\parallel\\hat{u}_\\varphi$."
   },
 
   // ── Q5 · MCQ ─────────────────────────────────────────────
