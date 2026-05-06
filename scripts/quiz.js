@@ -161,7 +161,7 @@ function submit() {
     const given   = _checkTF(q, _el('#qz-input-area'));
     if (given === null) return;
     const correct = _isCorrect(q, given);
-    const points  = correct ? 1 : 0;
+    const points  = correct ? Math.max(0, 1 - (hintUsed ? _scoringCfg.hintPenalty : 0)) : 0;
     state.answers[idx] = { given, correct, points };
     _showFeedback(q, given, correct, correct ? points : null);
     return;
