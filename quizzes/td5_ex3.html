@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD5 Ex3 — Cylindre chargé en translation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="quiz-page">
+
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD5 · Exercice 3 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent3)">Cylindre chargé en translation</h1>
+    <p class="ch-subtitle">Champ $\vec{E}$, courant, champ $\vec{B}$ — force sur une charge et correction relativiste</p>
+  </div>
+
+  <div id="qz-past-attempts"></div>
+
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="qz-results"></div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+// ═══════════════════════════════════════════════════════════
+//  TD5 — Exercice 3 : Cylindre chargé en translation
+//  Cylindre infini rayon R, densité ρ₀, vitesse v selon z
+//  → j = ρ₀v, courant équivalent
+//  → E par Gauss, B par Ampère
+//  → force sur charge q en translation avec le cylindre
+//  → F = F₀(1 - v²/c²)
+// ═══════════════════════════════════════════════════════════
+
+const CTX = `
+  Cylindre infini de rayon $R$, axe $Oz$, densité volumique de charge uniforme $\\rho_0$.
+  Le cylindre se translate à vitesse uniforme $v$ selon $+\\hat{u}_z$.
+`;
+
+const questions = [
+
+  // ── Q1 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Par le théorème de Gauss, quel est le champ $\\vec{E}$ à l'extérieur du cylindre ($r > R$) ?",
+    options: [
+      "$\\vec{E} = \\dfrac{\\rho_0 R^2}{2\\varepsilon_0 r}\\hat{u}_r$",
+      "$\\vec{E} = \\dfrac{\\rho_0 r}{2\\varepsilon_0}\\hat{u}_r$",
+      "$\\vec{E} = \\dfrac{\\rho_0 R^2}{\\varepsilon_0 r}\\hat{u}_r$",
+      "$\\vec{E} = \\dfrac{\\rho_0}{2\\varepsilon_0}\\hat{u}_r$"
+    ],
+    answer: "$\\vec{E} = \\dfrac{\\rho_0 R^2}{2\\varepsilon_0 r}\\hat{u}_r$",
+    explanation: "Gauss sur un cylindre de rayon $r > R$, hauteur $h$ : $E\\cdot 2\\pi r h = Q_{int}/\\varepsilon_0 = \\rho_0\\pi R^2 h/\\varepsilon_0$. Donc $E = \\rho_0 R^2/(2\\varepsilon_0 r)$. C'est le champ d'un fil infini de densité linéique $\\lambda = \\rho_0\\pi R^2$."
+  },
+
+  // ── Q2 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Quelle est la densité volumique de courant $\\vec{j}$ créée par la translation du cylindre ?",
+    options: [
+      "$\\vec{j} = \\rho_0 v\\,\\hat{u}_z$",
+      "$\\vec{j} = \\rho_0 v^2\\,\\hat{u}_z$",
+      "$\\vec{j} = \\rho_0/v\\,\\hat{u}_z$",
+      "$\\vec{j} = \\rho_0\\hat{u}_z$"
+    ],
+    answer: "$\\vec{j} = \\rho_0 v\\,\\hat{u}_z$",
+    explanation: "$\\vec{j} = \\rho_{mobile}\\vec{v} = \\rho_0 v\\,\\hat{u}_z$. C'est la définition de la densité de courant : charge par unité de volume fois vitesse. Le courant équivalent sur une hauteur $h$ : $I = j\\times\\pi R^2 = \\rho_0 v\\pi R^2$, ou encore $I = \\lambda v = \\rho_0\\pi R^2 v$ (densité linéique fois vitesse)."
+  },
+
+  // ── Q3 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Par le théorème d'Ampère, quel est le champ $\\vec{B}$ à l'extérieur ($r > R$) ?",
+    options: [
+      "$\\vec{B} = \\dfrac{\\mu_0\\rho_0 v R^2}{2r}\\hat{u}_\\varphi$",
+      "$\\vec{B} = \\dfrac{\\mu_0\\rho_0 v r}{2}\\hat{u}_\\varphi$",
+      "$\\vec{B} = \\mu_0\\rho_0 v R^2\\hat{u}_\\varphi$",
+      "$\\vec{B} = \\dfrac{\\mu_0\\rho_0 v R^2}{r}\\hat{u}_\\varphi$"
+    ],
+    answer: "$\\vec{B} = \\dfrac{\\mu_0\\rho_0 v R^2}{2r}\\hat{u}_\\varphi$",
+    explanation: "Ampère sur un cercle de rayon $r > R$ : $B\\cdot 2\\pi r = \\mu_0 I = \\mu_0\\rho_0 v\\pi R^2$. Donc $B = \\mu_0\\rho_0 v R^2/(2r)$. On peut l'écrire $B = \\mu_0 j_V R^2/(2r)$ ou encore $B = \\mu_0\\lambda v/(2\\pi r)$ avec $\\lambda = \\rho_0\\pi R^2$."
+  },
+
+  // ── Q4 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Une charge $q$ placée à $r > R$ se déplace avec le cylindre à vitesse $v\\hat{u}_z$. La force de Lorentz totale $\\vec{F} = q(\\vec{E} + \\vec{v}\\wedge\\vec{B})$ a une composante radiale. Que vaut la force magnétique $\\vec{F}_{mag} = q\\vec{v}\\wedge\\vec{B}$ ?",
+    options: [
+      "$\\vec{F}_{mag} = -\\dfrac{\\mu_0 q\\rho_0 v^2 R^2}{2r}\\hat{u}_r$",
+      "$\\vec{F}_{mag} = +\\dfrac{\\mu_0 q\\rho_0 v^2 R^2}{2r}\\hat{u}_r$",
+      "$\\vec{F}_{mag} = \\vec{0}$",
+      "$\\vec{F}_{mag} = -\\dfrac{\\mu_0 q\\rho_0 v R^2}{2r}\\hat{u}_r$"
+    ],
+    answer: "$\\vec{F}_{mag} = -\\dfrac{\\mu_0 q\\rho_0 v^2 R^2}{2r}\\hat{u}_r$",
+    explanation: "$\\vec{v}\\wedge\\vec{B} = v\\hat{u}_z\\wedge\\frac{\\mu_0\\rho_0 v R^2}{2r}\\hat{u}_\\varphi = \\frac{\\mu_0\\rho_0 v^2 R^2}{2r}(\\hat{u}_z\\wedge\\hat{u}_\\varphi) = -\\frac{\\mu_0\\rho_0 v^2 R^2}{2r}\\hat{u}_r$. La force magnétique est attractive (vers le cylindre) — elle s'oppose partiellement à la répulsion électrique."
+  },
+
+  // ── Q5 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "La force électrique est $\\vec{F}_{el} = q\\vec{E} = \\frac{q\\rho_0 R^2}{2\\varepsilon_0 r}\\hat{u}_r$. Quelle est la force totale $\\vec{F}$ ?",
+    options: [
+      "$\\vec{F} = \\dfrac{q\\rho_0 R^2}{2\\varepsilon_0 r}\\left(1 - \\varepsilon_0\\mu_0 v^2\\right)\\hat{u}_r$",
+      "$\\vec{F} = \\dfrac{q\\rho_0 R^2}{2\\varepsilon_0 r}\\left(1 + \\varepsilon_0\\mu_0 v^2\\right)\\hat{u}_r$",
+      "$\\vec{F} = \\dfrac{q\\rho_0 R^2}{2\\varepsilon_0 r}\\hat{u}_r$",
+      "$\\vec{F} = -\\dfrac{\\mu_0 q\\rho_0 v^2 R^2}{2r}\\hat{u}_r$"
+    ],
+    answer: "$\\vec{F} = \\dfrac{q\\rho_0 R^2}{2\\varepsilon_0 r}\\left(1 - \\varepsilon_0\\mu_0 v^2\\right)\\hat{u}_r$",
+    explanation: "$\\vec{F} = \\vec{F}_{el} + \\vec{F}_{mag} = \\frac{q\\rho_0 R^2}{2\\varepsilon_0 r}\\hat{u}_r - \\frac{\\mu_0 q\\rho_0 v^2 R^2}{2r}\\hat{u}_r = \\frac{q\\rho_0 R^2}{2\\varepsilon_0 r}(1 - \\varepsilon_0\\mu_0 v^2)\\hat{u}_r$. En mettant en facteur $F_0 = \\frac{q\\rho_0 R^2}{2\\varepsilon_0 r}$, on obtient $F = F_0(1 - \\varepsilon_0\\mu_0 v^2)$."
+  },
+
+  // ── Q6 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "En utilisant $c^2 = 1/(\\varepsilon_0\\mu_0)$, la force totale se met sous la forme $F = F_0(1 - v^2/c^2)$.",
+    answer: "true",
+    explanation: "$\\varepsilon_0\\mu_0 v^2 = v^2/c^2$ puisque $c^2 = 1/(\\varepsilon_0\\mu_0)$. Donc $F = F_0(1 - v^2/c^2)$. C'est un résultat profond : la force exercée sur une charge en mouvement est réduite d'un facteur $(1-v^2/c^2)$ par rapport à la force au repos. C'est une conséquence directe de la relativité restreinte — l'électromagnétisme est naturellement relativiste."
+  },
+
+  // ── Q7 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "La relation $c^2 = 1/(\\varepsilon_0\\mu_0)$ fut l'une des premières indications que la lumière est une onde électromagnétique.",
+    answer: "true",
+    explanation: "Maxwell a calculé en 1865 la vitesse de propagation des ondes électromagnétiques : $c = 1/\\sqrt{\\varepsilon_0\\mu_0} \\approx 3\\times10^8\\,\\text{m/s}$. Cette valeur coïncide avec la vitesse de la lumière mesurée par Fizeau en 1849. Maxwell en conclut que la lumière est une onde électromagnétique — une des plus grandes synthèses de la physique du XIXe siècle."
+  },
+
+  // ── Q8 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "La correction relativiste $F = F_0(1-v^2/c^2)$ montre que pour $v \\ll c$ :",
+    options: [
+      "La force magnétique est négligeable devant la force électrique",
+      "La force électrique est négligeable devant la force magnétique",
+      "Les deux forces sont égales",
+      "La force totale est nulle"
+    ],
+    answer: "La force magnétique est négligeable devant la force électrique",
+    explanation: "Pour $v\\ll c$ : $v^2/c^2 \\ll 1$, donc $F \\approx F_0 = F_{el}$. La correction magnétique est d'ordre $(v/c)^2 \\ll 1$. C'est pourquoi en électrostatique on ignore souvent les effets magnétiques des charges en mouvement lent. Cependant, dans les conducteurs (où $v_d \\sim$ mm/s), c'est la grande densité $n$ d'électrons qui compense la faiblesse de $v/c$ et rend le champ magnétique observable."
+  },
+
+];
+
+QuizEngine.loadQuiz("td5_ex3", questions, `md:
+## Exercice 3 — Cylindre chargé en translation
+
+Cylindre infini ($R$, $\\rho_0$) se translatant à vitesse $v$ selon $\\hat{u}_z$.
+
+**1.** Champ $\\vec{E}$ par Gauss (cylindre statique).
+
+**2.** Densité de courant $\\vec{j} = \\rho_0 v\\hat{u}_z$, courant équivalent $I = \\rho_0\\pi R^2 v$.
+
+**3.** Champ $\\vec{B}$ par Ampère.
+
+**4–5.** Force de Lorentz sur une charge $q$ en translation avec le cylindre : montrer $F = F_0(1 - v^2/c^2)$.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD5 Ex2 — Solénoïde et tore</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="quiz-page">
+
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD5 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent2)">Solénoïde et tore</h1>
+    <p class="ch-subtitle">$\vec{B} = \mu_0 n I\,\hat{u}_z$ à l'intérieur — tore : $\vec{B}$ confiné entre $R_1$ et $R_2$</p>
+  </div>
+
+  <div id="qz-past-attempts"></div>
+
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="qz-results"></div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+// ═══════════════════════════════════════════════════════════
+//  TD5 — Exercice 2 : Solénoïde et tore
+//  Solénoïde infini : n spires/m, courant I → B = μ₀nI dedans, 0 dehors
+//  Tore : N spires, rayons R₁ et R₂ → B = μ₀NI/(2πr) dedans, 0 dehors
+// ═══════════════════════════════════════════════════════════
+
+const CTX_SOL = `
+  Solénoïde infini de rayon $R$, $n$ spires par unité de longueur, courant $I$.
+  Axe $Oz$, coordonnées cylindriques.
+`;
+
+const CTX_TORE = `
+  Tore de rayon intérieur $R_1$, rayon extérieur $R_2$, formé de $N$ spires parcourues par $I$.
+  Axe $Oz$, le tore est dans le plan $z = 0$.
+`;
+
+const questions = [
+
+  // ── Q1 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_SOL,
+    question: "Par analyse des symétries du solénoïde infini, dans quelle direction est $\\vec{B}$ ?",
+    options: [
+      "Selon $\\hat{u}_z$ — tout plan $z = cte$ est plan d'antisymétrie du courant",
+      "Selon $\\hat{u}_\\varphi$ — comme pour un fil infini",
+      "Selon $\\hat{u}_r$",
+      "Dans une direction quelconque"
+    ],
+    answer: "Selon $\\hat{u}_z$ — tout plan $z = cte$ est plan d'antisymétrie du courant",
+    explanation: "Tout plan perpendiculaire à $Oz$ est plan d'antisymétrie du courant (le courant azimutal s'inverse par réflexion) ⟹ $\\vec{B}\\perp$ au plan ⟹ $\\vec{B}\\parallel\\hat{u}_z$. Les invariances (translation $z$, rotation $\\varphi$) imposent $B = B(r)$ uniquement. Conclusion : $\\vec{B} = B(r)\\hat{u}_z$."
+  },
+
+  // ── Q2 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_SOL,
+    question: "Quel contour d'Ampère permet de montrer que $B$ est constant à l'intérieur ($r < R$) ?",
+    options: [
+      "Un rectangle dont deux côtés sont parallèles à $Oz$ à des distances $r_1 < R$ et $r_2 < R$",
+      "Un cercle de rayon $r < R$ dans le plan $Oxy$",
+      "Un rectangle avec un côté à $r < R$ et l'autre à $r > R$",
+      "Une sphère de rayon $r < R$"
+    ],
+    answer: "Un rectangle dont deux côtés sont parallèles à $Oz$ à des distances $r_1 < R$ et $r_2 < R$",
+    explanation: "Pour montrer $B(r_1) = B(r_2)$ pour $r_1, r_2 < R$ : on prend un rectangle avec deux côtés $\\parallel\\hat{u}_z$ à $r_1$ et $r_2$, et deux côtés $\\perp\\hat{u}_z$. La circulation vaut $(B(r_1) - B(r_2))L = 0$ (pas de courant enlacé, et les côtés horizontaux sont nuls car $\\vec{B}\\perp d\\vec{\\ell}$). Donc $B(r_1) = B(r_2)$ : $B$ est uniforme à l'intérieur."
+  },
+
+  // ── Q3 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_SOL,
+    question: "En supposant $B = 0$ à l'extérieur ($r > R$), quel contour d'Ampère donne la valeur de $B$ à l'intérieur ?",
+    options: [
+      "Un rectangle avec un côté de longueur $L$ à l'intérieur et l'autre à l'extérieur",
+      "Un cercle de rayon $r < R$",
+      "Un rectangle entièrement à l'intérieur",
+      "Un cercle de rayon $r > R$"
+    ],
+    answer: "Un rectangle avec un côté de longueur $L$ à l'intérieur et l'autre à l'extérieur",
+    explanation: "Circulation : côté intérieur $B\\cdot L$, côté extérieur $0$, côtés perpendiculaires nuls ($\\vec{B}\\perp d\\vec{\\ell}$). Total : $BL = \\mu_0 I_{enlacé} = \\mu_0 (nL)I$ ($nL$ spires sur la longueur $L$). D'où $B = \\mu_0 nI$. C'est le résultat emblématique du solénoïde : champ uniforme à l'intérieur, nul à l'extérieur."
+  },
+
+  // ── Q4 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    context: CTX_SOL,
+    question: "Le champ à l'intérieur du solénoïde infini est $\\vec{B} = \\mu_0 n I\\,\\hat{u}_z$, uniforme et indépendant de $r$.",
+    answer: "true",
+    explanation: "$B = \\mu_0 nI$ ne dépend ni de $r$ ni de $z$ — le champ est parfaitement uniforme à l'intérieur. C'est l'idéalisation du solénoïde infini. En pratique, un solénoïde fini présente des effets de bords (inhomogénéité aux extrémités), mais les bobines d'Helmholtz ou les solénoïdes longs s'en approchent bien."
+  },
+
+  // ── Q5 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_TORE,
+    question: "Pour le tore, quel contour d'Ampère utiliser pour calculer $\\vec{B}$ à l'intérieur ($R_1 < r < R_2$) ?",
+    options: [
+      "Un cercle de rayon $r$ dans le plan $z = 0$, centré sur $Oz$",
+      "Un rectangle parallèle à l'axe",
+      "Une sphère de rayon $r$",
+      "Un cercle dans un plan méridien"
+    ],
+    answer: "Un cercle de rayon $r$ dans le plan $z = 0$, centré sur $Oz$",
+    explanation: "Par les symétries du tore ($\\vec{B}$ selon $\\hat{u}_\\varphi$, indépendant de $\\varphi$), le cercle de rayon $r$ dans le plan $z=0$ est le contour optimal. La circulation vaut $B(r)\\times 2\\pi r$. Il enlace les $N$ spires du tore : $I_{enlacé} = NI$."
+  },
+
+  // ── Q6 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_TORE,
+    question: "Pour $R_1 < r < R_2$ (intérieur du tore), que vaut $\\vec{B}$ ?",
+    options: [
+      "$\\vec{B} = \\dfrac{\\mu_0 N I}{2\\pi r}\\hat{u}_\\varphi$",
+      "$\\vec{B} = \\mu_0 N I\\,\\hat{u}_z$",
+      "$\\vec{B} = \\dfrac{\\mu_0 N I}{2\\pi R_1}\\hat{u}_\\varphi$",
+      "$\\vec{B} = \\dfrac{\\mu_0 N I}{\\pi(R_2^2 - R_1^2)}\\hat{u}_\\varphi$"
+    ],
+    answer: "$\\vec{B} = \\dfrac{\\mu_0 N I}{2\\pi r}\\hat{u}_\\varphi$",
+    explanation: "$2\\pi r\\,B = \\mu_0 NI \\Rightarrow B = \\mu_0 NI/(2\\pi r)$. Contrairement au solénoïde, le champ dans le tore n'est pas uniforme — il varie en $1/r$. C'est pourquoi les transformateurs et inductances utilisent plutôt des tores en matériau ferromagnétique pour confiner le flux."
+  },
+
+  // ── Q7 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    context: CTX_TORE,
+    question: "Pour $r < R_1$ et $r > R_2$, le champ magnétique du tore est nul.",
+    answer: "true",
+    explanation: "Pour $r < R_1$ : le cercle d'Ampère n'enlace aucun courant net ($NI$ monte et $NI$ redescend, ou les spires ne sont pas enlacées) ⟹ $B = 0$. Pour $r > R_2$ : le cercle enlace toutes les spires avec les courants montants et descendants qui se compensent exactement ⟹ $I_{enlacé} = 0 \\Rightarrow B = 0$. Le champ est entièrement confiné dans le tore."
+  },
+
+  // ── Q8 · MCQ ─────────────────────────────────────════════
+  {
+    type: "mcq",
+    question: "Un solénoïde de longueur $\\ell$, de $N$ spires totales et de densité $n = N/\\ell$, donne $\\vec{B} = \\mu_0 nI\\,\\hat{u}_z$. Pour un tore de $N$ spires et de rayon moyen $r_0 = (R_1+R_2)/2$, le champ au centre vaut $\\mu_0 NI/(2\\pi r_0)$. Le solénoïde et le tore donnent le même champ si :",
+    options: [
+      "$\\ell = 2\\pi r_0$ — le tore est un solénoïde refermé sur lui-même",
+      "$\\ell = r_0$",
+      "$N\\ell = 2\\pi r_0$",
+      "Jamais — les formules sont fondamentalement différentes"
+    ],
+    answer: "$\\ell = 2\\pi r_0$ — le tore est un solénoïde refermé sur lui-même",
+    explanation: "$B_{sol} = \\mu_0(N/\\ell)I$ et $B_{tore} = \\mu_0 NI/(2\\pi r_0)$. Égalité si $1/\\ell = 1/(2\\pi r_0)$, soit $\\ell = 2\\pi r_0$ = longueur de la circonférence moyenne du tore. C'est exact : le tore est littéralement un solénoïde refermé sur lui-même — d'où la cohérence des deux formules."
+  },
+
+];
+
+QuizEngine.loadQuiz("td5_ex2", questions, `md:
+## Exercice 2 — Solénoïde infini et tore
+
+**1.** Rappel : symétries d'une spire circulaire.
+
+**2.** Solénoïde infini ($n$ spires/m, courant $I$) : montrer $\\vec{B} = \\mu_0 nI\\,\\hat{u}_z$ à l'intérieur, $\\vec{B} = \\vec{0}$ à l'extérieur.
+
+**3.** Tore ($N$ spires, rayons $R_1$ et $R_2$) : $\\vec{B} = \\frac{\\mu_0 NI}{2\\pi r}\\hat{u}_\\varphi$ pour $R_1 < r < R_2$, nul ailleurs.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>

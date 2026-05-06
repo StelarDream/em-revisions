@@ -65,15 +65,24 @@
     <div class="index-grid" id="grid-td4"></div>
   </div>
 
-  <!-- ── TD5–7 placeholders ────────────────────────────────  -->
+  <!-- ── TD5 ─────────────────────────────────────────────── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      TD5 — Magnétostatique : théorème d'Ampère
+    </h2>
+    <div class="index-grid" id="grid-td5"></div>
+  </div>
+
+  <!-- ── TD6–7 placeholders ────────────────────────────────  -->
   <div class="section">
     <h2 class="section-title">
       <span class="dot" style="background:var(--ink-faint)"></span>
-      TD5–7 — À venir
+      TD6–7 — À venir
     </h2>
     <div class="callout warn">
       <span class="callout-icon">🚧</span>
-      <div>Les quizzes des TDs 5 à 7 seront ajoutés progressivement.</div>
+      <div>Les quizzes des TDs 6 et 7 seront ajoutés progressivement.</div>
     </div>
   </div>
 
@@ -248,6 +257,32 @@ const catalogue = {
       desc:  "$\\vec{E}$ sur l'axe (charge $\\lambda$), $\\vec{B}$ en rotation — analogie $E$/$B$",
       color: "ic-4"
     },
+  ],
+  "td5": [
+    {
+      file:  "quizzes/td5_ex1.html",
+      id:    "td5_ex1",
+      label: "TD5 · Ex 1",
+      title: "Câble coaxial",
+      desc:  "Fil infini, cylindre creux, câble coaxial — $\\vec{B}=\\vec{0}$ à l'extérieur",
+      color: "ic-1"
+    },
+    {
+      file:  "quizzes/td5_ex2.html",
+      id:    "td5_ex2",
+      label: "TD5 · Ex 2",
+      title: "Solénoïde &amp; tore",
+      desc:  "$\\vec{B} = \\mu_0 nI$ uniforme à l'intérieur — tore : $\\vec{B}\\propto 1/r$ confiné",
+      color: "ic-1"
+    },
+    {
+      file:  "quizzes/td5_ex3.html",
+      id:    "td5_ex3",
+      label: "TD5 · Ex 3",
+      title: "Cylindre en translation",
+      desc:  "$\\vec{E}$ (Gauss), $\\vec{B}$ (Ampère), force de Lorentz — $F = F_0(1-v^2/c^2)$",
+      color: "ic-1"
+    },
   ]
 };
 
@@ -334,6 +369,7 @@ renderGrid(catalogue.td1, 'grid-td1');
 renderGrid(catalogue.td2, 'grid-td2');
 renderGrid(catalogue.td3, 'grid-td3');
 renderGrid(catalogue.td4, 'grid-td4');
+renderGrid(catalogue.td5, 'grid-td5');
 </script>
 </body>
 </html>
