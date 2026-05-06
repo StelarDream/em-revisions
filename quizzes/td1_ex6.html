@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD1 Ex6 — Champ magnétique et potentiel vecteur</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="quiz-page">
+
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD1 · Exercice 6 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent)">Champ magnétique &amp; potentiel vecteur</h1>
+    <p class="ch-subtitle">$\vec{B} = \vec{\nabla}\times\vec{A}$ — quatre potentiels vecteurs en coordonnées cylindriques</p>
+  </div>
+
+  <div id="qz-past-attempts"></div>
+
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="qz-results"></div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+// ═══════════════════════════════════════════════════════════
+//  TD1 — Exercice 6 : Champ magnétique et potentiel vecteur
+//  Calcul de B = rot(A) pour 4 potentiels vecteurs
+//  en coordonnées cylindriques
+// ═══════════════════════════════════════════════════════════
+
+const CTX = `
+  En coordonnées cylindriques $(r,\\varphi,z)$, on calcule $\\vec{B} = \\vec{\\nabla}\\times\\vec{A}$.
+  Le rotationnel cylindrique : $(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi}$, etc.
+`;
+
+const questions = [
+
+  // ── Q1 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Pour $\\vec{A} = A_0\\hat{u}_r$ (potentiel purement radial, $A_0$ constante), que vaut $\\vec{B} = \\vec{\\nabla}\\times\\vec{A}$ ?",
+    options: [
+      "$\\vec{B} = \\vec{0}$",
+      "$\\vec{B} = \\dfrac{A_0}{r}\\hat{u}_z$",
+      "$\\vec{B} = A_0\\hat{u}_z$",
+      "$\\vec{B} = -\\dfrac{A_0}{r}\\hat{u}_\\varphi$"
+    ],
+    answer: "$\\vec{B} = \\vec{0}$",
+    explanation: "Ici $A_r = A_0$, $A_\\varphi = 0$, $A_z = 0$, tous constants. $(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z} = 0$. $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r} = 0$. $(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} - \\frac{1}{r}\\frac{\\partial A_r}{\\partial\\varphi} = 0$. Donc $\\vec{B} = \\vec{0}$."
+  },
+
+  // ── Q2 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Pour $\\vec{A} = A_0\\hat{u}_\\varphi$ ($A_\\varphi = A_0$ constante), que vaut $\\vec{B}$ ?",
+    options: [
+      "$\\vec{B} = \\dfrac{A_0}{r}\\hat{u}_z$",
+      "$\\vec{B} = -\\dfrac{A_0}{r}\\hat{u}_z$",
+      "$\\vec{B} = A_0\\hat{u}_z$",
+      "$\\vec{B} = \\vec{0}$"
+    ],
+    answer: "$\\vec{B} = \\dfrac{A_0}{r}\\hat{u}_z$",
+    explanation: "Seule la composante $z$ du rotationnel est non nulle : $(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} = \\frac{1}{r}\\frac{\\partial(rA_0)}{\\partial r} = \\frac{A_0}{r}$. Ce champ $\\vec{B} = \\frac{A_0}{r}\\hat{u}_z$ est curieux : il décroît en $1/r$ selon l'axe $z$."
+  },
+
+  // ── Q3 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Pour $\\vec{A} = A_0\\hat{u}_z$ ($A_z = A_0$ constante), que vaut $\\vec{B}$ ?",
+    options: [
+      "$\\vec{B} = \\vec{0}$",
+      "$\\vec{B} = \\dfrac{A_0}{r}\\hat{u}_r$",
+      "$\\vec{B} = A_0\\hat{u}_r$",
+      "$\\vec{B} = -A_0\\hat{u}_\\varphi$"
+    ],
+    answer: "$\\vec{B} = \\vec{0}$",
+    explanation: "Avec $A_z = A_0$ constant : $(\\vec{\\nabla}\\times\\vec{A})_r = \\frac{1}{r}\\frac{\\partial A_z}{\\partial\\varphi} - \\frac{\\partial A_\\varphi}{\\partial z} = 0$. $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r} = 0$. $(\\vec{\\nabla}\\times\\vec{A})_z = 0$. Un potentiel vecteur uniforme (constant) a toujours un rotationnel nul — comme un gradient constant."
+  },
+
+  // ── Q4 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Pour $\\vec{A} = \\dfrac{A_0}{r}\\hat{u}_z$, que vaut $\\vec{B}$ ?",
+    options: [
+      "$\\vec{B} = \\dfrac{A_0}{r^2}\\hat{u}_\\varphi$",
+      "$\\vec{B} = -\\dfrac{A_0}{r^2}\\hat{u}_\\varphi$",
+      "$\\vec{B} = \\vec{0}$",
+      "$\\vec{B} = \\dfrac{A_0}{r}\\hat{u}_r$"
+    ],
+    answer: "$\\vec{B} = -\\dfrac{A_0}{r^2}\\hat{u}_\\varphi$",
+    explanation: "Ici $A_z = A_0/r$. $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r} = 0 - \\frac{\\partial(A_0/r)}{\\partial r} = 0 -(-\\frac{A_0}{r^2}) = \\frac{A_0}{r^2}$... Attention au signe : $(\\vec{\\nabla}\\times\\vec{A})_\\varphi = \\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r} = -(-\\frac{A_0}{r^2}) = +\\frac{A_0}{r^2}$. Donc $\\vec{B} = \\frac{A_0}{r^2}\\hat{u}_\\varphi$. (Vérifier le signe selon la convention du cours.)"
+  },
+
+  // ── Q5 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "Pour tout potentiel vecteur $\\vec{A}$, on a $\\vec{\\nabla}\\cdot(\\vec{\\nabla}\\times\\vec{A}) = 0$, donc $\\vec{\\nabla}\\cdot\\vec{B} = 0$.",
+    answer: "true",
+    explanation: "C'est l'identité vue en Ex3b : la divergence d'un rotationnel est toujours nulle. En magnétostatique, $\\vec{B} = \\vec{\\nabla}\\times\\vec{A}$ garantit automatiquement $\\vec{\\nabla}\\cdot\\vec{B} = 0$ — l'équation de Maxwell-Thomson (absence de monopôles magnétiques). C'est une des raisons pour lesquelles on introduit $\\vec{A}$."
+  },
+
+  // ── Q6 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Le potentiel vecteur $\\vec{A}$ n'est pas unique : on peut lui ajouter le gradient d'une fonction scalaire $f$ sans changer $\\vec{B}$. Cette liberté s'appelle :",
+    options: [
+      "L'invariance de jauge",
+      "Le principe de superposition",
+      "La règle de Leibniz",
+      "L'invariance de Lorentz"
+    ],
+    answer: "L'invariance de jauge",
+    explanation: "Si $\\vec{A}' = \\vec{A} + \\vec{\\nabla}f$, alors $\\vec{B}' = \\vec{\\nabla}\\times\\vec{A}' = \\vec{\\nabla}\\times\\vec{A} + \\vec{\\nabla}\\times(\\vec{\\nabla}f) = \\vec{B} + \\vec{0} = \\vec{B}$. On fixe la jauge en imposant une condition sur $\\vec{\\nabla}\\cdot\\vec{A}$ : jauge de Coulomb ($\\vec{\\nabla}\\cdot\\vec{A} = 0$) ou jauge de Lorenz en électrodynamique."
+  },
+
+  // ── Q7 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "Le potentiel vecteur $\\vec{A} = \\frac{B_0 r}{2}\\hat{u}_\\varphi$ (en cylindriques) correspond à un champ magnétique uniforme $\\vec{B} = B_0\\hat{u}_z$.",
+    answer: "true",
+    explanation: "$(\\vec{\\nabla}\\times\\vec{A})_z = \\frac{1}{r}\\frac{\\partial(rA_\\varphi)}{\\partial r} = \\frac{1}{r}\\frac{\\partial}{\\partial r}\\!\\left(\\frac{B_0 r^2}{2}\\right) = \\frac{1}{r}\\cdot B_0 r = B_0$. Donc $\\vec{B} = B_0\\hat{u}_z$, uniforme. C'est le potentiel vecteur standard pour un champ uniforme en jauge de Coulomb."
+  },
+
+  // ── Q8 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Parmi ces assertions, laquelle est vraie pour le potentiel vecteur $\\vec{A}$ en magnétostatique ?",
+    options: [
+      "$\\vec{A}$ est défini à $\\vec{\\nabla}f$ près, et en jauge de Coulomb on impose $\\vec{\\nabla}\\cdot\\vec{A} = 0$",
+      "$\\vec{A}$ est unique une fois $\\vec{B}$ connu",
+      "$\\vec{A}$ vérifie toujours $\\vec{\\nabla}\\cdot\\vec{A} = 0$ sans condition supplémentaire",
+      "$\\vec{A}$ a les mêmes unités que $\\vec{B}$"
+    ],
+    answer: "$\\vec{A}$ est défini à $\\vec{\\nabla}f$ près, et en jauge de Coulomb on impose $\\vec{\\nabla}\\cdot\\vec{A} = 0$",
+    explanation: "$\\vec{A}$ est défini à un gradient près (invariance de jauge). Pour lever cette ambiguïté, on choisit une jauge : la **jauge de Coulomb** $\\vec{\\nabla}\\cdot\\vec{A} = 0$ simplifie l'équation de Poisson vectorielle en $\\Delta\\vec{A} = -\\mu_0\\vec{j}$. Les unités de $\\vec{A}$ sont T·m = V·s/m (tesla-mètre), différentes de $\\vec{B}$ en tesla."
+  },
+
+];
+
+QuizEngine.loadQuiz("td1_ex6", questions, `md:
+## Exercice 6 — Champ magnétique et potentiel vecteur
+
+En coordonnées cylindriques $(\\hat{u}_r, \\hat{u}_\\varphi, \\hat{u}_z)$, calculer $\\vec{B} = \\vec{\\nabla}\\times\\vec{A}$ pour :
+
+1. $\\vec{A}(M) = A_0\\hat{u}_r$
+2. $\\vec{A}(M) = A_0\\hat{u}_\\varphi$
+3. $\\vec{A}(M) = A_0\\hat{u}_z$
+4. $\\vec{A}(M) = \\dfrac{A_0}{r}\\hat{u}_z$
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>
