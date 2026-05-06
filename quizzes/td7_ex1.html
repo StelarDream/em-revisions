@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD7 Ex1 — Freinage par induction</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<main class="quiz-page">
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD7 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent)">Freinage par induction</h1>
+    <p class="ch-subtitle">Barre mobile dans $\vec{B}$ — fem, loi de Lenz, équation du mouvement, circuit RL</p>
+  </div>
+  <div id="qz-past-attempts"></div>
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+  <div id="qz-results"></div>
+</main>
+<button id="btt" title="Haut de page">↑</button>
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+
+const CTX = `
+  Circuit en U horizontal, refermé par une barre mobile de longueur $l$, masse $m$, résistance $R$.
+  Champ $\\vec{B}$ uniforme, perpendiculaire au plan du circuit. Position $x(t)$, vitesse $v = \\dot{x}$.
+`;
+
+const questions = [
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Quand la barre se déplace à vitesse $v$, le flux à travers le circuit vaut $\\Phi = B\\,l\\,x$. La fem induite selon la loi de Faraday est :",
+    options: [
+      "$e = -Blv$",
+      "$e = Blv$",
+      "$e = -Bl\\dot{v}$",
+      "$e = Blx$"
+    ],
+    answer: "$e = -Blv$",
+    explanation: "$e = -\\frac{d\\Phi}{dt} = -Bl\\frac{dx}{dt} = -Blv$. Le signe dépend de l'orientation choisie pour le circuit — si la barre avance ($v > 0$), le flux augmente, et la fem est négative (s'oppose à l'augmentation). C'est la loi de Lenz : la fem induite s'oppose à la cause qui lui donne naissance."
+  },
+  {
+    type: "mcq",
+    context: CTX,
+    question: "La loi de Lenz stipule que le courant induit :",
+    options: [
+      "S'oppose à la variation du flux qui lui donne naissance",
+      "Amplifie toujours la variation de flux",
+      "Est nul si le champ est uniforme",
+      "Dépend uniquement de la résistance du circuit"
+    ],
+    answer: "S'oppose à la variation du flux qui lui donne naissance",
+    explanation: "La loi de Lenz est une expression du principe de modération (ou de conservation de l'énergie) : le courant induit crée un champ qui s'oppose à la variation de flux. Si le flux augmente, le courant induit crée un champ opposé ; si le flux diminue, il crée un champ dans le même sens. Elle est contenue dans le signe $-$ de la loi de Faraday."
+  },
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Le courant induit est $i = e/R = -Blv/R$. La force de Laplace sur la barre est $\\vec{F} = i\\,l\\,\\vec{B}\\times\\hat{u}_x$... quel est son signe par rapport à $v$ ?",
+    options: [
+      "Opposé à $v$ — la force freine la barre",
+      "Dans le même sens que $v$ — la force accélère la barre",
+      "Nul",
+      "Perpendiculaire à $v$"
+    ],
+    answer: "Opposé à $v$ — la force freine la barre",
+    explanation: "$F = Bil = B\\frac{Blv}{R}l = \\frac{B^2l^2}{R}v$, dirigée selon $-\\hat{u}_x$ (s'oppose au mouvement). C'est le freinage magnétique : l'énergie cinétique est convertie en chaleur par effet Joule. La constante de freinage est $k = B^2l^2/R$."
+  },
+  {
+    type: "mcq",
+    context: CTX,
+    question: "L'équation du mouvement de la barre (sans pile, $v_0$ à $t=0$) donne $v(t) = $ :",
+    options: [
+      "$v_0\\,e^{-t/\\tau}$ avec $\\tau = mR/(B^2l^2)$",
+      "$v_0\\,e^{-t/\\tau}$ avec $\\tau = B^2l^2/m$",
+      "$v_0(1 - e^{-t/\\tau})$",
+      "$v_0\\cos(\\omega t)$"
+    ],
+    answer: "$v_0\\,e^{-t/\\tau}$ avec $\\tau = mR/(B^2l^2)$",
+    explanation: "$m\\dot{v} = -\\frac{B^2l^2}{R}v$ ⟹ $v(t) = v_0\\,e^{-t/\\tau}$ avec $\\tau = mR/(B^2l^2)$. La vitesse décroît exponentiellement. L'énergie cinétique $\\frac{1}{2}mv^2 = \\frac{1}{2}mv_0^2 e^{-2t/\\tau}$ est intégralement dissipée par effet Joule dans $R$."
+  },
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Avec une pile de fem $E$ (barre immobile à $t=0$), la vitesse limite atteinte pour $t \\to \\infty$ est :",
+    options: [
+      "$v_{lim} = \\dfrac{ER}{B^2l^2} \\cdot \\dfrac{1}{1} = \\dfrac{E}{Bl}$",
+      "$v_{lim} = \\dfrac{E}{R}$",
+      "$v_{lim} = EBl$",
+      "$v_{lim} = \\dfrac{E}{B^2l^2}$"
+    ],
+    answer: "$v_{lim} = \\dfrac{ER}{B^2l^2} \\cdot \\dfrac{1}{1} = \\dfrac{E}{Bl}$",
+    explanation: "À la vitesse limite, $\\dot{v} = 0$ : la force motrice $F = BiL$ compense la force de freinage. Le courant à $v_{lim}$ est $i = (E - Blv_{lim})/R = 0$ ⟹ $Blv_{lim} = E$ ⟹ $v_{lim} = E/(Bl)$. Physiquement : la fem de la pile est exactement compensée par la fem de Lorentz de la barre — le courant s'annule."
+  },
+  {
+    type: "tf",
+    question: "Quand la barre atteint sa vitesse limite avec la pile, l'énergie fournie par la pile est intégralement convertie en énergie mécanique.",
+    answer: "false",
+    explanation: "Faux. À $v_{lim}$ le courant est nul, donc aucune puissance n'est ni fournie ni dissipée — c'est un état d'équilibre dynamique. En régime transitoire, une partie de l'énergie de la pile est dissipée dans $R$ par effet Joule (conversion irréversible). C'est analogue au circuit RL : l'énergie stockée dans $L$ est $\\frac{1}{2}Li^2$, mais l'énergie dissipée dans $R$ est $\\int Ri^2\\,dt$."
+  },
+  {
+    type: "mcq",
+    question: "Après avoir atteint $v_{lim}$, on applique un frottement $\\vec{f} = -k\\vec{v}$. L'équation du mouvement devient $m\\dot{v} = F_{Laplace} + f$. En régime permanent ($\\dot{v}=0$) :",
+    options: [
+      "La nouvelle vitesse limite vérifie $\\frac{B^2l^2}{R}v + kv = \\frac{B^2l^2}{R}v_{lim}$",
+      "La barre s'arrête",
+      "La vitesse augmente indéfiniment",
+      "Aucun nouveau régime permanent n'existe"
+    ],
+    answer: "La nouvelle vitesse limite vérifie $\\frac{B^2l^2}{R}v + kv = \\frac{B^2l^2}{R}v_{lim}$",
+    explanation: "L'équation est $m\\dot{v} = (E/R - v/R\\cdot Bl)Bl - kv$. À l'équilibre : $BlE/R = (B^2l^2/R + k)v'$, d'où $v' = v_{lim}/(1 + kR/B^2l^2) < v_{lim}$. Le frottement réduit la vitesse limite — les deux forces dissipatrices (magnétique et mécanique) se partagent la puissance de la pile."
+  },
+  {
+    type: "tf",
+    question: "La fem induite dans un circuit peut être due à un mouvement du circuit dans un champ statique (induction de Lorentz) ou à un champ variable dans un circuit fixe (induction de Neumann) — les deux donnent la même loi $e = -d\\Phi/dt$.",
+    answer: "true",
+    explanation: "C'est l'unification réalisée par Faraday et formalisée par Maxwell. La loi $e = -d\\Phi/dt$ est universelle, qu'on move le circuit ou qu'on varie le champ. Physiquement : dans le premier cas, c'est la force de Lorentz $q\\vec{v}\\wedge\\vec{B}$ sur les charges mobiles ; dans le second, c'est le champ électrique induit $\\vec{\\nabla}\\times\\vec{E} = -\\partial\\vec{B}/\\partial t$ (Maxwell-Faraday)."
+  },
+];
+
+QuizEngine.loadQuiz("td7_ex1", questions, `md:
+## Exercice 1 — Freinage par induction
+
+Barre mobile (longueur $l$, masse $m$, résistance $R$) dans un circuit en U, champ $\\vec{B}$ uniforme.
+
+**a–d)** fem induite, loi de Lenz, force de Laplace, $v(t) = v_0 e^{-t/\\tau}$ (freinage).
+
+**e–g)** Avec pile de fem $E$ : vitesse limite $v_{lim} = E/(Bl)$, avec frottement constant puis $f = -kv$.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>

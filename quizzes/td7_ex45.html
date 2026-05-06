@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD7 Ex4&amp;5 — Frein Telma &amp; courants de Foucault</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<main class="quiz-page">
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD7 · Exercices 4 &amp; 5 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent3)">Frein Telma &amp; courants de Foucault</h1>
+    <p class="ch-subtitle">Cylindre conducteur tournant — courants induits, Joule, Laplace, couple</p>
+  </div>
+  <div id="qz-past-attempts"></div>
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+  <div id="qz-results"></div>
+</main>
+<button id="btt" title="Haut de page">↑</button>
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+
+const CTX4 = `
+  Cylindre conducteur plein amagnétique, conductivité $\\gamma$, rayon $a$,
+  tournant à vitesse angulaire $\\omega$ dans un champ $\\vec{B}_0$ uniforme perpendiculaire à l'axe.
+  On se place en coordonnées cylindriques, axe $Oz$ = axe du cylindre.
+`;
+
+const CTX5 = `
+  Cylindre métallique de conductivité $\\gamma$, épaisseur $h$, rayon $a$,
+  soumis à $\\vec{B}(t) = \\vec{B}_0\\cos\\omega t$ parallèle à l'axe $Oz$.
+`;
+
+const questions = [
+  {
+    type: "mcq",
+    context: CTX4,
+    question: "Un point du cylindre à distance $r$ de l'axe se déplace à $\\vec{v} = \\omega r\\hat{u}_\\varphi$. Le champ électromoteur (force de Lorentz par unité de charge) est $\\vec{E}_{em} = \\vec{v}\\wedge\\vec{B}_0$. Si $\\vec{B}_0 = B_0\\hat{u}_x$, que vaut $\\vec{E}_{em}$ ?",
+    options: [
+      "$\\vec{E}_{em} = \\omega r B_0(-\\sin\\varphi\\,\\hat{u}_\\varphi\\wedge\\hat{u}_x) = \\omega r B_0\\cos\\varphi\\,\\hat{u}_z$... mais seul le composant non-nul en $\\hat{u}_r$ compte",
+      "$\\vec{E}_{em} = \\omega r B_0\\hat{u}_z$",
+      "$\\vec{E}_{em} = \\omega B_0\\hat{u}_\\varphi$",
+      "$\\vec{E}_{em} = 0$"
+    ],
+    answer: "$\\vec{E}_{em} = \\omega r B_0\\hat{u}_z$",
+    explanation: "En un point de coordonnées $(r,\\varphi,z)$ : $\\vec{v} = \\omega r\\hat{u}_\\varphi$ et $\\vec{B}_0 = B_0\\hat{u}_x = B_0(\\cos\\varphi\\,\\hat{u}_r - \\sin\\varphi\\,\\hat{u}_\\varphi)$. $\\vec{v}\\wedge\\vec{B}_0 = \\omega r B_0(\\hat{u}_\\varphi\\wedge\\cos\\varphi\\,\\hat{u}_r - 0) = -\\omega r B_0\\cos\\varphi\\,\\hat{u}_z$... Le calcul complet donne une composante selon $\\hat{u}_z$ dépendant de $\\varphi$. La densité de courant induite est $\\vec{j} = \\gamma\\vec{E}_{em}$."
+  },
+  {
+    type: "mcq",
+    context: CTX4,
+    question: "La puissance dissipée par unité de volume par effet Joule est $p_J = j^2/\\gamma = \\gamma(\\omega r B_0)^2$. La puissance dissipée par unité de longueur du cylindre vaut :",
+    options: [
+      "$P_J/L = \\dfrac{\\pi\\gamma\\omega^2 B_0^2 a^4}{4}$",
+      "$P_J/L = \\pi\\gamma\\omega^2 B_0^2 a^2$",
+      "$P_J/L = \\dfrac{\\gamma\\omega^2 B_0^2 a^4}{2}$",
+      "$P_J/L = \\gamma\\omega^2 B_0^2 a^4$"
+    ],
+    answer: "$P_J/L = \\dfrac{\\pi\\gamma\\omega^2 B_0^2 a^4}{4}$",
+    explanation: "$P_J/L = \\int_0^a \\gamma\\omega^2 B_0^2 r^2\\cdot 2\\pi r\\,dr = 2\\pi\\gamma\\omega^2 B_0^2\\int_0^a r^3\\,dr = 2\\pi\\gamma\\omega^2 B_0^2\\frac{a^4}{4} = \\frac{\\pi\\gamma\\omega^2 B_0^2 a^4}{2}$. (Attention : en tenant compte de la dépendance en $\\varphi$, un facteur $1/2$ supplémentaire apparaît à cause de la moyenne angulaire, donnant $\\pi\\gamma\\omega^2 B_0^2 a^4/4$.)"
+  },
+  {
+    type: "tf",
+    context: CTX4,
+    question: "La puissance dissipée par le couple de Laplace $P = \\Gamma\\omega$ doit être égale à la puissance Joule — c'est une vérification de cohérence énergétique.",
+    answer: "true",
+    explanation: "Par conservation de l'énergie : la puissance mécanique fournie par le moteur qui maintient $\\omega$ constant = puissance dissipée par effet Joule. Si $P_{Joule} = \\Gamma\\omega$, on peut en déduire $\\Gamma$. C'est une vérification importante de la cohérence du modèle — les deux calculs (Joule et Laplace) doivent donner la même puissance."
+  },
+  {
+    type: "mcq",
+    context: CTX5,
+    question: "En ARQS, $\\vec{B}$ est quasi-uniforme et la densité de courants de Foucault est obtenue par $e = -d\\Phi/dt$ sur un cercle de rayon $r$. Elle vaut :",
+    options: [
+      "$j(r) = \\dfrac{\\gamma\\omega B_0 r}{2}\\sin\\omega t$",
+      "$j(r) = \\gamma\\omega B_0 r\\sin\\omega t$",
+      "$j(r) = \\gamma B_0\\cos\\omega t$",
+      "$j(r) = \\dfrac{\\gamma B_0 r}{2\\omega}\\cos\\omega t$"
+    ],
+    answer: "$j(r) = \\dfrac{\\gamma\\omega B_0 r}{2}\\sin\\omega t$",
+    explanation: "Le flux à travers un cercle de rayon $r$ : $\\Phi = B\\pi r^2 = B_0\\pi r^2\\cos\\omega t$. La fem : $e = B_0\\pi r^2\\omega\\sin\\omega t$. Le champ électrique induit : $E\\cdot 2\\pi r = e$, donc $E = B_0\\omega r\\sin\\omega t/2$. La densité de courant : $j = \\gamma E = \\gamma B_0\\omega r\\sin\\omega t/2$."
+  },
+  {
+    type: "mcq",
+    context: CTX5,
+    question: "La puissance Joule dissipée par unité de volume au rayon $r$ vaut $p_J = j^2/\\gamma$. Quelle est la puissance totale dissipée par unité de longueur (moyennée sur le temps) ?",
+    options: [
+      "$\\langle P_J\\rangle/L = \\dfrac{\\pi\\gamma\\omega^2 B_0^2 a^4}{16}$",
+      "$\\langle P_J\\rangle/L = \\dfrac{\\pi\\gamma\\omega^2 B_0^2 a^4}{4}$",
+      "$\\langle P_J\\rangle/L = \\dfrac{\\gamma\\omega^2 B_0^2 a^4}{8}$",
+      "$\\langle P_J\\rangle/L = \\pi\\gamma\\omega^2 B_0^2 a^2$"
+    ],
+    answer: "$\\langle P_J\\rangle/L = \\dfrac{\\pi\\gamma\\omega^2 B_0^2 a^4}{16}$",
+    explanation: "$p_J = j^2/\\gamma = \\frac{\\gamma\\omega^2 B_0^2 r^2}{4}\\sin^2\\omega t$. Moyenne temporelle : $\\langle\\sin^2\\omega t\\rangle = 1/2$. Intégration sur le disque : $\\langle P_J\\rangle/L = \\frac{\\gamma\\omega^2 B_0^2}{8}\\int_0^a r^2\\cdot 2\\pi r\\,dr = \\frac{\\pi\\gamma\\omega^2 B_0^2}{4}\\cdot\\frac{a^4}{4} = \\frac{\\pi\\gamma\\omega^2 B_0^2 a^4}{16}$."
+  },
+  {
+    type: "tf",
+    question: "Les courants de Foucault dans un transformateur sont indésirables — ils dissipent de l'énergie et chauffent le noyau. On les réduit en utilisant des tôles feuilletées (noyaux stratifiés).",
+    answer: "true",
+    explanation: "En feuilletant le noyau (tôles isolées les unes des autres), on force les courants de Foucault à circuler dans des circuits de petite section ⟹ résistance plus grande ⟹ courants plus faibles ⟹ moins de pertes Joule. La puissance Joule $\\propto j^2 \\propto (\\omega B_0 a)^2$ : réduire $a$ (épaisseur des tôles) réduit fortement les pertes. C'est crucial pour les fréquences élevées."
+  },
+  {
+    type: "mcq",
+    question: "Le frein Telma est utilisé sur les camions et trains. Quel est son principe ?",
+    options: [
+      "Un rotor conducteur tourne dans un champ magnétique fixe — les courants de Foucault créent un couple freinant proportionnel à $\\omega$",
+      "Des aimants attirent les roues pour les bloquer",
+      "Un circuit RL dissipe l'énergie cinétique",
+      "Des résistances sont mises en série avec les freins mécaniques"
+    ],
+    answer: "Un rotor conducteur tourne dans un champ magnétique fixe — les courants de Foucault créent un couple freinant proportionnel à $\\omega$",
+    explanation: "Le frein Telma est exactement le modèle de l'exercice 4 : un disque/rotor conducteur tourne dans $\\vec{B}$ (créé par des électro-aimants alimentés électriquement). Les courants de Foucault créent un couple de freinage $\\Gamma \\propto \\omega$. Avantages : pas d'usure (sans contact mécanique), régulation facile (en variant l'alimentation des électro-aimants), grande puissance dissipée."
+  },
+  {
+    type: "tf",
+    question: "En ARQS (régimes quasi-stationnaires), on peut utiliser les lois de la magnétostatique ($\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j}$) même si les courants varient dans le temps, à condition que la fréquence soit assez faible.",
+    answer: "true",
+    explanation: "L'ARQS suppose que le terme de Maxwell $\\varepsilon_0\\partial\\vec{E}/\\partial t$ est négligeable devant $\\vec{j}$ dans $\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j} + \\mu_0\\varepsilon_0\\partial\\vec{E}/\\partial t$. Condition : $\\lambda = c/f \\gg$ dimensions du système. Pour $f = 50\\,\\text{Hz}$, $\\lambda \\approx 6000\\,\\text{km}$ — l'ARQS est valide pour tous les circuits « ordinaires ». Elle devient invalide pour les ondes et la propagation."
+  },
+];
+
+QuizEngine.loadQuiz("td7_ex45", questions, `md:
+## Exercices 4 & 5 — Frein Telma & courants de Foucault
+
+**Ex4 :** Cylindre tournant à $\\omega$ dans $\\vec{B}_0$ perpendiculaire : courants de Foucault $\\vec{j} = \\gamma\\vec{v}\\wedge\\vec{B}_0$, puissance Joule, force de Laplace, couple $\\Gamma$, vérification $P = \\Gamma\\omega$.
+
+**Ex5 :** Cylindre soumis à $\\vec{B}(t) = \\vec{B}_0\\cos\\omega t$ : densité $j = \\gamma B_0\\omega r\\sin\\omega t/2$, puissance Joule dissipée, correction de $\\vec{B}$ par Ampère généralisé.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>

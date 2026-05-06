@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD7 Ex6&amp;7 — Auto-induction solénoïde</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<main class="quiz-page">
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD7 · Exercices 6 &amp; 7 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent4)">Auto-induction du solénoïde</h1>
+    <p class="ch-subtitle">$L = \mu_0 n^2 V$, énergie $u_B = B^2/(2\mu_0)$, champ $\vec{E}$ induit par Faraday</p>
+  </div>
+  <div id="qz-past-attempts"></div>
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+  <div id="qz-results"></div>
+</main>
+<button id="btt" title="Haut de page">↑</button>
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+
+const CTX = `
+  Solénoïde de longueur $l$, section $S = \\pi a^2$, $N$ spires totales, $n = N/l$ spires/m,
+  parcouru par un courant $I(t)$. Champ intérieur : $\\vec{B} = \\mu_0 n I\\,\\hat{u}_z$.
+`;
+
+const questions = [
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Le flux propre à travers le solénoïde entier est $\\Phi = N\\times B\\times S$. Le coefficient d'auto-induction $L$ défini par $\\Phi = LI$ vaut :",
+    options: [
+      "$L = \\mu_0 n^2 S l = \\mu_0\\pi n^2 a^2 l$",
+      "$L = \\mu_0 n S$",
+      "$L = \\mu_0 N^2 / l$",
+      "$L = \\mu_0 n S / l$"
+    ],
+    answer: "$L = \\mu_0 n^2 S l = \\mu_0\\pi n^2 a^2 l$",
+    explanation: "$\\Phi = N\\cdot B\\cdot S = N\\cdot\\mu_0 nI\\cdot S = \\mu_0 nNI S = \\mu_0 n^2 lSI$ (car $N = nl$). Donc $L = \\mu_0 n^2 Sl = \\mu_0\\pi n^2 a^2 l$. L'inductance est proportionnelle à $n^2$, à la section et à la longueur — et indépendante de $I$ (géométrie pure)."
+  },
+  {
+    type: "mcq",
+    context: CTX,
+    question: "L'énergie magnétique stockée dans le solénoïde est $U_m = \\frac{1}{2}LI^2$. En remplaçant $L$ et $B = \\mu_0 nI$, on obtient :",
+    options: [
+      "$U_m = \\dfrac{B^2}{2\\mu_0}\\times Sl$ (densité d'énergie $\\times$ volume)",
+      "$U_m = \\dfrac{\\mu_0 B^2}{2}\\times Sl$",
+      "$U_m = \\dfrac{B^2}{\\mu_0}\\times Sl$",
+      "$U_m = \\dfrac{B}{2\\mu_0}\\times Sl$"
+    ],
+    answer: "$U_m = \\dfrac{B^2}{2\\mu_0}\\times Sl$ (densité d'énergie $\\times$ volume)",
+    explanation: "$U_m = \\frac{1}{2}LI^2 = \\frac{1}{2}\\mu_0 n^2 Sl\\cdot I^2 = \\frac{1}{2}\\mu_0 n^2 I^2\\cdot Sl = \\frac{B^2}{2\\mu_0}\\cdot Sl$. La densité volumique d'énergie magnétique est $u_m = B^2/(2\\mu_0)$ — analogue à $u_e = \\varepsilon_0 E^2/2$ pour l'énergie électrostatique."
+  },
+  {
+    type: "tf",
+    question: "La densité d'énergie magnétique $u_m = B^2/(2\\mu_0)$ est l'analogue magnétique de la densité d'énergie électrostatique $u_e = \\varepsilon_0 E^2/2$.",
+    answer: "true",
+    explanation: "Les deux formules ont la même structure : $u = \\text{constante}\\times\\text{champ}^2$. Pour l'électrostatique : $u_e = \\varepsilon_0 E^2/2 = D^2/(2\\varepsilon_0)$. Pour la magnétostatique : $u_m = B^2/(2\\mu_0) = \\mu_0 H^2/2$. L'énergie totale d'un système électromagnétique est $U = \\int(\\varepsilon_0 E^2/2 + B^2/(2\\mu_0))\\,dV$."
+  },
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Avec $I(t)$ variable, Maxwell-Faraday donne $\\vec{\\nabla}\\times\\vec{E} = -\\partial\\vec{B}/\\partial t$. À l'intérieur du solénoïde ($r < a$), le champ $\\vec{E}$ induit sur un cercle de rayon $r$ vaut :",
+    options: [
+      "$E(r) = -\\dfrac{\\mu_0 n r}{2}\\dot{I}$ selon $\\hat{u}_\\varphi$",
+      "$E(r) = -\\mu_0 n\\dot{I}$ uniforme",
+      "$E(r) = -\\dfrac{\\mu_0 n a^2}{2r}\\dot{I}$ selon $\\hat{u}_\\varphi$",
+      "$E(r) = 0$"
+    ],
+    answer: "$E(r) = -\\dfrac{\\mu_0 n r}{2}\\dot{I}$ selon $\\hat{u}_\\varphi$",
+    explanation: "Par Faraday sur un cercle de rayon $r < a$ : $\\oint\\vec{E}\\cdot d\\vec{\\ell} = E\\cdot 2\\pi r = -\\frac{d}{dt}(B\\pi r^2) = -\\mu_0 n\\dot{I}\\pi r^2$. Donc $E = -\\mu_0 n\\dot{I}r/2$. Le champ $\\vec{E}$ est azimutal, croît linéairement avec $r$ à l'intérieur — analogue au champ magnétique à l'intérieur d'un solénoïde."
+  },
+  {
+    type: "mcq",
+    context: CTX,
+    question: "À l'extérieur du solénoïde ($r > a$), le champ $\\vec{E}$ induit est :",
+    options: [
+      "$E(r) = -\\dfrac{\\mu_0 n a^2}{2r}\\dot{I}$ selon $\\hat{u}_\\varphi$",
+      "$E(r) = 0$ (champ nul hors du solénoïde)",
+      "$E(r) = -\\dfrac{\\mu_0 n r}{2}\\dot{I}$",
+      "$E(r) = -\\mu_0 n\\dot{I}a$"
+    ],
+    answer: "$E(r) = -\\dfrac{\\mu_0 n a^2}{2r}\\dot{I}$ selon $\\hat{u}_\\varphi$",
+    explanation: "Pour $r > a$ : le flux enlacé est $\\Phi = B\\pi a^2$ (constant car $B = 0$ hors du solénoïde). Donc $E\\cdot 2\\pi r = -\\mu_0 n\\dot{I}\\pi a^2$, soit $E = -\\mu_0 n a^2\\dot{I}/(2r)$. Le champ $\\vec{E}$ décroît en $1/r$ à l'extérieur — bien que $\\vec{B} = \\vec{0}$ hors du solénoïde, il existe un champ électrique induit ! C'est l'effet Aharonov-Bohm."
+  },
+  {
+    type: "tf",
+    question: "La fem d'auto-induction $e = -L\\dot{I}$ s'oppose toujours à la variation de courant (loi de Lenz) — une inductance « s'oppose au passage du courant ».",
+    answer: "true",
+    explanation: "Si $\\dot{I} > 0$ (courant croissant) : $e = -L\\dot{I} < 0$ — la fem tend à réduire le courant. Si $\\dot{I} < 0$ (courant décroissant) : $e > 0$ — la fem tend à maintenir le courant. C'est pourquoi on ne peut pas couper brusquement un courant dans une inductance — la tension peut devenir très grande ($e = -L\\dot{I}$ avec $\\dot{I}$ très négatif) et provoquer des arcs électriques."
+  },
+  {
+    type: "mcq",
+    question: "Un circuit RL (résistance $R$, inductance $L$, pile $E$) : le courant en régime établi et le temps caractéristique sont :",
+    options: [
+      "$I_{\\infty} = E/R$, $\\tau = L/R$",
+      "$I_{\\infty} = E/L$, $\\tau = R/L$",
+      "$I_{\\infty} = E\\cdot R$, $\\tau = L/R$",
+      "$I_{\\infty} = E/R$, $\\tau = R/L$"
+    ],
+    answer: "$I_{\\infty} = E/R$, $\\tau = L/R$",
+    explanation: "La loi des mailles : $E = RI + L\\dot{I}$. En régime établi $\\dot{I} = 0$ ⟹ $I_{\\infty} = E/R$ (l'inductance ne joue plus). La solution générale : $I(t) = E/R(1 - e^{-t/\\tau})$ avec $\\tau = L/R$. $\\tau$ est le temps pour atteindre $63\\%$ du régime permanent. Plus $L$ est grand, plus le transitoire est lent."
+  },
+  {
+    type: "mcq",
+    question: "L'inductance d'un solénoïde est $L = \\mu_0 n^2 V$ où $V = Sl$ est le volume. Pour augmenter $L$ par un facteur 4, on peut :",
+    options: [
+      "Doubler le nombre de spires $N$ à longueur $l$ fixe (double $n$, donc $L \\propto n^2$ quadruple)",
+      "Doubler la longueur $l$ à $n$ fixe",
+      "Doubler le rayon $a$ à $n$ fixe",
+      "Doubler le courant $I$"
+    ],
+    answer: "Doubler le nombre de spires $N$ à longueur $l$ fixe (double $n$, donc $L \\propto n^2$ quadruple)",
+    explanation: "Doubler $N$ à $l$ fixe ⟹ $n \\to 2n$ ⟹ $L \\propto n^2 \\to 4L$ ✓. Doubler $l$ à $n$ fixe ⟹ $V \\to 2V$ ⟹ $L \\to 2L$ (facteur 2 seulement). Doubler $a$ à $n$ fixe ⟹ $S \\to 4S$ ⟹ $L \\to 4L$ ✓ (même résultat mais par une autre voie). Le courant $I$ n'affecte pas $L$ — l'inductance ne dépend que de la géométrie."
+  },
+];
+
+QuizEngine.loadQuiz("td7_ex67", questions, `md:
+## Exercices 6 & 7 — Auto-induction du solénoïde
+
+**Ex6 :** Coefficient d'auto-inductance $L = \\mu_0 n^2 Sl$ par le flux, par l'énergie $U_m = LI^2/2 = B^2V/(2\\mu_0)$.
+
+**Ex7 :** Solénoïde infini avec $I(t)$ variable — champ $\\vec{B}(t)$, champ $\\vec{E}$ induit par Faraday ($E \\propto r$ dedans, $E \\propto 1/r$ dehors), fem d'auto-induction $e = -L\\dot{I}$.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>

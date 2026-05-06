@@ -74,15 +74,24 @@
     <div class="index-grid" id="grid-td5"></div>
   </div>
 
-  <!-- ── TD6–7 placeholders ────────────────────────────────  -->
+  <!-- ── TD7 ─────────────────────────────────────────────── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent2)"></span>
+      TD7 — Induction, auto-induction &amp; mutuelle induction
+    </h2>
+    <div class="index-grid" id="grid-td7"></div>
+  </div>
+
+  <!-- ── TD6 placeholder ───────────────────────────────────  -->
   <div class="section">
     <h2 class="section-title">
       <span class="dot" style="background:var(--ink-faint)"></span>
-      TD6–7 — À venir
+      TD6 — À venir
     </h2>
     <div class="callout warn">
       <span class="callout-icon">🚧</span>
-      <div>Les quizzes des TDs 6 et 7 seront ajoutés progressivement.</div>
+      <div>Le quiz du TD6 (Moment magnétique) sera ajouté prochainement.</div>
     </div>
   </div>
 
@@ -283,6 +292,48 @@ const catalogue = {
       desc:  "$\\vec{E}$ (Gauss), $\\vec{B}$ (Ampère), force de Lorentz — $F = F_0(1-v^2/c^2)$",
       color: "ic-1"
     },
+  ],
+  "td7": [
+    {
+      file:  "quizzes/td7_ex1.html",
+      id:    "td7_ex1",
+      label: "TD7 · Ex 1",
+      title: "Freinage par induction",
+      desc:  "Barre mobile — fem, Lenz, $v(t)=v_0 e^{-t/\\tau}$, vitesse limite avec pile",
+      color: "ic-3"
+    },
+    {
+      file:  "quizzes/td7_ex23.html",
+      id:    "td7_ex23",
+      label: "TD7 · Ex 2&amp;3",
+      title: "Cadre tombant &amp; $\\vec{B}$ tournant",
+      desc:  "3 phases d'entrée dans $\\vec{B}$ — flux $B_0a^2\\cos\\omega t$, fem sinusoïdale, Lenz",
+      color: "ic-3"
+    },
+    {
+      file:  "quizzes/td7_ex45.html",
+      id:    "td7_ex45",
+      label: "TD7 · Ex 4&amp;5",
+      title: "Frein Telma &amp; Foucault",
+      desc:  "Courants induits $\\vec{j}=\\gamma\\vec{v}\\wedge\\vec{B}$, puissance Joule, couple, ARQS",
+      color: "ic-3"
+    },
+    {
+      file:  "quizzes/td7_ex67.html",
+      id:    "td7_ex67",
+      label: "TD7 · Ex 6&amp;7",
+      title: "Auto-induction solénoïde",
+      desc:  "$L = \\mu_0 n^2 V$, énergie $u_m = B^2/(2\\mu_0)$, champ $\\vec{E}$ induit par Faraday",
+      color: "ic-3"
+    },
+    {
+      file:  "quizzes/td7_ex9.html",
+      id:    "td7_ex9",
+      label: "TD7 · Ex 9",
+      title: "Induction mutuelle",
+      desc:  "Solénoïdes coaxiaux — $M_{12}=M_{21}$, énergie, force, couplage $k$, transformateur",
+      color: "ic-3"
+    },
   ]
 };
 
@@ -370,6 +421,7 @@ renderGrid(catalogue.td2, 'grid-td2');
 renderGrid(catalogue.td3, 'grid-td3');
 renderGrid(catalogue.td4, 'grid-td4');
 renderGrid(catalogue.td5, 'grid-td5');
+renderGrid(catalogue.td7, 'grid-td7');
 </script>
 </body>
 </html>
