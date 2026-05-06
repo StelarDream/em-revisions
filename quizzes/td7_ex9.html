@@ -65,21 +65,21 @@ const questions = [
       "$M_{12} = \\mu_0 N_1 N_2 S_2$",
       "$M_{12} = \\mu_0 n_1 n_2 S_2 l$"
     ],
-    answer: "$M_{12} = \\mu_0 n_1 N_2 S_2 l$",
-    explanation: "Le flux de $\\vec{B}_1 = \\mu_0 n_1 I_1\\hat{u}_z$ à travers une spire de 2 : $\\Phi_{1\\to spire} = B_1 S_2$ (car $S_2 < S_1$, tout le flux de 1 passe dans 2). Le flux total à travers les $N_2$ spires sur la longueur commune $l$ : $\\Phi_{12} = N_2\\cdot B_1 S_2 = \\mu_0 n_1 N_2 S_2 l\\cdot I_1$. Donc $M_{12} = \\mu_0 n_1 N_2 S_2 l$."
+    answer: "$M_{12} = \\mu_0 n_1 n_2 S_2 l$",
+    explanation: "Le flux de $\\vec{B}_1 = \\mu_0 n_1 I_1\\hat{u}_z$ à travers une spire de 2 : $\\Phi_{1\\to spire} = B_1 S_2$ (car $S_2 < S_1$, tout le flux de 1 passe dans 2). Le nombre de spires de 2 dans la zone de chevauchement est $n_2 l$ (avec $n_2 = N_2/L_2$). Flux total : $\\Phi_{12} = n_2 l\\cdot B_1 S_2 = \\mu_0 n_1 n_2 S_2 l\\cdot I_1$. Donc $M_{12} = \\mu_0 n_1 n_2 S_2 l$."
   },
   {
     type: "mcq",
     context: CTX,
     question: "On calcule maintenant $M_{21}$ (flux de 2 à travers 1). Le champ de 2 ne remplit que $S_2$ à l'intérieur de 1. Que vaut $M_{21}$ ?",
     options: [
-      "$M_{21} = \\mu_0 n_2 N_1' S_2 l$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
+      "$M_{21} = \\mu_0 n_2 N_1' S_2$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
       "$M_{21} = \\mu_0 n_2 N_1 S_1 L_1$",
       "$M_{21} = \\mu_0 n_1 N_2 S_1 l$",
       "$M_{21} = 0$"
     ],
-    answer: "$M_{21} = \\mu_0 n_2 N_1' S_2 l$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
-    explanation: "Le champ $B_2 = \\mu_0 n_2 I_2$ n'existe qu'à l'intérieur du solénoïde 2 (section $S_2$). Le flux de 2 à travers chaque spire de 1 (section $S_1 > S_2$) : $\\Phi_{2\\to spire_1} = B_2 S_2$. Multiplié par le nombre de spires de 1 dans la zone commune ($n_1 l$) : $\\Phi_{21} = \\mu_0 n_2 n_1 l S_2 l \\cdot I_2$, d'où $M_{21} = \\mu_0 n_1 n_2 S_2 l^2/(L_1/N_1)$... ce qui se simplifie en $\\mu_0 n_1 n_2 S_2 l^2/l = \\mu_0 n_1 n_2 S_2 l = M_{12}$ ✓."
+    answer: "$M_{21} = \\mu_0 n_2 N_1' S_2$ où $N_1' = n_1 l$ est le nombre de spires de 1 sur la longueur $l$",
+    explanation: "Le champ $B_2 = \\mu_0 n_2 I_2$ n'existe qu'à l'intérieur du solénoïde 2 (section $S_2$). Le flux de 2 à travers chaque spire de 1 (section $S_1 > S_2$) : $\\Phi_{2\\to spire_1} = B_2 S_2$. Nombre de spires de 1 dans la zone commune : $N_1' = n_1 l$. Flux total : $\\Phi_{21} = N_1'\\cdot B_2 S_2 = \\mu_0 n_2 n_1 S_2 l\\cdot I_2$. Donc $M_{21} = \\mu_0 n_1 n_2 S_2 l = M_{12}$ ✓."
   },
   {
     type: "tf",
