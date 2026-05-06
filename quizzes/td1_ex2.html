@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz · TD1 Ex2 — Champs & lignes de champ</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="quiz.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/quiz.css">
 </head>
 <body>
 
@@ -50,12 +50,12 @@
 
 <button id="btt" title="Haut de page">↑</button>
 
-<script src="nav.js"></script>
+<script src="/scripts/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="main.js"></script>
-<script src="quiz.js"></script>
-<script>
+<script src="/scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/scripts/quiz.js';
 // ═══════════════════════════════════════════════════════════
 //  TD1 — Exercice 2 : Champs et lignes de champ
 //  Trois champs cartésiens :
@@ -73,27 +73,23 @@ const CTX_ABC = `
 
 const questions = [
 
-  // ── Q1 · Fill ─────────────────────────────────────────────
+  // ── Q1 · Numeric ──────────────────────────────────────────
   {
-    type: "fill",
+    type: "numeric",
     context: CTX_ABC,
     question: "Calculez $\\vec{\\nabla}\\cdot\\vec{A}$.",
-    symbols: [],
-    hint: "Entrez un nombre entier",
-    retryHint: "md:$\\vec{\\nabla}\\cdot\\vec{A} = \\partial_x A_x + \\partial_y A_y + \\partial_z A_z$. Ici $A_x = -y$, $A_y = x$.",
-    answer: ["0"],
+    hint: "md:$\\vec{\\nabla}\\cdot\\vec{A} = \\partial_x A_x + \\partial_y A_y + \\partial_z A_z$. Ici $A_x = -y$, $A_y = x$.",
+    answer: 0,
     explanation: "$\\vec{\\nabla}\\cdot\\vec{A} = \\dfrac{\\partial(-y)}{\\partial x} + \\dfrac{\\partial x}{\\partial y} + 0 = 0 + 0 = 0$. Le champ $\\vec{A}$ est solénoïdal (à flux conservatif)."
   },
 
-  // ── Q2 · Fill ─────────────────────────────────────────────
+  // ── Q2 · Numeric ──────────────────────────────────────────
   {
-    type: "fill",
+    type: "numeric",
     context: CTX_ABC,
     question: "Calculez la composante $z$ du rotationnel de $\\vec{A}$ : $(\\vec{\\nabla}\\times\\vec{A})_z$.",
-    symbols: [],
-    hint: "Entrez un nombre (ex: 2)",
-    retryHint: "md:$(\\vec{\\nabla}\\times\\vec{A})_z = \\partial_x A_y - \\partial_y A_x$. Ici $A_y = x$ et $A_x = -y$.",
-    answer: ["2"],
+    hint: "md:$(\\vec{\\nabla}\\times\\vec{A})_z = \\partial_x A_y - \\partial_y A_x$. Ici $A_y = x$ et $A_x = -y$.",
+    answer: 2,
     explanation: "$(\\vec{\\nabla}\\times\\vec{A})_z = \\dfrac{\\partial A_y}{\\partial x} - \\dfrac{\\partial A_x}{\\partial y} = \\dfrac{\\partial x}{\\partial x} - \\dfrac{\\partial(-y)}{\\partial y} = 1-(-1) = 2$. Le rotationnel de $\\vec{A}$ est $2\\,\\hat{u}_z$ — constant, uniforme."
   },
 
@@ -190,7 +186,7 @@ $$\\vec{A}(\\vec{r}) = -y\\,\\hat{u}_x + x\\,\\hat{u}_y \\qquad \\vec{B}(\\vec{r
 **d)** En déduire et représenter les lignes de champ de chacun des trois vecteurs.
 
 **e)** Retrouver grâce aux théorèmes de Green-Ostrogradski et Stokes les résultats de la question **b)**.
-`);
+`, { setsFile: '/config/token_sets.json', normFile: '/config/norm_rules.json' });
 </script>
 </body>
 </html>

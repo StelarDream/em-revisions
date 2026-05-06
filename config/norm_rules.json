@@ -1,0 +1,52 @@
+{
+  "notes": [
+    "Keys are replacement strings. '$1' means first capture group (JS replace syntax).",
+    "regex: patterns for new RegExp(). Rule order = application order. Use double-escaping for backslashes.",
+    "literals: exact strings. Longest match wins at each position. Single-level JSON backslash escaping.",
+    "Duplicate keys across merged specs have their lists concatenated."
+  ],
+
+  "$1": {
+    "regex": [
+      "vec\\{([^}]+)\\}",
+      "\\\\hat\\{([^}]+)\\}"
+    ]
+  },
+
+  "": {
+    "regex": [
+      "\\s+",
+      "hat_",
+      "\\\\vec",
+      "\\\\hat",
+      "[{}\\\\]",
+      "_"
+    ]
+  },
+
+  "*": {
+    "literals": ["**", "×", "·"],
+    "regex": ["\\\\times", "\\\\cdot", "\\\\bullet"]
+  },
+
+  "/": {
+    "literals": ["÷"],
+    "regex": ["\\\\div"]
+  },
+
+  "^2": { "literals": ["²"] },
+  "^3": { "literals": ["³"] },
+  "^n": { "literals": ["ⁿ"] },
+
+  "eps": {
+    "literals": ["\\varepsilon", "\\epsilon"]
+  },
+
+  "mu": {
+    "literals": ["\\mu"]
+  },
+
+  "pi": {
+    "literals": ["\\pi"]
+  }
+}

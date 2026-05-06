@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz · TD1 Ex1 — Champs de position</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="quiz.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/quiz.css">
 </head>
 
 <body>
@@ -47,8 +47,7 @@
         <div id="qz-feedback" class="qz-feedback"></div>
         <div class="qz-actions" id="qz-actions-row">
           <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
-            →</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
         </div>
       </div>
     </div>
@@ -60,12 +59,12 @@
 
   <button id="btt" title="Haut de page">↑</button>
 
-  <script src="nav.js"></script>
+  <script src="/scripts/nav.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-  <script src="main.js"></script>
-  <script src="quiz.js"></script>
-  <script>
+  <script src="/scripts/main.js"></script>
+  <script type="module">
+  import { QuizEngine } from '/scripts/quiz.js';
     // ═══════════════════════════════════════════════════════════
     //  TD1 — Exercice 1 : Champs de position
     //  Concepts : $\vec{R}$, $R$, divergence, gradient
@@ -131,10 +130,13 @@ C'est bien **vrai** pour $R \\neq 0$. À retenir : $\\vec{\\nabla}\\cdot\\!(R^n\
       {
         type: "fill",
         question: "Complétez : $\\vec{\\nabla}\\!\\left(\\dfrac{1}{R}\\right) = $ ___",
-        symbols: ['-', 'u_r', '/', 'R', '^2', '^3'],
-        hint: "Forme attendue : ex. `A/B`",
-        retryHint: "md:Pense à $\\vec{\\nabla}f(R) = f'(R)\\,\\hat{u}_R$. Ici $f(R) = 1/R$, donc $f'(R) = ?$",
-        answer: ["-R/R^3", "-u_r/R^2", "-(1/R^3)R", "-(1/R^2)u_r"],
+        symbols: ['-', 'u_r', '/', 'R', '^'],
+        recognised: {
+          sets: ["numbers", "math_symbols"],
+          values: ["R", "u_r"]
+        },
+        hint: "md:Pense à $\\vec{\\nabla}f(R) = f'(R)\\,\\hat{u}_R$. Ici $f(R) = 1/R$, donc $f'(R) = ?$",
+        answer: ["-R/R^3", "-u_r/R^2", "-(1/R^3)*R", "-(1/R^2)*u_r"],
         explanation: "$\\vec{\\nabla}\\!\\left(\\dfrac{1}{R}\\right) = -\\dfrac{\\vec{R}}{R^3} = -\\dfrac{\\hat{u}_R}{R^2}$. Ce résultat est essentiel : il montre que le potentiel coulombien $V = q/(4\\pi\\varepsilon_0 R)$ donne bien $\\vec{E} = -\\vec{\\nabla}V = q\\vec{R}/(4\\pi\\varepsilon_0 R^3)$."
       },
 
@@ -183,7 +185,7 @@ On considère le champ vectoriel $\\vec{R}$ qui est en un point $M$ le vecteur $
 - $\\text{div}\\!\\left(\\dfrac{\\vec{R}}{R^2}\\right)$
 - $\\text{div}\\!\\left(\\dfrac{\\vec{R}}{R^3}\\right)$
 - $\\vec{\\nabla}\\!\\left(\\dfrac{1}{R^2}\\right)$
-`);
+`, { setsFile: '/config/token_sets.json', normFile: '/config/norm_rules.json' });
   </script>
 </body>
 

@@ -2,7 +2,6 @@
 
 /* ── KaTeX auto-render ── */
 document.addEventListener("DOMContentLoaded", function () {
-  // Render all math
   renderMathInElement(document.body, {
     delimiters: [
       { left: "$$",  right: "$$",  display: true  },
@@ -12,12 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     throwOnError: false,
     strict: false
-  });
-
-  // ── Active nav link ──
-  const current = location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".topbar-nav a").forEach(a => {
-    if (a.getAttribute("href") === current) a.classList.add("active");
   });
 
   // ── Back-to-top button ──

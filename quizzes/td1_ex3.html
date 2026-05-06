@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz · TD1 Ex3 — Identités vectorielles</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="quiz.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/quiz.css">
 </head>
 <body>
 
@@ -50,12 +50,12 @@
 
 <button id="btt" title="Haut de page">↑</button>
 
-<script src="nav.js"></script>
+<script src="/scripts/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="main.js"></script>
-<script src="quiz.js"></script>
-<script>
+<script src="/scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/scripts/quiz.js';
 // ═══════════════════════════════════════════════════════════
 //  TD1 — Exercice 3 : Identités vectorielles
 //  Formules rot(grad), div(rot), double rot, Leibniz
@@ -148,8 +148,11 @@ const questions = [
     type: "fill",
     question: "Complétez l'identité : $\\vec{\\nabla}\\cdot(\\vec{a}\\times\\vec{b}) = \\vec{b}\\cdot(\\vec{\\nabla}\\times\\vec{a}) -$ ___",
     symbols: ['a', 'b', '.', 'rot(b)', 'rot(a)', '*'],
-    hint: "Forme attendue : ex. `a.rot(b)` ou `a*(rot b)`",
-    retryHint: "md:Pense à la règle de Leibniz pour le produit vectoriel. Le terme manquant est symétrique au premier : si le premier contient `rot(a)` et `b`, l'autre contient...",
+    recognised: {
+      sets: [],
+      values: ["a", "b", "rot(a)", "rot(b)"]
+    },
+    hint: "md:Pense à la règle de Leibniz pour le produit vectoriel. Le terme manquant est symétrique au premier : si le premier contient `rot(a)` et `b`, l'autre contient...",
     answer: ["a·rot(b)", "a.rot(b)", "a*(rotb)", "a.rotb", "a·(rot b)"],
     explanation: "$\\vec{\\nabla}\\cdot(\\vec{a}\\times\\vec{b}) = \\vec{b}\\cdot(\\vec{\\nabla}\\times\\vec{a}) - \\vec{a}\\cdot(\\vec{\\nabla}\\times\\vec{b})$. Cette identité est analogue à la formule du triple produit mixte et est utile pour calculer la divergence du vecteur de Poynting $\\vec{S} = \\frac{1}{\\mu_0}\\vec{E}\\times\\vec{B}$."
   },
@@ -182,7 +185,7 @@ Démontrez les relations suivantes (on pourra utiliser le système de coordonné
 5. $\\vec{\\nabla}\\cdot(f\\vec{a}) = f\\,\\vec{\\nabla}\\cdot\\vec{a} + \\vec{a}\\cdot\\vec{\\nabla}f$
 6. $\\vec{\\nabla}\\cdot(\\vec{a}\\times\\vec{b}) = \\vec{b}\\cdot(\\vec{\\nabla}\\times\\vec{a}) - \\vec{a}\\cdot(\\vec{\\nabla}\\times\\vec{b})$
 7. $\\vec{\\nabla}\\times(f\\vec{a}) = \\vec{\\nabla}f\\times\\vec{a} + f\\,\\vec{\\nabla}\\times\\vec{a}$
-`);
+`, { setsFile: '/config/token_sets.json', normFile: '/config/norm_rules.json' });
 </script>
 </body>
 </html>

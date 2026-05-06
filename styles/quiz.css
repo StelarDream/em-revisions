@@ -94,6 +94,33 @@
 .qz-type-tf         { background: var(--accent3-soft); color: var(--accent3); }
 .qz-type-fill       { background: var(--accent5-soft); color: var(--accent5); }
 .qz-type-conceptual { background: var(--accent4-soft); color: var(--accent4); }
+.qz-type-numeric    { background: var(--accent-soft);  color: var(--accent); }
+
+/* ─── Hint button & content ──────────────────────────────── */
+#qz-hint-area {
+  margin-top: .6rem;
+  margin-bottom: .2rem;
+}
+.qz-btn-hint {
+  background: none;
+  border: 1px dashed var(--ink-muted);
+  color: var(--ink-muted);
+  font-size: .8rem;
+  padding: .28rem .7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.qz-btn-hint:hover { border-color: var(--accent); color: var(--accent); }
+.qz-hint-content {
+  margin-top: .5rem;
+  padding: .55rem .9rem;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  font-size: .88rem;
+  line-height: 1.55;
+}
 
 /* ─── Question text ──────────────────────────────────────── */
 #qz-qtext {
@@ -136,7 +163,9 @@
   user-select: none;
   background: var(--surface);
 }
-.qz-option:hover {
+.qz-option:hover,
+.qz-option:focus {
+  outline: none;
   border-color: var(--accent2);
   background: var(--accent2-soft);
   transform: translateX(2px);
@@ -350,9 +379,31 @@
 /* ─── Action buttons ─────────────────────────────────────── */
 .qz-actions {
   display: flex;
+  align-items: center;
   gap: .75rem;
   margin-top: 1.2rem;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+/* Points earned — shown bottom-left of actions row after answering */
+.qz-earned-pts {
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--accent3);
+  padding: .2rem .55rem;
+  background: var(--accent3-soft);
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.qz-earned-pts.pts-amazing {
+  color: #7a5e00;
+  background: #fff3b0;
+}
+.qz-earned-pts.pts-low {
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .qz-btn {
@@ -411,9 +462,26 @@
   font-size: .88rem;
   line-height: 1.5;
 }
+/* Multi-answer MCQ */
+.qz-multi-hint {
+  font-size: .78rem;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  margin-top: .45rem;
+}
+.qz-multi .qz-opt-key {
+  border-radius: 3px; /* square vs rounded for radio-like */
+}
+.qz-multi .qz-option.selected .qz-opt-key {
+  background: var(--accent2);
+  color: #fff;
+}
+
 .qz-review-icon { font-size: .9rem; flex-shrink: 0; margin-top: .1rem; }
 .qz-review-item.ok .qz-review-icon { color: var(--accent3); }
 .qz-review-item.ko .qz-review-icon { color: var(--accent);  }
+.qz-review-q     { flex: 1; }
+.qz-review-pts   { font-family: var(--font-mono); font-size: .75rem; color: var(--ink-muted); flex-shrink: 0; align-self: center; }
 
 .qz-result-actions {
   display: flex; gap: .75rem; justify-content: center;
@@ -503,6 +571,78 @@ details[open] .qz-exercise-summary {
 .qz-exercise-body .qz-md-ul,
 .qz-exercise-body .qz-md-ol {
   margin-left: 1.5rem;
+}
+
+/* ─── Global progress card (quizzes index) ──────────────── */
+.qz-global {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.qz-global-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: .75rem;
+}
+
+.qz-global-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+.qz-global-fraction {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--ink-faint);
+}
+
+.qz-global-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.qz-global-fill {
+  height: 100%;
+  transition: width .5s ease;
+}
+.qz-global-fill-done  { background: var(--accent3); }
+.qz-global-fill-tried { background: var(--accent2); opacity: .6; }
+
+.qz-global-stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.qz-global-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .15rem;
+}
+
+.qz-global-num {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.qz-global-lbl {
+  font-size: .68rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  white-space: nowrap;
 }
 
 /* ─── Print: hide collapsible toggle chrome ──────────────── */

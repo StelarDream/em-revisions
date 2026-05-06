@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizzes — EM L2</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/print_style.css">
+  <link rel="stylesheet" href="/styles/quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="page">
+
+  <div class="ch-header">
+    <p class="ch-label">Entraînement · EM L2</p>
+    <h1 class="ch-title">🎯 Quizzes</h1>
+    <p class="ch-subtitle">Un fichier par exercice de TD — scores sauvegardés localement</p>
+  </div>
+
+  <div class="callout tip">
+    <span class="callout-icon">💾</span>
+    <div>Vos scores sont sauvegardés dans le navigateur (localStorage). Ils persistent entre les sessions, sur cette machine.</div>
+  </div>
+
+  <div id="global-progress"></div>
+
+  <!-- ── TD1 ─────────────────────────────────────────────── -->
+  <div class="section" style="margin-top:2rem">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      TD1 — Rappels de mathématiques
+    </h2>
+    <div class="index-grid" id="grid-td1"></div>
+  </div>
+
+  <!-- ── TD2–7 placeholders ────────────────────────────────  -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--ink-faint)"></span>
+      TD2–7 — À venir
+    </h2>
+    <div class="callout warn">
+      <span class="callout-icon">🚧</span>
+      <div>Les quizzes des TDs 2 à 7 seront ajoutés progressivement.</div>
+    </div>
+  </div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="/scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="/scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/scripts/quiz.js';
+
+const catalogue = {
+  "td1": [
+    {
+      file:  "/quizzes/td1_ex1.html",
+      id:    "td1_ex1",
+      label: "TD1 · Ex 1",
+      title: "Champs de position",
+      desc:  "Divergence de $\\vec{R}$, gradient de $R$, identités clés sur $R^n$",
+      color: "ic-1"
+    },
+    {
+      file:  "/quizzes/td1_ex2.html",
+      id:    "td1_ex2",
+      label: "TD1 · Ex 2",
+      title: "Champs & lignes de champ",
+      desc:  "Div/rot des champs $\\vec{A}$, $\\vec{B}$, $\\vec{C}$ — identifier solénoïdal vs irrotationnel",
+      color: "ic-1"
+    },
+    {
+      file:  "/quizzes/td1_ex3.html",
+      id:    "td1_ex3",
+      label: "TD1 · Ex 3",
+      title: "Identités vectorielles",
+      desc:  "$\\vec{\\nabla}\\times(\\vec{\\nabla}f)=\\vec{0}$, double rot, formules de Leibniz",
+      color: "ic-1"
+    },
+  ]
+};
+
+function renderGrid(entries, gridId) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.innerHTML = entries.map(e => {
+    const attempts   = QuizEngine.Storage.getAttempts(e.id);
+    const last       = attempts.length > 0 ? attempts[attempts.length - 1] : null;
+    const pts        = last ? (last.totalPoints ?? last.score) : null;
+    const ratio      = last ? pts / last.total : null;
+    const badgeCls   = last
+      ? (ratio >= 0.75 ? 'badge-green' : ratio >= 0.5 ? 'badge-orange' : 'badge-red')
+      : 'badge-blue';
+    const badgeTxt   = last
+      ? (Number.isInteger(pts) && pts === last.score
+          ? `${last.score}/${last.total}`
+          : `${pts.toFixed(1)} pts`)
+      : 'Nouveau';
+    return `
+      <a href="${e.file}" class="index-card ${e.color}">
+        <span class="num">${e.label} &nbsp;<span class="badge ${badgeCls}">${badgeTxt}</span></span>
+        <span class="title">${e.title}</span>
+        <span class="desc">${e.desc}</span>
+      </a>`;
+  }).join('');
+  renderMathInElement(grid, {
+    delimiters: [{ left:"$", right:"$", display:false }, { left:"$$", right:"$$", display:true }],
+    throwOnError: false
+  });
+}
+
+function renderGlobalProgress(catalogue) {
+  const all   = Object.values(catalogue).flat();
+  const total = all.length;
+  let attempted = 0, completed = 0, totalScore = 0, totalPossible = 0;
+
+  for (const e of all) {
+    const last = (() => {
+      const a = QuizEngine.Storage.getAttempts(e.id);
+      return a.length > 0 ? a[a.length - 1] : null;
+    })();
+    if (last) {
+      const pts = last.totalPoints ?? last.score;
+      attempted++;
+      totalScore    += pts;
+      totalPossible += last.total;
+      if (pts / last.total >= 0.75) completed++;
+    }
+  }
+
+  const pctDone  = total ? (completed / total * 100).toFixed(1) : 0;
+  const pctTried = total ? ((attempted - completed) / total * 100).toFixed(1) : 0;
+
+  document.getElementById('global-progress').innerHTML = `
+    <div class="qz-global">
+      <div class="qz-global-header">
+        <span class="qz-global-title">Progression globale</span>
+        <span class="qz-global-fraction">${attempted} / ${total} tentés</span>
+      </div>
+      <div class="qz-global-track">
+        <div class="qz-global-fill qz-global-fill-done"  style="width:${pctDone}%"></div>
+        <div class="qz-global-fill qz-global-fill-tried" style="width:${pctTried}%"></div>
+      </div>
+      <div class="qz-global-stats">
+        <div class="qz-global-stat">
+          <span class="qz-global-num">${attempted} / ${total}</span>
+          <span class="qz-global-lbl">Tentés</span>
+        </div>
+        <div class="qz-global-stat">
+          <span class="qz-global-num">${totalPossible > 0 ? `${totalScore.toFixed(1)} / ${totalPossible} pts` : '—'}</span>
+          <span class="qz-global-lbl">Points</span>
+        </div>
+        <div class="qz-global-stat">
+          <span class="qz-global-num">${completed} / ${total}</span>
+          <span class="qz-global-lbl">Réussis ≥ 75 %</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+renderGlobalProgress(catalogue);
+renderGrid(catalogue.td1, 'grid-td1');
+</script>
+</body>
+</html>
