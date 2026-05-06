@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD1 Ex3 — Identités vectorielles</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="quiz-page">
+
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD1 · Exercice 3 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent4)">Identités vectorielles</h1>
+    <p class="ch-subtitle">$\vec{\nabla}\times(\vec{\nabla}f)$, $\vec{\nabla}\cdot(\vec{\nabla}\times\vec{A})$, formules de Leibniz, double rotationnel</p>
+  </div>
+
+  <div id="qz-past-attempts"></div>
+
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="qz-results"></div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="main.js"></script>
+<script src="quiz.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════
+//  TD1 — Exercice 3 : Identités vectorielles
+//  Formules rot(grad), div(rot), double rot, Leibniz
+// ═══════════════════════════════════════════════════════════
+
+const questions = [
+
+  // ── Q1 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "$\\vec{\\nabla}\\times(\\vec{\\nabla}f) = \\vec{0}$ pour tout champ scalaire $f$ suffisamment régulier.",
+    answer: "true",
+    explanation: "C'est une identité fondamentale : le rotationnel d'un gradient est toujours nul. Conséquence directe en EM : $\\vec{E}$ électrostatique dérive d'un potentiel $V$ ($\\vec{E} = -\\vec{\\nabla}V$), donc $\\vec{\\nabla}\\times\\vec{E} = 0$. C'est l'équation de Maxwell-Faraday en statique."
+  },
+
+  // ── Q2 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "$\\vec{\\nabla}\\cdot(\\vec{\\nabla}\\times\\vec{A}) = 0$ pour tout champ vectoriel $\\vec{A}$ régulier.",
+    answer: "true",
+    explanation: "La divergence d'un rotationnel est toujours nulle. En magnétostatique : $\\vec{B} = \\vec{\\nabla}\\times\\vec{A}$ implique immédiatement $\\vec{\\nabla}\\cdot\\vec{B} = 0$ (pas de monopôle magnétique). C'est l'équation de Maxwell-Thomson."
+  },
+
+  // ── Q3 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Quelle est la bonne formule pour $\\vec{\\nabla}\\times(\\vec{\\nabla}\\times\\vec{A})$ ?",
+    options: [
+      "$\\Delta\\vec{A}$",
+      "$\\vec{\\nabla}(\\vec{\\nabla}\\cdot\\vec{A}) - \\Delta\\vec{A}$",
+      "$\\vec{\\nabla}(\\vec{\\nabla}\\cdot\\vec{A}) + \\Delta\\vec{A}$",
+      "$-\\Delta\\vec{A}$"
+    ],
+    answer: "$\\vec{\\nabla}(\\vec{\\nabla}\\cdot\\vec{A}) - \\Delta\\vec{A}$",
+    explanation: "C'est l'identité du double rotationnel : $\\vec{\\nabla}\\times(\\vec{\\nabla}\\times\\vec{A}) = \\vec{\\nabla}(\\vec{\\nabla}\\cdot\\vec{A}) - \\Delta\\vec{A}$. En utilisant la jauge de Coulomb ($\\vec{\\nabla}\\cdot\\vec{A}=0$), elle se simplifie en $-\\Delta\\vec{A} = \\mu_0\\vec{j}$ — l'équation de Poisson vectorielle pour $\\vec{A}$."
+  },
+
+  // ── Q4 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Laquelle de ces expressions est la formule de Leibniz pour la divergence de $f\\vec{A}$ ?",
+    options: [
+      "$f\\,(\\vec{\\nabla}\\cdot\\vec{A}) + \\vec{A}\\cdot(\\vec{\\nabla}f)$",
+      "$f\\,(\\vec{\\nabla}\\times\\vec{A}) + \\vec{\\nabla}f\\times\\vec{A}$",
+      "$f\\,(\\vec{\\nabla}\\cdot\\vec{A}) - \\vec{A}\\cdot(\\vec{\\nabla}f)$",
+      "$\\vec{A}\\,(\\vec{\\nabla}\\cdot f)$"
+    ],
+    answer: "$f\\,(\\vec{\\nabla}\\cdot\\vec{A}) + \\vec{A}\\cdot(\\vec{\\nabla}f)$",
+    explanation: "Règle de Leibniz pour la divergence : $\\vec{\\nabla}\\cdot(f\\vec{A}) = f\\,\\vec{\\nabla}\\cdot\\vec{A} + \\vec{A}\\cdot\\vec{\\nabla}f$. Analogue au produit $(fg)' = f'g + fg'$ en 1D. Très utile pour intégrer par parties dans les calculs d'énergie EM."
+  },
+
+  // ── Q5 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Quelle est la formule de Leibniz pour le rotationnel de $f\\vec{A}$ ?",
+    options: [
+      "$f\\,(\\vec{\\nabla}\\times\\vec{A}) - \\vec{\\nabla}f\\times\\vec{A}$",
+      "$f\\,(\\vec{\\nabla}\\times\\vec{A}) + \\vec{\\nabla}f\\times\\vec{A}$",
+      "$f\\,(\\vec{\\nabla}\\times\\vec{A}) + \\vec{A}\\times\\vec{\\nabla}f$",
+      "$\\vec{\\nabla}f\\times\\vec{A}$"
+    ],
+    answer: "$f\\,(\\vec{\\nabla}\\times\\vec{A}) + \\vec{\\nabla}f\\times\\vec{A}$",
+    explanation: "$\\vec{\\nabla}\\times(f\\vec{A}) = f\\,(\\vec{\\nabla}\\times\\vec{A}) + (\\vec{\\nabla}f)\\times\\vec{A}$. Attention à l'ordre dans le produit vectoriel : $(\\vec{\\nabla}f)\\times\\vec{A} = -\\vec{A}\\times(\\vec{\\nabla}f)$."
+  },
+
+  // ── Q6 · Conceptual ──────────────────────────────────────
+  {
+    type: "conceptual",
+    question: "Un champ $\\vec{E}$ vérifie $\\vec{\\nabla}\\times\\vec{E} = \\vec{0}$ dans tout l'espace simplement connexe. Que peut-on en déduire ?",
+    options: [
+      "Il existe un scalaire $V$ tel que $\\vec{E} = -\\vec{\\nabla}V$",
+      "Il existe un vecteur $\\vec{A}$ tel que $\\vec{E} = \\vec{\\nabla}\\times\\vec{A}$",
+      "$\\vec{\\nabla}\\cdot\\vec{E} = 0$ aussi",
+      "$\\vec{E}$ est nécessairement nul"
+    ],
+    answer: "Il existe un scalaire $V$ tel que $\\vec{E} = -\\vec{\\nabla}V$",
+    explanation: "Si $\\vec{\\nabla}\\times\\vec{E} = \\vec{0}$ dans un domaine simplement connexe, alors $\\vec{E}$ est un gradient : $\\vec{E} = -\\vec{\\nabla}V$. La réciproque est aussi vraie : $\\vec{\\nabla}\\times(\\vec{\\nabla}V) = \\vec{0}$ toujours. Ceci est le théorème de Poincaré."
+  },
+
+  // ── Q7 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "Le Laplacien d'un champ scalaire peut s'écrire $\\Delta f = \\vec{\\nabla}\\cdot(\\vec{\\nabla}f)$.",
+    answer: "true",
+    explanation: "$\\Delta f = \\text{div}(\\text{grad}\\, f) = \\vec{\\nabla}\\cdot(\\vec{\\nabla}f)$. C'est la définition. En cartésien : $\\Delta f = \\partial^2 f/\\partial x^2 + \\partial^2 f/\\partial y^2 + \\partial^2 f/\\partial z^2$. En statique, l'équation de Poisson s'écrit $\\Delta V = -\\rho/\\varepsilon_0$."
+  },
+
+  // ── Q8 · Fill ─────────────────────────────────────────────
+  {
+    type: "fill",
+    question: "Complétez l'identité : $\\vec{\\nabla}\\cdot(\\vec{a}\\times\\vec{b}) = \\vec{b}\\cdot(\\vec{\\nabla}\\times\\vec{a}) -$ ___",
+    symbols: ['a', 'b', '.', 'rot(b)', 'rot(a)', '*'],
+    hint: "Forme attendue : ex. `a.rot(b)` ou `a*(rot b)`",
+    retryHint: "md:Pense à la règle de Leibniz pour le produit vectoriel. Le terme manquant est symétrique au premier : si le premier contient `rot(a)` et `b`, l'autre contient...",
+    answer: ["a·rot(b)", "a.rot(b)", "a*(rotb)", "a.rotb", "a·(rot b)"],
+    explanation: "$\\vec{\\nabla}\\cdot(\\vec{a}\\times\\vec{b}) = \\vec{b}\\cdot(\\vec{\\nabla}\\times\\vec{a}) - \\vec{a}\\cdot(\\vec{\\nabla}\\times\\vec{b})$. Cette identité est analogue à la formule du triple produit mixte et est utile pour calculer la divergence du vecteur de Poynting $\\vec{S} = \\frac{1}{\\mu_0}\\vec{E}\\times\\vec{B}$."
+  },
+
+  // ── Q9 · Conceptual ──────────────────────────────────────
+  {
+    type: "conceptual",
+    question: "Quelle propriété fondamentale des champs électrostatiques découle directement de l'identité $\\vec{\\nabla}\\times(\\vec{\\nabla}f) = \\vec{0}$ ?",
+    options: [
+      "Le champ $\\vec{E}$ est à circulation conservative : $\\oint \\vec{E}\\cdot d\\vec{\\ell} = 0$",
+      "Le flux de $\\vec{E}$ est nul sur toute surface fermée",
+      "Le champ $\\vec{E}$ est uniforme",
+      "La charge totale est conservée"
+    ],
+    answer: "Le champ $\\vec{E}$ est à circulation conservative : $\\oint \\vec{E}\\cdot d\\vec{\\ell} = 0$",
+    explanation: "Puisque $\\vec{E} = -\\vec{\\nabla}V$, on a $\\vec{\\nabla}\\times\\vec{E} = \\vec{0}$. Par le théorème de Stokes, $\\oint_C \\vec{E}\\cdot d\\vec{\\ell} = \\iint_S (\\vec{\\nabla}\\times\\vec{E})\\cdot d\\vec{S} = 0$. La circulation de $\\vec{E}$ est nulle sur tout contour fermé — c'est la conservation de l'énergie en électrostatique."
+  },
+
+];
+
+QuizEngine.loadQuiz("td1_ex3", questions, `md:
+## Exercice 3 — Relations de l'analyse vectorielle
+
+Démontrez les relations suivantes (on pourra utiliser le système de coordonnées cartésien) :
+
+1. $\\vec{\\nabla}\\times(\\vec{\\nabla}f) = \\vec{0}$. En déduire une propriété importante des champs électrostatiques.
+2. $\\vec{\\nabla}\\cdot(\\vec{\\nabla}\\times\\vec{A}) = 0$
+3. Donner l'expression du laplacien : $\\Delta f = \\vec{\\nabla}\\cdot(\\vec{\\nabla}f)$
+4. $\\vec{\\nabla}\\times(\\vec{\\nabla}\\times\\vec{A}) = \\vec{\\nabla}(\\vec{\\nabla}\\cdot\\vec{A}) - \\Delta\\vec{A}$
+5. $\\vec{\\nabla}\\cdot(f\\vec{a}) = f\\,\\vec{\\nabla}\\cdot\\vec{a} + \\vec{a}\\cdot\\vec{\\nabla}f$
+6. $\\vec{\\nabla}\\cdot(\\vec{a}\\times\\vec{b}) = \\vec{b}\\cdot(\\vec{\\nabla}\\times\\vec{a}) - \\vec{a}\\cdot(\\vec{\\nabla}\\times\\vec{b})$
+7. $\\vec{\\nabla}\\times(f\\vec{a}) = \\vec{\\nabla}f\\times\\vec{a} + f\\,\\vec{\\nabla}\\times\\vec{a}$
+`);
+</script>
+</body>
+</html>

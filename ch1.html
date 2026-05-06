@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CM1 · Rappels de maths — EM L2</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print_style.css">
+</head>
+
+<body>
+
+  <div id="topbar" class="topbar"></div>
+
+  <main class="page">
+
+    <!-- Header -->
+    <div class="ch-header">
+      <p class="ch-label">CM 1 · Electromagnétisme L2</p>
+      <h1 class="ch-title" style="color:var(--accent)">Rappels de mathématiques</h1>
+      <p class="ch-subtitle">Opérateurs vectoriels · Systèmes de coordonnées · Théorèmes intégraux</p>
+    </div>
+
+    <!-- ── 1. Coordonnées ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        Systèmes de coordonnées
+      </h2>
+
+      <table class="rev-table">
+        <thead>
+          <tr>
+            <th>Système</th>
+            <th>Variables</th>
+            <th>Base locale</th>
+            <th>Élément de volume $d\tau$</th>
+            <th>Élément de longueur $d\ell$</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cartésien</strong></td>
+            <td>$x,y,z$</td>
+            <td>$\hat{u}_x, \hat{u}_y, \hat{u}_z$ (fixes)</td>
+            <td>$dx\,dy\,dz$</td>
+            <td>$dx\,\hat{u}_x + dy\,\hat{u}_y + dz\,\hat{u}_z$</td>
+          </tr>
+          <tr>
+            <td><strong>Cylindrique</strong></td>
+            <td>$r, \theta, z$</td>
+            <td>$\hat{u}_r, \hat{u}_\theta, \hat{u}_z$ (dépend de $\theta$)</td>
+            <td>$r\,dr\,d\theta\,dz$</td>
+            <td>$dr\,\hat{u}_r + r\,d\theta\,\hat{u}_\theta + dz\,\hat{u}_z$</td>
+          </tr>
+          <tr>
+            <td><strong>Sphérique</strong></td>
+            <td>$r, \theta, \varphi$</td>
+            <td>$\hat{u}_r, \hat{u}_\theta, \hat{u}_\varphi$ (dépend de $\theta,\varphi$)</td>
+            <td>$r^2 \sin\theta\,dr\,d\theta\,d\varphi$</td>
+            <td>$dr\,\hat{u}_r + r\,d\theta\,\hat{u}_\theta + r\sin\theta\,d\varphi\,\hat{u}_\varphi$</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">💡</span>
+        <div>En cylindrique : $\hat{u}_r = \cos\theta\,\hat{u}_x + \sin\theta\,\hat{u}_y$, $\hat{u}_\theta =
+          -\sin\theta\,\hat{u}_x + \cos\theta\,\hat{u}_y$. Ces vecteurs <em>tournent</em> avec le point.</div>
+      </div>
+    </div>
+
+    <!-- ── 2. Gradient ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        Gradient $\vec{\nabla} f$
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-blue">
+          <div class="label">Cartésien</div>
+          <div class="math">$$\vec{\nabla} f = \frac{\partial f}{\partial x}\hat{u}_x + \frac{\partial f}{\partial
+            y}\hat{u}_y + \frac{\partial f}{\partial z}\hat{u}_z$$</div>
+        </div>
+        <div class="formula-card card-blue">
+          <div class="label">Cylindrique</div>
+          <div class="math">$$\vec{\nabla} f = \frac{\partial f}{\partial r}\hat{u}_r + \frac{1}{r}\frac{\partial
+            f}{\partial \theta}\hat{u}_\theta + \frac{\partial f}{\partial z}\hat{u}_z$$</div>
+        </div>
+        <div class="formula-card card-blue">
+          <div class="label">Sphérique</div>
+          <div class="math">$$\vec{\nabla} f = \frac{\partial f}{\partial r}\hat{u}_r + \frac{1}{r}\frac{\partial
+            f}{\partial \theta}\hat{u}_\theta + \frac{1}{r\sin\theta}\frac{\partial f}{\partial
+            \varphi}\hat{u}_\varphi$$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. Divergence ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent3)"></span>
+        Divergence $\vec{\nabla} \cdot \vec{A}$
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-green">
+          <div class="label">Cartésien</div>
+          <div class="math">$$\vec{\nabla}\cdot\vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial
+            y} + \frac{\partial A_z}{\partial z}$$</div>
+        </div>
+        <div class="formula-card card-green">
+          <div class="label">Cylindrique</div>
+          <div class="math">$$\vec{\nabla}\cdot\vec{A} = \frac{1}{r}\frac{\partial (r A_r)}{\partial r} +
+            \frac{1}{r}\frac{\partial A_\theta}{\partial \theta} + \frac{\partial A_z}{\partial z}$$</div>
+          <div class="note">Attention au facteur $r$ devant $A_r$ !</div>
+        </div>
+        <div class="formula-card card-green">
+          <div class="label">Sphérique</div>
+          <div class="math">$$\vec{\nabla}\cdot\vec{A} = \frac{1}{r^2}\frac{\partial (r^2 A_r)}{\partial r} +$$
+            $$\frac{1}{r\sin\theta}\frac{\partial (\sin\theta\, A_\theta)}{\partial \theta}+\frac{1}{r\sin\theta}\frac{\partial A_\varphi}{\partial \varphi}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. Rotationnel ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent4)"></span>
+        Rotationnel $\vec{\nabla} \times \vec{A}$
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-purple">
+          <div class="label">Cartésien</div>
+          <div class="math">$$\vec{\nabla}\times\vec{A} = \begin{vmatrix}\hat{u}_x & \hat{u}_y & \hat{u}_z \\ \partial_x
+            & \partial_y & \partial_z \\ A_x & A_y & A_z\end{vmatrix}$$</div>
+        </div>
+        <div class="formula-card card-purple">
+          <div class="label">Cylindrique (composante z)</div>
+          <div class="math">$$(\vec{\nabla}\times\vec{A})_z = \frac{1}{r}\frac{\partial(r A_\theta)}{\partial r} -
+            \frac{1}{r}\frac{\partial A_r}{\partial \theta}$$</div>
+          <div class="note">La plus utile en EM pour $\vec{B} = \vec{\nabla}\times\vec{A}$.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 5. Laplacien ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent5)"></span>
+        Laplacien $\Delta f = \vec{\nabla}^2 f$
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-orange">
+          <div class="label">Cartésien</div>
+          <div class="math">$$\Delta f = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} +
+            \frac{\partial^2 f}{\partial z^2}$$</div>
+        </div>
+        <div class="formula-card card-orange">
+          <div class="label">Cylindrique (si f = f(r))</div>
+          <div class="math">$$\Delta f = \frac{1}{r}\frac{\partial}{\partial r}\!\left(r\frac{\partial f}{\partial
+            r}\right)$$</div>
+        </div>
+        <div class="formula-card card-orange">
+          <div class="label">Sphérique (si f = f(r))</div>
+          <div class="math">$$\Delta f = \frac{1}{r^2}\frac{\partial}{\partial r}\!\left(r^2\frac{\partial f}{\partial
+            r}\right) = \frac{\partial^2 f}{\partial r^2} + \frac{2}{r}\frac{\partial f}{\partial r}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 6. Théorèmes intégraux ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        Théorèmes intégraux fondamentaux
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-red">
+          <div class="label">Green-Ostrogradski (divergence)</div>
+          <div class="math">$$\iiint_V \vec{\nabla}\cdot\vec{A}\,d\tau = \oiint_S \vec{A}\cdot d\vec{S}$$</div>
+          <div class="note">Flux sortant de $S$ = intégrale de volume de la divergence.</div>
+        </div>
+        <div class="formula-card card-red">
+          <div class="label">Stokes (rotationnel)</div>
+          <div class="math">$$\iint_S (\vec{\nabla}\times\vec{A})\cdot d\vec{S} = \oint_C \vec{A}\cdot d\vec{\ell}$$
+          </div>
+          <div class="note">Circulation sur $C$ = flux du rotationnel à travers $S$ s'appuyant sur $C$.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 7. Identités utiles ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        Identités vectorielles essentielles
+      </h2>
+      <div class="callout rule">
+        <span class="callout-icon">📌</span>
+        <div>
+          <strong>À mémoriser absolument :</strong><br>
+          $\vec{\nabla}\times(\vec{\nabla} f) = \vec{0}$ &nbsp;—&nbsp; tout gradient est irrotationnel<br>
+          $\vec{\nabla}\cdot(\vec{\nabla}\times\vec{A}) = 0$ &nbsp;—&nbsp; tout rotationnel est solénoïdal<br>
+          $\vec{\nabla}\times(\vec{\nabla}\times\vec{A}) = \vec{\nabla}(\vec{\nabla}\cdot\vec{A}) - \Delta\vec{A}$
+        </div>
+      </div>
+      <div class="formula-grid">
+        <div class="formula-card card-blue">
+          <div class="label">Leibniz — div</div>
+          <div class="math">$$\vec{\nabla}\cdot(f\vec{A}) = f\,\vec{\nabla}\cdot\vec{A} + \vec{A}\cdot\vec{\nabla}f$$
+          </div>
+        </div>
+        <div class="formula-card card-blue">
+          <div class="label">Leibniz — rot</div>
+          <div class="math">$$\vec{\nabla}\times(f\vec{A}) = f\,\vec{\nabla}\times\vec{A} + \vec{\nabla}f\times\vec{A}$$
+          </div>
+        </div>
+        <div class="formula-card card-blue">
+          <div class="label">Champ de position $\vec{R} = \overrightarrow{OM}$</div>
+          <div class="math">$$\vec{\nabla}\cdot\vec{R} = 3 \qquad \vec{\nabla}\times\vec{R} = \vec{0}$$</div>
+          <div class="note">$\vec{\nabla} R = \hat{u}_R$ et $\Delta\!\left(\frac{1}{R}\right) = -4\pi\delta^3(\vec{r})$
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

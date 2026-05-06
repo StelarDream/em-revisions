@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CM5 · Induction — EM L2</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print_style.css">
+  <link rel="stylesheet" href="print_style.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="page">
+
+  <div class="ch-header">
+    <p class="ch-label">CM 5 · Electromagnétisme L2</p>
+    <h1 class="ch-title" style="color:var(--accent5)">Induction, auto-induction &amp; mutuelle induction</h1>
+    <p class="ch-subtitle">Loi de Faraday · Loi de Lenz · Inductances · Énergie magnétique</p>
+  </div>
+
+  <!-- ── 1. Flux magnétique ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent5)"></span>
+      Flux magnétique
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-orange">
+        <div class="label">Flux à travers une surface $S$</div>
+        <div class="math">$$\Phi = \iint_S \vec{B}\cdot d\vec{S}$$</div>
+        <div class="note">Unité : Weber (Wb = V·s = T·m²).</div>
+      </div>
+      <div class="formula-card card-orange">
+        <div class="label">Propriété fondamentale</div>
+        <div class="math">$$\vec{\nabla}\cdot\vec{B} = 0 \implies \oiint \vec{B}\cdot d\vec{S} = 0$$</div>
+        <div class="note">Le flux de $\vec{B}$ sortant de toute surface fermée est nul.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Loi de Faraday ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      Loi de Faraday (induction)
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-red">
+        <div class="label">Force électromotrice induite</div>
+        <div class="math">$$e = -\frac{d\Phi}{dt}$$</div>
+        <div class="note">Le signe $-$ exprime la loi de Lenz. $\Phi$ est le flux à travers le circuit orienté.</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Forme locale (Maxwell-Faraday)</div>
+        <div class="math">$$\vec{\nabla}\times\vec{E} = -\frac{\partial \vec{B}}{\partial t}$$</div>
+        <div class="note">Généralise l'irrotationnalité de $\vec{E}$ au cas dynamique.</div>
+      </div>
+    </div>
+
+    <div class="callout rule">
+      <span class="callout-icon">🧲</span>
+      <div>
+        <strong>Loi de Lenz :</strong> le courant induit crée un champ qui s'oppose à la variation du flux qui lui a donné naissance. C'est une conséquence de la conservation de l'énergie.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Sources de la fem ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent2)"></span>
+      Deux sources de fem induite
+    </h2>
+    <div class="two-col">
+      <div class="formula-card card-blue" style="border-left-color:var(--accent2)">
+        <div class="label" style="color:var(--accent2)">Induction par variation de $\vec{B}$ (circuit fixe)</div>
+        <div class="math">$$e = -\iint_S \frac{\partial \vec{B}}{\partial t}\cdot d\vec{S}$$</div>
+        <div class="note">Circuit immobile, $\vec{B}$ variable dans le temps.</div>
+      </div>
+      <div class="formula-card card-green">
+        <div class="label">Induction par mouvement (Neumann)</div>
+        <div class="math">$$e = \oint_C (\vec{v}\times\vec{B})\cdot d\vec{\ell}$$</div>
+        <div class="note">Circuit mobile dans un $\vec{B}$ stationnaire. Force motrice = force de Lorentz magnétique.</div>
+      </div>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div>En général : $e = -\dfrac{d\Phi}{dt}$ englobe les deux cas simultanément (formule de Leibniz pour la dérivée d'un flux avec contour mobile).</div>
+    </div>
+  </div>
+
+  <!-- ── 4. Inductance propre ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent4)"></span>
+      Auto-inductance $L$
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-purple">
+        <div class="label">Définition</div>
+        <div class="math">$$\Phi = L\,I$$</div>
+        <div class="note">$L$ > 0, unité : Henry (H = Wb/A). Dépend uniquement de la géométrie.</div>
+      </div>
+      <div class="formula-card card-purple">
+        <div class="label">fem d'auto-induction</div>
+        <div class="math">$$e = -L\frac{dI}{dt}$$</div>
+      </div>
+      <div class="formula-card card-purple">
+        <div class="label">Solénoïde ($n$ spires/m, longueur $\ell$, section $S$)</div>
+        <div class="math">$$L = \mu_0 n^2 \ell S = \frac{\mu_0 N^2 S}{\ell}$$</div>
+      </div>
+      <div class="formula-card card-purple">
+        <div class="label">Tore ($N$ spires, section $S$, rayon $r$)</div>
+        <div class="math">$$L = \frac{\mu_0 N^2 S}{2\pi r}$$</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. Mutuelle inductance ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent3)"></span>
+      Mutuelle inductance $M$
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-green">
+        <div class="label">Définition</div>
+        <div class="math">$$\Phi_{1\to2} = M\,I_1 \qquad \Phi_{2\to1} = M\,I_2$$</div>
+        <div class="note">$M$ est symétrique : le flux créé par 1 dans 2 divié par $I_1$ = flux créé par 2 dans 1 divisé par $I_2$.</div>
+      </div>
+      <div class="formula-card card-green">
+        <div class="label">fem mutuellement induites</div>
+        <div class="math">$$e_2 = -M\frac{dI_1}{dt} \qquad e_1 = -M\frac{dI_2}{dt}$$</div>
+      </div>
+      <div class="formula-card card-green">
+        <div class="label">Coefficient de couplage</div>
+        <div class="math">$$k = \frac{M}{\sqrt{L_1 L_2}} \qquad 0 \leq k \leq 1$$</div>
+        <div class="note">$k=1$ : couplage parfait (transformateur idéal). $k=0$ : circuits découplés.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. Énergie magnétique ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      Énergie magnétique
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-red">
+        <div class="label">Énergie stockée dans une inductance</div>
+        <div class="math">$$W = \frac{1}{2}L I^2$$</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Deux inductances couplées</div>
+        <div class="math">$$W = \frac{1}{2}L_1 I_1^2 + M I_1 I_2 + \frac{1}{2}L_2 I_2^2$$</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Densité volumique d'énergie magnétique</div>
+        <div class="math">$$u_B = \frac{B^2}{2\mu_0} = \frac{\mu_0}{2}H^2$$</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. Méthode induction ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent2)"></span>
+      Méthode — Résoudre un problème d'induction
+    </h2>
+    <div class="callout rule">
+      <span class="callout-icon">📋</span>
+      <div>
+        <strong>1.</strong> Choisir une orientation pour le circuit (sens positif du contour → normale $\hat{n}$ par main droite).<br>
+        <strong>2.</strong> Calculer $\Phi(t) = \iint \vec{B}\cdot\hat{n}\,dS$ en fonction des variables du problème.<br>
+        <strong>3.</strong> Appliquer $e = -d\Phi/dt$.<br>
+        <strong>4.</strong> En déduire le courant $i = e/R$ (si résistance pure).<br>
+        <strong>5.</strong> Vérifier le <strong>sens</strong> du courant avec Lenz : il doit s'opposer à la variation.
+      </div>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-icon">⚡</span>
+      <div>
+        <strong>Freinage par induction :</strong> une barre mobile de masse $m$ et résistance $R$ dans un champ $B$ uniforme vérifie :<br>
+        $$m\frac{dv}{dt} = -\frac{B^2\ell^2}{R}\,v \implies v(t) = v_0\,e^{-t/\tau} \quad \text{avec} \quad \tau = \frac{mR}{B^2\ell^2}$$
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+<script src="nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

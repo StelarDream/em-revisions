@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CM3 · Charges en mouvement — EM L2</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print_style.css">
+  <link rel="stylesheet" href="print_style.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="page">
+
+  <div class="ch-header">
+    <p class="ch-label">CM 3 · Electromagnétisme L2</p>
+    <h1 class="ch-title" style="color:var(--accent3)">Charges en mouvement</h1>
+    <p class="ch-subtitle">Densité de courant · Modèle de Drude · Forces électromagnétiques</p>
+  </div>
+
+  <!-- ── 1. Courant et densité ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent3)"></span>
+      Courant électrique et densité de courant
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-green">
+        <div class="label">Intensité</div>
+        <div class="math">$$I = \iint_S \vec{j}\cdot d\vec{S}$$</div>
+        <div class="note">Flux de la densité volumique de courant à travers une section $S$.</div>
+      </div>
+      <div class="formula-card card-green">
+        <div class="label">Densité volumique de courant</div>
+        <div class="math">$$\vec{j} = n_e\,q\,\vec{v}_d = \rho_\text{libre}\,\vec{v}_d$$</div>
+        <div class="note">$n_e$ = nb d'électrons par m³, $\vec{v}_d$ = vitesse de dérive.</div>
+      </div>
+      <div class="formula-card card-green">
+        <div class="label">Densité surfacique</div>
+        <div class="math">$$\vec{j}_\text{surf} = \sigma_\text{surf}\,\vec{v} \qquad [A/m]$$</div>
+      </div>
+      <div class="formula-card card-green">
+        <div class="label">Équation de continuité (conservation)</div>
+        <div class="math">$$\frac{\partial \rho}{\partial t} + \vec{\nabla}\cdot\vec{j} = 0$$</div>
+        <div class="note">En régime stationnaire : $\vec{\nabla}\cdot\vec{j} = 0$.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Modèle de Drude ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent2)"></span>
+      Modèle de Drude (1900)
+    </h2>
+    <div class="callout tip">
+      <span class="callout-icon">⚙️</span>
+      <div>Un électron de masse $m_e$ est soumis au champ $\vec{E}$ et à une force de frottement $\vec{F}_f = -\dfrac{m_e}{\tau}\vec{v}$ modélisant les collisions avec le réseau ($\tau$ = temps entre deux chocs).</div>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-card card-blue">
+        <div class="label">Équation du mouvement</div>
+        <div class="math">$$m_e\frac{d\vec{v}}{dt} = -e\vec{E} - \frac{m_e}{\tau}\vec{v}$$</div>
+      </div>
+      <div class="formula-card card-blue">
+        <div class="label">Vitesse de dérive à l'équilibre</div>
+        <div class="math">$$\vec{v}_d = -\frac{e\tau}{m_e}\vec{E}$$</div>
+      </div>
+      <div class="formula-card card-blue">
+        <div class="label">Loi d'Ohm locale</div>
+        <div class="math">$$\vec{j} = \sigma\vec{E} \qquad \text{avec} \qquad \sigma = \frac{n_e e^2 \tau}{m_e}$$</div>
+        <div class="note">$\sigma$ en $\Omega^{-1}\text{m}^{-1}$ = S/m. Résistivité $\rho = 1/\sigma$.</div>
+      </div>
+      <div class="formula-card card-blue">
+        <div class="label">Résistance d'un fil</div>
+        <div class="math">$$R = \frac{\rho_\text{rés}\, L}{S} = \frac{L}{\sigma S}$$</div>
+        <div class="note">$L$ = longueur, $S$ = section transversale.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Force de Lorentz ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      Force de Lorentz
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-red">
+        <div class="label">Sur une charge ponctuelle</div>
+        <div class="math">$$\vec{F} = q\left(\vec{E} + \vec{v}\times\vec{B}\right)$$</div>
+        <div class="note">La force magnétique $q\vec{v}\times\vec{B}$ est perpendiculaire à $\vec{v}$ : elle ne travaille pas.</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Rayon cyclotron</div>
+        <div class="math">$$r_c = \frac{m v_\perp}{|q|B}$$</div>
+        <div class="note">Mouvement circulaire uniforme dans le plan $\perp$ à $\vec{B}$.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. Force de Laplace ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent4)"></span>
+      Force de Laplace (sur un conducteur)
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-purple">
+        <div class="label">Élément de force sur un fil</div>
+        <div class="math">$$d\vec{F} = I\,d\vec{\ell}\times\vec{B}$$</div>
+        <div class="note">$d\vec{\ell}$ dans le sens du courant.</div>
+      </div>
+      <div class="formula-card card-purple">
+        <div class="label">Force volumique sur un conducteur</div>
+        <div class="math">$$\vec{f} = \vec{j}\times\vec{B} \qquad [\text{N/m}^3]$$</div>
+      </div>
+      <div class="formula-card card-purple">
+        <div class="label">Force sur un fil rectiligne dans $B$ uniforme</div>
+        <div class="math">$$\vec{F} = I\,\vec{L}\times\vec{B}$$</div>
+        <div class="note">$\vec{L}$ = vecteur longueur du fil dans le sens de $I$.</div>
+      </div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div>La force de Laplace ne travaille pas sur les charges libres du conducteur (elles se déplacent le long du fil, pas transversalement). En revanche elle peut mettre le <em>conducteur entier</em> en mouvement.</div>
+    </div>
+  </div>
+
+  <!-- ── 5. Effet Hall ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent5)"></span>
+      Effet Hall
+    </h2>
+    <div class="callout key">
+      <span class="callout-icon">🔬</span>
+      <div>
+        Un champ $\vec{B}$ perpendiculaire à un courant $I$ crée une <strong>tension de Hall</strong> transversale :<br>
+        $$U_H = \frac{IB}{n_e e\, a}$$
+        où $a$ est l'épaisseur du conducteur dans la direction de $\vec{B}$. Permet de mesurer $n_e$ et le signe des porteurs.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+<script src="nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

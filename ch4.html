@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CM4 · Magnétostatique — EM L2</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print_style.css">
+</head>
+
+<body>
+
+  <div id="topbar" class="topbar"></div>
+
+  <main class="page">
+
+    <div class="ch-header">
+      <p class="ch-label">CM 4 · Electromagnétisme L2</p>
+      <h1 class="ch-title" style="color:var(--accent4)">Magnétostatique</h1>
+      <p class="ch-subtitle">Biot-Savart · Théorème d'Ampère · Potentiel vecteur · Moment magnétique</p>
+    </div>
+
+    <!-- ── 1. Analogie ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent4)"></span>
+        Analogie électrostatique / magnétostatique
+      </h2>
+      <table class="rev-table">
+        <thead>
+          <tr>
+            <th>Électrostatique</th>
+            <th>Magnétostatique</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Charge $dq$</td>
+            <td>Élément de courant $Id\vec{\ell}$</td>
+          </tr>
+          <tr>
+            <td>Constante $\dfrac{1}{4\pi\varepsilon_0}$</td>
+            <td>Constante $\dfrac{\mu_0}{4\pi}$</td>
+          </tr>
+          <tr>
+            <td>$\vec{E}$ radial (polaire)</td>
+            <td>$\vec{B}$ orthoradial (axial / pseudo-vecteur)</td>
+          </tr>
+          <tr>
+            <td>$\vec{\nabla}\times\vec{E} = \vec{0}$</td>
+            <td>$\vec{\nabla}\cdot\vec{B} = 0$</td>
+          </tr>
+          <tr>
+            <td>$\vec{\nabla}\cdot\vec{E} = \rho/\varepsilon_0$</td>
+            <td>$\vec{\nabla}\times\vec{B} = \mu_0\vec{j}$</td>
+          </tr>
+          <tr>
+            <td>Potentiel scalaire $V$, $\vec{E}=-\vec{\nabla}V$</td>
+            <td>Potentiel vecteur $\vec{A}$, $\vec{B}=\vec{\nabla}\times\vec{A}$</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── 2. Biot-Savart ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent4)"></span>
+        Loi de Biot-Savart
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-purple">
+          <div class="label">Forme générale</div>
+          <div class="math">$$\vec{B}(M) = \frac{\mu_0}{4\pi}\int \frac{I\,d\vec{\ell}\times\hat{u}_{PM}}{PM^2}$$</div>
+          <div class="note">$\hat{u}_{PM}$ de la source $P$ vers le point $M$.</div>
+        </div>
+        <div class="formula-card card-purple">
+          <div class="label">Fil rectiligne infini</div>
+          <div class="math">$$B = \frac{\mu_0 I}{2\pi r}$$</div>
+          <div class="note">$r$ = distance au fil. Direction : règle du tire-bouchon / main droite.</div>
+        </div>
+        <div class="formula-card card-purple">
+          <div class="label">Centre d'une spire circulaire</div>
+          <div class="math">$$B_0 = \frac{\mu_0 I}{2R}$$</div>
+          <div class="note">Dirigé selon l'axe de la spire.</div>
+        </div>
+        <div class="formula-card card-purple">
+          <div class="label">Axe d'une spire (distance $z$)</div>
+          <div class="math">$$B(z) = \frac{\mu_0 I}{2R}\sin^3\!\beta = \frac{\mu_0 I R^2}{2(R^2+z^2)^{3/2}}$$</div>
+          <div class="note">$\beta$ = demi-angle sous lequel la spire est vue depuis $M$.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. Méthode Biot-Savart ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        Méthode — Symétries et invariances
+      </h2>
+      <div class="callout rule">
+        <span class="callout-icon">📋</span>
+        <div>
+          <strong>1. Plan de symétrie</strong> de la distribution de courant : $\vec{B}$ est <em>perpendiculaire</em> au
+          plan.<br><br>
+          <strong>2. Plan d'antisymétrie</strong> : $\vec{B}$ est <em>contenu dans</em> le plan.<br><br>
+          <strong>3. Invariances</strong> : si la distribution est invariante par translation selon $z$ → $\vec{B}$ ne
+          dépend pas de $z$ ; si invariante en $\theta$ → $\vec{B}$ ne dépend pas de $\theta$.
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>$\vec{B}$ est un <strong>pseudo-vecteur</strong> (vecteur axial) : règles <em>inverses</em> de $\vec{E}$.
+          Pour $\vec{E}$ (vrai vecteur) : contenu dans les plans de symétrie, perpendiculaire aux plans d'antisymétrie.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. Théorème d'Ampère ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent3)"></span>
+        Théorème d'Ampère
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-green">
+          <div class="label">Forme intégrale</div>
+          <div class="math">$$\oint_C \vec{B}\cdot d\vec{\ell} = \mu_0 I_{\text{enlacé}}$$</div>
+          <div class="note">$I_{\text{enlacé}}$ = somme algébrique des courants enlacés par le contour $C$ (règle
+            tire-bouchon).</div>
+        </div>
+        <div class="formula-card card-green">
+          <div class="label">Forme locale (Maxwell-Ampère statique)</div>
+          <div class="math">$$\vec{\nabla}\times\vec{B} = \mu_0\vec{j}$$</div>
+        </div>
+      </div>
+
+      <div class="callout rule">
+        <span class="callout-icon">📋</span>
+        <div>
+          <strong>Méthode :</strong> choisir un contour d'Ampère sur lequel $\vec{B}$ est <em>colinéaire et
+            uniforme</em> → la circulation vaut $B \cdot L_\text{utile}$.
+        </div>
+      </div>
+
+      <table class="rev-table">
+        <thead>
+          <tr>
+            <th>Distribution</th>
+            <th>Résultat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fil rectiligne infini, courant $I$</td>
+            <td>$B(r) = \dfrac{\mu_0 I}{2\pi r}\quad(r > 0)$</td>
+          </tr>
+          <tr>
+            <td>Solénoïde infini ($n$ spires/m, courant $I$)</td>
+            <td>$B_\text{int} = \mu_0 n I\quad$ (nul à l'extérieur)</td>
+          </tr>
+          <tr>
+            <td>Tore ($N$ spires, rayon moyen $r$)</td>
+            <td>$B = \dfrac{\mu_0 N I}{2\pi r}\quad$ (intérieur seulement)</td>
+          </tr>
+          <tr>
+            <td>Plan infini de courant $\vec{j}_S$</td>
+            <td>$B = \dfrac{\mu_0 j_S}{2}$ (de chaque côté, parallèle au plan)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── 5. Potentiel vecteur ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent5)"></span>
+        Potentiel vecteur $\vec{A}$
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-orange">
+          <div class="label">Définition</div>
+          <div class="math">$$\vec{B} = \vec{\nabla}\times\vec{A}$$</div>
+          <div class="note">$\vec{A}$ défini à un gradient près (jauge de Coulomb : $\vec{\nabla}\cdot\vec{A}=0$).</div>
+        </div>
+        <div class="formula-card card-orange">
+          <div class="label">Expression intégrale</div>
+          <div class="math">$$\vec{A}(M) = \frac{\mu_0}{4\pi}\int \frac{I\,d\vec{\ell}}{PM}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 6. Moment magnétique ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        Moment magnétique
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-red">
+          <div class="label">Spire plane de courant $I$, surface $S$</div>
+          <div class="math">$$\vec{m} = I\,S\,\hat{n}$$</div>
+          <div class="note">$\hat{n}$ : normale à la spire par règle de la main droite avec le sens de $I$.</div>
+        </div>
+        <div class="formula-card card-red">
+          <div class="label">Couple dans un champ $\vec{B}$ uniforme</div>
+          <div class="math">$$\vec{\Gamma} = \vec{m}\times\vec{B}$$</div>
+        </div>
+        <div class="formula-card card-red">
+          <div class="label">Énergie potentielle</div>
+          <div class="math">$$E_p = -\vec{m}\cdot\vec{B}$$</div>
+          <div class="note">Équilibre stable quand $\vec{m} \parallel \vec{B}$ (énergie minimale).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 7. Conditions aux limites ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        Conditions aux limites pour $\vec{B}$
+      </h2>
+      <div class="formula-grid">
+        <div class="formula-card card-blue">
+          <div class="label">Composante normale — continue</div>
+          <div class="math">$$B_{n,2} - B_{n,1} = 0$$</div>
+        </div>
+        <div class="formula-card card-blue">
+          <div class="label">Composante tangentielle — discontinue</div>
+          <div class="math">$$\hat{n}_{1\to2}\times(\vec{B}_2 - \vec{B}_1) = \mu_0\,\vec{j}_\text{surf}$$</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

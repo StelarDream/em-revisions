@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CM2 · Électrostatique — EM L2</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print_style.css">
+  <link rel="stylesheet" href="print_style.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="page">
+
+  <div class="ch-header">
+    <p class="ch-label">CM 2 · Electromagnétisme L2</p>
+    <h1 class="ch-title" style="color:var(--accent2)">Électrostatique</h1>
+    <p class="ch-subtitle">Champ $\vec{E}$, potentiel $V$, théorème de Gauss, distributions de charges</p>
+  </div>
+
+  <!-- ── 1. Postulats fondamentaux ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent2)"></span>
+      Lois fondamentales
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-blue">
+        <div class="label">Loi de Coulomb</div>
+        <div class="math">$$\vec{E}(M) = \frac{1}{4\pi\varepsilon_0}\int \frac{dq}{PM^2}\,\hat{u}_{PM}$$</div>
+        <div class="note">$\hat{u}_{PM}$ pointe de la source $P$ vers le point de calcul $M$.</div>
+      </div>
+      <div class="formula-card card-blue">
+        <div class="label">Maxwell-Gauss (locale)</div>
+        <div class="math">$$\vec{\nabla}\cdot\vec{E} = \frac{\rho}{\varepsilon_0}$$</div>
+      </div>
+      <div class="formula-card card-blue">
+        <div class="label">Théorème de Gauss (intégral)</div>
+        <div class="math">$$\oiint_S \vec{E}\cdot d\vec{S} = \frac{Q_{\text{int}}}{\varepsilon_0}$$</div>
+        <div class="note">$Q_{\text{int}}$ = charge algébrique totale à l'intérieur de $S$.</div>
+      </div>
+      <div class="formula-card card-blue">
+        <div class="label">$\vec{E}$ irrotationnel</div>
+        <div class="math">$$\vec{\nabla}\times\vec{E} = \vec{0} \qquad \Longleftrightarrow \qquad \oint_C \vec{E}\cdot d\vec{\ell} = 0$$</div>
+        <div class="note">Valable en statique seulement.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Potentiel ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      Potentiel électrostatique $V$
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-red">
+        <div class="label">Définition</div>
+        <div class="math">$$\vec{E} = -\vec{\nabla} V$$</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Potentiel d'une charge ponctuelle</div>
+        <div class="math">$$V(M) = \frac{q}{4\pi\varepsilon_0\, r} + \text{cte}$$</div>
+        <div class="note">On prend $V \to 0$ à l'infini (convention courante).</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Équation de Poisson</div>
+        <div class="math">$$\Delta V = -\frac{\rho}{\varepsilon_0}$$</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Équation de Laplace (vide)</div>
+        <div class="math">$$\Delta V = 0$$</div>
+        <div class="note">Valable dans les régions sans charge.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Distributions ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent3)"></span>
+      Types de distributions de charges
+    </h2>
+    <table class="rev-table">
+      <thead><tr>
+        <th>Type</th><th>Densité</th><th>Élément de charge $dq$</th><th>Unité SI</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Volumique</td><td>$\rho$</td><td>$\rho\,d\tau$</td><td>$\text{C/m}^3$</td></tr>
+        <tr><td>Surfacique</td><td>$\sigma$</td><td>$\sigma\,dS$</td><td>$\text{C/m}^2$</td></tr>
+        <tr><td>Linéique</td><td>$\lambda$</td><td>$\lambda\,d\ell$</td><td>$\text{C/m}$</td></tr>
+        <tr><td>Ponctuelle</td><td>$q$</td><td>$q$</td><td>$\text{C}$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 4. Méthode Gauss ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent4)"></span>
+      Méthode du théorème de Gauss
+    </h2>
+    <div class="callout rule">
+      <span class="callout-icon">📋</span>
+      <div>
+        <strong>Étapes systématiques :</strong><br>
+        1. Analyser les <strong>symétries</strong> et <strong>invariances</strong> → déterminer la direction de $\vec{E}$<br>
+        2. Choisir une <strong>surface de Gauss adaptée</strong> (sphère, cylindre, plan) sur laquelle $\vec{E}$ est uniforme et normal ou tangent<br>
+        3. Calculer le <strong>flux</strong> $\oiint \vec{E}\cdot d\vec{S} = E \cdot S_{\text{utile}}$<br>
+        4. Calculer $Q_{\text{int}}$, appliquer $Q_{\text{int}} / \varepsilon_0$<br>
+        5. En déduire $\vec{E}$, puis $V$ par intégration
+      </div>
+    </div>
+
+    <table class="rev-table">
+      <thead><tr><th>Distribution</th><th>Surface de Gauss</th><th>Résultat clé</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Sphère de rayon $R$, charge $Q$</td>
+          <td>Sphère concentrique rayon $r$</td>
+          <td>$E = \dfrac{Q}{4\pi\varepsilon_0 r^2}$ ($r > R$), comme charge ponctuelle</td>
+        </tr>
+        <tr>
+          <td>Fil infini, densité $\lambda$</td>
+          <td>Cylindre coaxial rayon $r$, hauteur $h$</td>
+          <td>$E = \dfrac{\lambda}{2\pi\varepsilon_0 r}$</td>
+        </tr>
+        <tr>
+          <td>Plan infini, densité $\sigma$</td>
+          <td>Cylindre traversant le plan (boîte de Gauss)</td>
+          <td>$E = \dfrac{\sigma}{2\varepsilon_0}$ (de chaque côté)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 5. Conditions aux limites ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent5)"></span>
+      Conditions aux limites (interface)
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-orange">
+        <div class="label">Composante tangentielle — continue</div>
+        <div class="math">$$E_{t,2} - E_{t,1} = 0$$</div>
+        <div class="note">La composante parallèle à l'interface est continue.</div>
+      </div>
+      <div class="formula-card card-orange">
+        <div class="label">Composante normale — discontinue</div>
+        <div class="math">$$\vec{E}_2 - \vec{E}_1 = \frac{\sigma}{\varepsilon_0}\,\hat{n}_{1\to2}$$</div>
+        <div class="note">$\sigma$ = densité surfacique de charge à l'interface.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. Énergie ── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      Énergie électrostatique
+    </h2>
+    <div class="formula-grid">
+      <div class="formula-card card-red">
+        <div class="label">Énergie de 2 charges ponctuelles</div>
+        <div class="math">$$W = \frac{q_1 q_2}{4\pi\varepsilon_0\, r_{12}}$$</div>
+      </div>
+      <div class="formula-card card-red">
+        <div class="label">Densité d'énergie du champ</div>
+        <div class="math">$$u_E = \frac{\varepsilon_0}{2}E^2 = \frac{\varepsilon_0}{2}|\vec{E}|^2$$</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+<script src="nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
