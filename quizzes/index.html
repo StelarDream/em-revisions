@@ -56,15 +56,24 @@
     <div class="index-grid" id="grid-td3"></div>
   </div>
 
-  <!-- ── TD4–7 placeholders ────────────────────────────────  -->
+  <!-- ── TD4 ─────────────────────────────────────────────── -->
+  <div class="section">
+    <h2 class="section-title">
+      <span class="dot" style="background:var(--accent4)"></span>
+      TD4 — Magnétostatique : loi de Biot-Savart
+    </h2>
+    <div class="index-grid" id="grid-td4"></div>
+  </div>
+
+  <!-- ── TD5–7 placeholders ────────────────────────────────  -->
   <div class="section">
     <h2 class="section-title">
       <span class="dot" style="background:var(--ink-faint)"></span>
-      TD4–7 — À venir
+      TD5–7 — À venir
     </h2>
     <div class="callout warn">
       <span class="callout-icon">🚧</span>
-      <div>Les quizzes des TDs 4 à 7 seront ajoutés progressivement.</div>
+      <div>Les quizzes des TDs 5 à 7 seront ajoutés progressivement.</div>
     </div>
   </div>
 
@@ -205,6 +214,40 @@ const catalogue = {
       desc:  "Plaquette dans $\\vec{B}$ — champ de Hall, $V_H = R_H IB/b$, force de Laplace",
       color: "ic-3"
     },
+  ],
+  "td4": [
+    {
+      file:  "quizzes/td4_ex1.html",
+      id:    "td4_ex1",
+      label: "TD4 · Ex 1",
+      title: "Symétries &amp; invariances",
+      desc:  "Cylindre $j\\parallel Oz$ et solénoïde — plans d'antisymétrie, direction de $\\vec{B}$",
+      color: "ic-4"
+    },
+    {
+      file:  "quizzes/td4_ex2.html",
+      id:    "td4_ex2",
+      label: "TD4 · Ex 2",
+      title: "Spire carrée",
+      desc:  "Fil fini par Biot-Savart — limite $L\\to\\infty$, champ au centre de la boucle carrée",
+      color: "ic-4"
+    },
+    {
+      file:  "quizzes/td4_ex3.html",
+      id:    "td4_ex3",
+      label: "TD4 · Ex 3",
+      title: "Spire circulaire &amp; Helmholtz",
+      desc:  "$B = \\frac{\\mu_0 I}{2R}\\sin^3\\beta$ — bobine plate, condition $d = R$",
+      color: "ic-4"
+    },
+    {
+      file:  "quizzes/td4_ex4.html",
+      id:    "td4_ex4",
+      label: "TD4 · Ex 4",
+      title: "Boucle chargée",
+      desc:  "$\\vec{E}$ sur l'axe (charge $\\lambda$), $\\vec{B}$ en rotation — analogie $E$/$B$",
+      color: "ic-4"
+    },
   ]
 };
 
@@ -290,6 +333,7 @@ renderGlobalProgress(catalogue);
 renderGrid(catalogue.td1, 'grid-td1');
 renderGrid(catalogue.td2, 'grid-td2');
 renderGrid(catalogue.td3, 'grid-td3');
+renderGrid(catalogue.td4, 'grid-td4');
 </script>
 </body>
 </html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD4 Ex2 — Spire carrée</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="quiz-page">
+
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD4 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent)">Spire carrée</h1>
+    <p class="ch-subtitle">Fil rectiligne fini par Biot-Savart — champ au centre d'une boucle carrée</p>
+  </div>
+
+  <div id="qz-past-attempts"></div>
+
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="qz-results"></div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+// ═══════════════════════════════════════════════════════════
+//  TD4 — Exercice 2 : Spire carrée
+//  Fil fini de longueur L parcouru par I
+//  → champ au centre d'une spire carrée de côté L
+// ═══════════════════════════════════════════════════════════
+
+const CTX_FIL = `
+  Fil rectiligne fini de longueur $L$, parcouru par $I$. Origine $O$ au milieu du fil,
+  axe $Oz$ selon le fil. Point $M$ dans le plan médiateur ($z = 0$) à distance $r$ de $O$.
+`;
+
+const questions = [
+
+  // ── Q1 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_FIL,
+    question: "Par l'analyse des symétries, dans quelle direction est $\\vec{B}(M)$ pour $M$ dans le plan médiateur $z = 0$ ?",
+    options: [
+      "Selon $\\hat{u}_\\varphi$ uniquement",
+      "Selon $\\hat{u}_z$ uniquement",
+      "Selon $\\hat{u}_r$ uniquement",
+      "Quelconque"
+    ],
+    answer: "Selon $\\hat{u}_\\varphi$ uniquement",
+    explanation: "Le plan $z = 0$ est plan de symétrie du courant ⟹ $\\vec{B}$ est perpendiculaire à ce plan pour les points dans le plan, donc $B_r = B_z = 0$. La distribution est invariante par rotation autour de $Oz$ ⟹ $B$ ne dépend pas de $\\varphi$. Conclusion : $\\vec{B}(M) = B(r)\\hat{u}_\\varphi$."
+  },
+
+  // ── Q2 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_FIL,
+    question: "L'élément de courant $Id\\vec{\\ell} = I\\,dz\\,\\hat{u}_z$ au point $P(0,0,z)$ crée en $M(r,0,0)$ un champ $d\\vec{B}$. Dans quelle direction est $d\\vec{B}$ ?",
+    options: [
+      "Selon $\\hat{u}_\\varphi$ (résultat du produit $d\\vec{\\ell}\\wedge\\hat{u}_{PM}$)",
+      "Selon $\\hat{u}_r$",
+      "Selon $\\hat{u}_z$",
+      "Dans une direction quelconque dépendant de $z$"
+    ],
+    answer: "Selon $\\hat{u}_\\varphi$ (résultat du produit $d\\vec{\\ell}\\wedge\\hat{u}_{PM}$)",
+    explanation: "$\\overrightarrow{PM} = r\\hat{u}_r - z\\hat{u}_z$, donc $\\hat{u}_{PM} \\propto r\\hat{u}_r - z\\hat{u}_z$. Le produit $d\\vec{\\ell}\\wedge\\hat{u}_{PM} = dz\\,\\hat{u}_z\\wedge(r\\hat{u}_r - z\\hat{u}_z) = dz\\,r(\\hat{u}_z\\wedge\\hat{u}_r) = dz\\,r\\,\\hat{u}_\\varphi$. Tous les éléments contribuent selon $\\hat{u}_\\varphi$, confirmant le résultat de symétrie."
+  },
+
+  // ── Q3 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_FIL,
+    question: "Après intégration avec $\\int_{-L/2}^{L/2}\\frac{dz}{(r^2+z^2)^{3/2}} = \\frac{2\\cdot L/2}{r^2\\sqrt{(L/2)^2+r^2}}$, quel est le champ $B$ au point $M$ ?",
+    options: [
+      "$B = \\dfrac{\\mu_0 I}{4\\pi r}\\cdot\\dfrac{L/2}{\\sqrt{r^2+(L/2)^2}} \\times 2$",
+      "$B = \\dfrac{\\mu_0 I}{2\\pi r}$",
+      "$B = \\dfrac{\\mu_0 I L}{4\\pi r^2}$",
+      "$B = \\dfrac{\\mu_0 I}{4\\pi r}$"
+    ],
+    answer: "$B = \\dfrac{\\mu_0 I}{4\\pi r}\\cdot\\dfrac{L/2}{\\sqrt{r^2+(L/2)^2}} \\times 2$",
+    explanation: "L'intégrale donne $B = \\frac{\\mu_0 I r}{4\\pi}\\int_{-L/2}^{L/2}\\frac{dz}{(r^2+z^2)^{3/2}} = \\frac{\\mu_0 I r}{4\\pi}\\cdot\\frac{L}{r^2\\sqrt{r^2+(L/2)^2}} = \\frac{\\mu_0 I}{4\\pi r}\\cdot\\frac{L}{\\sqrt{r^2+(L/2)^2}}$. Quand $L\\to\\infty$ : $B\\to\\frac{\\mu_0 I}{2\\pi r}$ — on retrouve le fil infini."
+  },
+
+  // ── Q4 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    context: CTX_FIL,
+    question: "Quand $L \\to \\infty$, le champ du fil fini tend vers $\\frac{\\mu_0 I}{2\\pi r}$, retrouvant le résultat du fil infini.",
+    answer: "true",
+    explanation: "Pour $L\\gg r$ : $\\frac{L}{\\sqrt{r^2+(L/2)^2}} \\approx \\frac{L}{L/2} = 2$, donc $B \\to \\frac{\\mu_0 I}{4\\pi r}\\times 2 = \\frac{\\mu_0 I}{2\\pi r}$ ✓. C'est une vérification importante de cohérence de Biot-Savart avec le résultat classique du fil infini."
+  },
+
+  // ── Q5 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Pour une boucle carrée de côté $L$ et de centre $O$, chaque côté est à distance $L/2$ du centre. Par symétrie, les quatre côtés contribuent-ils de la même façon en $O$ ?",
+    options: [
+      "Oui — les quatre contributions sont identiques (même module, même direction $\\hat{u}_z$)",
+      "Non — les côtés parallèles contribuent dans le même sens mais les perpendiculaires s'annulent",
+      "Oui, mais seulement deux par deux",
+      "Non — les contributions se compensent exactement"
+    ],
+    answer: "Oui — les quatre contributions sont identiques (même module, même direction $\\hat{u}_z$)",
+    explanation: "Pour chaque côté, le centre $O$ est dans le plan médiateur du côté, à distance $r = L/2$. Par la règle de la main droite (ou règle du bonhomme d'Ampère), chaque côté crée en $O$ un champ selon $+\\hat{u}_z$ (pour un courant circulant dans le sens trigo). Les quatre contributions ont le même module $B_1 = \\frac{\\mu_0 I}{4\\pi(L/2)}\\cdot\\frac{L}{\\sqrt{(L/2)^2+(L/2)^2}}\\times 2$."
+  },
+
+  // ── Q6 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Quel est le champ total $B$ au centre $O$ d'une boucle carrée de côté $L$ parcourue par $I$ ?",
+    options: [
+      "$B = \\dfrac{2\\sqrt{2}\\,\\mu_0 I}{\\pi L}$",
+      "$B = \\dfrac{\\mu_0 I}{\\pi L}$",
+      "$B = \\dfrac{4\\mu_0 I}{\\pi L}$",
+      "$B = \\dfrac{\\sqrt{2}\\,\\mu_0 I}{2\\pi L}$"
+    ],
+    answer: "$B = \\dfrac{2\\sqrt{2}\\,\\mu_0 I}{\\pi L}$",
+    explanation: "Pour un côté : $r = L/2$, $a = L/2$. $B_1 = \\frac{\\mu_0 I}{4\\pi(L/2)}\\cdot\\frac{2(L/2)}{\\sqrt{(L/2)^2+(L/2)^2}} = \\frac{\\mu_0 I}{2\\pi L}\\cdot\\frac{1}{\\frac{1}{\\sqrt{2}}}\\cdot\\frac{\\sqrt{2}}{\\sqrt{2}} = \\frac{\\mu_0 I}{2\\pi L}\\cdot\\sqrt{2}$. Quatre côtés : $B = 4B_1 = \\frac{4\\mu_0 I\\sqrt{2}}{2\\pi L} = \\frac{2\\sqrt{2}\\,\\mu_0 I}{\\pi L}$."
+  },
+
+  // ── Q7 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "Le champ au centre d'une spire carrée de côté $L$ est plus grand que le champ au centre d'une spire circulaire de même périmètre ($C = 4L$, donc rayon $R = 2L/\\pi$).",
+    answer: "false",
+    explanation: "Spire carrée : $B_{carré} = \\frac{2\\sqrt{2}\\mu_0 I}{\\pi L}$. Spire circulaire de même périmètre $4L$ : $R = 4L/(2\\pi) = 2L/\\pi$, et $B_{circ} = \\frac{\\mu_0 I}{2R} = \\frac{\\mu_0 I\\pi}{4L}$. Ratio : $B_{circ}/B_{carré} = \\frac{\\pi^2}{8\\sqrt{2}} \\approx 0{,}87$. La spire carrée a donc un champ légèrement plus grand — un carré est légèrement moins efficace qu'un cercle à périmètre égal."
+  },
+
+  // ── Q8 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "La loi de Biot-Savart $d\\vec{B} = \\frac{\\mu_0}{4\\pi}\\frac{I\\,d\\vec{\\ell}\\wedge\\hat{u}_{PM}}{PM^2}$ est valide pour :",
+    options: [
+      "Les courants stationnaires (magnétostatique) uniquement",
+      "Tout courant variable dans le temps",
+      "Uniquement les fils rectilignes infinis",
+      "Uniquement les courants en régime harmonique"
+    ],
+    answer: "Les courants stationnaires (magnétostatique) uniquement",
+    explanation: "Biot-Savart est un postulat de la magnétostatique — il est valable pour les courants permanents ($\\partial\\vec{j}/\\partial t = 0$). Pour les courants variables, il faut les équations de Maxwell complètes avec le terme de Maxwell ($\\partial\\vec{E}/\\partial t$), ce qui mène à des ondes électromagnétiques et à la loi de Jefimenko en général."
+  },
+
+];
+
+QuizEngine.loadQuiz("td4_ex2", questions, `md:
+## Exercice 2 — Champ magnétique créé par une spire carrée
+
+**Partie 1 :** Fil rectiligne fini de longueur $L$, parcouru par $I$.
+Symétries → direction de $\\vec{B}$, calcul par Biot-Savart dans le plan médiateur, limite $L\\to\\infty$.
+
+**Partie 2 :** Boucle carrée de côté $L$.
+Montrer que les 4 contributions en $O$ sont identiques, calculer $B_{total}$ au centre.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>
