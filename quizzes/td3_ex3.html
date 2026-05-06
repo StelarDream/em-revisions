@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD3 Ex3 — Lorentz, Laplace &amp; effet Hall</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="quiz-page">
+
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD3 · Exercice 3 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent3)">Lorentz, Laplace &amp; effet Hall</h1>
+    <p class="ch-subtitle">Plaquette conductrice dans $\vec{B}$ — tension de Hall, force de Laplace</p>
+  </div>
+
+  <div id="qz-past-attempts"></div>
+
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="qz-results"></div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+// ═══════════════════════════════════════════════════════════
+//  TD3 — Exercice 3 : Forces de Lorentz et de Laplace, effet Hall
+//  Plaquette de largeur a (Oy), épaisseur b (Oz)
+//  Courant I selon Ox, champ B = B uz
+// ═══════════════════════════════════════════════════════════
+
+const CTX = `
+  Une plaquette conductrice (largeur $a$ selon $Oy$, épaisseur $b$ selon $Oz$) est parcourue par
+  un courant $I$ selon $Ox$. Un champ magnétique $\\vec{B} = B\\hat{u}_z$ est appliqué perpendiculairement.
+  On note $R_H = 1/(nq)$ la constante de Hall, $n$ la densité de porteurs, $q$ leur charge.
+`;
+
+const questions = [
+
+  // ── Q1 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Les porteurs se déplacent selon $+\\hat{u}_x$ (pour $q > 0$). La force de Lorentz magnétique $\\vec{F} = q\\vec{v}\\wedge\\vec{B}$ les dévie selon quelle direction ?",
+    options: [
+      "Selon $-\\hat{u}_y$",
+      "Selon $+\\hat{u}_y$",
+      "Selon $+\\hat{u}_z$",
+      "Selon $-\\hat{u}_x$"
+    ],
+    answer: "Selon $-\\hat{u}_y$",
+    explanation: "$\\vec{v} = v\\hat{u}_x$ et $\\vec{B} = B\\hat{u}_z$, donc $\\vec{v}\\wedge\\vec{B} = vB(\\hat{u}_x\\wedge\\hat{u}_z) = -vB\\hat{u}_y$. Pour $q > 0$ : $\\vec{F} = -qvB\\hat{u}_y$ — les porteurs s'accumulent du côté $y = 0$ (face $C$). Pour $q < 0$ (électrons) : $\\vec{F}$ est dans $+\\hat{u}_y$ mais la charge est négative, donc les électrons s'accumulent aussi du côté $C$. La tension de Hall $V_H = V_A - V_C$ change de signe selon le signe de $q$."
+  },
+
+  // ── Q2 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    context: CTX,
+    question: "Le signe de la tension de Hall $V_H = V_A - V_C$ dépend du signe des porteurs de charge.",
+    answer: "true",
+    explanation: "C'est précisément l'intérêt de l'effet Hall : il permet de déterminer le signe des porteurs (électrons ou trous). Si $q > 0$, les porteurs s'accumulent côté $C$ → $V_A > V_C$ → $V_H > 0$. Si $q < 0$ (électrons), ils s'accumulent aussi côté $C$ (même sens de dérive mais charge opposée), mais le potentiel s'inverse → $V_H < 0$."
+  },
+
+  // ── Q3 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "En régime permanent, les porteurs ne sont plus déviés : le champ de Hall $\\vec{E}_H$ compense la force de Lorentz. Quelle est l'expression de $E_H$ ?",
+    options: [
+      "$E_H = v_d B$",
+      "$E_H = v_d / B$",
+      "$E_H = B / v_d$",
+      "$E_H = v_d B^2$"
+    ],
+    answer: "$E_H = v_d B$",
+    explanation: "Équilibre : $q E_H = q v_d B$, donc $E_H = v_d B$. Le champ de Hall est dirigé selon $\\hat{u}_y$ et compense exactement la déviation magnétique. C'est la condition de régime permanent (lignes de courant parallèles à $Ox$)."
+  },
+
+  // ── Q4 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "En exprimant $v_d$ à partir de $j_V = I/(ab)$ et $j_V = nq\\,v_d$, quelle est la tension de Hall $V_H = E_H\\times a$ ?",
+    options: [
+      "$V_H = \\dfrac{R_H\\,I\\,B}{b}$",
+      "$V_H = \\dfrac{R_H\\,I\\,B}{a}$",
+      "$V_H = R_H\\,I\\,B\\,a$",
+      "$V_H = \\dfrac{I\\,B}{nqb}$"
+    ],
+    answer: "$V_H = \\dfrac{R_H\\,I\\,B}{b}$",
+    explanation: "$v_d = j_V/(nq) = I/(nq\\,ab)$. Donc $E_H = v_d B = IB/(nqab)$. La tension : $V_H = E_H\\times a = IB/(nqb) = R_H IB/b$ avec $R_H = 1/(nq)$. Notez que $V_H$ dépend de l'épaisseur $b$ (et non de la largeur $a$) — une plaquette fine donne une tension de Hall plus grande."
+  },
+
+  // ── Q5 · mcq ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Pour le cuivre ($n = 8{,}5\\times10^{28}\\,\\text{m}^{-3}$, $B = 1\\,\\text{T}$, $I = 1\\,\\text{A}$, $b = 0{,}1\\,\\text{mm}$), la tension de Hall vaut environ :",
+    options: [
+      "$V_H \\approx 0{,}73\\,\\mu\\text{V}$",
+      "$V_H \\approx 7{,}3\\,\\text{mV}$",
+      "$V_H \\approx 73\\,\\text{V}$",
+      "$V_H \\approx 0{,}73\\,\\text{mV}$"
+    ],
+    answer: "$V_H \\approx 0{,}73\\,\\mu\\text{V}$",
+    explanation: "$R_H = 1/(nq) = 1/(8{,}5\\times10^{28}\\times1{,}6\\times10^{-19}) \\approx 7{,}3\\times10^{-11}\\,\\text{m}^3/\\text{C}$. $V_H = R_H IB/b = 7{,}3\\times10^{-11}\\times1\\times1/(10^{-4}) \\approx 7{,}3\\times10^{-7}\\,\\text{V} \\approx 0{,}73\\,\\mu\\text{V}$. Très faible pour un métal — c'est pourquoi on utilise des semi-conducteurs (beaucoup moins de porteurs) pour les capteurs à effet Hall."
+  },
+
+  // ── Q6 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "La force de Lorentz $\\vec{F} = q(\\vec{E} + \\vec{v}\\wedge\\vec{B})$ ne fournit aucun travail pour la partie magnétique.",
+    answer: "true",
+    explanation: "La puissance de la force magnétique est $\\mathcal{P} = (q\\vec{v}\\wedge\\vec{B})\\cdot\\vec{v} = q(\\vec{v}\\wedge\\vec{B})\\cdot\\vec{v} = 0$ (produit mixte avec deux vecteurs identiques). La force magnétique ne travaille jamais : elle dévie les charges sans modifier leur énergie cinétique. L'énergie dans un circuit vient du champ électrique, pas du champ magnétique."
+  },
+
+  // ── Q7 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "La force de Laplace sur un élément de volume $dV$ d'un conducteur de densité de courant $\\vec{j}$ dans un champ $\\vec{B}$ s'écrit :",
+    options: [
+      "$d\\vec{F} = \\vec{j}\\wedge\\vec{B}\\,dV$",
+      "$d\\vec{F} = \\vec{j}\\cdot\\vec{B}\\,dV$",
+      "$d\\vec{F} = \\vec{j}\\wedge\\vec{B}\\,dS$",
+      "$d\\vec{F} = \\vec{B}\\wedge\\vec{j}\\,dV$"
+    ],
+    answer: "$d\\vec{F} = \\vec{j}\\wedge\\vec{B}\\,dV$",
+    explanation: "Un porteur de charge $q$ dans $dV$ subit $\\vec{F} = q\\vec{v}\\wedge\\vec{B}$. La densité volumique de force est $\\vec{f} = nq\\vec{v}\\wedge\\vec{B} = \\vec{j}\\wedge\\vec{B}$, donc $d\\vec{F} = \\vec{j}\\wedge\\vec{B}\\,dV$. Pour un conducteur filiforme : $\\vec{j}\\,dV = I\\,d\\vec{\\ell}$, d'où $d\\vec{F} = I\\,d\\vec{\\ell}\\wedge\\vec{B}$ (force de Laplace classique)."
+  },
+
+  // ── Q8 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "Pour un conducteur filiforme de longueur $L$ parcouru par $I$ dans un champ $\\vec{B}$ uniforme, la force de Laplace totale est :",
+    options: [
+      "$\\vec{F} = I\\vec{L}\\wedge\\vec{B}$",
+      "$\\vec{F} = I L B$",
+      "$\\vec{F} = I\\vec{B}\\wedge\\vec{L}$",
+      "$\\vec{F} = I^2\\vec{L}\\wedge\\vec{B}$"
+    ],
+    answer: "$\\vec{F} = I\\vec{L}\\wedge\\vec{B}$",
+    explanation: "$\\vec{F} = \\int I\\,d\\vec{\\ell}\\wedge\\vec{B} = I\\left(\\int d\\vec{\\ell}\\right)\\wedge\\vec{B} = I\\vec{L}\\wedge\\vec{B}$ où $\\vec{L}$ est le vecteur allant d'une extrémité à l'autre. Pour $\\vec{B}$ uniforme, seul le déplacement net compte — un circuit fermé dans un champ uniforme subit une force totale nulle."
+  },
+
+];
+
+QuizEngine.loadQuiz("td3_ex3", questions, `md:
+## Exercice 3 — Forces de Lorentz et de Laplace, effet Hall
+
+Plaquette conductrice (largeur $a$, épaisseur $b$), courant $I$ selon $Ox$, champ $\\vec{B} = B\\hat{u}_z$.
+
+**1.** Déviation qualitative des porteurs — signe de $V_H$.
+
+**2.** Champ de Hall $\\vec{E}_H$, tension $V_H = R_H IB/b$.
+
+**3.** Application numérique cuivre : $n = 8{,}5\\times10^{28}\\,\\text{m}^{-3}$.
+
+**4.** Force de Laplace : conducteur volumique puis filiforme.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>
