@@ -252,21 +252,19 @@ const QuizEngine = (() => {
   function _renderFillBlank(q, container) {
     _fillAttempts = 0;
 
-    // Build symbol legend from q.symbols or a sensible default
     const symbols = q.symbols || ['u_r', 'u_theta', 'u_z', 'R', 'r', 'z', '/', '*', '^2', '^3', '-'];
-    const legendHtml = symbols.map(s =>
-      `<span class="qz-sym-token" title="Cliquer pour insérer" data-sym="${s}">${s}</span>`
-    ).join('');
+    const legendHtml = symbols.length > 0 ? `
+      <div class="qz-sym-legend">
+        <span class="qz-sym-label">Symboles :</span>
+        ${symbols.map(s => `<span class="qz-sym-token" title="Cliquer pour insérer" data-sym="${s}">${s}</span>`).join('')}
+      </div>` : '';
 
     container.innerHTML = `
       <div class="qz-fill">
-        <div class="qz-sym-legend">
-          <span class="qz-sym-label">Symboles :</span>
-          ${legendHtml}
-        </div>
+        ${legendHtml}
         <div class="qz-fill-input-row">
           <input class="qz-input" id="qz-blank" type="text"
-                 placeholder="ex: -u_r/R^2" autocomplete="off" spellcheck="false">
+                 placeholder="votre réponse…" autocomplete="off" spellcheck="false">
           <span class="qz-fill-status" id="qz-fill-status"></span>
         </div>
         <div class="qz-fill-hint" id="qz-fill-hint"></div>
@@ -399,9 +397,8 @@ const QuizEngine = (() => {
     _renderField(fb.querySelector('#qz-retry-hint'), q.retryHint || 'Vérifie ta notation et réessaie.');
     fb.style.display = 'block';
 
-    // Button row: retry OR give up
+    // Button row: retry OR give up — replaces entire actions row
     const actions = _el('#qz-actions-row');
-    _el('#qz-submit').style.display = 'none';
 
     // Inject retry + give-up buttons into actions
     actions.innerHTML = `
@@ -425,7 +422,7 @@ const QuizEngine = (() => {
       _answers[_current] = { given, correct: false }; // lock as wrong
       _showFeedback(q, given, false);
       actions.innerHTML = `
-        <button id="qz-next" class="qz-btn qz-btn-primary" onclick="QuizEngine.next()">Suivant →</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:inline-flex" onclick="QuizEngine.next()">Suivant →</button>
       `;
     });
   }
@@ -462,7 +459,7 @@ const QuizEngine = (() => {
     if (actions) {
       actions.innerHTML = `
         <button id="qz-submit" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next"   class="qz-btn qz-btn-primary" onclick="QuizEngine.next()">Suivant →</button>
+        <button id="qz-next"   class="qz-btn qz-btn-primary" style="display:inline-flex" onclick="QuizEngine.next()">Suivant →</button>
       `;
     }
   }

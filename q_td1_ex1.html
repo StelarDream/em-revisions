@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,156 +9,166 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="quiz-page">
+  <main class="quiz-page">
 
-  <!-- Header -->
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD1 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent)">Champs de position</h1>
-    <p class="ch-subtitle">Opérateurs sur $\vec{R} = \overrightarrow{OM}$ — divergence, gradient, identités</p>
-  </div>
+    <!-- Header -->
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD1 · Exercice 1 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent)">Champs de position</h1>
+      <p class="ch-subtitle">Opérateurs sur $\vec{R} = \overrightarrow{OM}$ — divergence, gradient, identités</p>
+    </div>
 
-  <!-- Past attempts -->
-  <div id="qz-past-attempts"></div>
+    <!-- Past attempts -->
+    <div id="qz-past-attempts"></div>
 
-  <!-- Progress -->
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-
-  <!-- Question card -->
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+    <!-- Progress -->
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+
+    <!-- Question card -->
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Results -->
-  <div id="qz-results"></div>
+    <!-- Results -->
+    <div id="qz-results"></div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="main.js"></script>
-<script src="quiz.js"></script>
-<script>
-// ═══════════════════════════════════════════════════════════
-//  TD1 — Exercice 1 : Champs de position
-//  Concepts : $\vec{R}$, $R$, divergence, gradient
-// ═══════════════════════════════════════════════════════════
+  <script src="nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="main.js"></script>
+  <script src="quiz.js"></script>
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    //  TD1 — Exercice 1 : Champs de position
+    //  Concepts : $\vec{R}$, $R$, divergence, gradient
+    // ═══════════════════════════════════════════════════════════
 
-const questions = [
+    const questions = [
 
-  // ── Q1 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "En coordonnées cartésiennes, le champ de position $\\vec{R} = \\overrightarrow{OM}$ s'écrit $\\vec{R} = x\\,\\hat{u}_x + y\\,\\hat{u}_y + z\\,\\hat{u}_z$.",
-    answer: "true",
-    explanation: "Par définition, $\\overrightarrow{OM}$ relie l'origine au point $M(x,y,z)$, donc $\\vec{R} = x\\,\\hat{u}_x + y\\,\\hat{u}_y + z\\,\\hat{u}_z$ en cartésien. En sphérique, $\\vec{R} = r\\,\\hat{u}_r$ ; en cylindrique, $\\vec{R} = r\\,\\hat{u}_r + z\\,\\hat{u}_z$."
-  },
+      // ── Q1 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "En coordonnées cartésiennes, le champ de position $\\vec{R} = \\overrightarrow{OM}$ s'écrit $\\vec{R} = x\\,\\hat{u}_x + y\\,\\hat{u}_y + z\\,\\hat{u}_z$.",
+        answer: "true",
+        explanation: "Par définition, $\\overrightarrow{OM}$ relie l'origine au point $M(x,y,z)$, donc $\\vec{R} = x\\,\\hat{u}_x + y\\,\\hat{u}_y + z\\,\\hat{u}_z$ en cartésien. En sphérique, $\\vec{R} = r\\,\\hat{u}_r$ ; en cylindrique, $\\vec{R} = r\\,\\hat{u}_r + z\\,\\hat{u}_z$."
+      },
 
-  // ── Q2 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Quelle est la valeur de $\\vec{\\nabla}\\cdot\\vec{R}$ (divergence du champ de position) en tout point de l'espace ?",
-    options: ["$0$", "$1$", "$2$", "$3$"],
-    answer: "$3$",
-    explanation: "En cartésien : $\\vec{\\nabla}\\cdot\\vec{R} = \\dfrac{\\partial x}{\\partial x} + \\dfrac{\\partial y}{\\partial y} + \\dfrac{\\partial z}{\\partial z} = 1+1+1 = 3$. C'est la dimension de l'espace !"
-  },
+      // ── Q2 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Quelle est la valeur de $\\vec{\\nabla}\\cdot\\vec{R}$ (divergence du champ de position) en tout point de l'espace ?",
+        options: ["$0$", "$1$", "$2$", "$3$"],
+        answer: "$3$",
+        explanation: "En cartésien : $\\vec{\\nabla}\\cdot\\vec{R} = \\dfrac{\\partial x}{\\partial x} + \\dfrac{\\partial y}{\\partial y} + \\dfrac{\\partial z}{\\partial z} = 1+1+1 = 3$. C'est la dimension de l'espace !"
+      },
 
-  // ── Q3 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Que vaut $\\vec{\\nabla} R$ où $R = |\\vec{R}|$ est la norme du champ de position ?",
-    options: [
-      "$\\hat{u}_R$",
-      "$\\vec{R}$",
-      "$\\dfrac{1}{R}$",
-      "$R\\,\\hat{u}_R$"
-    ],
-    answer: "$\\hat{u}_R$",
-    explanation: "$R = \\sqrt{x^2+y^2+z^2}$, donc $\\dfrac{\\partial R}{\\partial x} = \\dfrac{x}{R}$, etc. On obtient $\\vec{\\nabla}R = \\dfrac{\\vec{R}}{R} = \\hat{u}_R$. Résultat fondamental en EM."
-  },
+      // ── Q3 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Que vaut $\\vec{\\nabla} R$ où $R = |\\vec{R}|$ est la norme du champ de position ?",
+        options: [
+          "$\\hat{u}_R$",
+          "$\\vec{R}$",
+          "$\\dfrac{1}{R}$",
+          "$R\\,\\hat{u}_R$"
+        ],
+        answer: "$\\hat{u}_R$",
+        explanation: "$R = \\sqrt{x^2+y^2+z^2}$, donc $\\dfrac{\\partial R}{\\partial x} = \\dfrac{x}{R}$, etc. On obtient $\\vec{\\nabla}R = \\dfrac{\\vec{R}}{R} = \\hat{u}_R$. Résultat fondamental en EM."
+      },
 
-  // ── Q4 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Quelle est la valeur de $\\vec{\\nabla}\\cdot\\!\\left(\\dfrac{\\vec{R}}{R^3}\\right)$ pour $R \\neq 0$ ?",
-    options: ["$3/R^3$", "$-2/R^3$", "$0$", "$1/R^2$"],
-    answer: "$0$",
-    explanation: "On peut montrer que $\\vec{\\nabla}\\cdot\\!\\left(\\dfrac{\\vec{R}}{R^3}\\right) = 0$ pour $R\\neq 0$. Ce champ est solénoïdal hors de l'origine. En électrostatique, c'est le champ d'une charge ponctuelle — sa divergence est nulle hors de la charge, et $4\\pi\\delta^3(\\vec{r})$ à l'origine."
-  },
+      // ── Q4 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Quelle est la valeur de $\\vec{\\nabla}\\cdot\\!\\left(\\dfrac{\\vec{R}}{R^3}\\right)$ pour $R \\neq 0$ ?",
+        options: ["$3/R^3$", "$-2/R^3$", "$0$", "$1/R^2$"],
+        answer: "$0$",
+        explanation: "On peut montrer que $\\vec{\\nabla}\\cdot\\!\\left(\\dfrac{\\vec{R}}{R^3}\\right) = 0$ pour $R\\neq 0$. Ce champ est solénoïdal hors de l'origine. En électrostatique, c'est le champ d'une charge ponctuelle — sa divergence est nulle hors de la charge, et $4\\pi\\delta^3(\\vec{r})$ à l'origine."
+      },
 
-  // ── Q5 · TF ──────────────────────────────────────────────
-  {
-    type: "tf",
-    question: "On a $\\vec{\\nabla}\\cdot\\!\\left(\\dfrac{\\vec{R}}{R^2}\\right) = \\dfrac{1}{R^2}$.",
-    answer: "false",
-    explanation: "Le calcul donne $\\vec{\\nabla}\\cdot\\!\\left(\\dfrac{\\vec{R}}{R^2}\\right) = \\dfrac{1}{R^2}$ est **faux**. Le résultat correct est $\\dfrac{3}{R^2} - \\dfrac{2}{R^2} = \\dfrac{1}{R^2}$... non — recalculons : $\\vec{\\nabla}\\cdot(R^n \\vec{R}) = (n+3)R^n$. Pour $n=-2$ : $(1)R^{-2} = 1/R^2$. Donc c'est en fait **vrai** pour $R\\neq 0$. Mais la formule générale est $\\vec{\\nabla}\\cdot\\!(R^n\\vec{R}) = (n+3)R^n$ — cette question illustre l'importance de vérifier le calcul complet."
-  },
+      // ── Q5 · TF ──────────────────────────────────────────────
+      {
+        type: "tf",
+        question: "On a $\\vec{\\nabla}\\cdot\\!\\left(\\dfrac{\\vec{R}}{R^2}\\right) = \\dfrac{1}{R^2}$.",
+        answer: "true",
+        explanation: `md:
+On utilise la formule générale $\\vec{\\nabla}\\cdot(R^n\\vec{R}) = (n+3)R^n$. Avec $n = -2$ :
 
-  // ── Q6 · Fill ─────────────────────────────────────────────
-  {
-    type: "fill",
-    question: "Complétez : $\\vec{\\nabla}\\!\\left(\\dfrac{1}{R}\\right) = $ ___",
-    symbols: ['-', 'u_r', '/', 'R', '^2', '^3'],
-    hint: "Forme attendue : ex. `-u_r/R^2`",
-    retryHint: "md:Pense à $\\vec{\\nabla}f(R) = f'(R)\\,\\hat{u}_R$. Ici $f(R) = 1/R$, donc $f'(R) = ?$",
-    answer: ["-R/R^3", "-u_r/R^2", "-ur/R^2", "-u_r/r^2"],
-    explanation: "$\\vec{\\nabla}\\!\\left(\\dfrac{1}{R}\\right) = -\\dfrac{\\vec{R}}{R^3} = -\\dfrac{\\hat{u}_R}{R^2}$. Ce résultat est essentiel : il montre que le potentiel coulombien $V = q/(4\\pi\\varepsilon_0 R)$ donne bien $\\vec{E} = -\\vec{\\nabla}V = q\\vec{R}/(4\\pi\\varepsilon_0 R^3)$."
-  },
+$$\\vec{\\nabla}\\cdot\\!\\left(\\frac{\\vec{R}}{R^2}\\right) = (-2+3)\\,R^{-2} = \\frac{1}{R^2}$$
 
-  // ── Q7 · Conceptual ──────────────────────────────────────
-  {
-    type: "conceptual",
-    question: "Le champ $\\vec{F} = \\dfrac{\\vec{R}}{R^3}$ est-il à flux conservatif (solénoïdal) pour $R \\neq 0$ ?",
-    options: [
-      "Oui, car $\\vec{\\nabla}\\cdot\\vec{F} = 0$ pour $R\\neq 0$",
-      "Non, car $\\vec{\\nabla}\\cdot\\vec{F} = 3/R^3 \\neq 0$",
-      "Oui, mais seulement loin de l'origine",
-      "Non, car son rotationnel est non nul"
-    ],
-    answer: "Oui, car $\\vec{\\nabla}\\cdot\\vec{F} = 0$ pour $R\\neq 0$",
-    explanation: "Un champ est solénoïdal si $\\vec{\\nabla}\\cdot\\vec{F} = 0$. On montre que $\\vec{\\nabla}\\cdot(\\vec{R}/R^3) = 0$ pour $R\\neq 0$. À l'origine, la divergence est une distribution de Dirac : $\\vec{\\nabla}\\cdot(\\vec{R}/R^3) = 4\\pi\\delta^3(\\vec{r})$."
-  },
+C'est bien **vrai** pour $R \\neq 0$. À retenir : $\\vec{\\nabla}\\cdot\\!(R^n\\vec{R}) = (n+3)R^n$ — cas particuliers importants : $n=-3$ donne $0$ (solénoïdal), $n=-2$ donne $1/R^2$.
+`
+      },
 
-  // ── Q8 · MCQ ─────────────────────────────────────────────
-  {
-    type: "mcq",
-    question: "Quelle est l'expression de $\\vec{R}$ en coordonnées sphériques ?",
-    options: [
-      "$r\\,\\hat{u}_r$",
-      "$r\\,\\hat{u}_r + z\\,\\hat{u}_z$",
-      "$r\\,\\hat{u}_r + r\\,\\hat{u}_\\theta$",
-      "$x\\,\\hat{u}_x + y\\,\\hat{u}_y + z\\,\\hat{u}_z$"
-    ],
-    answer: "$r\\,\\hat{u}_r$",
-    explanation: "En sphériques, $\\hat{u}_r$ pointe radiallement depuis l'origine vers $M$, et $r = R = |\\overrightarrow{OM}|$. Donc $\\vec{R} = r\\,\\hat{u}_r$. La forme $r\\,\\hat{u}_r + z\\,\\hat{u}_z$ est la décomposition en **cylindriques**."
-  },
+      // ── Q6 · Fill ─────────────────────────────────────────────
+      {
+        type: "fill",
+        question: "Complétez : $\\vec{\\nabla}\\!\\left(\\dfrac{1}{R}\\right) = $ ___",
+        symbols: ['-', 'u_r', '/', 'R', '^2', '^3'],
+        hint: "Forme attendue : ex. `A/B`",
+        retryHint: "md:Pense à $\\vec{\\nabla}f(R) = f'(R)\\,\\hat{u}_R$. Ici $f(R) = 1/R$, donc $f'(R) = ?$",
+        answer: ["-R/R^3", "-u_r/R^2", "-(1/R^3)R", "-(1/R^2)u_r"],
+        explanation: "$\\vec{\\nabla}\\!\\left(\\dfrac{1}{R}\\right) = -\\dfrac{\\vec{R}}{R^3} = -\\dfrac{\\hat{u}_R}{R^2}$. Ce résultat est essentiel : il montre que le potentiel coulombien $V = q/(4\\pi\\varepsilon_0 R)$ donne bien $\\vec{E} = -\\vec{\\nabla}V = q\\vec{R}/(4\\pi\\varepsilon_0 R^3)$."
+      },
 
-];
+      // ── Q7 · Conceptual ──────────────────────────────────────
+      {
+        type: "conceptual",
+        question: "Le champ $\\vec{F} = \\dfrac{\\vec{R}}{R^3}$ est-il à flux conservatif (solénoïdal) pour $R \\neq 0$ ?",
+        options: [
+          "Oui, car $\\vec{\\nabla}\\cdot\\vec{F} = 0$ pour $R\\neq 0$",
+          "Non, car $\\vec{\\nabla}\\cdot\\vec{F} = 3/R^3 \\neq 0$",
+          "Oui, mais seulement loin de l'origine",
+          "Non, car son rotationnel est non nul"
+        ],
+        answer: "Oui, car $\\vec{\\nabla}\\cdot\\vec{F} = 0$ pour $R\\neq 0$",
+        explanation: "Un champ est solénoïdal si $\\vec{\\nabla}\\cdot\\vec{F} = 0$. On montre que $\\vec{\\nabla}\\cdot(\\vec{R}/R^3) = 0$ pour $R\\neq 0$. À l'origine, la divergence est une distribution de Dirac : $\\vec{\\nabla}\\cdot(\\vec{R}/R^3) = 4\\pi\\delta^3(\\vec{r})$."
+      },
 
-QuizEngine.loadQuiz("td1_ex1", questions, `md:
+      // ── Q8 · MCQ ─────────────────────────────────────────────
+      {
+        type: "mcq",
+        question: "Quelle est l'expression de $\\vec{R}$ en coordonnées sphériques ?",
+        options: [
+          "$r\\,\\hat{u}_r$",
+          "$r\\,\\hat{u}_r + z\\,\\hat{u}_z$",
+          "$r\\,\\hat{u}_r + r\\,\\hat{u}_\\theta$",
+          "$x\\,\\hat{u}_x + y\\,\\hat{u}_y + z\\,\\hat{u}_z$"
+        ],
+        answer: "$r\\,\\hat{u}_r$",
+        explanation: "En sphériques, $\\hat{u}_r$ pointe radiallement depuis l'origine vers $M$, et $r = R = |\\overrightarrow{OM}|$. Donc $\\vec{R} = r\\,\\hat{u}_r$. La forme $r\\,\\hat{u}_r + z\\,\\hat{u}_z$ est la décomposition en **cylindriques**."
+      },
+
+    ];
+
+    QuizEngine.loadQuiz("td1_ex1", questions, `md:
 ## Exercice 1 — Champs de position
 
 On considère le champ vectoriel $\\vec{R}$ qui est en un point $M$ le vecteur $\\overrightarrow{OM}$, et le champ scalaire $R$, norme de $\\vec{R}$.
@@ -173,6 +184,7 @@ On considère le champ vectoriel $\\vec{R}$ qui est en un point $M$ le vecteur $
 - $\\text{div}\\!\\left(\\dfrac{\\vec{R}}{R^3}\\right)$
 - $\\vec{\\nabla}\\!\\left(\\dfrac{1}{R^2}\\right)$
 `);
-</script>
+  </script>
 </body>
+
 </html>
