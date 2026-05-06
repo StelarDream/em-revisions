@@ -106,6 +106,7 @@
   <script src="scripts/main.js"></script>
   <script type="module">
     import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    import { QUIZZES } from '/em-revisions/scripts/config.js';
 
     const catalogue = {
       "td1": [
@@ -367,6 +368,8 @@
     function renderGrid(entries, gridId) {
       const grid = document.getElementById(gridId);
       if (!grid) return;
+      const tdKey = gridId.replace('grid-', '');
+      const icClass = (QUIZZES[tdKey] || {}).ic || 'ic-1';
       grid.innerHTML = entries.map(e => {
         const attempts = QuizEngine.Storage.getAttempts(e.id);
         const last = attempts.length > 0 ? attempts[attempts.length - 1] : null;
@@ -381,7 +384,7 @@
             : `${pts.toFixed(1)} pts`)
           : 'Nouveau';
         return `
-      <a href="${e.file}" class="index-card ${e.color}">
+      <a href="${e.file}" class="index-card ${icClass}">
         <span class="num">${e.label} &nbsp;<span class="badge ${badgeCls}">${badgeTxt}</span></span>
         <span class="title">${e.title}</span>
         <span class="desc">${e.desc}</span>
@@ -450,6 +453,13 @@
     renderGrid(catalogue.td5, 'grid-td5');
     renderGrid(catalogue.td6, 'grid-td6');
     renderGrid(catalogue.td7, 'grid-td7');
+
+    // Sync section header dots with config colors
+    for (const [key, cfg] of Object.entries(QUIZZES)) {
+      const grid = document.getElementById(`grid-${key}`);
+      const dot = grid?.closest('.section')?.querySelector('.dot');
+      if (dot) dot.style.background = `var(${cfg.css})`;
+    }
   </script>
 </body>
 

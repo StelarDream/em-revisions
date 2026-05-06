@@ -20,6 +20,10 @@
   --accent3-soft: #eafaf1;
   --accent4: #7d3c98;
   --accent4-soft: #f5eef8;
+  --accent4b: #5b2c6f;
+  --accent4b-soft: #ede0f5;
+  --accent4c: #9b59b6;
+  --accent4c-soft: #f3eafa;
   --accent5: #d4800a;
   --accent5-soft: #fef9ec;
 
@@ -684,6 +688,22 @@ strong {
 
 .ic-4 .num {
   color: var(--accent4);
+}
+
+.ic-4b {
+  border-top: 3px solid var(--accent4b);
+}
+
+.ic-4b .num {
+  color: var(--accent4b);
+}
+
+.ic-4c {
+  border-top: 3px solid var(--accent4c);
+}
+
+.ic-4c .num {
+  color: var(--accent4c);
 }
 
 .ic-5 {
