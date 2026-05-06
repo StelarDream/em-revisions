@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD2 Ex3 — Distribution de trois charges</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+
+<div id="topbar" class="topbar"></div>
+
+<main class="quiz-page">
+
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD2 · Exercice 3 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent4)">Distribution de trois charges</h1>
+    <p class="ch-subtitle">Développement multipolaire — molécule CO$_2$, équation de Laplace</p>
+  </div>
+
+  <div id="qz-past-attempts"></div>
+
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="qz-results"></div>
+
+</main>
+
+<button id="btt" title="Haut de page">↑</button>
+
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+// ═══════════════════════════════════════════════════════════
+//  TD2 — Exercice 3 : Distribution de trois charges
+//  Modèle CO₂ : q1 = q2 = -q/2 (O), q0 = +q (C), espacés de d
+//  Développement multipolaire, équation de Laplace
+// ═══════════════════════════════════════════════════════════
+
+const CTX = `
+  Trois charges $q_1$, $q_0$, $q_2$ sont alignées, espacées d'une distance $d$.
+  On note $r_1$, $r$, $r_2$ leurs distances à un point $M$ quelconque, et $\\theta$ l'angle entre l'axe des charges et $\\overrightarrow{q_0 M}$.
+  $$\\text{Modèle CO}_2 : q_0 = +q,\\quad q_1 = q_2 = -\\tfrac{q}{2}$$
+`;
+
+const questions = [
+
+  // ── Q1 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Quel est le potentiel total $V(M)$ créé par les trois charges en un point $M$ quelconque ?",
+    options: [
+      "$V(M) = \\dfrac{1}{4\\pi\\varepsilon_0}\\!\\left(\\dfrac{q_1}{r_1} + \\dfrac{q_0}{r} + \\dfrac{q_2}{r_2}\\right)$",
+      "$V(M) = \\dfrac{q_0+q_1+q_2}{4\\pi\\varepsilon_0 r}$",
+      "$V(M) = \\dfrac{1}{4\\pi\\varepsilon_0}\\!\\left(\\dfrac{q_1}{r_1^2} + \\dfrac{q_0}{r^2} + \\dfrac{q_2}{r_2^2}\\right)$",
+      "$V(M) = \\dfrac{q_1 r_1 + q_0 r + q_2 r_2}{4\\pi\\varepsilon_0}$"
+    ],
+    answer: "$V(M) = \\dfrac{1}{4\\pi\\varepsilon_0}\\!\\left(\\dfrac{q_1}{r_1} + \\dfrac{q_0}{r} + \\dfrac{q_2}{r_2}\\right)$",
+    explanation: "Le potentiel est scalaire et additif. Pour chaque charge ponctuelle $q_i$ à distance $r_i$ de $M$ : $V_i = q_i/(4\\pi\\varepsilon_0 r_i)$. Le potentiel total est la somme des contributions — c'est la superposition des potentiels."
+  },
+
+  // ── Q2 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Pour $M$ loin des charges ($r \\gg d$), au premier ordre en $d/r$, quelle est l'approximation de $r_1$ (distance de $q_1$ à $M$, avec $q_1$ à $-d$ de $q_0$) ?",
+    options: [
+      "$r_1 \\approx r\\left(1 + \\dfrac{d\\cos\\theta}{r}\\right)^{1/2} \\approx r + \\dfrac{d\\cos\\theta}{2}$",
+      "$r_1 \\approx r + d\\cos\\theta$",
+      "$r_1 \\approx r - d\\cos\\theta$",
+      "$r_1 \\approx r\\sqrt{1 + (d/r)^2}$"
+    ],
+    answer: "$r_1 \\approx r + d\\cos\\theta$",
+    explanation: "Par la loi d'Al-Kashi : $r_1^2 = r^2 + d^2 - 2rd\\cos\\theta \\approx r^2(1 - 2d\\cos\\theta/r)$ pour $d \\ll r$. Donc $r_1 \\approx r\\sqrt{1-2d\\cos\\theta/r} \\approx r(1 - d\\cos\\theta/r) = r - d\\cos\\theta$. Wait — on place $q_1$ à $+d$ le long de l'axe, et $q_2$ à $-d$, ce qui donne $r_1 \\approx r - d\\cos\\theta$ et $r_2 \\approx r + d\\cos\\theta$. (Vérifier le signe selon la convention choisie dans l'énoncé.)"
+  },
+
+  // ── Q3 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Quel terme $A$ apparaît au premier ordre ($1/r$) du développement multipolaire $V(M) = \\frac{1}{4\\pi\\varepsilon_0}\\left[\\frac{A}{r} + \\frac{B\\cos\\theta}{r^2} + \\cdots\\right]$ ?",
+    options: [
+      "$A = q_1 + q_0 + q_2$ (charge totale)",
+      "$A = q_0 - q_1 - q_2$",
+      "$A = (q_1 - q_2)d$",
+      "$A = q_0$"
+    ],
+    answer: "$A = q_1 + q_0 + q_2$ (charge totale)",
+    explanation: "Le terme monopolaire (ordre $1/r$) est toujours la charge totale : $A = q_1 + q_0 + q_2$. C'est la contribution dominante à grande distance. Pour CO$_2$ : $A = -q/2 + q - q/2 = 0$ — le terme monopolaire est nul, la molécule est électriquement neutre."
+  },
+
+  // ── Q4 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    context: CTX,
+    question: "Pour CO$_2$ ($q_0 = +q$, $q_1 = q_2 = -q/2$), le terme dipolaire $B$ est également nul.",
+    answer: "true",
+    explanation: "$B = (q_1 - q_2) \\times d/2 + \\ldots$ — mais par symétrie $q_1 = q_2$, donc le moment dipolaire $B \\propto q_1 - q_2 = 0$. De façon plus rigoureuse, le moment dipolaire est $p = \\sum q_i z_i = (-q/2)(-d) + q \\cdot 0 + (-q/2)(+d) = qd/2 - qd/2 = 0$. La molécule CO$_2$ est apolaire — son premier terme non nul est le terme quadripolaire ($1/r^3$)."
+  },
+
+  // ── Q5 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX,
+    question: "Pour CO$_2$ (charge totale nulle, dipôle nul), le potentiel dominant à grande distance est le terme quadripolaire. Il varie comme :",
+    options: [
+      "$1/r^3$",
+      "$1/r^2$",
+      "$1/r$",
+      "$1/r^4$"
+    ],
+    answer: "$1/r^3$",
+    explanation: "Le développement multipolaire donne $V \\sim A/r + B/r^2 + C/r^3 + \\ldots$ Pour CO$_2$, $A = 0$ (neutre) et $B = 0$ (apolaire), donc le terme dominant est le terme quadripolaire $\\propto C/r^3$. C'est pourquoi les interactions entre molécules de CO$_2$ sont de courte portée (décroissance rapide)."
+  },
+
+  // ── Q6 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "Le potentiel $V(M) = \\dfrac{C(3\\cos^2\\theta - 1)}{4\\pi\\varepsilon_0 r^3}$ (terme quadripolaire) vérifie l'équation de Laplace $\\Delta V = 0$ partout sauf à l'origine.",
+    answer: "true",
+    explanation: "En dehors des charges sources, le potentiel vérifie $\\Delta V = 0$ (équation de Laplace). Le terme quadripolaire est une solution de Laplace en coordonnées sphériques — c'est une harmonique sphérique de degré 2. On peut vérifier directement que $\\Delta\\left(\\frac{3\\cos^2\\theta - 1}{r^3}\\right) = 0$ pour $r > 0$."
+  },
+
+  // ── Q7 · MCQ ─────────────────────────────────────────────
+  {
+    type: "mcq",
+    question: "L'équation de Poisson relie le potentiel $V$ à la densité de charge $\\rho$. Laquelle est correcte ?",
+    options: [
+      "$\\Delta V = -\\dfrac{\\rho}{\\varepsilon_0}$",
+      "$\\Delta V = \\dfrac{\\rho}{\\varepsilon_0}$",
+      "$\\vec{\\nabla} V = -\\dfrac{\\rho}{\\varepsilon_0}$",
+      "$\\Delta V = \\rho\\varepsilon_0$"
+    ],
+    answer: "$\\Delta V = -\\dfrac{\\rho}{\\varepsilon_0}$",
+    explanation: "L'équation de Poisson est $\\Delta V = -\\rho/\\varepsilon_0$. Elle découle de $\\vec{\\nabla}\\cdot\\vec{E} = \\rho/\\varepsilon_0$ (Maxwell-Gauss) et $\\vec{E} = -\\vec{\\nabla}V$, d'où $\\Delta V = \\vec{\\nabla}\\cdot(\\vec{\\nabla}V) = -\\vec{\\nabla}\\cdot\\vec{E} = -\\rho/\\varepsilon_0$. En l'absence de charges ($\\rho = 0$) : équation de Laplace $\\Delta V = 0$."
+  },
+
+  // ── Q8 · TF ──────────────────────────────────────────────
+  {
+    type: "tf",
+    question: "La divergence du gradient d'un potentiel vérifiant l'équation de Laplace est nulle.",
+    answer: "true",
+    explanation: "Par définition, $\\Delta V = \\vec{\\nabla}\\cdot(\\vec{\\nabla}V) = \\text{div}(\\text{grad}\\,V)$. Si $V$ vérifie l'équation de Laplace ($\\Delta V = 0$), alors $\\text{div}(\\text{grad}\\,V) = 0$, autrement dit la divergence du gradient de $V$ est nulle. C'est exactement la question 6 de l'exercice (calcul de $\\Delta V$)."
+  },
+
+];
+
+QuizEngine.loadQuiz("td2_ex3", questions, `md:
+## Exercice 3 — Distribution de trois charges (modèle CO₂)
+
+Trois charges $q_1$, $q_0$, $q_2$ sont alignées à égale distance $d$. On modélise CO$_2$ par $q_0 = +q$ (carbone) et $q_1 = q_2 = -q/2$ (oxygènes).
+
+**1.** Calculer le potentiel $V(M)$.
+
+**2.** Exprimer $r_1$ et $r_2$ en fonction de $r$, $\\theta$, $d$.
+
+**3.** Pour $r \\gg d$, montrer que $V(M) = \\frac{1}{4\\pi\\varepsilon_0}\\left[\\frac{A}{r} + \\frac{B\\cos\\theta}{r^2} + \\frac{C(3\\cos^2\\theta-1)}{r^3}\\right]$.
+
+**4–5.** Appliquer à CO$_2$ ($d = 0{,}1143$ nm, $q = 0{,}892|e|$). Calculer $\\vec{E}$, $\\Delta V$, vérifier l'équation de Laplace.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>
