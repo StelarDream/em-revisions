@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,147 +10,151 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
-<div id="topbar" class="topbar"></div>
-<main class="quiz-page">
-  <div class="quiz-header ch-header">
-    <p class="ch-label">TD8 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
-    <h1 class="ch-title" style="color:var(--accent2)">Mise en charge d'une bobine</h1>
-    <p class="ch-subtitle">Circuit RL — champ $\vec{E}$ induit, Poynting radial, bilan $U_m = \frac{1}{2}Li^2$</p>
-  </div>
-  <div id="qz-past-attempts"></div>
-  <div class="qz-progress">
-    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
-    <span id="qz-progress-label"></span>
-  </div>
-  <div id="qz-question-area">
-    <div class="qz-card">
-      <div class="qz-card-header">
-        <span id="qz-qnum"></span>
-        <span id="qz-qtype" class="qz-type-badge"></span>
+  <div id="topbar" class="topbar"></div>
+  <main class="quiz-page">
+    <div class="quiz-header ch-header">
+      <p class="ch-label">TD8 · Exercice 2 &nbsp;—&nbsp; Quiz</p>
+      <h1 class="ch-title" style="color:var(--accent2)">Mise en charge d'une bobine</h1>
+      <p class="ch-subtitle">Circuit RL — champ $\vec{E}$ induit, Poynting radial, bilan $U_m = \frac{1}{2}Li^2$</p>
+    </div>
+    <div id="qz-past-attempts"></div>
+    <div class="qz-progress">
+      <div class="qz-progress-track">
+        <div id="qz-progress-fill"></div>
       </div>
-      <div id="qz-context"></div>
-      <div id="qz-qtext"></div>
-      <div id="qz-input-area"></div>
-      <div id="qz-feedback" class="qz-feedback"></div>
-      <div class="qz-actions" id="qz-actions-row">
-        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
-        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      <span id="qz-progress-label"></span>
+    </div>
+    <div id="qz-question-area">
+      <div class="qz-card">
+        <div class="qz-card-header">
+          <span id="qz-qnum"></span>
+          <span id="qz-qtype" class="qz-type-badge"></span>
+        </div>
+        <div id="qz-context"></div>
+        <div id="qz-qtext"></div>
+        <div id="qz-input-area"></div>
+        <div id="qz-feedback" class="qz-feedback"></div>
+        <div class="qz-actions" id="qz-actions-row">
+          <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+          <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant
+            →</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="qz-results"></div>
-</main>
-<button id="btt" title="Haut de page">↑</button>
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+    <div id="qz-results"></div>
+  </main>
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
 
-const CTX = `
+    const CTX = `
   Solénoïde : longueur $l$, rayon $a$, $n$ spires/m, axe $Oz$.
   Branché sur générateur de fem $e$, résistance interne $R \\gg$ résistance bobine.
   Circuit fermé à $t = 0$, courant initial $i_0$.
 `;
 
-const questions = [
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Après fermeture du circuit, la loi d'évolution du courant dans un circuit RL ($L = \\mu_0 n^2 \\pi a^2 l$) est :",
-    options: [
-      "$i(t) = \\dfrac{e}{R}\\left(1 - e^{-t/\\tau}\\right) + i_0 e^{-t/\\tau}$ avec $\\tau = L/R$",
-      "$i(t) = \\dfrac{e}{R}\\left(1 - e^{-t/\\tau}\\right)$ avec $i_0 = 0$",
-      "$i(t) = i_0 e^{-t/\\tau}$",
-      "$i(t) = e/R$ immédiatement"
-    ],
-    answer: "$i(t) = \\dfrac{e}{R}\\left(1 - e^{-t/\\tau}\\right) + i_0 e^{-t/\\tau}$ avec $\\tau = L/R$",
-    explanation: "La loi des mailles : $e = Ri + L\\dot{i}$. Solution générale : $i(t) = e/R + Ae^{-t/\\tau}$. Avec $i(0) = i_0$ : $A = i_0 - e/R$, d'où $i(t) = e/R + (i_0 - e/R)e^{-t/\\tau}$. Cela se réécrit comme indiqué. Si $i_0 = 0$ : régime de charge classique $i = (e/R)(1-e^{-t/\\tau})$."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "L'ARQS (approximation des régimes quasi-stationnaires) signifie que $\\tau_{EM} \\ll \\tau_{circuit}$. Pour ce solénoïde, cela implique que :",
-    options: [
-      "La taille du solénoïde est très petite devant $\\lambda = c/f$ — les effets de propagation sont négligeables",
-      "Le courant est constant dans tout le circuit à chaque instant",
-      "La résistance $R$ est très grande",
-      "L'inductance $L$ est nulle"
-    ],
-    answer: "La taille du solénoïde est très petite devant $\\lambda = c/f$ — les effets de propagation sont négligeables",
-    explanation: "L'ARQS est valide quand la longueur du circuit $\\ell \\ll \\lambda = c/f$ (longueur d'onde associée à la fréquence caractéristique $f \\sim 1/\\tau$). Dans ce cas, le champ se propage instantanément dans tout le circuit — on peut appliquer les lois de la magnétostatique (Ampère, $B = \\mu_0 nI$) même si $i$ varie, pourvu que la variation soit lente."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "En ARQS, le champ à l'intérieur du solénoïde est $\\vec{B}(t) = \\mu_0 n i(t)\\hat{u}_z$. Par les symétries, dans quelle direction est le champ $\\vec{E}$ induit (pour $r < a$) ?",
-    options: [
-      "Selon $\\hat{u}_\\varphi$ — tout plan $z=cte$ est plan d'antisymétrie de $\\partial\\vec{B}/\\partial t$",
-      "Selon $\\hat{u}_z$",
-      "Selon $\\hat{u}_r$",
-      "$\\vec{E} = \\vec{0}$"
-    ],
-    answer: "Selon $\\hat{u}_\\varphi$ — tout plan $z=cte$ est plan d'antisymétrie de $\\partial\\vec{B}/\\partial t$",
-    explanation: "$\\partial\\vec{B}/\\partial t = \\mu_0 n\\dot{i}\\hat{u}_z$ — même direction que $\\vec{B}$, donc même analyse de symétrie. Tout plan $z = cte$ est plan d'antisymétrie ⟹ $\\vec{E}$ perpendiculaire à ce plan ⟹ $\\vec{E} \\parallel \\hat{u}_\\varphi$. L'invariance par rotation ⟹ $E$ indépendant de $\\varphi$. Donc $\\vec{E} = E(r,t)\\hat{u}_\\varphi$."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Par le théorème de Stokes sur un cercle de rayon $r < a$ : $\\oint\\vec{E}\\cdot d\\vec{\\ell} = -d\\Phi/dt$. Le champ $\\vec{E}$ à l'intérieur vaut :",
-    options: [
-      "$\\vec{E}(r,t) = -\\dfrac{\\mu_0 n\\dot{i}\\,r}{2}\\hat{u}_\\varphi$",
-      "$\\vec{E}(r,t) = -\\dfrac{\\mu_0 n\\dot{i}\\,a^2}{2r}\\hat{u}_\\varphi$",
-      "$\\vec{E}(r,t) = -\\mu_0 n\\dot{i}\\,r\\,\\hat{u}_\\varphi$",
-      "$\\vec{E}(r,t) = \\dfrac{\\mu_0 n\\dot{i}\\,r}{2}\\hat{u}_\\varphi$"
-    ],
-    answer: "$\\vec{E}(r,t) = -\\dfrac{\\mu_0 n\\dot{i}\\,r}{2}\\hat{u}_\\varphi$",
-    explanation: "$E\\cdot 2\\pi r = -\\frac{d}{dt}(\\mu_0 ni\\cdot\\pi r^2) = -\\mu_0 n\\dot{i}\\pi r^2$. Donc $E = -\\mu_0 n\\dot{i}r/2$. Le signe $-$ traduit la loi de Lenz : si $\\dot{i} > 0$ ($B$ augmente), $\\vec{E}$ est dans $-\\hat{u}_\\varphi$ (s'oppose à l'augmentation). Ce champ électrique induit est exactement celui qui crée la fem d'auto-induction $e_{auto} = -L\\dot{i}$."
-  },
-  {
-    type: "tf",
-    context: CTX,
-    question: "En ARQS (régime lentement variable), la densité d'énergie électrique $u_E = \\varepsilon_0 E^2/2$ est négligeable devant la densité d'énergie magnétique $u_B = B^2/(2\\mu_0)$.",
-    answer: "true",
-    explanation: "$u_E/u_B = \\varepsilon_0 E^2/(B^2/\\mu_0) = \\varepsilon_0\\mu_0 E^2/B^2$. Ici $E \\sim \\mu_0 n\\dot{i}a/2$ et $B = \\mu_0 ni$. Donc $u_E/u_B \\sim \\varepsilon_0\\mu_0(\\dot{i}/i)^2 a^2 \\sim (a/c\\tau)^2 \\ll 1$ en ARQS ($a \\ll c\\tau = \\lambda$). L'énergie électrique est d'ordre $(v/c)^2$ devant l'énergie magnétique — négligeable en régime quasi-stationnaire."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Le vecteur de Poynting en surface du solénoïde ($r = a$) est $\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B}$. Sa direction est :",
-    options: [
-      "Selon $-\\hat{u}_r$ si $\\dot{i} > 0$ — l'énergie entre dans le solénoïde pour charger le champ $\\vec{B}$",
-      "Selon $+\\hat{u}_r$ — l'énergie sort du solénoïde",
-      "Selon $\\hat{u}_z$",
-      "$\\vec{\\Pi} = \\vec{0}$"
-    ],
-    answer: "Selon $-\\hat{u}_r$ si $\\dot{i} > 0$ — l'énergie entre dans le solénoïde pour charger le champ $\\vec{B}$",
-    explanation: "En $r = a$ : $\\vec{E} = -\\frac{\\mu_0 n\\dot{i}a}{2}\\hat{u}_\\varphi$ et $\\vec{B} = \\mu_0 ni\\hat{u}_z$. $\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B} = -\\frac{n\\dot{i}a}{2}\\hat{u}_\\varphi\\wedge\\mu_0 ni\\hat{u}_z = -\\frac{\\mu_0 n^2 a i\\dot{i}}{2}(\\hat{u}_\\varphi\\wedge\\hat{u}_z) = -\\frac{\\mu_0 n^2 a i\\dot{i}}{2}\\hat{u}_r$. Pour $\\dot{i} > 0$ : $\\vec{\\Pi}$ selon $-\\hat{u}_r$ — l'énergie pénètre dans le solénoïde et s'y stocke sous forme de champ magnétique."
-  },
-  {
-    type: "tf",
-    context: CTX,
-    question: "L'équation de conservation de l'énergie électromagnétique $\\partial u_{em}/\\partial t + \\vec{\\nabla}\\cdot\\vec{\\Pi} = -\\vec{j}\\cdot\\vec{E}$ est vérifiée dans ce solénoïde (en négligeant $u_E$).",
-    answer: "true",
-    explanation: "$\\partial u_B/\\partial t = \\partial(B^2/2\\mu_0)/\\partial t = \\mu_0 n^2 i\\dot{i}$. $\\vec{\\nabla}\\cdot\\vec{\\Pi} = \\frac{1}{r}\\frac{\\partial(r\\Pi_r)}{\\partial r}$... En fait, $\\vec{\\Pi}$ est uniforme pour $r < a$ et on vérifie en intégrant sur un cylindre de longueur $l$ : le flux entrant $= |\\Pi_r|\\times 2\\pi al = \\mu_0 n^2 i\\dot{i}\\pi a^2 l = \\frac{d}{dt}(\\frac{1}{2}Li^2)$. C'est bien la variation d'énergie magnétique — le bilan est vérifié (ici $\\vec{j} = \\vec{0}$ dans le solénoïde idéal, pas de dissipation)."
-  },
-  {
-    type: "mcq",
-    context: CTX,
-    question: "Bilan d'énergie de $t=0$ ($i=i_0$) à $t\\to\\infty$ ($i\\to 0$, courant annulé). L'énergie magnétique $\\Delta U_m = \\frac{1}{2}L(0 - i_0^2) = -\\frac{1}{2}Li_0^2$ est :",
-    options: [
-      "Entièrement dissipée dans la résistance $R$ par effet Joule : $\\int_0^\\infty Ri^2\\,dt = \\frac{1}{2}Li_0^2$",
-      "Rayonnée sous forme d'ondes électromagnétiques",
-      "Stockée dans le champ électrique",
-      "Restituée au générateur"
-    ],
-    answer: "Entièrement dissipée dans la résistance $R$ par effet Joule : $\\int_0^\\infty Ri^2\\,dt = \\frac{1}{2}Li_0^2$",
-    explanation: "Avec $e = 0$ (générateur coupé) et $i(t) = i_0 e^{-t/\\tau}$ : $\\int_0^\\infty Ri^2 dt = Ri_0^2\\int_0^\\infty e^{-2t/\\tau}dt = Ri_0^2\\cdot\\frac{\\tau}{2} = Ri_0^2\\cdot\\frac{L}{2R} = \\frac{1}{2}Li_0^2$ ✓. L'énergie magnétique stockée dans la bobine est intégralement convertie en chaleur dans $R$. C'est le pendant magnétique de la décharge d'un condensateur dans une résistance."
-  },
-];
+    const questions = [
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Après fermeture du circuit, la loi d'évolution du courant dans un circuit RL ($L = \\mu_0 n^2 \\pi a^2 l$) est :",
+        options: [
+          "$i(t) = \\dfrac{e}{R}\\left(1 - e^{-t/\\tau}\\right) + i_0 e^{-t/\\tau}$ avec $\\tau = L/R$",
+          "$i(t) = \\dfrac{e}{R}\\left(1 - e^{-t/\\tau}\\right)$ avec $i_0 = 0$",
+          "$i(t) = i_0 e^{-t/\\tau}$",
+          "$i(t) = e/R$ immédiatement"
+        ],
+        answer: "$i(t) = \\dfrac{e}{R}\\left(1 - e^{-t/\\tau}\\right) + i_0 e^{-t/\\tau}$ avec $\\tau = L/R$",
+        explanation: "La loi des mailles : $e = Ri + L\\dot{i}$. Solution générale : $i(t) = e/R + Ae^{-t/\\tau}$. Avec $i(0) = i_0$ : $A = i_0 - e/R$, d'où $i(t) = e/R + (i_0 - e/R)e^{-t/\\tau}$. Cela se réécrit comme indiqué. Si $i_0 = 0$ : régime de charge classique $i = (e/R)(1-e^{-t/\\tau})$."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "L'ARQS (approximation des régimes quasi-stationnaires) signifie que $\\tau_{EM} \\ll \\tau_{circuit}$. Pour ce solénoïde, cela implique que :",
+        options: [
+          "La taille du solénoïde est très petite devant $\\lambda = c/f$ — les effets de propagation sont négligeables",
+          "Le courant est constant dans tout le circuit à chaque instant",
+          "La résistance $R$ est très grande",
+          "L'inductance $L$ est nulle"
+        ],
+        answer: "La taille du solénoïde est très petite devant $\\lambda = c/f$ — les effets de propagation sont négligeables",
+        explanation: "L'ARQS est valide quand la longueur du circuit $\\ell \\ll \\lambda = c/f$ (longueur d'onde associée à la fréquence caractéristique $f \\sim 1/\\tau$). Dans ce cas, le champ se propage instantanément dans tout le circuit — on peut appliquer les lois de la magnétostatique (Ampère, $B = \\mu_0 nI$) même si $i$ varie, pourvu que la variation soit lente."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "En ARQS, le champ à l'intérieur du solénoïde est $\\vec{B}(t) = \\mu_0 n i(t)\\hat{u}_z$. Par les symétries, dans quelle direction est le champ $\\vec{E}$ induit (pour $r < a$) ?",
+        options: [
+          "Selon $\\hat{u}_\\varphi$ — tout plan méridien est plan d'antisymétrie de $\\partial\\vec{B}/\\partial t$",
+          "Selon $\\hat{u}_z$",
+          "Selon $\\hat{u}_r$",
+          "$\\vec{E} = \\vec{0}$"
+        ],
+        answer: "Selon $\\hat{u}_\\varphi$ — tout plan méridien est plan d'antisymétrie de $\\partial\\vec{B}/\\partial t$",
+        explanation: "$\\partial\\vec{B}/\\partial t = \\mu_0 n\\dot{i}\\hat{u}_z$ — même symétries que $\\vec{B}$. Tout plan méridien (contenant $Oz$) est plan d'antisymétrie de $\\partial\\vec{B}/\\partial t$ (pseudovecteur axial) ⟹ $\\vec{E}$ perpendiculaire à ce plan ⟹ $\\vec{E} \\parallel \\hat{u}_\\varphi$. L'invariance par rotation impose $E$ indépendant de $\\varphi$. Donc $\\vec{E} = E(r,t)\\hat{u}_\\varphi$.",
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Par le théorème de Stokes sur un cercle de rayon $r < a$ : $\\oint\\vec{E}\\cdot d\\vec{\\ell} = -d\\Phi/dt$. Le champ $\\vec{E}$ à l'intérieur vaut :",
+        options: [
+          "$\\vec{E}(r,t) = -\\dfrac{\\mu_0 n\\dot{i}\\,r}{2}\\hat{u}_\\varphi$",
+          "$\\vec{E}(r,t) = -\\dfrac{\\mu_0 n\\dot{i}\\,a^2}{2r}\\hat{u}_\\varphi$",
+          "$\\vec{E}(r,t) = -\\mu_0 n\\dot{i}\\,r\\,\\hat{u}_\\varphi$",
+          "$\\vec{E}(r,t) = \\dfrac{\\mu_0 n\\dot{i}\\,r}{2}\\hat{u}_\\varphi$"
+        ],
+        answer: "$\\vec{E}(r,t) = -\\dfrac{\\mu_0 n\\dot{i}\\,r}{2}\\hat{u}_\\varphi$",
+        explanation: "$E\\cdot 2\\pi r = -\\frac{d}{dt}(\\mu_0 ni\\cdot\\pi r^2) = -\\mu_0 n\\dot{i}\\pi r^2$. Donc $E = -\\mu_0 n\\dot{i}r/2$. Le signe $-$ traduit la loi de Lenz : si $\\dot{i} > 0$ ($B$ augmente), $\\vec{E}$ est dans $-\\hat{u}_\\varphi$ (s'oppose à l'augmentation). Ce champ électrique induit est exactement celui qui crée la fem d'auto-induction $e_{auto} = -L\\dot{i}$."
+      },
+      {
+        type: "tf",
+        context: CTX,
+        question: "En ARQS (régime lentement variable), la densité d'énergie électrique $u_E = \\varepsilon_0 E^2/2$ est négligeable devant la densité d'énergie magnétique $u_B = B^2/(2\\mu_0)$.",
+        answer: "true",
+        explanation: "$u_E/u_B = \\varepsilon_0 E^2/(B^2/\\mu_0) = \\varepsilon_0\\mu_0 E^2/B^2$. Ici $E \\sim \\mu_0 n\\dot{i}a/2$ et $B = \\mu_0 ni$. Donc $u_E/u_B \\sim \\varepsilon_0\\mu_0(\\dot{i}/i)^2 a^2 \\sim (a/c\\tau)^2 \\ll 1$ en ARQS ($a \\ll c\\tau = \\lambda$). L'énergie électrique est d'ordre $(v/c)^2$ devant l'énergie magnétique — négligeable en régime quasi-stationnaire."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Le vecteur de Poynting en surface du solénoïde ($r = a$) est $\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B}$. Sa direction est :",
+        options: [
+          "Selon $-\\hat{u}_r$ si $\\dot{i} > 0$ — l'énergie entre dans le solénoïde pour charger le champ $\\vec{B}$",
+          "Selon $+\\hat{u}_r$ — l'énergie sort du solénoïde",
+          "Selon $\\hat{u}_z$",
+          "$\\vec{\\Pi} = \\vec{0}$"
+        ],
+        answer: "Selon $-\\hat{u}_r$ si $\\dot{i} > 0$ — l'énergie entre dans le solénoïde pour charger le champ $\\vec{B}$",
+        explanation: "En $r = a$ : $\\vec{E} = -\\frac{\\mu_0 n\\dot{i}a}{2}\\hat{u}_\\varphi$ et $\\vec{B} = \\mu_0 ni\\hat{u}_z$. $\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B} = -\\frac{n\\dot{i}a}{2}\\hat{u}_\\varphi\\wedge\\mu_0 ni\\hat{u}_z = -\\frac{\\mu_0 n^2 a i\\dot{i}}{2}(\\hat{u}_\\varphi\\wedge\\hat{u}_z) = -\\frac{\\mu_0 n^2 a i\\dot{i}}{2}\\hat{u}_r$. Pour $\\dot{i} > 0$ : $\\vec{\\Pi}$ selon $-\\hat{u}_r$ — l'énergie pénètre dans le solénoïde et s'y stocke sous forme de champ magnétique."
+      },
+      {
+        type: "tf",
+        context: CTX,
+        question: "L'équation de conservation de l'énergie électromagnétique $\\partial u_{em}/\\partial t + \\vec{\\nabla}\\cdot\\vec{\\Pi} = -\\vec{j}\\cdot\\vec{E}$ est vérifiée dans ce solénoïde (en négligeant $u_E$).",
+        answer: "true",
+        explanation: "$\\partial u_B/\\partial t = \\partial(B^2/2\\mu_0)/\\partial t = \\mu_0 n^2 i\\dot{i}$. $\\vec{\\nabla}\\cdot\\vec{\\Pi} = \\frac{1}{r}\\frac{\\partial(r\\Pi_r)}{\\partial r}$... En fait, $\\vec{\\Pi}$ est uniforme pour $r < a$ et on vérifie en intégrant sur un cylindre de longueur $l$ : le flux entrant $= |\\Pi_r|\\times 2\\pi al = \\mu_0 n^2 i\\dot{i}\\pi a^2 l = \\frac{d}{dt}(\\frac{1}{2}Li^2)$. C'est bien la variation d'énergie magnétique — le bilan est vérifié (ici $\\vec{j} = \\vec{0}$ dans le solénoïde idéal, pas de dissipation)."
+      },
+      {
+        type: "mcq",
+        context: CTX,
+        question: "Bilan d'énergie de $t=0$ ($i=i_0$) à $t\\to\\infty$ ($i\\to 0$, courant annulé). L'énergie magnétique $\\Delta U_m = \\frac{1}{2}L(0 - i_0^2) = -\\frac{1}{2}Li_0^2$ est :",
+        options: [
+          "Entièrement dissipée dans la résistance $R$ par effet Joule : $\\int_0^\\infty Ri^2\\,dt = \\frac{1}{2}Li_0^2$",
+          "Rayonnée sous forme d'ondes électromagnétiques",
+          "Stockée dans le champ électrique",
+          "Restituée au générateur"
+        ],
+        answer: "Entièrement dissipée dans la résistance $R$ par effet Joule : $\\int_0^\\infty Ri^2\\,dt = \\frac{1}{2}Li_0^2$",
+        explanation: "Avec $e = 0$ (générateur coupé) et $i(t) = i_0 e^{-t/\\tau}$ : $\\int_0^\\infty Ri^2 dt = Ri_0^2\\int_0^\\infty e^{-2t/\\tau}dt = Ri_0^2\\cdot\\frac{\\tau}{2} = Ri_0^2\\cdot\\frac{L}{2R} = \\frac{1}{2}Li_0^2$ ✓. L'énergie magnétique stockée dans la bobine est intégralement convertie en chaleur dans $R$. C'est le pendant magnétique de la décharge d'un condensateur dans une résistance."
+      },
+    ];
 
-QuizEngine.loadQuiz("td8_ex2", questions, `md:
+    QuizEngine.loadQuiz("td8_ex2", questions, `md:
 ## Exercice 2 — Mise en charge d'une bobine conductrice
 
 Solénoïde ($n$, $a$, $l$) branché sur $(e, R)$, fermé à $t=0$, courant initial $i_0$.
@@ -160,6 +165,7 @@ Solénoïde ($n$, $a$, $l$) branché sur $(e, R)$, fermé à $t=0$, courant init
 
 **g–i)** $\\vec{\\Pi} = -\\frac{\\mu_0 n^2 ai\\dot{i}}{2}\\hat{u}_r$ (entrant), équation de Poynting vérifiée, bilan $\\frac{1}{2}Li_0^2$ dissipé dans $R$.
 `, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
-</script>
+  </script>
 </body>
+
 </html>

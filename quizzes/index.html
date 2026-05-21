@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -10,434 +11,437 @@
   <link rel="stylesheet" href="styles/print_style.css">
   <link rel="stylesheet" href="styles/quiz.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="page">
+  <main class="page">
 
-  <div class="ch-header">
-    <p class="ch-label">Entraînement · EM L2</p>
-    <h1 class="ch-title">🎯 Quizzes</h1>
-    <p class="ch-subtitle">Un fichier par exercice de TD — scores sauvegardés localement</p>
-  </div>
+    <div class="ch-header">
+      <p class="ch-label">Entraînement · EM L2</p>
+      <h1 class="ch-title">🎯 Quizzes</h1>
+      <p class="ch-subtitle">Un fichier par exercice de TD — scores sauvegardés localement</p>
+    </div>
 
-  <div class="callout tip">
-    <span class="callout-icon">💾</span>
-    <div>Vos scores sont sauvegardés dans le navigateur (localStorage). Ils persistent entre les sessions, sur cette machine.</div>
-  </div>
+    <div class="callout tip">
+      <span class="callout-icon">💾</span>
+      <div>Vos scores sont sauvegardés dans le navigateur (localStorage). Ils persistent entre les sessions, sur cette
+        machine.</div>
+    </div>
 
-  <div id="global-progress"></div>
+    <div id="global-progress"></div>
 
-  <!-- ── TD1 ─────────────────────────────────────────────── -->
-  <div class="section" style="margin-top:2rem">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent)"></span>
-      TD1 — Rappels de mathématiques
-    </h2>
-    <div class="index-grid" id="grid-td1"></div>
-  </div>
+    <!-- ── TD1 ─────────────────────────────────────────────── -->
+    <div class="section" style="margin-top:2rem">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        TD1 — Rappels de mathématiques
+      </h2>
+      <div class="index-grid" id="grid-td1"></div>
+    </div>
 
-  <!-- ── TD2 ─────────────────────────────────────────────── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent2)"></span>
-      TD2 — Rappels d'électrostatique
-    </h2>
-    <div class="index-grid" id="grid-td2"></div>
-  </div>
+    <!-- ── TD2 ─────────────────────────────────────────────── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        TD2 — Rappels d'électrostatique
+      </h2>
+      <div class="index-grid" id="grid-td2"></div>
+    </div>
 
-  <!-- ── TD3 ─────────────────────────────────────────────── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent3)"></span>
-      TD3 — Charges en mouvement
-    </h2>
-    <div class="index-grid" id="grid-td3"></div>
-  </div>
+    <!-- ── TD3 ─────────────────────────────────────────────── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent3)"></span>
+        TD3 — Charges en mouvement
+      </h2>
+      <div class="index-grid" id="grid-td3"></div>
+    </div>
 
-  <!-- ── TD4 ─────────────────────────────────────────────── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent4)"></span>
-      TD4 — Magnétostatique : loi de Biot-Savart
-    </h2>
-    <div class="index-grid" id="grid-td4"></div>
-  </div>
+    <!-- ── TD4 ─────────────────────────────────────────────── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent4)"></span>
+        TD4 — Magnétostatique : loi de Biot-Savart
+      </h2>
+      <div class="index-grid" id="grid-td4"></div>
+    </div>
 
-  <!-- ── TD5 ─────────────────────────────────────────────── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent)"></span>
-      TD5 — Magnétostatique : théorème d'Ampère
-    </h2>
-    <div class="index-grid" id="grid-td5"></div>
-  </div>
+    <!-- ── TD5 ─────────────────────────────────────────────── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        TD5 — Magnétostatique : théorème d'Ampère
+      </h2>
+      <div class="index-grid" id="grid-td5"></div>
+    </div>
 
-  <!-- ── TD6 ─────────────────────────────────────────────── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent4)"></span>
-      TD6 — Moment magnétique
-    </h2>
-    <div class="index-grid" id="grid-td6"></div>
-  </div>
+    <!-- ── TD6 ─────────────────────────────────────────────── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent4)"></span>
+        TD6 — Moment magnétique
+      </h2>
+      <div class="index-grid" id="grid-td6"></div>
+    </div>
 
-  <!-- ── TD7 ─────────────────────────────────────────────── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent2)"></span>
-      TD7 — Induction, auto-induction &amp; mutuelle induction
-    </h2>
-    <div class="index-grid" id="grid-td7"></div>
-  </div>
+    <!-- ── TD7 ─────────────────────────────────────────────── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        TD7 — Induction, auto-induction &amp; mutuelle induction
+      </h2>
+      <div class="index-grid" id="grid-td7"></div>
+    </div>
 
-  <!-- ── TD8 ─────────────────────────────────────────────── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent)"></span>
-      TD8 — Énergie électromagnétique
-    </h2>
-    <div class="index-grid" id="grid-td8"></div>
-  </div>
+    <!-- ── TD8 ─────────────────────────────────────────────── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        TD8 — Énergie électromagnétique
+      </h2>
+      <div class="index-grid" id="grid-td8"></div>
+    </div>
 
-</main>
+  </main>
 
-<button id="btt" title="Haut de page">↑</button>
+  <button id="btt" title="Haut de page">↑</button>
 
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
-<script type="module">
-import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script type="module">
+    import { QuizEngine } from '/em-revisions/scripts/quiz.js';
 
-const catalogue = {
-  "td1": [
-    {
-      file:  "quizzes/td1_ex1.html",
-      id:    "td1_ex1",
-      label: "TD1 · Ex 1",
-      title: "Champs de position",
-      desc:  "Divergence de $\\vec{R}$, gradient de $R$, identités clés sur $R^n$",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td1_ex2.html",
-      id:    "td1_ex2",
-      label: "TD1 · Ex 2",
-      title: "Champs & lignes de champ",
-      desc:  "Div/rot des champs $\\vec{A}$, $\\vec{B}$, $\\vec{C}$ — solénoïdal vs irrotationnel",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td1_ex3.html",
-      id:    "td1_ex3",
-      label: "TD1 · Ex 3",
-      title: "Identités vectorielles",
-      desc:  "$\\vec{\\nabla}\\times(\\vec{\\nabla}f)=\\vec{0}$, double rot, formules de Leibniz",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td1_ex4.html",
-      id:    "td1_ex4",
-      label: "TD1 · Ex 4",
-      title: "Opérateurs en cylindriques",
-      desc:  "Retrouver div et rot en coordonnées cylindriques — jacobien, facteurs $1/r$",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td1_ex5.html",
-      id:    "td1_ex5",
-      label: "TD1 · Ex 5",
-      title: "Potentiel & champ $\\vec{E}$",
-      desc:  "$\\vec{E} = -\\vec{\\nabla}V$, Laplacien, Poisson — condensateur plan et sphère chargée",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td1_ex6.html",
-      id:    "td1_ex6",
-      label: "TD1 · Ex 6",
-      title: "Potentiel vecteur $\\vec{A}$",
-      desc:  "$\\vec{B} = \\vec{\\nabla}\\times\\vec{A}$ — quatre cas en cylindriques, invariance de jauge",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td1_ex7.html",
-      id:    "td1_ex7",
-      label: "TD1 · Ex 7",
-      title: "Théorème de Stokes",
-      desc:  "Circulation, flux de $\\vec{\\nabla}\\times\\vec{A}$ — disque vs demi-sphère, indépendance de la surface",
-      color: "ic-1"
-    },
-  ],
-  "td2": [
-    {
-      file:  "quizzes/td2_ex1.html",
-      id:    "td2_ex1",
-      label: "TD2 · Ex 1",
-      title: "Demi-cercle chargé",
-      desc:  "Potentiel et champ en $O$ — intégration sur une distribution filiforme",
-      color: "ic-2"
-    },
-    {
-      file:  "quizzes/td2_ex2.html",
-      id:    "td2_ex2",
-      label: "TD2 · Ex 2",
-      title: "Sphère non uniforme",
-      desc:  "$\\sigma(\\theta) = \\sigma_0\\cos\\theta$ — potentiel nul, champ $\\neq 0$ au centre",
-      color: "ic-2"
-    },
-    {
-      file:  "quizzes/td2_ex3.html",
-      id:    "td2_ex3",
-      label: "TD2 · Ex 3",
-      title: "Trois charges / CO₂",
-      desc:  "Développement multipolaire — monopole, dipôle, quadripôle, équation de Laplace",
-      color: "ic-2"
-    },
-    {
-      file:  "quizzes/td2_ex4.html",
-      id:    "td2_ex4",
-      label: "TD2 · Ex 4",
-      title: "Sphères creuses",
-      desc:  "Théorème de Gauss sphérique — $\\rho$ uniforme et $\\rho \\propto r^2$",
-      color: "ic-2"
-    },
-    {
-      file:  "quizzes/td2_ex5.html",
-      id:    "td2_ex5",
-      label: "TD2 · Ex 5",
-      title: "Cylindres creux",
-      desc:  "Gauss en symétrie cylindrique — $\\rho$ uniforme et $\\rho \\propto r^3$",
-      color: "ic-2"
-    },
-  ],
-  "td3": [
-    {
-      file:  "quizzes/td3_ex1.html",
-      id:    "td3_ex1",
-      label: "TD3 · Ex 1",
-      title: "Conductivité des métaux",
-      desc:  "Densité électronique, $j_V$, vitesse de dérive — modèle de Drude, conductivité $\\gamma$",
-      color: "ic-3"
-    },
-    {
-      file:  "quizzes/td3_ex2.html",
-      id:    "td3_ex2",
-      label: "TD3 · Ex 2",
-      title: "Densité de courant",
-      desc:  "Cylindre, sphère et cylindre en rotation — $\\vec{j}_V$, $\\vec{j}_S$, lien $I = Q/T$",
-      color: "ic-3"
-    },
-    {
-      file:  "quizzes/td3_ex3.html",
-      id:    "td3_ex3",
-      label: "TD3 · Ex 3",
-      title: "Lorentz, Hall &amp; Laplace",
-      desc:  "Plaquette dans $\\vec{B}$ — champ de Hall, $V_H = R_H IB/b$, force de Laplace",
-      color: "ic-3"
-    },
-  ],
-  "td4": [
-    {
-      file:  "quizzes/td4_ex1.html",
-      id:    "td4_ex1",
-      label: "TD4 · Ex 1",
-      title: "Symétries &amp; invariances",
-      desc:  "Cylindre $j\\parallel Oz$ et solénoïde — plans d'antisymétrie, direction de $\\vec{B}$",
-      color: "ic-4"
-    },
-    {
-      file:  "quizzes/td4_ex2.html",
-      id:    "td4_ex2",
-      label: "TD4 · Ex 2",
-      title: "Spire carrée",
-      desc:  "Fil fini par Biot-Savart — limite $L\\to\\infty$, champ au centre de la boucle carrée",
-      color: "ic-4"
-    },
-    {
-      file:  "quizzes/td4_ex3.html",
-      id:    "td4_ex3",
-      label: "TD4 · Ex 3",
-      title: "Spire circulaire &amp; Helmholtz",
-      desc:  "$B = \\frac{\\mu_0 I}{2R}\\sin^3\\beta$ — bobine plate, condition $d = R$",
-      color: "ic-4"
-    },
-    {
-      file:  "quizzes/td4_ex4.html",
-      id:    "td4_ex4",
-      label: "TD4 · Ex 4",
-      title: "Boucle chargée",
-      desc:  "$\\vec{E}$ sur l'axe (charge $\\lambda$), $\\vec{B}$ en rotation — analogie $E$/$B$",
-      color: "ic-4"
-    },
-  ],
-  "td5": [
-    {
-      file:  "quizzes/td5_ex1.html",
-      id:    "td5_ex1",
-      label: "TD5 · Ex 1",
-      title: "Câble coaxial",
-      desc:  "Fil infini, cylindre creux, câble coaxial — $\\vec{B}=\\vec{0}$ à l'extérieur",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td5_ex2.html",
-      id:    "td5_ex2",
-      label: "TD5 · Ex 2",
-      title: "Solénoïde &amp; tore",
-      desc:  "$\\vec{B} = \\mu_0 nI$ uniforme à l'intérieur — tore : $\\vec{B}\\propto 1/r$ confiné",
-      color: "ic-1"
-    },
-    {
-      file:  "quizzes/td5_ex3.html",
-      id:    "td5_ex3",
-      label: "TD5 · Ex 3",
-      title: "Cylindre en translation",
-      desc:  "$\\vec{E}$ (Gauss), $\\vec{B}$ (Ampère), force de Lorentz — $F = F_0(1-v^2/c^2)$",
-      color: "ic-1"
-    },
-  ],
-  "td6": [
-    {
-      file:  "quizzes/td6_ex1.html",
-      id:    "td6_ex1",
-      label: "TD6 · Ex 1",
-      title: "Spire oscillante",
-      desc:  "$\\vec{\\mathcal{M}} = I\\pi R^2\\hat{n}$, équilibre, $\\omega_0 = \\sqrt{\\mathcal{M}B_0/J}$, mesure de $B_0$",
-      color: "ic-4"
-    },
-    {
-      file:  "quizzes/td6_ex23.html",
-      id:    "td6_ex23",
-      label: "TD6 · Ex 2&amp;3",
-      title: "Balance de Cotton &amp; Cadre",
-      desc:  "$B = mga'/(iLa)$ — couple sur cadre, équilibres, pulsation, $\\vec{B}$ vertical",
-      color: "ic-4"
-    },
-    {
-      file:  "quizzes/td6_ex4.html",
-      id:    "td6_ex4",
-      label: "TD6 · Ex 4",
-      title: "Sphère chargée en rotation",
-      desc:  "$\\mathcal{M} = Q\\omega R^2/5$, champ dipolaire — modèle électron incompatible avec $c$",
-      color: "ic-4"
-    },
-  ],
-    {
-      file:  "quizzes/td7_ex1.html",
-      id:    "td7_ex1",
-      label: "TD7 · Ex 1",
-      title: "Freinage par induction",
-      desc:  "Barre mobile — fem, Lenz, $v(t)=v_0 e^{-t/\\tau}$, vitesse limite avec pile",
-      color: "ic-3"
-    },
-    {
-      file:  "quizzes/td7_ex23.html",
-      id:    "td7_ex23",
-      label: "TD7 · Ex 2&amp;3",
-      title: "Cadre tombant &amp; $\\vec{B}$ tournant",
-      desc:  "3 phases d'entrée dans $\\vec{B}$ — flux $B_0a^2\\cos\\omega t$, fem sinusoïdale, Lenz",
-      color: "ic-3"
-    },
-    {
-      file:  "quizzes/td7_ex45.html",
-      id:    "td7_ex45",
-      label: "TD7 · Ex 4&amp;5",
-      title: "Frein Telma &amp; Foucault",
-      desc:  "Courants induits $\\vec{j}=\\gamma\\vec{v}\\wedge\\vec{B}$, puissance Joule, couple, ARQS",
-      color: "ic-3"
-    },
-    {
-      file:  "quizzes/td7_ex67.html",
-      id:    "td7_ex67",
-      label: "TD7 · Ex 6&amp;7",
-      title: "Auto-induction solénoïde",
-      desc:  "$L = \\mu_0 n^2 V$, énergie $u_m = B^2/(2\\mu_0)$, champ $\\vec{E}$ induit par Faraday",
-      color: "ic-3"
-    },
-    {
-      file:  "quizzes/td7_ex9.html",
-      id:    "td7_ex9",
-      label: "TD7 · Ex 9",
-      title: "Induction mutuelle",
-      desc:  "Solénoïdes coaxiaux — $M_{12}=M_{21}$, énergie, force, couplage $k$, transformateur",
-      color: "ic-3"
-    },
-  ],
-  "td8": [
-    {
-      file:  "quizzes/td8_ex01.html",
-      id:    "td8_ex01",
-      label: "TD8 · Prél &amp; Ex 1",
-      title: "Poynting — fil &amp; sphère",
-      desc:  "$\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B}$ — bilan Joule, $\\vec{B}=\\vec{0}$, courant de déplacement",
-      color: "ic-2"
-    },
-    {
-      file:  "quizzes/td8_ex2.html",
-      id:    "td8_ex2",
-      label: "TD8 · Ex 2",
-      title: "Mise en charge d'une bobine",
-      desc:  "Circuit RL, ARQS, $\\vec{E}$ induit, $\\vec{\\Pi}$ radial entrant, bilan $\\frac{1}{2}Li_0^2$",
-      color: "ic-2"
-    },
-  ]
-};
+    const catalogue = {
+      "td1": [
+        {
+          file: "quizzes/td1_ex1.html",
+          id: "td1_ex1",
+          label: "TD1 · Ex 1",
+          title: "Champs de position",
+          desc: "Divergence de $\\vec{R}$, gradient de $R$, identités clés sur $R^n$",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td1_ex2.html",
+          id: "td1_ex2",
+          label: "TD1 · Ex 2",
+          title: "Champs & lignes de champ",
+          desc: "Div/rot des champs $\\vec{A}$, $\\vec{B}$, $\\vec{C}$ — solénoïdal vs irrotationnel",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td1_ex3.html",
+          id: "td1_ex3",
+          label: "TD1 · Ex 3",
+          title: "Identités vectorielles",
+          desc: "$\\vec{\\nabla}\\times(\\vec{\\nabla}f)=\\vec{0}$, double rot, formules de Leibniz",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td1_ex4.html",
+          id: "td1_ex4",
+          label: "TD1 · Ex 4",
+          title: "Opérateurs en cylindriques",
+          desc: "Retrouver div et rot en coordonnées cylindriques — jacobien, facteurs $1/r$",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td1_ex5.html",
+          id: "td1_ex5",
+          label: "TD1 · Ex 5",
+          title: "Potentiel & champ $\\vec{E}$",
+          desc: "$\\vec{E} = -\\vec{\\nabla}V$, Laplacien, Poisson — condensateur plan et sphère chargée",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td1_ex6.html",
+          id: "td1_ex6",
+          label: "TD1 · Ex 6",
+          title: "Potentiel vecteur $\\vec{A}$",
+          desc: "$\\vec{B} = \\vec{\\nabla}\\times\\vec{A}$ — quatre cas en cylindriques, invariance de jauge",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td1_ex7.html",
+          id: "td1_ex7",
+          label: "TD1 · Ex 7",
+          title: "Théorème de Stokes",
+          desc: "Circulation, flux de $\\vec{\\nabla}\\times\\vec{A}$ — disque vs demi-sphère, indépendance de la surface",
+          color: "ic-1"
+        },
+      ],
+      "td2": [
+        {
+          file: "quizzes/td2_ex1.html",
+          id: "td2_ex1",
+          label: "TD2 · Ex 1",
+          title: "Demi-cercle chargé",
+          desc: "Potentiel et champ en $O$ — intégration sur une distribution filiforme",
+          color: "ic-2"
+        },
+        {
+          file: "quizzes/td2_ex2.html",
+          id: "td2_ex2",
+          label: "TD2 · Ex 2",
+          title: "Sphère non uniforme",
+          desc: "$\\sigma(\\theta) = \\sigma_0\\cos\\theta$ — potentiel nul, champ $\\neq 0$ au centre",
+          color: "ic-2"
+        },
+        {
+          file: "quizzes/td2_ex3.html",
+          id: "td2_ex3",
+          label: "TD2 · Ex 3",
+          title: "Trois charges / CO₂",
+          desc: "Développement multipolaire — monopole, dipôle, quadripôle, équation de Laplace",
+          color: "ic-2"
+        },
+        {
+          file: "quizzes/td2_ex4.html",
+          id: "td2_ex4",
+          label: "TD2 · Ex 4",
+          title: "Sphères creuses",
+          desc: "Théorème de Gauss sphérique — $\\rho$ uniforme et $\\rho \\propto r^2$",
+          color: "ic-2"
+        },
+        {
+          file: "quizzes/td2_ex5.html",
+          id: "td2_ex5",
+          label: "TD2 · Ex 5",
+          title: "Cylindres creux",
+          desc: "Gauss en symétrie cylindrique — $\\rho$ uniforme et $\\rho \\propto r^3$",
+          color: "ic-2"
+        },
+      ],
+      "td3": [
+        {
+          file: "quizzes/td3_ex1.html",
+          id: "td3_ex1",
+          label: "TD3 · Ex 1",
+          title: "Conductivité des métaux",
+          desc: "Densité électronique, $j_V$, vitesse de dérive — modèle de Drude, conductivité $\\gamma$",
+          color: "ic-3"
+        },
+        {
+          file: "quizzes/td3_ex2.html",
+          id: "td3_ex2",
+          label: "TD3 · Ex 2",
+          title: "Densité de courant",
+          desc: "Cylindre, sphère et cylindre en rotation — $\\vec{j}_V$, $\\vec{j}_S$, lien $I = Q/T$",
+          color: "ic-3"
+        },
+        {
+          file: "quizzes/td3_ex3.html",
+          id: "td3_ex3",
+          label: "TD3 · Ex 3",
+          title: "Lorentz, Hall &amp; Laplace",
+          desc: "Plaquette dans $\\vec{B}$ — champ de Hall, $V_H = R_H IB/b$, force de Laplace",
+          color: "ic-3"
+        },
+      ],
+      "td4": [
+        {
+          file: "quizzes/td4_ex1.html",
+          id: "td4_ex1",
+          label: "TD4 · Ex 1",
+          title: "Symétries &amp; invariances",
+          desc: "Cylindre $j\\parallel Oz$ et solénoïde — plans d'antisymétrie, direction de $\\vec{B}$",
+          color: "ic-4"
+        },
+        {
+          file: "quizzes/td4_ex2.html",
+          id: "td4_ex2",
+          label: "TD4 · Ex 2",
+          title: "Spire carrée",
+          desc: "Fil fini par Biot-Savart — limite $L\\to\\infty$, champ au centre de la boucle carrée",
+          color: "ic-4"
+        },
+        {
+          file: "quizzes/td4_ex3.html",
+          id: "td4_ex3",
+          label: "TD4 · Ex 3",
+          title: "Spire circulaire &amp; Helmholtz",
+          desc: "$B = \\frac{\\mu_0 I}{2R}\\sin^3\\beta$ — bobine plate, condition $d = R$",
+          color: "ic-4"
+        },
+        {
+          file: "quizzes/td4_ex4.html",
+          id: "td4_ex4",
+          label: "TD4 · Ex 4",
+          title: "Boucle chargée",
+          desc: "$\\vec{E}$ sur l'axe (charge $\\lambda$), $\\vec{B}$ en rotation — analogie $E$/$B$",
+          color: "ic-4"
+        },
+      ],
+      "td5": [
+        {
+          file: "quizzes/td5_ex1.html",
+          id: "td5_ex1",
+          label: "TD5 · Ex 1",
+          title: "Câble coaxial",
+          desc: "Fil infini, cylindre creux, câble coaxial — $\\vec{B}=\\vec{0}$ à l'extérieur",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td5_ex2.html",
+          id: "td5_ex2",
+          label: "TD5 · Ex 2",
+          title: "Solénoïde &amp; tore",
+          desc: "$\\vec{B} = \\mu_0 nI$ uniforme à l'intérieur — tore : $\\vec{B}\\propto 1/r$ confiné",
+          color: "ic-1"
+        },
+        {
+          file: "quizzes/td5_ex3.html",
+          id: "td5_ex3",
+          label: "TD5 · Ex 3",
+          title: "Cylindre en translation",
+          desc: "$\\vec{E}$ (Gauss), $\\vec{B}$ (Ampère), force de Lorentz — $F = F_0(1-v^2/c^2)$",
+          color: "ic-1"
+        },
+      ],
+      "td6": [
+        {
+          file: "quizzes/td6_ex1.html",
+          id: "td6_ex1",
+          label: "TD6 · Ex 1",
+          title: "Spire oscillante",
+          desc: "$\\vec{\\mathcal{M}} = I\\pi R^2\\hat{n}$, équilibre, $\\omega_0 = \\sqrt{\\mathcal{M}B_0/J}$, mesure de $B_0$",
+          color: "ic-4"
+        },
+        {
+          file: "quizzes/td6_ex23.html",
+          id: "td6_ex23",
+          label: "TD6 · Ex 2&amp;3",
+          title: "Balance de Cotton &amp; Cadre",
+          desc: "$B = mga'/(iLa)$ — couple sur cadre, équilibres, pulsation, $\\vec{B}$ vertical",
+          color: "ic-4"
+        },
+        {
+          file: "quizzes/td6_ex4.html",
+          id: "td6_ex4",
+          label: "TD6 · Ex 4",
+          title: "Sphère chargée en rotation",
+          desc: "$\\mathcal{M} = Q\\omega R^2/5$, champ dipolaire — modèle électron incompatible avec $c$",
+          color: "ic-4"
+        },
+      ],
+      "td7": [
+        {
+          file: "quizzes/td7_ex1.html",
+          id: "td7_ex1",
+          label: "TD7 · Ex 1",
+          title: "Freinage par induction",
+          desc: "Barre mobile — fem, Lenz, $v(t)=v_0 e^{-t/\\tau}$, vitesse limite avec pile",
+          color: "ic-3"
+        },
+        {
+          file: "quizzes/td7_ex23.html",
+          id: "td7_ex23",
+          label: "TD7 · Ex 2&amp;3",
+          title: "Cadre tombant &amp; $\\vec{B}$ tournant",
+          desc: "3 phases d'entrée dans $\\vec{B}$ — flux $B_0a^2\\cos\\omega t$, fem sinusoïdale, Lenz",
+          color: "ic-3"
+        },
+        {
+          file: "quizzes/td7_ex45.html",
+          id: "td7_ex45",
+          label: "TD7 · Ex 4&amp;5",
+          title: "Frein Telma &amp; Foucault",
+          desc: "Courants induits $\\vec{j}=\\gamma\\vec{v}\\wedge\\vec{B}$, puissance Joule, couple, ARQS",
+          color: "ic-3"
+        },
+        {
+          file: "quizzes/td7_ex67.html",
+          id: "td7_ex67",
+          label: "TD7 · Ex 6&amp;7",
+          title: "Auto-induction solénoïde",
+          desc: "$L = \\mu_0 n^2 V$, énergie $u_m = B^2/(2\\mu_0)$, champ $\\vec{E}$ induit par Faraday",
+          color: "ic-3"
+        },
+        {
+          file: "quizzes/td7_ex9.html",
+          id: "td7_ex9",
+          label: "TD7 · Ex 9",
+          title: "Induction mutuelle",
+          desc: "Solénoïdes coaxiaux — $M_{12}=M_{21}$, énergie, force, couplage $k$, transformateur",
+          color: "ic-3"
+        },
+      ],
+      "td8": [
+        {
+          file: "quizzes/td8_ex01.html",
+          id: "td8_ex01",
+          label: "TD8 · Prél &amp; Ex 1",
+          title: "Poynting — fil &amp; sphère",
+          desc: "$\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B}$ — bilan Joule, $\\vec{B}=\\vec{0}$, courant de déplacement",
+          color: "ic-2"
+        },
+        {
+          file: "quizzes/td8_ex2.html",
+          id: "td8_ex2",
+          label: "TD8 · Ex 2",
+          title: "Mise en charge d'une bobine",
+          desc: "Circuit RL, ARQS, $\\vec{E}$ induit, $\\vec{\\Pi}$ radial entrant, bilan $\\frac{1}{2}Li_0^2$",
+          color: "ic-2"
+        },
+      ]
+    };
 
-function renderGrid(entries, gridId) {
-  const grid = document.getElementById(gridId);
-  if (!grid) return;
-  grid.innerHTML = entries.map(e => {
-    const attempts   = QuizEngine.Storage.getAttempts(e.id);
-    const last       = attempts.length > 0 ? attempts[attempts.length - 1] : null;
-    const pts        = last ? (last.totalPoints ?? last.score) : null;
-    const ratio      = last ? pts / last.total : null;
-    const badgeCls   = last
-      ? (ratio >= 0.75 ? 'badge-green' : ratio >= 0.5 ? 'badge-orange' : 'badge-red')
-      : 'badge-blue';
-    const badgeTxt   = last
-      ? (Number.isInteger(pts) && pts === last.score
-          ? `${last.score}/${last.total}`
-          : `${pts.toFixed(1)} pts`)
-      : 'Nouveau';
-    return `
+    function renderGrid(entries, gridId) {
+      const grid = document.getElementById(gridId);
+      if (!grid) return;
+      grid.innerHTML = entries.map(e => {
+        const attempts = QuizEngine.Storage.getAttempts(e.id);
+        const last = attempts.length > 0 ? attempts[attempts.length - 1] : null;
+        const pts = last ? (last.totalPoints ?? last.score) : null;
+        const ratio = last ? pts / last.total : null;
+        const badgeCls = last
+          ? (ratio >= 0.75 ? 'badge-green' : ratio >= 0.5 ? 'badge-orange' : 'badge-red')
+          : 'badge-blue';
+        const badgeTxt = last
+          ? (Number.isInteger(pts) && pts === last.score
+            ? `${last.score}/${last.total}`
+            : `${pts.toFixed(1)} pts`)
+          : 'Nouveau';
+        return `
       <a href="${e.file}" class="index-card ${e.color}">
         <span class="num">${e.label} &nbsp;<span class="badge ${badgeCls}">${badgeTxt}</span></span>
         <span class="title">${e.title}</span>
         <span class="desc">${e.desc}</span>
       </a>`;
-  }).join('');
-  renderMathInElement(grid, {
-    delimiters: [{ left:"$", right:"$", display:false }, { left:"$$", right:"$$", display:true }],
-    throwOnError: false
-  });
-}
-
-function renderGlobalProgress(catalogue) {
-  const all   = Object.values(catalogue).flat();
-  const total = all.length;
-  let attempted = 0, completed = 0, totalScore = 0, totalPossible = 0;
-
-  for (const e of all) {
-    const last = (() => {
-      const a = QuizEngine.Storage.getAttempts(e.id);
-      return a.length > 0 ? a[a.length - 1] : null;
-    })();
-    if (last) {
-      const pts = last.totalPoints ?? last.score;
-      attempted++;
-      totalScore    += pts;
-      totalPossible += last.total;
-      if (pts / last.total >= 0.75) completed++;
+      }).join('');
+      renderMathInElement(grid, {
+        delimiters: [{ left: "$", right: "$", display: false }, { left: "$$", right: "$$", display: true }],
+        throwOnError: false
+      });
     }
-  }
 
-  const pctDone  = total ? (completed / total * 100).toFixed(1) : 0;
-  const pctTried = total ? ((attempted - completed) / total * 100).toFixed(1) : 0;
+    function renderGlobalProgress(catalogue) {
+      const all = Object.values(catalogue).flat();
+      const total = all.length;
+      let attempted = 0, completed = 0, totalScore = 0, totalPossible = 0;
 
-  document.getElementById('global-progress').innerHTML = `
+      for (const e of all) {
+        const last = (() => {
+          const a = QuizEngine.Storage.getAttempts(e.id);
+          return a.length > 0 ? a[a.length - 1] : null;
+        })();
+        if (last) {
+          const pts = last.totalPoints ?? last.score;
+          attempted++;
+          totalScore += pts;
+          totalPossible += last.total;
+          if (pts / last.total >= 0.75) completed++;
+        }
+      }
+
+      const pctDone = total ? (completed / total * 100).toFixed(1) : 0;
+      const pctTried = total ? ((attempted - completed) / total * 100).toFixed(1) : 0;
+
+      document.getElementById('global-progress').innerHTML = `
     <div class="qz-global">
       <div class="qz-global-header">
         <span class="qz-global-title">Progression globale</span>
@@ -462,17 +466,18 @@ function renderGlobalProgress(catalogue) {
         </div>
       </div>
     </div>`;
-}
+    }
 
-renderGlobalProgress(catalogue);
-renderGrid(catalogue.td1, 'grid-td1');
-renderGrid(catalogue.td2, 'grid-td2');
-renderGrid(catalogue.td3, 'grid-td3');
-renderGrid(catalogue.td4, 'grid-td4');
-renderGrid(catalogue.td5, 'grid-td5');
-renderGrid(catalogue.td6, 'grid-td6');
-renderGrid(catalogue.td7, 'grid-td7');
-renderGrid(catalogue.td8, 'grid-td8');
-</script>
+    renderGlobalProgress(catalogue);
+    renderGrid(catalogue.td1, 'grid-td1');
+    renderGrid(catalogue.td2, 'grid-td2');
+    renderGrid(catalogue.td3, 'grid-td3');
+    renderGrid(catalogue.td4, 'grid-td4');
+    renderGrid(catalogue.td5, 'grid-td5');
+    renderGrid(catalogue.td6, 'grid-td6');
+    renderGrid(catalogue.td7, 'grid-td7');
+    renderGrid(catalogue.td8, 'grid-td8');
+  </script>
 </body>
+
 </html>
