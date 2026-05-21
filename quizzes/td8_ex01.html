@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <base href="/em-revisions/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz · TD8 Ex Prél &amp; Ex1 — Poynting &amp; Sphère</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<main class="quiz-page">
+  <div class="quiz-header ch-header">
+    <p class="ch-label">TD8 · Prél &amp; Exercice 1 &nbsp;—&nbsp; Quiz</p>
+    <h1 class="ch-title" style="color:var(--accent)">Vecteur de Poynting — fil &amp; sphère</h1>
+    <p class="ch-subtitle">$\vec{\Pi} = \frac{1}{\mu_0}\vec{E}\wedge\vec{B}$ — bilan Joule, Maxwell-Ampère, sphère en expansion</p>
+  </div>
+  <div id="qz-past-attempts"></div>
+  <div class="qz-progress">
+    <div class="qz-progress-track"><div id="qz-progress-fill"></div></div>
+    <span id="qz-progress-label"></span>
+  </div>
+  <div id="qz-question-area">
+    <div class="qz-card">
+      <div class="qz-card-header">
+        <span id="qz-qnum"></span>
+        <span id="qz-qtype" class="qz-type-badge"></span>
+      </div>
+      <div id="qz-context"></div>
+      <div id="qz-qtext"></div>
+      <div id="qz-input-area"></div>
+      <div id="qz-feedback" class="qz-feedback"></div>
+      <div class="qz-actions" id="qz-actions-row">
+        <button id="qz-submit" class="qz-btn qz-btn-primary" onclick="QuizEngine.submit()">Valider</button>
+        <button id="qz-next" class="qz-btn qz-btn-primary" style="display:none" onclick="QuizEngine.next()">Suivant →</button>
+      </div>
+    </div>
+  </div>
+  <div id="qz-results"></div>
+</main>
+<button id="btt" title="Haut de page">↑</button>
+<script src="scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="scripts/main.js"></script>
+<script type="module">
+import { QuizEngine } from '/em-revisions/scripts/quiz.js';
+
+const CTX_FIL = `
+  Cylindre conducteur plein, rayon $a$, longueur $h$, résistivité $\\rho_r$,
+  parcouru par un courant permanent $i$ uniforme.
+`;
+
+const CTX_SPH = `
+  Sphère de charge totale $Q$ conservée, rayon $R(t)$ variable,
+  densité volumique $\\rho(r,t) = \\text{cte}$ pour $r < R(t)$, nulle ailleurs.
+`;
+
+const questions = [
+  // ── PRÉLIMINAIRE ──────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_FIL,
+    question: "Le champ électrique à l'intérieur du fil est lié à la densité de courant par la loi d'Ohm locale $\\vec{j} = \\vec{E}/\\rho_r$. Avec $j = i/(\\pi a^2)$, que vaut $\\vec{E}$ ?",
+    options: [
+      "$\\vec{E} = \\dfrac{\\rho_r i}{\\pi a^2}\\hat{u}_z$",
+      "$\\vec{E} = \\dfrac{i}{\\pi a^2}\\hat{u}_z$",
+      "$\\vec{E} = \\dfrac{\\rho_r}{\\pi a^2 i}\\hat{u}_z$",
+      "$\\vec{E} = \\rho_r i\\,\\hat{u}_z$"
+    ],
+    answer: "$\\vec{E} = \\dfrac{\\rho_r i}{\\pi a^2}\\hat{u}_z$",
+    explanation: "Loi d'Ohm locale : $\\vec{E} = \\rho_r\\vec{j}$. Or $j = i/(\\pi a^2)$ (courant uniforme sur la section). Donc $E = \\rho_r i/(\\pi a^2)$, dirigé selon $\\hat{u}_z$ (sens du courant). La tension aux bornes du fil est $U = Eh = \\rho_r ih/(\\pi a^2) = Ri$ avec $R = \\rho_r h/(\\pi a^2)$ la résistance — cohérent avec la loi d'Ohm macroscopique."
+  },
+  {
+    type: "mcq",
+    context: CTX_FIL,
+    question: "En surface du fil ($r = a$), le champ magnétique est $\\vec{B} = \\frac{\\mu_0 i}{2\\pi a}\\hat{u}_\\varphi$. Le vecteur de Poynting $\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B}$ y vaut :",
+    options: [
+      "$\\vec{\\Pi} = -\\dfrac{\\rho_r i^2}{2\\pi^2 a^3}\\hat{u}_r$ — dirigé vers l'intérieur du fil",
+      "$\\vec{\\Pi} = \\dfrac{\\rho_r i^2}{2\\pi^2 a^3}\\hat{u}_r$ — dirigé vers l'extérieur",
+      "$\\vec{\\Pi} = \\dfrac{\\rho_r i^2}{2\\pi a^2}\\hat{u}_z$",
+      "$\\vec{\\Pi} = \\vec{0}$"
+    ],
+    answer: "$\\vec{\\Pi} = -\\dfrac{\\rho_r i^2}{2\\pi^2 a^3}\\hat{u}_r$ — dirigé vers l'intérieur du fil",
+    explanation: "$\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B} = \\frac{1}{\\mu_0}\\cdot\\frac{\\rho_r i}{\\pi a^2}\\hat{u}_z\\wedge\\frac{\\mu_0 i}{2\\pi a}\\hat{u}_\\varphi = \\frac{\\rho_r i^2}{2\\pi^2 a^3}(\\hat{u}_z\\wedge\\hat{u}_\\varphi) = -\\frac{\\rho_r i^2}{2\\pi^2 a^3}\\hat{u}_r$. Le vecteur de Poynting est dirigé vers l'intérieur du fil — l'énergie électromagnétique pénètre radialement dans le conducteur pour être dissipée par effet Joule."
+  },
+  {
+    type: "tf",
+    context: CTX_FIL,
+    question: "Le flux du vecteur de Poynting entrant à travers la surface latérale du fil est égal à la puissance Joule dissipée $P_J = Ri^2$.",
+    answer: "true",
+    explanation: "Flux entrant : $\\Phi = |\\Pi|\\times 2\\pi a h = \\frac{\\rho_r i^2}{2\\pi^2 a^3}\\times 2\\pi a h = \\frac{\\rho_r i^2 h}{\\pi a^2} = Ri^2$ ✓. C'est le théorème de Poynting : en régime permanent, l'énergie qui entre par les faces du fil (flux de $\\vec{\\Pi}$) est intégralement convertie en chaleur (effet Joule). L'énergie ne vient pas du fil lui-même mais des champs électromagnétiques extérieurs."
+  },
+  // ── EXERCICE 1 ────────────────────────────────────────────
+  {
+    type: "mcq",
+    context: CTX_SPH,
+    question: "Par symétrie sphérique, pourquoi le champ $\\vec{B}$ est-il nul en tout point (en l'absence de champ extérieur) ?",
+    options: [
+      "$\\vec{B}$ devrait être radial par symétrie, mais $\\vec{\\nabla}\\cdot\\vec{B} = 0$ impose qu'un champ radial en $1/r^2$ est nul sauf si une source magnétique existe",
+      "$\\vec{B}$ est toujours nul pour une distribution sphérique",
+      "La charge est nulle donc $\\vec{B} = 0$",
+      "La symétrie impose $\\vec{B} \\parallel \\hat{u}_r$, et tout plan méridien est plan de symétrie de $\\vec{j}$ donc $\\vec{B}$ est dans ce plan, ce qui est incompatible avec $\\hat{u}_r$ sauf $B=0$"
+    ],
+    answer: "$\\vec{B}$ devrait être radial par symétrie, mais $\\vec{\\nabla}\\cdot\\vec{B} = 0$ impose qu'un champ radial en $1/r^2$ est nul sauf si une source magnétique existe",
+    explanation: "La distribution est à symétrie sphérique et les courants $\\vec{j}$ sont radiaux (liés à $\\dot{R}$). Tout plan méridien est plan de symétrie pour $\\vec{j}$ ⟹ $\\vec{B}$ perpendiculaire à ce plan ⟹ $\\vec{B} \\parallel \\hat{u}_\\varphi$. Mais l'invariance par rotation impose $\\vec{B}$ indépendant de $\\varphi$ ⟹ $B_\\varphi = 0$. De même pour $\\hat{u}_r$ et $\\hat{u}_\\theta$. Donc $\\vec{B} = \\vec{0}$."
+  },
+  {
+    type: "mcq",
+    context: CTX_SPH,
+    question: "L'équation de conservation de la charge est $\\vec{\\nabla}\\cdot\\vec{j} + \\partial\\rho/\\partial t = 0$. Pour $r > R(t)$, $\\rho = 0$ et $\\partial\\rho/\\partial t = 0$. Quelle contrainte cela impose-t-il sur $\\vec{j}$ pour $r > R(t)$ ?",
+    options: [
+      "$\\vec{\\nabla}\\cdot\\vec{j} = 0$ — le flux de $\\vec{j}$ à travers toute sphère $r > R$ est nul",
+      "$\\vec{j} = 0$ partout hors de la sphère",
+      "$\\vec{j}$ est tangentiel",
+      "Aucune contrainte"
+    ],
+    answer: "$\\vec{\\nabla}\\cdot\\vec{j} = 0$ — le flux de $\\vec{j}$ à travers toute sphère $r > R$ est nul",
+    explanation: "Pour $r > R$ : $\\partial\\rho/\\partial t = 0$ ⟹ $\\vec{\\nabla}\\cdot\\vec{j} = 0$. Par Gauss sur une sphère de rayon $r > R$ : $\\iint\\vec{j}\\cdot d\\vec{S} = 0$. La densité de courant convectif existe uniquement à $r = R$ (surface de la sphère en mouvement) — c'est un courant surfacique lié à la variation de $R$."
+  },
+  {
+    type: "mcq",
+    context: CTX_SPH,
+    question: "La densité de courant volumique à $r = R(t)$ est liée à la vitesse $\\dot{R}$ de l'interface. Sur une sphère de Gauss de rayon $r$ avec $r = R$ :",
+    options: [
+      "$j = \\dfrac{Q\\dot{R}}{4\\pi R^3}$ pour $r < R$, nul pour $r > R$",
+      "$j = \\dfrac{Q\\dot{R}}{4\\pi r^2}$ pour $r < R$",
+      "$j = \\dfrac{3Q\\dot{R}}{4\\pi R^3}$ pour $r < R$",
+      "$j = \\dfrac{Q\\dot{R}}{4\\pi R^2}$ sur la surface"
+    ],
+    answer: "$j = \\dfrac{Q\\dot{R}}{4\\pi R^3}$ pour $r < R$, nul pour $r > R$",
+    explanation: "La densité volumique dans la sphère est $\\rho = 3Q/(4\\pi R^3)$. La conservation de la charge : $\\partial\\rho/\\partial t + \\vec{\\nabla}\\cdot\\vec{j} = 0$. $\\partial\\rho/\\partial t = -3Q\\dot{R}/(4\\pi R^4) \\cdot 3/R = -9Q\\dot{R}/(4\\pi R^4)$... En fait, par l'équation de continuité sur une sphère de rayon $r < R$ : $j\\cdot 4\\pi r^2 = -\\frac{d}{dt}\\left(\\frac{Q r^3}{R^3}\\right) = -\\frac{3Qr^3\\dot{R}}{R^4}$... D'où $j = -\\frac{3Q\\dot{R}r}{4\\pi R^4}$... Le signe indique le sens (vers l'extérieur si $\\dot{R}>0$)."
+  },
+  {
+    type: "mcq",
+    context: CTX_SPH,
+    question: "Le champ électrique $\\vec{E}$ est obtenu par Gauss (symétrie sphérique). Pour $r < R(t)$ :",
+    options: [
+      "$\\vec{E} = \\dfrac{Qr}{4\\pi\\varepsilon_0 R^3}\\hat{u}_r$",
+      "$\\vec{E} = \\dfrac{Q}{4\\pi\\varepsilon_0 r^2}\\hat{u}_r$",
+      "$\\vec{E} = \\dfrac{Q}{4\\pi\\varepsilon_0 R^2}\\hat{u}_r$",
+      "$\\vec{E} = 0$"
+    ],
+    answer: "$\\vec{E} = \\dfrac{Qr}{4\\pi\\varepsilon_0 R^3}\\hat{u}_r$",
+    explanation: "Gauss sur une sphère de rayon $r < R$ : $E\\cdot 4\\pi r^2 = Q_{int}/\\varepsilon_0 = \\frac{Q r^3}{R^3\\varepsilon_0}$. Donc $E = Qr/(4\\pi\\varepsilon_0 R^3)$ — croît linéairement avec $r$ à l'intérieur, comme pour une sphère uniformément chargée statique. Pour $r > R$ : $E = Q/(4\\pi\\varepsilon_0 r^2)$ comme une charge ponctuelle."
+  },
+  {
+    type: "tf",
+    context: CTX_SPH,
+    question: "Le vecteur de Poynting $\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B}$ est nul partout puisque $\\vec{B} = \\vec{0}$, donc le flux d'énergie électromagnétique est nul.",
+    answer: "true",
+    explanation: "Puisque $\\vec{B} = \\vec{0}$ partout, $\\vec{\\Pi} = \\frac{1}{\\mu_0}\\vec{E}\\wedge\\vec{B} = \\vec{0}$. Le flux d'énergie électromagnétique est nul — il n'y a pas de transport d'énergie par les ondes. La variation d'énergie du système est due uniquement à la variation de l'énergie électrostatique $U_E = \\int \\frac{\\varepsilon_0 E^2}{2}dV$, qui change quand $R(t)$ varie."
+  },
+  {
+    type: "mcq",
+    context: CTX_SPH,
+    question: "L'équation de Maxwell-Ampère est $\\vec{\\nabla}\\times\\vec{B} = \\mu_0\\vec{j} + \\mu_0\\varepsilon_0\\partial\\vec{E}/\\partial t$. Puisque $\\vec{B} = \\vec{0}$, quelle relation vérifie-t-on ?",
+    options: [
+      "$\\vec{j} + \\varepsilon_0\\partial\\vec{E}/\\partial t = \\vec{0}$ — le courant de conduction est exactement compensé par le courant de déplacement",
+      "$\\vec{j} = \\vec{0}$",
+      "$\\partial\\vec{E}/\\partial t = \\vec{0}$",
+      "Maxwell-Ampère n'est pas applicable ici"
+    ],
+    answer: "$\\vec{j} + \\varepsilon_0\\partial\\vec{E}/\\partial t = \\vec{0}$ — le courant de conduction est exactement compensé par le courant de déplacement",
+    explanation: "Avec $\\vec{B} = \\vec{0}$ : $\\vec{\\nabla}\\times\\vec{B} = \\vec{0}$, donc Maxwell-Ampère impose $\\mu_0(\\vec{j} + \\varepsilon_0\\partial\\vec{E}/\\partial t) = \\vec{0}$. C'est une vérification importante : le courant de déplacement $\\varepsilon_0\\partial\\vec{E}/\\partial t$ compense exactement le courant de convection $\\vec{j}$ dû au mouvement des charges. C'est précisément pourquoi $\\vec{B}$ peut rester nul malgré les courants."
+  },
+];
+
+QuizEngine.loadQuiz("td8_ex01", questions, `md:
+## Exercice préliminaire — Fil conducteur (Poynting & Joule)
+
+Cylindre conducteur ($a$, $h$, $\\rho_r$, courant $i$) : montrer que $\\vec{\\Pi}$ est radial entrant et que $\\oint\\vec{\\Pi}\\cdot d\\vec{S} = Ri^2$.
+
+## Exercice 1 — Extension d'une sphère chargée
+
+Sphère de charge $Q$ constante, rayon $R(t)$ variable.
+$\\vec{B} = \\vec{0}$ par symétrie — courant de déplacement compense $\\vec{j}$ — $\\vec{\\Pi} = \\vec{0}$ — bilan d'énergie électrostatique.
+`, { setsFile: 'config/token_sets.json', normFile: 'config/norm_rules.json' });
+</script>
+</body>
+</html>
