@@ -6,6 +6,7 @@ export const CHAPTERS = {
   ch3: { css: '--accent3', ic: 'ic-3' },
   ch4: { css: '--accent4', ic: 'ic-4' },
   ch5: { css: '--accent5', ic: 'ic-5' },
+  ch6: { css: '--accent', ic: 'ic-6' },
 };
 
 export const QUIZZES = {

@@ -713,3 +713,11 @@ strong {
 .ic-5 .num {
   color: var(--accent5);
 }
+
+.ic-6 {
+  border-top: 3px solid var(--accent);
+}
+
+.ic-6 .num {
+  color: var(--accent);
+}
