@@ -2,7 +2,7 @@ import { _el, _renderField } from './markdown.js';
 import { _normFill, _isRecognizedFormat, _resolveRecognised } from './normalize.js';
 
 export function _renderFillBlank(q, container) {
-  const tokens  = _resolveRecognised(q.recognised);
+  const tokens = _resolveRecognised(q.recognised);
   const symbols = q.symbols || [];
   const legendHtml = symbols.length > 0 ? `
     <div class="qz-sym-legend">
@@ -34,7 +34,7 @@ export function _renderFillBlank(q, container) {
     });
   });
 
-  const inp    = container.querySelector('#qz-blank');
+  const inp = container.querySelector('#qz-blank');
   const status = container.querySelector('#qz-fill-status');
 
   inp.addEventListener('input', () => {
@@ -44,16 +44,16 @@ export function _renderFillBlank(q, container) {
 
     if (v.length === 0) {
       status.textContent = '';
-      status.className   = 'qz-fill-status';
-      inp.className      = 'qz-input';
+      status.className = 'qz-fill-status';
+      inp.className = 'qz-input';
     } else if (_isRecognizedFormat(v, tokens)) {
       status.textContent = '✓';
-      status.className   = 'qz-fill-status recognized';
-      inp.className      = 'qz-input recognized';
+      status.className = 'qz-fill-status recognized';
+      inp.className = 'qz-input recognized';
     } else {
       status.textContent = '?';
-      status.className   = 'qz-fill-status unrecognized';
-      inp.className      = 'qz-input unrecognized';
+      status.className = 'qz-fill-status unrecognized';
+      inp.className = 'qz-input unrecognized';
     }
   });
 
@@ -85,7 +85,7 @@ export function _checkFill(q) {
   }
 
   const normalized = _normFill(raw);
-  const accepts    = Array.isArray(q.answer) ? q.answer : [q.answer];
-  const correct    = accepts.some(a => _normFill(a) === normalized);
+  const accepts = Array.isArray(q.answer) ? q.answer : [q.answer];
+  const correct = accepts.some(a => _normFill(a) === normalized);
   return { raw, correct, normalized };
 }

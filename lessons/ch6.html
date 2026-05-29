@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <base href="/em-revisions/">
@@ -9,280 +10,327 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/print_style.css">
 </head>
+
 <body>
 
-<div id="topbar" class="topbar"></div>
+  <div id="topbar" class="topbar"></div>
 
-<main class="page">
+  <main class="page">
 
-  <div class="ch-header">
-    <p class="ch-label">CM 6 · Electromagnétisme L2</p>
-    <h1 class="ch-title" style="color:var(--accent)">Équations de Maxwell &amp; énergie électromagnétique</h1>
-    <p class="ch-subtitle">Équations de Maxwell · ARQS · Énergie EM · Vecteur de Poynting</p>
-  </div>
-
-  <!-- ── 1. Les 4 équations de Maxwell ── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent)"></span>
-      Les 4 équations de Maxwell
-    </h2>
-
-    <div class="callout tip">
-      <span class="callout-icon">💡</span>
-      <div>
-        En régime <strong>stationnaire</strong>, $\vec{E}$ et $\vec{B}$ sont découplés. En régime <strong>variable</strong>, les quatre équations de Maxwell les couplent irrémédiablement — c'est l'origine des ondes électromagnétiques.
-      </div>
+    <div class="ch-header">
+      <p class="ch-label">CM 6 · Electromagnétisme L2</p>
+      <h1 class="ch-title" style="color:var(--accent)">Équations de Maxwell &amp; énergie électromagnétique</h1>
+      <p class="ch-subtitle">Équations de Maxwell · ARQS · Énergie EM · Vecteur de Poynting</p>
     </div>
 
-    <div class="formula-grid">
+    <!-- ── 1. Les 4 équations de Maxwell ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        Les 4 équations de Maxwell
+      </h2>
 
-      <div class="formula-card card-red">
-        <div class="label">M1 — Flux magnétique (Gauss magnétique)</div>
-        <div class="math">$$\vec{\nabla}\cdot\vec{B} = 0 \iff \oiint_S \vec{B}\cdot d\vec{S} = 0$$</div>
-        <div class="note">Pas de charges magnétiques : le flux de $\vec{B}$ sortant de toute surface fermée est nul. <em>Valable quel que soit le régime.</em></div>
-      </div>
-
-      <div class="formula-card card-red">
-        <div class="label">M2 — Maxwell-Faraday</div>
-        <div class="math">$$\vec{\nabla}\times\vec{E} = -\frac{\partial\vec{B}}{\partial t} \iff \oint_\mathcal{C} \vec{E}\cdot d\vec{\ell} = -\frac{d\Phi}{dt}$$</div>
-        <div class="note">Un champ magnétique variable crée un champ électrique à circulation non nulle (fem induite). <em>Indépendant des sources.</em></div>
-      </div>
-
-      <div class="formula-card card-orange">
-        <div class="label">M3 — Maxwell-Gauss</div>
-        <div class="math">$$\vec{\nabla}\cdot\vec{E} = \frac{\rho}{\varepsilon_0} \iff \oiint_S \vec{E}\cdot d\vec{S} = \frac{Q_\text{int}}{\varepsilon_0}$$</div>
-        <div class="note">Théorème de Gauss. $\vec{E}$ diverge depuis les charges. <em>Valable quel que soit le régime.</em></div>
-      </div>
-
-      <div class="formula-card card-orange">
-        <div class="label">M4 — Maxwell-Ampère</div>
-        <div class="math">$$\vec{\nabla}\times\vec{B} = \mu_0\!\left(\vec{j} + \varepsilon_0\frac{\partial\vec{E}}{\partial t}\right) \iff \oint \vec{B}\cdot d\vec{\ell} = \mu_0 I_\text{enlacé} + \varepsilon_0\mu_0\iint \frac{\partial\vec{E}}{\partial t}\cdot d\vec{S}$$</div>
-        <div class="note">Le terme $\varepsilon_0\tfrac{\partial\vec{E}}{\partial t}$ est le <strong>courant de déplacement</strong> de Maxwell. Sans lui, l'équation de continuité de la charge ne serait pas satisfaite.</div>
-      </div>
-
-    </div>
-
-    <div class="callout key">
-      <span class="callout-icon">🔑</span>
-      <div>
-        <strong>Conséquence fondamentale :</strong> en prenant la divergence de M4 et en substituant M3, on retrouve l'équation de conservation de la charge :
-        $$\vec{\nabla}\cdot\vec{j} + \frac{\partial\rho}{\partial t} = 0$$
-        Ce résultat justifie rétrospectivement l'ajout du courant de déplacement par Maxwell.
-      </div>
-    </div>
-
-    <div class="callout rule">
-      <span class="callout-icon">📐</span>
-      <div>
-        <strong>Linéarité :</strong> si $\mathcal{D}_1$ crée $(\vec{E}_1,\vec{B}_1)$ et $\mathcal{D}_2$ crée $(\vec{E}_2,\vec{B}_2)$, alors la distribution $\mathcal{D}_1+\mathcal{D}_2$ crée $(\vec{E}_1+\vec{E}_2,\,\vec{B}_1+\vec{B}_2)$. Le principe de superposition découle directement de la linéarité des équations.
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 2. Continuités et discontinuités ── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent2)"></span>
-      Continuités &amp; discontinuités des champs
-    </h2>
-
-    <div class="formula-grid">
-      <div class="formula-card card-blue" style="border-left-color:var(--accent2)">
-        <div class="label" style="color:var(--accent2)">Relations de passage à travers une interface</div>
-        <div class="math">
-          $$\vec{E}_2 - \vec{E}_1 = \frac{\sigma}{\varepsilon_0}\,\hat{n}_{12}$$
-          $$\vec{B}_2 - \vec{B}_1 = \mu_0\,\vec{j}_S \wedge \hat{n}_{12}$$
-        </div>
-        <div class="note">$\sigma$ : densité surfacique de charges ; $\vec{j}_S$ : densité surfacique de courant ; $\hat{n}_{12}$ : normale orientée de 1 vers 2.</div>
-      </div>
-      <div class="formula-card card-blue" style="border-left-color:var(--accent2)">
-        <div class="label" style="color:var(--accent2)">Ce qui est continu / discontinu</div>
-        <div class="math"></div>
-        <div class="note">
-          <strong>$\vec{E}$ :</strong> composante <em>tangentielle</em> continue ; composante <em>normale</em> discontinue si $\sigma \neq 0$.<br><br>
-          <strong>$\vec{B}$ :</strong> composante <em>normale</em> continue ; composante <em>tangentielle</em> discontinue si $\vec{j}_S \neq \vec{0}$.<br><br>
-          Pour des distributions <em>volumiques</em>, les deux champs sont continus.
+      <div class="callout tip">
+        <span class="callout-icon">💡</span>
+        <div>
+          En régime <strong>stationnaire</strong>, $\vec{E}$ et $\vec{B}$ sont découplés. En régime
+          <strong>variable</strong>, les quatre équations de Maxwell les couplent irrémédiablement — c'est l'origine des
+          ondes électromagnétiques.
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- ── 3. Champs et potentiels ── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent4)"></span>
-      Champs et potentiels
-    </h2>
+      <div class="formula-gallery">
 
-    <div class="formula-grid">
-      <div class="formula-card card-purple">
-        <div class="label">Potentiel vecteur $\vec{A}$ (M1 $\Rightarrow$ div$\,\vec{B}=0$)</div>
-        <div class="math">$$\vec{B} = \vec{\nabla}\times\vec{A}$$</div>
-        <div class="note">Valable en tout régime (stationnaire ou variable).</div>
-      </div>
-      <div class="formula-card card-purple">
-        <div class="label">Potentiel scalaire $V$ (régime variable)</div>
-        <div class="math">$$\vec{E} = -\frac{\partial\vec{A}}{\partial t} - \vec{\nabla}V$$</div>
-        <div class="note">En régime stationnaire, le terme $\partial_t\vec{A}$ disparaît et on retrouve $\vec{E}=-\vec{\nabla}V$.</div>
-      </div>
-      <div class="formula-card card-purple">
-        <div class="label">Jauge de Lorentz</div>
-        <div class="math">$$\mu_0\varepsilon_0\frac{\partial V}{\partial t} + \vec{\nabla}\cdot\vec{A} = 0$$</div>
-        <div class="note">Condition de jauge qui simplifie les calculs en découplant les équations pour $V$ et $\vec{A}$.</div>
-      </div>
-      <div class="formula-card card-purple">
-        <div class="label">Équations de d'Alembert des potentiels (jauge de Lorentz)</div>
-        <div class="math">
-          $$\Delta V - \mu_0\varepsilon_0\frac{\partial^2 V}{\partial t^2} = -\frac{\rho}{\varepsilon_0}$$
-          $$\Delta\vec{A} - \mu_0\varepsilon_0\frac{\partial^2\vec{A}}{\partial t^2} = -\mu_0\vec{j}$$
+        <div class="formula-card card-red">
+          <div class="label">M1 — Flux magnétique (Gauss magnétique)</div>
+          <div class="math">$$\vec{\nabla}\cdot\vec{B} = 0 \iff \oiint_S \vec{B}\cdot d\vec{S} = 0$$</div>
+          <div class="note">Pas de charges magnétiques : le flux de $\vec{B}$ sortant de toute surface fermée est nul.
+            <em>Valable quel que soit le régime.</em>
+          </div>
         </div>
-        <div class="note">Les termes en $\partial^2/\partial t^2$ traduisent la <strong>propagation</strong> du champ électromagnétique à la célérité $c = 1/\sqrt{\mu_0\varepsilon_0}$.</div>
+
+        <div class="formula-card card-red">
+          <div class="label">M2 — Maxwell-Faraday</div>
+          <div class="math">$$\vec{\nabla}\times\vec{E} = -\frac{\partial\vec{B}}{\partial t} \iff \oint_\mathcal{C}
+            \vec{E}\cdot d\vec{\ell} = -\frac{d\Phi}{dt}$$</div>
+          <div class="note">Un champ magnétique variable crée un champ électrique à circulation non nulle (fem induite).
+            <em>Indépendant des sources.</em>
+          </div>
+        </div>
+
+        <div class="formula-card card-orange">
+          <div class="label">M3 — Maxwell-Gauss</div>
+          <div class="math">$$\vec{\nabla}\cdot\vec{E} = \frac{\rho}{\varepsilon_0} \iff \oiint_S \vec{E}\cdot d\vec{S}
+            = \frac{Q_\text{int}}{\varepsilon_0}$$</div>
+          <div class="note">Théorème de Gauss. $\vec{E}$ diverge depuis les charges. <em>Valable quel que soit le
+              régime.</em></div>
+        </div>
+
+        <div class="formula-card card-orange">
+          <div class="label">M4 — Maxwell-Ampère</div>
+          <div class="math">$$\vec{\nabla}\times\vec{B} = \mu_0\!\left(\vec{j} +
+            \varepsilon_0\frac{\partial\vec{E}}{\partial t}\right) \iff \oint \vec{B}\cdot d\vec{\ell} = \mu_0
+            I_\text{enlacé} + \varepsilon_0\mu_0\iint \frac{\partial\vec{E}}{\partial t}\cdot d\vec{S}$$</div>
+          <div class="note">Le terme $\varepsilon_0\tfrac{\partial\vec{E}}{\partial t}$ est le <strong>courant de
+              déplacement</strong> de Maxwell. Sans lui, l'équation de continuité de la charge ne serait pas satisfaite.
+          </div>
+        </div>
+
       </div>
-    </div>
 
-    <div class="callout tip">
-      <span class="callout-icon">💡</span>
-      <div>
-        Pour un couple $(\vec{E},\vec{B})$ donné, il existe une <strong>infinité</strong> de couples $(\vec{A},V)$ possibles — c'est la liberté de jauge. Les champs physiques $\vec{E}$ et $\vec{B}$ restent uniques quelle que soit la jauge choisie.
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 4. ARQS ── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent3)"></span>
-      Approximation des régimes quasi-stationnaires (ARQS)
-    </h2>
-
-    <div class="callout rule">
-      <span class="callout-icon">📋</span>
-      <div>
-        <strong>Condition de validité :</strong> on néglige le retard dû à la propagation devant la période des signaux, soit :<br>
-        $$L \ll \lambda = \frac{c}{f}$$
-        Exemple : pour $f = 50\,\text{Hz}$, $\lambda = 6000\,\text{km}$ — l'ARQS est excellente pour tous les circuits de laboratoire. Elle reste valable jusqu'à $f \approx 10\,\text{MHz}$ pour des circuits de taille métrique.
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="formula-card card-green">
-        <div class="label">Équations de Maxwell dans l'ARQS</div>
-        <div class="math">
-          $$\vec{\nabla}\cdot\vec{B} = 0$$
-          $$\vec{\nabla}\times\vec{E} = -\frac{\partial\vec{B}}{\partial t}$$
-          $$\vec{\nabla}\cdot\vec{E} = \frac{\rho}{\varepsilon_0}$$
-          $$\vec{\nabla}\times\vec{B} = \mu_0\vec{j} \quad \bigl(\varepsilon_0\partial_t\vec{E} \text{ négligé}\bigr)$$
+      <div class="callout key">
+        <span class="callout-icon">🔑</span>
+        <div>
+          <strong>Conséquence fondamentale :</strong> en prenant la divergence de M4 et en substituant M3, on retrouve
+          l'équation de conservation de la charge :
+          $$\vec{\nabla}\cdot\vec{j} + \frac{\partial\rho}{\partial t} = 0$$
+          Ce résultat justifie rétrospectivement l'ajout du courant de déplacement par Maxwell.
         </div>
       </div>
-      <div class="formula-card card-green">
-        <div class="label">Ce que l'ARQS conserve vs ce qu'elle abandonne</div>
-        <div class="math"></div>
-        <div class="note">
-          ✓ <strong>Conservé :</strong> induction ($\vec{\nabla}\times\vec{E} = -\partial_t\vec{B}$), div$\,\vec{j}=0$ (intensité uniforme en tout point d'un circuit à chaque instant).<br><br>
-          ✗ <strong>Abandonné :</strong> courant de déplacement $\varepsilon_0\partial_t\vec{E}$, phénomènes de propagation et de rayonnement.
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ── 5. Énergie électromagnétique ── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent5)"></span>
-      Énergie électromagnétique
-    </h2>
-
-    <div class="formula-grid">
-      <div class="formula-card card-orange">
-        <div class="label">Densité volumique d'énergie électrique</div>
-        <div class="math">$$\omega_E = \frac{\varepsilon_0 E^2}{2} = \frac{\varepsilon_0}{2}|\vec{E}|^2$$</div>
-        <div class="note">Obtenue à partir du condensateur plan : $\mathcal{E} = \frac{1}{2}CU^2 = \frac{\varepsilon_0 E^2}{2}\,\tau$.</div>
-      </div>
-      <div class="formula-card card-orange">
-        <div class="label">Densité volumique d'énergie magnétique</div>
-        <div class="math">$$\omega_B = \frac{B^2}{2\mu_0} = \frac{\mu_0}{2}H^2$$</div>
-        <div class="note">Obtenue à partir de la bobine : $\mathcal{E} = \frac{1}{2}LI^2 = \frac{B^2}{2\mu_0}\,\tau$.</div>
-      </div>
-      <div class="formula-card card-orange">
-        <div class="label">Densité volumique d'énergie électromagnétique totale</div>
-        <div class="math">$$w = \omega_E + \omega_B = \frac{\varepsilon_0 E^2}{2} + \frac{B^2}{2\mu_0}$$</div>
-      </div>
-      <div class="formula-card card-orange">
-        <div class="label">Énergie totale du champ EM dans l'espace</div>
-        <div class="math">$$\mathcal{E}_{E,B} = \iiint_\text{espace}\!\left(\frac{\varepsilon_0 E^2}{2} + \frac{B^2}{2\mu_0}\right)d\tau$$</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 6. Vecteur de Poynting ── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent)"></span>
-      Vecteur de Poynting &amp; conservation de l'énergie
-    </h2>
-
-    <div class="formula-grid">
-      <div class="formula-card card-red">
-        <div class="label">Vecteur de Poynting $\vec{\Pi}$</div>
-        <div class="math">$$\vec{\Pi} = \frac{1}{\mu_0}\vec{E}\wedge\vec{B}$$</div>
-        <div class="note">Homogène à une densité surfacique de puissance (W·m⁻²). Représente le «courant d'énergie» du champ EM.</div>
-      </div>
-      <div class="formula-card card-red">
-        <div class="label">Équation locale de conservation (forme de Poynting)</div>
-        <div class="math">$$\vec{\nabla}\cdot\vec{\Pi} + \frac{\partial w}{\partial t} + \vec{j}\cdot\vec{E} = 0$$</div>
-        <div class="note">$\vec{j}\cdot\vec{E}$ : puissance volumique cédée aux charges mobiles (positive = énergie transférée du champ vers les courants).</div>
-      </div>
-      <div class="formula-card card-red">
-        <div class="label">Forme intégrale (bilan sur un volume $\tau$)</div>
-        <div class="math">$$\frac{d\mathcal{E}_{E,B}}{dt} = -P_\text{cédée} - P_\text{rayonnée}$$</div>
-        <div class="note">
-          $P_\text{cédée} = \iiint_\tau \vec{j}\cdot\vec{E}\,d\tau$ : puissance cédée aux courants.<br>
-          $P_\text{rayonnée} = \oiint_S \vec{\Pi}\cdot d\vec{S}$ : flux sortant du vecteur de Poynting.
+      <div class="callout rule">
+        <span class="callout-icon">📐</span>
+        <div>
+          <strong>Linéarité :</strong> si $\mathcal{D}_1$ crée $(\vec{E}_1,\vec{B}_1)$ et $\mathcal{D}_2$ crée
+          $(\vec{E}_2,\vec{B}_2)$, alors la distribution $\mathcal{D}_1+\mathcal{D}_2$ crée
+          $(\vec{E}_1+\vec{E}_2,\,\vec{B}_1+\vec{B}_2)$. Le principe de superposition découle directement de la
+          linéarité des équations.
         </div>
       </div>
     </div>
 
-    <div class="callout key">
-      <span class="callout-icon">⚡</span>
-      <div>
-        <strong>Lecture physique :</strong> l'énergie EM stockée dans un volume diminue si elle est (1) transférée aux charges mobiles (effet Joule, accélération de charges) <em>ou</em> (2) rayonnée vers l'extérieur via le flux de $\vec{\Pi}$ à travers la surface fermée. Le vecteur de Poynting joue pour l'énergie le même rôle que $\vec{j}$ pour la charge.
+    <!-- ── 2. Continuités et discontinuités ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        Continuités &amp; discontinuités des champs
+      </h2>
+
+      <div class="formula-grid">
+        <div class="formula-card card-blue" style="border-left-color:var(--accent2)">
+          <div class="label" style="color:var(--accent2)">Relations de passage à travers une interface</div>
+          <div class="math">
+            $$\vec{E}_2 - \vec{E}_1 = \frac{\sigma}{\varepsilon_0}\,\hat{n}_{12}$$
+            $$\vec{B}_2 - \vec{B}_1 = \mu_0\,\vec{j}_S \wedge \hat{n}_{12}$$
+          </div>
+          <div class="note">$\sigma$ : densité surfacique de charges ; $\vec{j}_S$ : densité surfacique de courant ;
+            $\hat{n}_{12}$ : normale orientée de 1 vers 2.</div>
+        </div>
+        <div class="formula-card card-blue" style="border-left-color:var(--accent2)">
+          <div class="label" style="color:var(--accent2)">Ce qui est continu / discontinu</div>
+          <div class="math"></div>
+          <div class="note">
+            <strong>$\vec{E}$ :</strong> composante <em>tangentielle</em> continue ; composante <em>normale</em>
+            discontinue si $\sigma \neq 0$.<br><br>
+            <strong>$\vec{B}$ :</strong> composante <em>normale</em> continue ; composante <em>tangentielle</em>
+            discontinue si $\vec{j}_S \neq \vec{0}$.<br><br>
+            Pour des distributions <em>volumiques</em>, les deux champs sont continus.
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- ── 7. Tableau récapitulatif des régimes ── -->
-  <div class="section">
-    <h2 class="section-title">
-      <span class="dot" style="background:var(--accent2)"></span>
-      Récapitulatif — Trois régimes d'étude
-    </h2>
+    <!-- ── 3. Champs et potentiels ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent4)"></span>
+        Champs et potentiels
+      </h2>
 
-    <div class="callout rule">
-      <span class="callout-icon">📋</span>
-      <div>
-        <strong>Régime stationnaire</strong> — $\partial_t = 0$ partout. $\vec{E}$ et $\vec{B}$ découplés. Électrostatique + magnétostatique indépendantes.<br><br>
-        <strong>ARQS</strong> — variation temporelle des sources mais $L \ll \lambda$. Le courant de déplacement est négligé. $\vec{B}$ calculable comme en statique ; $\vec{E}$ inclut le terme $-\partial_t\vec{A}$. Domaine de l'induction et des circuits.<br><br>
-        <strong>Régime général (ondes)</strong> — 4 équations de Maxwell complètes. $\vec{E}$ et $\vec{B}$ couplés et se propageant à $c = 1/\sqrt{\mu_0\varepsilon_0} \approx 3\times10^8\,\text{m} \cdot \text{s}^{-1}$.
+      <div class="formula-grid">
+        <div class="formula-card card-purple">
+          <div class="label">Potentiel vecteur $\vec{A}$ (M1 $\Rightarrow$ div$\,\vec{B}=0$)</div>
+          <div class="math">$$\vec{B} = \vec{\nabla}\times\vec{A}$$</div>
+          <div class="note">Valable en tout régime (stationnaire ou variable).</div>
+        </div>
+        <div class="formula-card card-purple">
+          <div class="label">Potentiel scalaire $V$ (régime variable)</div>
+          <div class="math">$$\vec{E} = -\frac{\partial\vec{A}}{\partial t} - \vec{\nabla}V$$</div>
+          <div class="note">En régime stationnaire, le terme $\partial_t\vec{A}$ disparaît et on retrouve
+            $\vec{E}=-\vec{\nabla}V$.</div>
+        </div>
+        <div class="formula-card card-purple">
+          <div class="label">Jauge de Lorentz</div>
+          <div class="math">$$\mu_0\varepsilon_0\frac{\partial V}{\partial t} + \vec{\nabla}\cdot\vec{A} = 0$$</div>
+          <div class="note">Condition de jauge qui simplifie les calculs en découplant les équations pour $V$ et
+            $\vec{A}$.</div>
+        </div>
+        <div class="formula-card card-purple">
+          <div class="label">Équations de d'Alembert des potentiels (jauge de Lorentz)</div>
+          <div class="math">
+            $$\Delta V - \mu_0\varepsilon_0\frac{\partial^2 V}{\partial t^2} = -\frac{\rho}{\varepsilon_0}$$
+            $$\Delta\vec{A} - \mu_0\varepsilon_0\frac{\partial^2\vec{A}}{\partial t^2} = -\mu_0\vec{j}$$
+          </div>
+          <div class="note">Les termes en $\partial^2/\partial t^2$ traduisent la <strong>propagation</strong> du champ
+            électromagnétique à la célérité $c = 1/\sqrt{\mu_0\varepsilon_0}$.</div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">💡</span>
+        <div>
+          Pour un couple $(\vec{E},\vec{B})$ donné, il existe une <strong>infinité</strong> de couples $(\vec{A},V)$
+          possibles — c'est la liberté de jauge. Les champs physiques $\vec{E}$ et $\vec{B}$ restent uniques quelle que
+          soit la jauge choisie.
+        </div>
       </div>
     </div>
 
-    <div class="callout tip">
-      <span class="callout-icon">💡</span>
-      <div>
-        <strong>Constantes fondamentales :</strong>
-        $$\varepsilon_0 = \frac{1}{36\pi\times10^9}\,\text{F} \cdot \text{m}^{-1} \approx 8{,}85\times10^{-12}\,\text{F} \cdot \text{m}^{-1}$$
-        $$\mu_0 = 4\pi\times10^{-7}\,\text{H} \cdot \text{m}^{-1} \qquad c = \frac{1}{\sqrt{\mu_0\varepsilon_0}} = 299\,792\,458\,\text{m} \cdot \text{s}^{-1}$$
+    <!-- ── 4. ARQS ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent3)"></span>
+        Approximation des régimes quasi-stationnaires (ARQS)
+      </h2>
+
+      <div class="callout rule">
+        <span class="callout-icon">📋</span>
+        <div>
+          <strong>Condition de validité :</strong> on néglige le retard dû à la propagation devant la période des
+          signaux, soit :<br>
+          $$L \ll \lambda = \frac{c}{f}$$
+          Exemple : pour $f = 50\,\text{Hz}$, $\lambda = 6000\,\text{km}$ — l'ARQS est excellente pour tous les circuits
+          de laboratoire. Elle reste valable jusqu'à $f \approx 10\,\text{MHz}$ pour des circuits de taille métrique.
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="formula-card card-green">
+          <div class="label">Équations de Maxwell dans l'ARQS</div>
+          <div class="math">
+            $$\vec{\nabla}\cdot\vec{B} = 0$$
+            $$\vec{\nabla}\times\vec{E} = -\frac{\partial\vec{B}}{\partial t}$$
+            $$\vec{\nabla}\cdot\vec{E} = \frac{\rho}{\varepsilon_0}$$
+            $$\vec{\nabla}\times\vec{B} = \mu_0\vec{j} \quad \bigl(\varepsilon_0\partial_t\vec{E} \text{
+            négligé}\bigr)$$
+          </div>
+        </div>
+        <div class="formula-card card-green">
+          <div class="label">Ce que l'ARQS conserve vs ce qu'elle abandonne</div>
+          <div class="math"></div>
+          <div class="note">
+            ✓ <strong>Conservé :</strong> induction ($\vec{\nabla}\times\vec{E} = -\partial_t\vec{B}$), div$\,\vec{j}=0$
+            (intensité uniforme en tout point d'un circuit à chaque instant).<br><br>
+            ✗ <strong>Abandonné :</strong> courant de déplacement $\varepsilon_0\partial_t\vec{E}$, phénomènes de
+            propagation et de rayonnement.
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-</main>
+    <!-- ── 5. Énergie électromagnétique ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent5)"></span>
+        Énergie électromagnétique
+      </h2>
 
-<button id="btt" title="Haut de page">↑</button>
-<script src="scripts/nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="scripts/main.js"></script>
+      <div class="formula-grid">
+        <div class="formula-card card-orange">
+          <div class="label">Densité volumique d'énergie électrique</div>
+          <div class="math">$$\omega_E = \frac{\varepsilon_0 E^2}{2} = \frac{\varepsilon_0}{2}|\vec{E}|^2$$</div>
+          <div class="note">Obtenue à partir du condensateur plan : $\mathcal{E} = \frac{1}{2}CU^2 = \frac{\varepsilon_0
+            E^2}{2}\,\tau$.</div>
+        </div>
+        <div class="formula-card card-orange">
+          <div class="label">Densité volumique d'énergie magnétique</div>
+          <div class="math">$$\omega_B = \frac{B^2}{2\mu_0} = \frac{\mu_0}{2}H^2$$</div>
+          <div class="note">Obtenue à partir de la bobine : $\mathcal{E} = \frac{1}{2}LI^2 = \frac{B^2}{2\mu_0}\,\tau$.
+          </div>
+        </div>
+        <div class="formula-card card-orange">
+          <div class="label">Densité volumique d'énergie électromagnétique totale</div>
+          <div class="math">$$w = \omega_E + \omega_B = \frac{\varepsilon_0 E^2}{2} + \frac{B^2}{2\mu_0}$$</div>
+        </div>
+        <div class="formula-card card-orange">
+          <div class="label">Énergie totale du champ EM dans l'espace</div>
+          <div class="math">$$\mathcal{E}_{E,B} = \iiint_\text{espace}\!\left(\frac{\varepsilon_0 E^2}{2} +
+            \frac{B^2}{2\mu_0}\right)d\tau$$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 6. Vecteur de Poynting ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent)"></span>
+        Vecteur de Poynting &amp; conservation de l'énergie
+      </h2>
+
+      <div class="formula-grid">
+        <div class="formula-card card-red">
+          <div class="label">Vecteur de Poynting $\vec{\Pi}$</div>
+          <div class="math">$$\vec{\Pi} = \frac{1}{\mu_0}\vec{E}\wedge\vec{B}$$</div>
+          <div class="note">Homogène à une densité surfacique de puissance (W·m⁻²). Représente le «courant d'énergie» du
+            champ EM.</div>
+        </div>
+        <div class="formula-card card-red">
+          <div class="label">Équation locale de conservation (forme de Poynting)</div>
+          <div class="math">$$\vec{\nabla}\cdot\vec{\Pi} + \frac{\partial w}{\partial t} + \vec{j}\cdot\vec{E} = 0$$
+          </div>
+          <div class="note">$\vec{j}\cdot\vec{E}$ : puissance volumique cédée aux charges mobiles (positive = énergie
+            transférée du champ vers les courants).</div>
+        </div>
+        <div class="formula-card card-red">
+          <div class="label">Forme intégrale (bilan sur un volume $\tau$)</div>
+          <div class="math">$$\frac{d\mathcal{E}_{E,B}}{dt} = -P_\text{cédée} - P_\text{rayonnée}$$</div>
+          <div class="note">
+            $P_\text{cédée} = \iiint_\tau \vec{j}\cdot\vec{E}\,d\tau$ : puissance cédée aux courants.<br>
+            $P_\text{rayonnée} = \oiint_S \vec{\Pi}\cdot d\vec{S}$ : flux sortant du vecteur de Poynting.
+          </div>
+        </div>
+      </div>
+
+      <div class="callout key">
+        <span class="callout-icon">⚡</span>
+        <div>
+          <strong>Lecture physique :</strong> l'énergie EM stockée dans un volume diminue si elle est (1) transférée aux
+          charges mobiles (effet Joule, accélération de charges) <em>ou</em> (2) rayonnée vers l'extérieur via le flux
+          de $\vec{\Pi}$ à travers la surface fermée. Le vecteur de Poynting joue pour l'énergie le même rôle que
+          $\vec{j}$ pour la charge.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 7. Tableau récapitulatif des régimes ── -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="dot" style="background:var(--accent2)"></span>
+        Récapitulatif — Trois régimes d'étude
+      </h2>
+
+      <div class="callout rule">
+        <span class="callout-icon">📋</span>
+        <div>
+          <strong>Régime stationnaire</strong> — $\partial_t = 0$ partout. $\vec{E}$ et $\vec{B}$ découplés.
+          Électrostatique + magnétostatique indépendantes.<br><br>
+          <strong>ARQS</strong> — variation temporelle des sources mais $L \ll \lambda$. Le courant de déplacement est
+          négligé. $\vec{B}$ calculable comme en statique ; $\vec{E}$ inclut le terme $-\partial_t\vec{A}$. Domaine de
+          l'induction et des circuits.<br><br>
+          <strong>Régime général (ondes)</strong> — 4 équations de Maxwell complètes. $\vec{E}$ et $\vec{B}$ couplés et
+          se propageant à $c = 1/\sqrt{\mu_0\varepsilon_0} \approx 3\times10^8\,\text{m} \cdot \text{s}^{-1}$.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">💡</span>
+        <div>
+          <strong>Constantes fondamentales :</strong>
+          $$\varepsilon_0 = \frac{1}{36\pi\times10^9}\,\text{F} \cdot \text{m}^{-1} \approx
+          8{,}85\times10^{-12}\,\text{F} \cdot \text{m}^{-1}$$
+          $$\mu_0 = 4\pi\times10^{-7}\,\text{H} \cdot \text{m}^{-1} \qquad c = \frac{1}{\sqrt{\mu_0\varepsilon_0}} =
+          299\,792\,458\,\text{m} \cdot \text{s}^{-1}$$
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <button id="btt" title="Haut de page">↑</button>
+  <script src="scripts/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
+
 </html>

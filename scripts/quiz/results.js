@@ -16,10 +16,10 @@ export function _renderPastAttempts(state) {
   const last3 = attempts.slice(-3).reverse();
   el.innerHTML = `<span class="qz-attempts-label">Dernières tentatives :</span> ` +
     last3.map(a => {
-      const pts  = a.totalPoints ?? a.score;
-      const max  = a.total;
-      const pct  = pts / max;
-      const cls  = pct >= 0.75 ? 'badge-green' : pct >= 0.5 ? 'badge-orange' : 'badge-red';
+      const pts = a.totalPoints ?? a.score;
+      const max = a.total;
+      const pct = pts / max;
+      const cls = pct >= 0.75 ? 'badge-green' : pct >= 0.5 ? 'badge-orange' : 'badge-red';
       const disp = Number.isInteger(pts) && pts === a.score
         ? `${a.score}/${a.total}`
         : `${pts.toFixed(1)}/${a.total} pts`;
@@ -28,18 +28,18 @@ export function _renderPastAttempts(state) {
 }
 
 export function _showResults(state) {
-  const score       = state.answers.filter(a => a.correct).length;
-  const total       = state.questions.length;
+  const score = state.answers.filter(a => a.correct).length;
+  const total = state.questions.length;
   const totalPoints = state.answers.reduce((s, a) => s + (a?.points ?? 0), 0);
-  const maxPoints   = total;
-  const pct         = Math.round((totalPoints / maxPoints) * 100);
-  const elapsed     = Math.round((Date.now() - state.started) / 1000);
-  const mins        = Math.floor(elapsed / 60);
-  const secs        = elapsed % 60;
+  const maxPoints = total;
+  const pct = Math.round((totalPoints / maxPoints) * 100);
+  const elapsed = Math.round((Date.now() - state.started) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
 
   Storage.recordAttempt(state.quizId, score, total, totalPoints);
   const attempts = Storage.getAttempts(state.quizId);
-  const bestPts  = Math.max(...attempts.map(a => a.totalPoints ?? a.score));
+  const bestPts = Math.max(...attempts.map(a => a.totalPoints ?? a.score));
 
   const emoji = pct === 100 ? '🏆' : pct >= 75 ? '🎯' : pct >= 50 ? '📚' : '💪';
 
@@ -82,18 +82,18 @@ export function _showResults(state) {
     <div class="qz-review">
       <h3>Récapitulatif</h3>
       ${state.questions.map((q, i) => {
-        const ans = state.answers[i];
-        const pts = ans?.points ?? 0;
-        const ptsLabel = ans?.correct
-          ? (pts >= 0.995 ? '1 pt' : `${pts.toFixed(2)} pt`)
-          : '0 pt';
-        return `
+    const ans = state.answers[i];
+    const pts = ans?.points ?? 0;
+    const ptsLabel = ans?.correct
+      ? (pts >= 0.995 ? '1 pt' : `${pts.toFixed(2)} pt`)
+      : '0 pt';
+    return `
           <div class="qz-review-item ${ans?.correct ? 'ok' : 'ko'}">
             <span class="qz-review-icon">${ans?.correct ? '✓' : '✗'}</span>
             <span class="qz-review-q qz-review-q-${i}"></span>
             <span class="qz-review-pts">${ptsLabel}</span>
           </div>`;
-      }).join('')}
+  }).join('')}
     </div>
     ${exBlock}
     <div class="qz-result-actions">

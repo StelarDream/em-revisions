@@ -1,38 +1,91 @@
 {
   "numbers": {
-    "values": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    "values": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
     "inherits": []
   },
   "math_symbols": {
-    "values": ["pi", "e", "inf"],
+    "values": [
+      "pi",
+      "e",
+      "inf"
+    ],
     "inherits": []
   },
   "physics_constants": {
-    "values": ["eps0", "mu0", "c", "k", "h", "hbar"],
+    "values": [
+      "eps0",
+      "mu0",
+      "c",
+      "k",
+      "h",
+      "hbar"
+    ],
     "inherits": []
   },
   "unit_vectors": {
-    "values": ["u_r", "u_theta", "u_phi", "u_z", "u_x", "u_y", "u_rho"],
+    "values": [
+      "u_r",
+      "u_theta",
+      "u_phi",
+      "u_z",
+      "u_x",
+      "u_y",
+      "u_rho"
+    ],
     "inherits": []
   },
   "coordinates_spherical": {
-    "values": ["R", "r", "theta", "phi"],
+    "values": [
+      "R",
+      "r",
+      "theta",
+      "phi"
+    ],
     "inherits": []
   },
   "coordinates_cylindrical": {
-    "values": ["rho", "r", "z", "theta"],
+    "values": [
+      "rho",
+      "r",
+      "z",
+      "theta"
+    ],
     "inherits": []
   },
   "coordinates_cartesian": {
-    "values": ["x", "y", "z"],
+    "values": [
+      "x",
+      "y",
+      "z"
+    ],
     "inherits": []
   },
   "coordinates": {
     "values": [],
-    "inherits": ["coordinates_spherical", "coordinates_cylindrical", "coordinates_cartesian"]
+    "inherits": [
+      "coordinates_spherical",
+      "coordinates_cylindrical",
+      "coordinates_cartesian"
+    ]
   },
   "em_basics": {
     "values": [],
-    "inherits": ["unit_vectors", "coordinates_spherical", "math_symbols", "numbers"]
+    "inherits": [
+      "unit_vectors",
+      "coordinates_spherical",
+      "math_symbols",
+      "numbers"
+    ]
   }
 }

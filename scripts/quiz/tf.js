@@ -28,7 +28,7 @@ export function _renderTF(q, container) {
         e.preventDefault();
         lbl.click();
       } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight' ||
-                 e.key === 'ArrowUp'   || e.key === 'ArrowLeft') {
+        e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
         e.preventDefault();
         options[1 - idx].focus(); // toggle between the two
       }

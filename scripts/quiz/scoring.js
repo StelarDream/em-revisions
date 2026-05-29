@@ -5,7 +5,7 @@ export function loadScoringConfig() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return { ...DEFAULT_SCORING, ...JSON.parse(raw) };
-  } catch {}
+  } catch { }
   return { ...DEFAULT_SCORING };
 }
 

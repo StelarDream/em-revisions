@@ -52,7 +52,7 @@ export function _mergeNormSpecs(...specs) {
     for (const [key, rule] of Object.entries(spec)) {
       if (key === 'notes') continue; // skip documentation-only key
       if (!merged[key]) merged[key] = { regex: [], literals: [] };
-      merged[key].regex    = [...(merged[key].regex    || []), ...(rule.regex    || [])];
+      merged[key].regex = [...(merged[key].regex || []), ...(rule.regex || [])];
       merged[key].literals = [...(merged[key].literals || []), ...(rule.literals || [])];
     }
   }
@@ -81,7 +81,7 @@ function _compileNormSpec(spec) {
 
   literalRules.sort((a, b) => b.literal.length - a.literal.length);
 
-  let litRe  = null;
+  let litRe = null;
   const litMap = new Map();
   if (literalRules.length > 0) {
     for (const { output, literal } of literalRules) {

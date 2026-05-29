@@ -5,14 +5,12 @@
     "literals: exact strings. Longest match wins at each position. Single-level JSON backslash escaping.",
     "Duplicate keys across merged specs have their lists concatenated."
   ],
-
   "$1": {
     "regex": [
       "vec\\{([^}]+)\\}",
       "\\\\hat\\{([^}]+)\\}"
     ]
   },
-
   "": {
     "regex": [
       "\\s+",
@@ -23,30 +21,55 @@
       "_"
     ]
   },
-
   "*": {
-    "literals": ["**", "×", "·"],
-    "regex": ["\\\\times", "\\\\cdot", "\\\\bullet"]
+    "literals": [
+      "**",
+      "×",
+      "·"
+    ],
+    "regex": [
+      "\\\\times",
+      "\\\\cdot",
+      "\\\\bullet"
+    ]
   },
-
   "/": {
-    "literals": ["÷"],
-    "regex": ["\\\\div"]
+    "literals": [
+      "÷"
+    ],
+    "regex": [
+      "\\\\div"
+    ]
   },
-
-  "^2": { "literals": ["²"] },
-  "^3": { "literals": ["³"] },
-  "^n": { "literals": ["ⁿ"] },
-
+  "^2": {
+    "literals": [
+      "²"
+    ]
+  },
+  "^3": {
+    "literals": [
+      "³"
+    ]
+  },
+  "^n": {
+    "literals": [
+      "ⁿ"
+    ]
+  },
   "eps": {
-    "literals": ["\\varepsilon", "\\epsilon"]
+    "literals": [
+      "\\varepsilon",
+      "\\epsilon"
+    ]
   },
-
   "mu": {
-    "literals": ["\\mu"]
+    "literals": [
+      "\\mu"
+    ]
   },
-
   "pi": {
-    "literals": ["\\pi"]
+    "literals": [
+      "\\pi"
+    ]
   }
 }

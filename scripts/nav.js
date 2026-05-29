@@ -1,14 +1,14 @@
 /* Shared navigation HTML — injected by each page */
 (function () {
   const nav = [
-    { href: "",                    label: "Accueil" },
-    { href: "lessons/ch1.html",   label: "CM1 · Maths" },
-    { href: "lessons/ch2.html",   label: "CM2 · Électrostatique" },
-    { href: "lessons/ch3.html",   label: "CM3 · Charges en mouvement" },
-    { href: "lessons/ch4.html",   label: "CM4 · Magnétostatique" },
-    { href: "lessons/ch5.html",   label: "CM5 · Induction" },
-    { href: "lessons/ch6.html",   label: "CM6 · Maxwell" },
-    { href: "quizzes/",           label: "🎯 Quizzes" },
+    { href: "", label: "Accueil" },
+    { href: "lessons/ch1.html", label: "CM1 · Maths" },
+    { href: "lessons/ch2.html", label: "CM2 · Électrostatique" },
+    { href: "lessons/ch3.html", label: "CM3 · Charges en mouvement" },
+    { href: "lessons/ch4.html", label: "CM4 · Magnétostatique" },
+    { href: "lessons/ch5.html", label: "CM5 · Induction" },
+    { href: "lessons/ch6.html", label: "CM6 · Maxwell" },
+    { href: "quizzes/", label: "🎯 Quizzes" },
   ];
 
   const bar = document.getElementById("topbar");
@@ -66,6 +66,6 @@
 
   /* Scroll arrows */
   const navEl = bar.querySelector(".topbar-nav");
-  bar.querySelector(".nav-arrow-left").addEventListener("click",  () => navEl.scrollBy({ left: -180, behavior: "smooth" }));
-  bar.querySelector(".nav-arrow-right").addEventListener("click", () => navEl.scrollBy({ left:  180, behavior: "smooth" }));
+  bar.querySelector(".nav-arrow-left").addEventListener("click", () => navEl.scrollBy({ left: -180, behavior: "smooth" }));
+  bar.querySelector(".nav-arrow-right").addEventListener("click", () => navEl.scrollBy({ left: 180, behavior: "smooth" }));
 })();

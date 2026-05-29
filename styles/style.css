@@ -340,6 +340,25 @@ body {
   flex-shrink: 0;
 }
 
+/* ─── Formula gallery (flex, stretchy cards) ────────────── */
+.formula-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.formula-gallery .formula-card {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+
+@media (max-width: 620px) {
+  .formula-gallery .formula-card {
+    flex: 1 1 100%;
+  }
+}
+
 /* ─── Formula cards ─────────────────────────────────────── */
 .formula-grid {
   display: grid;
@@ -508,7 +527,7 @@ body {
 /* ─── Inline math helpers ───────────────────────────────── */
 .katex-display {
   padding: .3rem 0;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 /* ─── Tags / badges ─────────────────────────────────────── */

@@ -11,15 +11,15 @@ export function _evalNumericExpr(raw) {
   if (!/^[\d\s\.\+\-\*\/\^\(\)pigesqrtabsincostanlog,]*$/i.test(s)) return null;
 
   const expr = s
-    .replace(/\bpi\b/gi,   String(Math.PI))
-    .replace(/\be\b/g,     String(Math.E))
+    .replace(/\bpi\b/gi, String(Math.PI))
+    .replace(/\be\b/g, String(Math.E))
     .replace(/\bsqrt\b/gi, 'Math.sqrt')
-    .replace(/\babs\b/gi,  'Math.abs')
-    .replace(/\bsin\b/gi,  'Math.sin')
-    .replace(/\bcos\b/gi,  'Math.cos')
-    .replace(/\btan\b/gi,  'Math.tan')
-    .replace(/\blog\b/gi,  'Math.log')
-    .replace(/\^/g,        '**');
+    .replace(/\babs\b/gi, 'Math.abs')
+    .replace(/\bsin\b/gi, 'Math.sin')
+    .replace(/\bcos\b/gi, 'Math.cos')
+    .replace(/\btan\b/gi, 'Math.tan')
+    .replace(/\blog\b/gi, 'Math.log')
+    .replace(/\^/g, '**');
 
   try {
     // eslint-disable-next-line no-new-func
@@ -48,7 +48,7 @@ export function _renderNumeric(q, container) {
     'Entrez un nombre ou une expression (ex: `1/3`, `2*pi`)'
   );
 
-  const inp    = container.querySelector('#qz-blank');
+  const inp = container.querySelector('#qz-blank');
   const status = container.querySelector('#qz-fill-status');
 
   inp.addEventListener('input', () => {
@@ -58,16 +58,16 @@ export function _renderNumeric(q, container) {
 
     if (!v) {
       status.textContent = '';
-      status.className   = 'qz-fill-status';
-      inp.className      = 'qz-input';
+      status.className = 'qz-fill-status';
+      inp.className = 'qz-input';
     } else if (_evalNumericExpr(v) !== null) {
       status.textContent = '✓';
-      status.className   = 'qz-fill-status recognized';
-      inp.className      = 'qz-input recognized';
+      status.className = 'qz-fill-status recognized';
+      inp.className = 'qz-input recognized';
     } else {
       status.textContent = '?';
-      status.className   = 'qz-fill-status unrecognized';
-      inp.className      = 'qz-input unrecognized';
+      status.className = 'qz-fill-status unrecognized';
+      inp.className = 'qz-input unrecognized';
     }
   });
 
@@ -98,8 +98,8 @@ export function _checkNumeric(q) {
     return null;
   }
 
-  const expected  = q.answer;
+  const expected = q.answer;
   const tolerance = q.tolerance ?? (Number.isInteger(expected) ? 0 : 1e-9);
-  const correct   = Math.abs(given - expected) <= tolerance;
+  const correct = Math.abs(given - expected) <= tolerance;
   return { raw, correct, value: given, tolerance };
 }

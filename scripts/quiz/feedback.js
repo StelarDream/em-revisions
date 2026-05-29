@@ -5,9 +5,9 @@ import { _resolveAnswers } from './mcq.js';
 function _ptsHtml(points) {
   if (points === null || points === undefined) return '';
   const isAmazing = points >= 0.9;
-  const isLow    = points <= 0.1;
+  const isLow = points <= 0.1;
   const label = isAmazing ? '1 pt' : `${points.toFixed(2)} pt`;
-  const mod   = isAmazing ? ' pts-amazing' : isLow ? ' pts-low' : '';
+  const mod = isAmazing ? ' pts-amazing' : isLow ? ' pts-low' : '';
   return `<span class="qz-earned-pts${mod}">${isAmazing ? '★ ' : ""}+${label}</span>`;
 }
 
@@ -34,7 +34,7 @@ export function _showFeedback(q, given, correct, points = null) {
       <span class="qz-fb-icon">${correct ? '✓' : '✗'}</span>
       <span class="qz-fb-title">${correct ? 'Correct !' : 'Pas tout à fait…'}</span>
     </div>
-    ${!correct && q.type === 'fill'    ? `<div class="qz-fb-answer">Réponse : <strong>${_normFill(firstResolved)}</strong> &nbsp;<span class="qz-fb-answer-raw">(${firstResolved})</span></div>` : ''}
+    ${!correct && q.type === 'fill' ? `<div class="qz-fb-answer">Réponse : <strong>${_normFill(firstResolved)}</strong> &nbsp;<span class="qz-fb-answer-raw">(${firstResolved})</span></div>` : ''}
     ${!correct && q.type === 'numeric' ? `<div class="qz-fb-answer">Réponse attendue : <strong>${q.answer}</strong></div>` : ''}
     <div class="qz-fb-explanation"></div>
   `;

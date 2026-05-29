@@ -2,24 +2,24 @@ export const Storage = {
   key: id => `em_quiz_${id}`,
 
   save(id, data) {
-    try { localStorage.setItem(this.key(id), JSON.stringify(data)); } catch(e) {}
+    try { localStorage.setItem(this.key(id), JSON.stringify(data)); } catch (e) { }
   },
 
   load(id) {
-    try { return JSON.parse(localStorage.getItem(this.key(id))); } catch(e) { return null; }
+    try { return JSON.parse(localStorage.getItem(this.key(id))); } catch (e) { return null; }
   },
 
   recordAttempt(id, score, total, totalPoints) {
     const key = `em_attempts_${id}`;
     let attempts = [];
-    try { attempts = JSON.parse(localStorage.getItem(key)) || []; } catch(e) {}
+    try { attempts = JSON.parse(localStorage.getItem(key)) || []; } catch (e) { }
     attempts.push({ date: new Date().toISOString(), score, total, totalPoints: totalPoints ?? score });
     if (attempts.length > 20) attempts = attempts.slice(-20);
-    try { localStorage.setItem(key, JSON.stringify(attempts)); } catch(e) {}
+    try { localStorage.setItem(key, JSON.stringify(attempts)); } catch (e) { }
   },
 
   getAttempts(id) {
-    try { return JSON.parse(localStorage.getItem(`em_attempts_${id}`)) || []; } catch(e) { return []; }
+    try { return JSON.parse(localStorage.getItem(`em_attempts_${id}`)) || []; } catch (e) { return []; }
   },
 
   getAllStats() {
@@ -32,7 +32,7 @@ export const Storage = {
           stats[id] = JSON.parse(localStorage.getItem(k)) || [];
         }
       }
-    } catch(e) {}
+    } catch (e) { }
     return stats;
   },
 

@@ -20,7 +20,7 @@ export function _resolveAnswers(q) {
 }
 
 function _wireOptions(container, isMulti, enforceCount) {
-  const optDiv  = container.querySelector('.qz-options');
+  const optDiv = container.querySelector('.qz-options');
   const options = [...container.querySelectorAll('.qz-option')];
 
   const _updateSubmit = () => {
@@ -72,10 +72,10 @@ function _wireOptions(container, isMulti, enforceCount) {
 }
 
 export function _renderMCQ(q, container) {
-  const answers      = _resolveAnswers(q);
-  const isMulti      = answers.length > 1 || q.reveal_right_amount === false;
+  const answers = _resolveAnswers(q);
+  const isMulti = answers.length > 1 || q.reveal_right_amount === false;
   const enforceCount = isMulti && q.reveal_right_amount !== false;
-  const shuffled     = q.shuffleAnswers !== false ? _shuffle([...q.options]) : [...q.options];
+  const shuffled = q.shuffleAnswers !== false ? _shuffle([...q.options]) : [...q.options];
 
   container.innerHTML = `
     <div class="qz-options${isMulti ? ' qz-multi' : ''}" role="${isMulti ? 'group' : 'radiogroup'}"

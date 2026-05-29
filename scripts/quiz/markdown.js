@@ -4,9 +4,9 @@ export function _renderMath(el) {
   if (window.renderMathInElement) {
     renderMathInElement(el, {
       delimiters: [
-        { left: "$$",  right: "$$",  display: true  },
-        { left: "\\[", right: "\\]", display: true  },
-        { left: "$",   right: "$",   display: false },
+        { left: "$$", right: "$$", display: true },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "$", right: "$", display: false },
         { left: "\\(", right: "\\)", display: false }
       ],
       throwOnError: false
@@ -17,9 +17,9 @@ export function _renderMath(el) {
 export function _inlineMd(s) {
   return s
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g,     '<em>$1</em>')
-    .replace(/`([^`]+)`/g,     '<code class="qz-md-code">$1</code>')
-    .replace(/~~(.+?)~~/g,     '<del>$1</del>');
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code class="qz-md-code">$1</code>')
+    .replace(/~~(.+?)~~/g, '<del>$1</del>');
 }
 
 // Any string starting with "md:" is parsed as markdown+KaTeX.
@@ -30,8 +30,8 @@ export function _md(raw) {
 
   // Stash math so markdown transforms don't touch it
   const stash = [];
-  s = s.replace(/\$\$([\s\S]*?)\$\$/g, (_, m) => { stash.push(`$$${m}$$`); return `\x00M${stash.length-1}\x00`; });
-  s = s.replace(/\$([^\$\n]+?)\$/g,    (_, m) => { stash.push(`$${m}$`);   return `\x00M${stash.length-1}\x00`; });
+  s = s.replace(/\$\$([\s\S]*?)\$\$/g, (_, m) => { stash.push(`$$${m}$$`); return `\x00M${stash.length - 1}\x00`; });
+  s = s.replace(/\$([^\$\n]+?)\$/g, (_, m) => { stash.push(`$${m}$`); return `\x00M${stash.length - 1}\x00`; });
 
   const lines = s.split('\n');
   const chunks = [];
@@ -42,7 +42,7 @@ export function _md(raw) {
     if (/^---+$/.test(l.trim())) { chunks.push('<hr>'); i++; continue; }
 
     const hm = l.match(/^(#{1,4})\s+(.*)/);
-    if (hm) { chunks.push(`<h${hm[1].length+2} class="qz-md-h">${_inlineMd(hm[2])}</h${hm[1].length+2}>`); i++; continue; }
+    if (hm) { chunks.push(`<h${hm[1].length + 2} class="qz-md-h">${_inlineMd(hm[2])}</h${hm[1].length + 2}>`); i++; continue; }
 
     if (/^[-*]\s/.test(l)) {
       const items = [];

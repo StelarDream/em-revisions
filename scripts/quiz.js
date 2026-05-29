@@ -4,29 +4,35 @@
  * Persistent scoring via localStorage
  */
 
-import { Storage }                                         from './quiz/storage.js';
-import { _el, _renderMath, _renderField }                  from './quiz/markdown.js';
-import { _renderMCQ, _checkMCQ,
-         _resolveAnswers }                                 from './quiz/mcq.js';
-import { _renderTF, _checkTF }                             from './quiz/tf.js';
-import { _renderFillBlank, _checkFill }                    from './quiz/fill.js';
-import { _renderNumeric, _checkNumeric }                   from './quiz/numeric.js';
-import { _showFeedback, _showWrongFeedback }               from './quiz/feedback.js';
-import { _updateProgress, _renderPastAttempts,
-         _showResults }                                    from './quiz/results.js';
-import { setTokenSets, setNormSpec, _mergeNormSpecs }      from './quiz/normalize.js';
-import { calcPoints, calcMCQPoints,
-         loadScoringConfig, saveScoringConfig }            from './quiz/scoring.js';
+import { Storage } from './quiz/storage.js';
+import { _el, _renderMath, _renderField } from './quiz/markdown.js';
+import {
+  _renderMCQ, _checkMCQ,
+  _resolveAnswers
+} from './quiz/mcq.js';
+import { _renderTF, _checkTF } from './quiz/tf.js';
+import { _renderFillBlank, _checkFill } from './quiz/fill.js';
+import { _renderNumeric, _checkNumeric } from './quiz/numeric.js';
+import { _showFeedback, _showWrongFeedback } from './quiz/feedback.js';
+import {
+  _updateProgress, _renderPastAttempts,
+  _showResults
+} from './quiz/results.js';
+import { setTokenSets, setNormSpec, _mergeNormSpecs } from './quiz/normalize.js';
+import {
+  calcPoints, calcMCQPoints,
+  loadScoringConfig, saveScoringConfig
+} from './quiz/scoring.js';
 
 const state = {
-  quizId:       null,
-  questions:    [],
-  current:      0,
-  answers:      [],   // { given, correct, points }
-  started:      null,
-  exercise:     null,
-  triedWrong:   [],   // per question: array of wrong submissions (normalized str / float / option str)
-  hintUsed:     [],   // boolean per question
+  quizId: null,
+  questions: [],
+  current: 0,
+  answers: [],   // { given, correct, points }
+  started: null,
+  exercise: null,
+  triedWrong: [],   // per question: array of wrong submissions (normalized str / float / option str)
+  hintUsed: [],   // boolean per question
   foundCorrect: [],   // array of string[] — correct options found so far (MCQ)
 };
 
@@ -48,7 +54,7 @@ async function _ensureSets(setsFile, extraSets) {
 
 async function _ensureNorm(normFile, extraNorm) {
   const fromFile = normFile ? await _fetchJson(normFile) : null;
-  const specs    = [fromFile, extraNorm].filter(Boolean);
+  const specs = [fromFile, extraNorm].filter(Boolean);
   if (specs.length > 0) setNormSpec(_mergeNormSpecs(...specs));
 }
 
@@ -66,9 +72,9 @@ function _renderQuestion() {
   _el('#qz-results').style.display = 'none';
 
   const typeLabel = { mcq: 'QCM', tf: 'Vrai / Faux', fill: 'Compléter', numeric: 'Numérique' };
-  _el('#qz-qnum').textContent  = `Question ${state.current + 1} / ${state.questions.length}`;
+  _el('#qz-qnum').textContent = `Question ${state.current + 1} / ${state.questions.length}`;
   _el('#qz-qtype').textContent = typeLabel[q.type] || q.type;
-  _el('#qz-qtype').className   = `qz-type-badge qz-type-${q.type}`;
+  _el('#qz-qtype').className = `qz-type-badge qz-type-${q.type}`;
 
   _renderField(_el('#qz-qtext'), q.question);
 
@@ -82,10 +88,10 @@ function _renderQuestion() {
 
   const inp = _el('#qz-input-area');
   inp.innerHTML = '';
-  if      (q.type === 'mcq')        _renderMCQ(q, inp);
-  else if (q.type === 'tf')         _renderTF(q, inp);
-  else if (q.type === 'fill')       _renderFillBlank(q, inp);
-  else if (q.type === 'numeric')    _renderNumeric(q, inp);
+  if (q.type === 'mcq') _renderMCQ(q, inp);
+  else if (q.type === 'tf') _renderTF(q, inp);
+  else if (q.type === 'fill') _renderFillBlank(q, inp);
+  else if (q.type === 'numeric') _renderNumeric(q, inp);
   _renderMath(inp);
 
   // Hint button — injected once, reused each question
@@ -124,20 +130,20 @@ function _renderQuestion() {
 async function loadQuiz(quizId, questions, exercise, options = {}) {
   await Promise.all([
     _ensureSets(options.setsFile || null, options.sets || {}),
-    _ensureNorm(options.normFile || null, options.norm  || null),
+    _ensureNorm(options.normFile || null, options.norm || null),
   ]);
 
   _scoringCfg = loadScoringConfig();
 
-  state.quizId       = quizId;
-  state.questions    = questions;
-  state.exercise     = exercise || null;
-  state.current      = 0;
-  state.answers      = [];
-  state.triedWrong   = [];
-  state.hintUsed     = [];
+  state.quizId = quizId;
+  state.questions = questions;
+  state.exercise = exercise || null;
+  state.current = 0;
+  state.answers = [];
+  state.triedWrong = [];
+  state.hintUsed = [];
   state.foundCorrect = [];
-  state.started      = Date.now();
+  state.started = Date.now();
   _renderQuestion();
   _updateProgress(state);
   _renderPastAttempts(state);
@@ -150,18 +156,18 @@ function _optionByValue(value) {
 }
 
 function submit() {
-  const q   = state.questions[state.current];
+  const q = state.questions[state.current];
   const idx = state.current;
   const wrongFlags = (state.triedWrong[idx] || []).length;
-  const hintUsed   = state.hintUsed[idx]    || false;
+  const hintUsed = state.hintUsed[idx] || false;
 
   // ── True / False ──────────────────────────────────────────────────────────
   // Final immediately: 0 or 1 pt, no retry.
   if (q.type === 'tf') {
-    const given   = _checkTF(q, _el('#qz-input-area'));
+    const given = _checkTF(q, _el('#qz-input-area'));
     if (given === null) return;
     const correct = _isCorrect(q, given);
-    const points  = correct ? Math.max(0, 1 - (hintUsed ? _scoringCfg.hintPenalty : 0)) : 0;
+    const points = correct ? Math.max(0, 1 - (hintUsed ? _scoringCfg.hintPenalty : 0)) : 0;
     state.answers[idx] = { given, correct, points };
     _showFeedback(q, given, correct, correct ? points : null);
     return;
@@ -175,11 +181,11 @@ function submit() {
     if (selected === null) return;
 
     const correctAnswers = _resolveAnswers(q);
-    const correctSet     = new Set(correctAnswers);
-    const foundSet       = new Set(state.foundCorrect[idx] || []);
+    const correctSet = new Set(correctAnswers);
+    const foundSet = new Set(state.foundCorrect[idx] || []);
 
-    const wrongPicked  = selected.filter(v => !correctSet.has(v));
-    const newlyFound   = selected.filter(v => correctSet.has(v) && !foundSet.has(v));
+    const wrongPicked = selected.filter(v => !correctSet.has(v));
+    const newlyFound = selected.filter(v => correctSet.has(v) && !foundSet.has(v));
 
     // Lock wrong picks
     wrongPicked.forEach(v => {
@@ -194,7 +200,7 @@ function submit() {
       foundSet.add(v);
     });
 
-    state.triedWrong[idx]   = [...(state.triedWrong[idx] || []), ...wrongPicked];
+    state.triedWrong[idx] = [...(state.triedWrong[idx] || []), ...wrongPicked];
     state.foundCorrect[idx] = [...foundSet];
 
     const allFound = correctAnswers.every(v => foundSet.has(v));
@@ -330,13 +336,13 @@ function next() {
 }
 
 function restart() {
-  state.current      = 0;
-  state.answers      = [];
-  state.triedWrong   = [];
-  state.hintUsed     = [];
+  state.current = 0;
+  state.answers = [];
+  state.triedWrong = [];
+  state.hintUsed = [];
   state.foundCorrect = [];
-  state.started      = Date.now();
-  _el('#qz-results').style.display       = 'none';
+  state.started = Date.now();
+  _el('#qz-results').style.display = 'none';
   _el('#qz-question-area').style.display = 'block';
   _updateProgress(state);
   _renderQuestion();
