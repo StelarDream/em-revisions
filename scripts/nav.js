@@ -7,6 +7,7 @@
     { href: "lessons/ch3.html",   label: "CM3 · Charges en mouvement" },
     { href: "lessons/ch4.html",   label: "CM4 · Magnétostatique" },
     { href: "lessons/ch5.html",   label: "CM5 · Induction" },
+    { href: "lessons/ch6.html",   label: "CM6 · Maxwell" },
     { href: "quizzes/",           label: "🎯 Quizzes" },
   ];
 
