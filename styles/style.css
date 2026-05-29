@@ -508,7 +508,7 @@ body {
 /* ─── Inline math helpers ───────────────────────────────── */
 .katex-display {
   padding: .3rem 0;
-  overflow: visible;
+  overflow-y: hidden;
 }
 
 /* ─── Tags / badges ─────────────────────────────────────── */
